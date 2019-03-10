@@ -19,6 +19,10 @@ Route::get('abs', function () {
     return view('abs');
 });
 
-Route::get('liste', function () {
+Route::get('presence', function () {
     return view('EnseignantR/presence');
+});
+
+Route::get('groupes', function () {
+    return view('EnseignantR/groupes');
 });
