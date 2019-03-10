@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('abs', function () {
     return view('abs');
 });
+
+Route::get('liste', function () {
+    return view('EnseignantR/presence');
+});
