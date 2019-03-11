@@ -26,3 +26,7 @@ Route::get('presence', function () {
 Route::get('groupes', function () {
     return view('EnseignantR/groupes');
 });
+
+Route::get('correction/controle', function () {
+    return view('EnseignantR/correction/controle');
+});

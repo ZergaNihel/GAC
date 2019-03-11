@@ -173,7 +173,7 @@
                                 </span> <span class="mini-click-non">Correction</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Controle continu" href="all-professors.html"><span class="mini-sub-pro">Controle continu</span></a></li>
+                                <li><a title="Controle continu" href="{{url('correction/controle')}}"><span class="mini-sub-pro">Controle continu</span></a></li>
                                 <li><a title="Examen" href="add-professor.html"><span class="mini-sub-pro">Examen</span></a></li>
                                 <li><a title="Test de TP" href="edit-professor.html"><span class="mini-sub-pro">Test de TP</span></a></li>
                             </ul>
@@ -217,7 +217,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="index.html"><img class="main-logo" src="img/logo/logosn.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -845,7 +845,7 @@
                                         <li><a href="{{url('groupes')}}">Groupes</a></li>
                                         <li><a data-toggle="collapse" data-target="#demoevent" href="#">Correction <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">Controle continu</a>
+                                                <li><a href="{{url('correction/controle')}}">Controle continu</a>
                                                 </li>
                                                 <li><a href="add-professor.html">Examen</a>
                                                 </li>
