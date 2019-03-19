@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Etudiant;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/presence';
 
     /**
      * Create a new controller instance.
@@ -49,8 +51,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //'name' => ['required', 'string', 'max:255'],
+            'matricule' => ['required', 'string', 'max:255',],
+            'email' => ['required', 'string', 'email', 'max:255', ],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -62,11 +65,20 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+
+    { // Request $request;
+       /* $var = Etudiant::all();
+     $var->matricule = $request->input('matricule');
+     Etudiants:: where('matricule',$var)->count();
+     if($var>0){*/
         return User::create([
-            'name' => $data['name'],
+            //'name' => $data['name'],
+            'matricule' => $data['matricule'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+   // }
+   // else
+        //return 0;
     }
 }

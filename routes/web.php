@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('abs', function () {
@@ -30,3 +30,7 @@ Route::get('groupes', function () {
 Route::get('correction/controle', function () {
     return view('EnseignantR/correction/controle');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
