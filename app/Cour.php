@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Absence extends Model
+class Cour extends Model
 {
-    protected $primaryKey = 'idAbs';
     //
 }
