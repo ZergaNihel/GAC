@@ -91,8 +91,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a data-dismiss="modal" href="#">Annuler</a>
-                        <button id="valider" type="submit">Valider</button>
+                        <button class="btn btn-custon-four btn-primary" id="valider" type="submit">Valider</button>
                     </div>
                 </form>
             </div>

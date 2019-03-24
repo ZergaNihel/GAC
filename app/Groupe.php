@@ -11,5 +11,4 @@ class Groupe extends Model
     {
         return $this->hasMany('App\Etudiant','','idG');
     }
-    //
 }

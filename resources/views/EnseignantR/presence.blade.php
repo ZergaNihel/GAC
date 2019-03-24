@@ -172,34 +172,31 @@
             $(this).css("background-color", "green");
             $('#absent'+i).css("background-color", "#F6F8FA");
             var data = $('#formPresent'+i).serialize(); 
-            alert(data);
-            // $.ajax({
-            //     type:'get',
-            //     data:data,
-            //     url:'/present',
-            //     success:function(data){
-            //         alert(data);
-            //     }
-            // });
+            $.ajax({
+                type:'get',
+                data:data,
+                url:'/present',
+                success:function(data){
+                    alert(data);
+                }
+            });
         }
         else
         {
             var date=$('#date').val();
             var i=btn_id.substring(6,7);
-            alert("identif"+i)
-            alert("fdj"+$(this).attr("id"));
             $(this).css("background-color", "red");
             $('#present'+i).css("background-color", "#F6F8FA");
             var data = $('#formPresent'+i).serialize(); 
             alert(data);
-            // $.ajax({
-            //     type:'get',
-            //     data:data,
-            //     url:'/absent',
-            //     success:function(data){
-            //         alert(data);
-            //     }
-            // });
+            $.ajax({
+                type:'get',
+                data:data,
+                url:'/absent',
+                success:function(data){
+                    alert(data);
+                }
+            });
         }
     });
 
