@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Etudiant;
 use App\Http\Controllers\Controller;
+use Illuminate\support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Auth\Redirect;
 
 class RegisterController extends Controller
 {
@@ -23,7 +25,12 @@ class RegisterController extends Controller
     |
     */
 
+
     use RegistersUsers;
+
+    //protected function redirectTo(){}
+       
+    
 
     /**
      * Where to redirect users after registration.
@@ -52,10 +59,24 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             //'name' => ['required', 'string', 'max:255'],
-            'matricule' => ['required', 'string', 'max:255',],
-            'email' => ['required', 'string', 'email', 'max:255', ],
+            'matricule' => ['required', 'string', 'max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255','unique:users' ],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
+    }
+       public function redirectTo()
+    {
+            $p = DB::table('etudiants')
+                ->where('matricule',$data['matricule'] )
+                ->count();
+                if($p>0){ 
+         
+        
+            return '/presence';
+        } else {
+            return '/home';
+        }
+   
     }
 
     /**
@@ -66,19 +87,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
 
-    { // Request $request;
-       /* $var = Etudiant::all();
-     $var->matricule = $request->input('matricule');
-     Etudiants:: where('matricule',$var)->count();
-     if($var>0){*/
+    { 
+     
+    $ids= DB::table('etudiants')
+                ->where('matricule',$data['matricule'] )
+                ->select('idEtu')
+                ->get();
+                foreach ($ids as $key) {
+                   $id = $key->idEtu;
+                }
+             $p = DB::table('etudiants')
+                ->where('matricule',$data['matricule'] )
+                ->count();
+                if($p>0){   
+         
         return User::create([
             //'name' => $data['name'],
+
             'matricule' => $data['matricule'],
             'email' => $data['email'],
+            'id_Etu' => $id,
+            'role' => 0,
             'password' => Hash::make($data['password']),
         ]);
-   // }
-   // else
-        //return 0;
+    }
+  
     }
 }

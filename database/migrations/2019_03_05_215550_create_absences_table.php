@@ -21,7 +21,7 @@ class CreateAbsencesTable extends Migration
             $table->integer('etat');
             $table->string('date');
             $table->integer('etat_just')->default(2);
-            $table->unique(['id_td_tp','id_Etu']);
+            $table->unique(['id_td_tp','id_Etu',]);
             $table->timestamps();
             $table-> foreign('id_td_tp')->references('id')->on('td_tps')->onDelete('cascade');
             $table-> foreign('id_Etu')->references('idEtu')->on('etudiants')->onDelete('cascade');
