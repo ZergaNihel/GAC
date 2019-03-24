@@ -128,6 +128,7 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
 
+    @yield('script1')
         
 </head>
 
@@ -157,8 +158,8 @@
 								   <span class="mini-click-non">Présence</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Liste du groupe" href="{{url('liste')}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
-                                <li><a title="Gestion des justificatifs" href="index.html"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
+                                <li><a title="Liste du groupe" href="{{url('presence')}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
+                                <li><a title="Gestion des justificatifs" href="{{url('justifications')}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
                                 <li><a title="Liste des exclus" href="index-1.html"><span class="mini-sub-pro">Liste des exclus</span></a></li>
                                 <li><a title="Historique" href="index.html"><span class="mini-sub-pro">Historique</span></a></li>
                             </ul>
@@ -1041,22 +1042,7 @@
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
 
-   <script>
-       function presence(test) {
-          if(test==1)
-          {
-              document.getElementById("pr").style.backgroundColor= '#1DC712';
-              document.getElementById("abs").style.backgroundColor= '#f6f8fa';
-          }
-
-          else
-          {
-              document.getElementById("abs").style.backgroundColor= '#FF3737';
-              document.getElementById("pr").style.backgroundColor= '#f6f8fa';
-          }
-            
-       }
-   </script>
+    @yield('script2')
       
         
 </body>
