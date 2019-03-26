@@ -168,25 +168,20 @@
 
       //  $(this).attr("disabled", true);
         var btn_id = $(this).attr("id");
-        alert(btn_id);
         
         if(!btn_id.search("present"))
         {
             var date=$('#date').val();
-            alert(date);
             var i=btn_id.substring(7,8);
             $('#datep'+i).val(date);
-            alert($('#datep'+i).val());
             $(this).css("background-color", "green");
             $('#absent'+i).css("background-color", "#F6F8FA");
             var data = $('#formPresent'+i).serialize(); 
-            alert(data);
             $.ajax({
                 type:'get',
                 data:data,
                 url:'/present',
                 success:function(data){
-                    alert(data);
                 }
             });
         }
@@ -195,17 +190,14 @@
             var date=$('#date').val();
             var i=btn_id.substring(6,7);
             $('#datep'+i).val(date);
-            alert($('#datep'+i).val());
             $(this).css("background-color", "red");
             $('#present'+i).css("background-color", "#F6F8FA");
             var data = $('#formPresent'+i).serialize(); 
-            alert(data);
             $.ajax({
                 type:'get',
                 data:data,
                 url:'/absent',
                 success:function(data){
-                    alert(data);
                 }
             });
         }
@@ -217,15 +209,12 @@
     // JUSTIFICATIONS
     $(document).on("click",".btn-success",function(){
      var btn_id = $(this).attr("id");
-     alert(btn_id);
-     var i=btn_id.substring(7,9);
-     alert(i);
+     var i=btn_id.substring(7,btn_id.length);
      var data = $('#editA'+i).serialize();
-     alert(data);
      $.ajax({
              type:'get',
              data:data,
-             url:'justifications/accepter',
+             url:'/justifications/accepter',
              success:function(data){
                 // window.location.reload();
                 alert(data);
@@ -239,11 +228,10 @@
      var btn_id = $(this).attr("id");
      var i=btn_id.substring(7,9);
      var data = $('#editR'+i).serialize();
-     
      $.ajax({
              type:'get',
              data:data,
-             url:'justifications/refuser',
+             url:'/justifications/refuser',
              success:function(data){
                   $('#row'+i).remove();
              }
@@ -445,7 +433,7 @@
                                                         <tbody id="justif">
                                                             @php $No=1 @endphp
                                                             @foreach($justifications as $justification)
-                                                             <tr>
+                                                             <tr id="row{{$justification->idAbs}}">
                                                                 <td></td>
                                                                 <td>{{$No++}}</td>
                                                                 <td>{{$justification->matricule}}</td>
@@ -462,13 +450,15 @@
                                                                                             <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                                                         </div>
                                                                                         <div class="col-lg-4">
-                                                                                            <form id="">
+                                                                                            <form id="editA{{$justification->idAbs}}">
+                                                                                                {{ csrf_field() }}
                                                                                                 <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
                                                                                                 <button type="button" id="valider{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Accepter</button>
                                                                                             </form>
                                                                                         </div>  
                                                                                         <div class="col-lg-4">
-                                                                                            <form id="">
+                                                                                            <form id="editR{{$justification->idAbs}}">
+                                                                                                {{ csrf_field() }}
                                                                                                 <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
                                                                                                 <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
                                                                                             </form>
