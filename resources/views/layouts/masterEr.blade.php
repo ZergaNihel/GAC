@@ -51,12 +51,12 @@
     <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu-vertical.css')}}">
     <!-- calendar CSS
 		============================================ -->
-    <link rel="stylesheet" href="{{('css/calendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.print.min.css')}}">
     <!-- x-editor CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
-    <link rel="stylesheet" href="{{('css/editor/datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('css/editor/datetimepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/editor/bootstrap-editable.css')}}">
     <link rel="stylesheet" href="{{asset('css/editor/x-editor-style.css')}}">
     <!-- normalize CSS
@@ -843,7 +843,7 @@
                                         <li><a href="events.html">Dashboard</a></li>
                                         <li><a data-toggle="collapse" data-target="#Charts" href="#">Présence <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="{{url('liste')}}">Liste du groupe</a></li>
+                                                <li><a href="{{url('presence')}}">Liste du groupe</a></li>
                                                 <li><a href="index-1.html">Gestion des justificatifs</a></li>
                                                 <li><a href="index-3.html">Liste des exclus</a></li>
                                                 <li><a href="analytics.html">Historique</a></li>
@@ -995,7 +995,7 @@
     <!-- select2 JS
 		============================================ -->
     <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
-    <script src="js/select2/select2-active.js"></script>
+    <script src="{{asset('js/select2/select2-active.js')}}"></script>
     <!-- chosen JS
 		============================================ -->
     <script src="{{asset('js/chosen/chosen.jquery.js')}}"></script>

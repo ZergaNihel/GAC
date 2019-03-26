@@ -156,22 +156,31 @@
         
 
     // });
-    // $(document).on("click","#test",function(){
-    //     var date=$('#date').val();
-    //     alert(date);
+    // $("#date").datepicker({
+    //     onSelect: function() {
+    //         $("#absent1").attr("disabled", false);
+    //     }
+    // });
+    // $(document).on("select","#date",function(){
+    //     $("#absent1").attr("disabled", false);
     // });
     $(document).on("click",".pd-setting-ed",function(){
 
+      //  $(this).attr("disabled", true);
         var btn_id = $(this).attr("id");
         alert(btn_id);
         
         if(!btn_id.search("present"))
         {
             var date=$('#date').val();
+            alert(date);
             var i=btn_id.substring(7,8);
+            $('#datep'+i).val(date);
+            alert($('#datep'+i).val());
             $(this).css("background-color", "green");
             $('#absent'+i).css("background-color", "#F6F8FA");
             var data = $('#formPresent'+i).serialize(); 
+            alert(data);
             $.ajax({
                 type:'get',
                 data:data,
@@ -185,6 +194,8 @@
         {
             var date=$('#date').val();
             var i=btn_id.substring(6,7);
+            $('#datep'+i).val(date);
+            alert($('#datep'+i).val());
             $(this).css("background-color", "red");
             $('#present'+i).css("background-color", "#F6F8FA");
             var data = $('#formPresent'+i).serialize(); 
@@ -201,6 +212,45 @@
     });
 
     </script>
+
+    <script>
+    // JUSTIFICATIONS
+    $(document).on("click",".btn-success",function(){
+     var btn_id = $(this).attr("id");
+     alert(btn_id);
+     var i=btn_id.substring(7,9);
+     alert(i);
+     var data = $('#editA'+i).serialize();
+     alert(data);
+     $.ajax({
+             type:'get',
+             data:data,
+             url:'justifications/accepter',
+             success:function(data){
+                // window.location.reload();
+                alert(data);
+                  $('#row'+i).remove();
+             }
+     });
+
+    });
+
+    $(document).on("click",".btn-danger",function(){
+     var btn_id = $(this).attr("id");
+     var i=btn_id.substring(7,9);
+     var data = $('#editR'+i).serialize();
+     
+     $.ajax({
+             type:'get',
+             data:data,
+             url:'justifications/refuser',
+             success:function(data){
+                  $('#row'+i).remove();
+             }
+     });
+
+    });
+ </script>
 @endsection
 
 @section('path')
@@ -221,7 +271,8 @@
             </ul>
             <div id="myTabContent" class="tab-content custom-product-edit">
                 <div class="product-tab-list tab-pane fade active in" id="description">
-                    <!-- Static Table Start --><button id="test" class="btn">test</button>
+                    <!-- Static Table Start -->
+                    <button id="test" class="btn">test</button>
                     <div class="data-table-area mg-b-15">
                         <div class="container-fluid">
                             <div class="row">
@@ -238,7 +289,7 @@
                                                                 <div class="form-group data-custon-pick" id="data_2">
                                                                     <div class="input-group date">
                                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                        <input type="text" class="form-control" id="date" name="date" value="" required>
+                                                                        <input type="text" class="form-control" id="date" name="date" value="">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -310,31 +361,41 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="bodytablePopup">
+                                                        @php $No=1 @endphp
                                                         @foreach($etudiants as $etudiant)
                                                         <tr>
                                                             <td></td>
-                                                            <td> {{$etudiant->idEtu}} </td>
+                                                            <td>{{$No++}}</td>
                                                             <td>{{$etudiant->matricule}}</td>
                                                             <td>{{$etudiant->nom}} {{$etudiant->prenom}}</td>
                                                             <td>{{$etudiant->date_naissance}}</td>
                                                             <td class="datatable-ct">{{$etudiant->type}}</td>
                                                             <td class="datatable-ct">
                                                                 <div class="btn-group btn-custom-groups btn-custom-groups-one">
-                                                                    <form id="formPresent{{$etudiant->idEtu}}">
-                                                                        <input type="hidden" id="etudiant" name="etudiant" value="{{$etudiant->idEtu}}">
-                                                                        <input type="hidden" id="module" name="module" value="{{$idmodule}}">
-                                                                        <input type="hidden" id="groupe" name="groupe" value="{{$idgroupe}}">
-                                                                        <input type="hidden" id="seance" name="seance" value="{{$idseance}}">
-                                                                        <button type="button" id="present{{$etudiant->idEtu}}"  class="pd-setting-ed"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i></button>
-                                                                    </form> 
+                                                                    <div class="row" style="width:90px;">
+                                                                        <div class="col-lg-5">
+                                                                            <form id="formPresent{{$etudiant->idEtu}}">
+                                                                                <input type="hidden" id="etudiant" name="etudiant" value="{{$etudiant->idEtu}}">
+                                                                                <input type="hidden" id="module" name="module" value="{{$idmodule}}">
+                                                                                <input type="hidden" id="groupe" name="groupe" value="{{$idgroupe}}">
+                                                                                <input type="hidden" id="seance" name="seance" value="{{$idseance}}">
+                                                                                <input type="hidden" id="datep{{$etudiant->idEtu}}" name="datep" value="">
+                                                                                <button type="button" name="present" id="present{{$etudiant->idEtu}}"  class="pd-setting-ed"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i></button>
+                                                                            </form> 
+                                                                        </div>
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <div class="col-lg-3">
+                                                                                 <form id="formPresent{{$etudiant->idEtu}}">
+                                                                                    <input type="hidden" id="etudiant" name="etudiant" value="{{$etudiant->idEtu}}">
+                                                                                    <input type="hidden" id="module" name="module" value="{{$idmodule}}">
+                                                                                    <input type="hidden" id="groupe" name="groupe" value="{{$idgroupe}}">
+                                                                                    <input type="hidden" id="seance" name="seance" value="{{$idseance}}">
+                                                                                    <input type="hidden" id="datep{{$etudiant->idEtu}}" name="datep" value="">
+                                                                                    <button type="button" name="absent" id="absent{{$etudiant->idEtu}}"  class="pd-setting-ed"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i></button>
+                                                                                </form>  
+                                                                        </div>
+                                                                    </div>
                                                                     
-                                                                    <form id="formPresent{{$etudiant->idEtu}}">
-                                                                        <input type="hidden" id="etudiant" name="etudiant" value="{{$etudiant->idEtu}}">
-                                                                        <input type="hidden" id="module" name="module" value="{{$idmodule}}">
-                                                                        <input type="hidden" id="groupe" name="groupe" value="{{$idgroupe}}">
-                                                                        <input type="hidden" id="seance" name="seance" value="{{$idseance}}">
-                                                                        <button type="button" id="absent{{$etudiant->idEtu}}"  class="pd-setting-ed"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i></button>
-                                                                    </form>
                                                                 </div> 
                                                             </td>
                                                         </tr>
@@ -382,29 +443,37 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="justif">
-                                                            @php $No=0 @endphp
+                                                            @php $No=1 @endphp
                                                             @foreach($justifications as $justification)
                                                              <tr>
                                                                 <td></td>
-                                                                <td>{{$No+1}}</td>
+                                                                <td>{{$No++}}</td>
                                                                 <td>{{$justification->matricule}}</td>
                                                                 <td>{{$justification->nom}} {{$justification->prenom}}</td>
                                                                 <td>{{$justification->date_naissance}}</td>
-                                                                <td class="datatable-ct">{{$justification->etat}}</td>
+                                                                <td class="datatable-ct">{{$justification->type}}</td>
                                                                 <td class="datatable-ct">{{$justification->date}}</td>
                                                                 <td class="datatable-ct">
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div class="button-ap-list responsive-btn">
                                                                                 <div class="button-style-three">
-                                                                                    <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
-                                                                                    <form id="accepter">
-                                                                                        <input type="hidden" name="idjustification" value=" {{$justification->idAbs}} ">
-                                                                                        <button type="submit" id="valider" class="btn btn-custon-rounded-three btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Accepter</button>
-                                                                                    </form>
-                                                                                    <form id="refuser">
-                                                                                        <input type="hidden" name="idjustification" value=" {{$justification->idAbs}} ">
-                                                                                        <button type="button" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
-                                                                                    </form>
+                                                                                    <div class="row" style="width:300px;">
+                                                                                        <div class="col-lg-3">
+                                                                                            <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                                                        </div>
+                                                                                        <div class="col-lg-4">
+                                                                                            <form id="">
+                                                                                                <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
+                                                                                                <button type="button" id="valider{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Accepter</button>
+                                                                                            </form>
+                                                                                        </div>  
+                                                                                        <div class="col-lg-4">
+                                                                                            <form id="">
+                                                                                                <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
+                                                                                                <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
+                                                                                            </form>
+                                                                                        </div> 
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                     </div> 

@@ -64,20 +64,20 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
-       public function redirectTo()
-    {
-            $p = DB::table('etudiants')
-                ->where('matricule',$data['matricule'] )
-                ->count();
-                if($p>0){ 
+    //    public function redirectTo()
+    // {
+    //         $p = DB::table('etudiants')
+    //             ->where('matricule',$data['matricule'] )
+    //             ->count();
+    //             if($p>0){ 
          
         
-            return '/presence';
-        } else {
-            return '/home';
-        }
+    //         return '/presence';
+    //     } else {
+    //         return '/home';
+    //     }
    
-    }
+    // }
 
     /**
      * Create a new user instance after a valid registration.

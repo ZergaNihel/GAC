@@ -10,18 +10,14 @@
       //  });
       $(document).on("click",".btn-success",function(){
         var btn_id = $(this).attr("id");
-        alert(btn_id);
-        var i=btn_id.substring(7,9);
-        alert(i);
+        var i=btn_id.substring(7,8);
         var data = $('#editA'+i).serialize();
-        alert(data);
         $.ajax({
                 type:'get',
                 data:data,
                 url:'justifications/accepter',
                 success:function(data){
                    // window.location.reload();
-                   alert(data);
                      $('#row'+i).remove();
                 }
         });
@@ -30,9 +26,8 @@
 
        $(document).on("click",".btn-danger",function(){
         var btn_id = $(this).attr("id");
-        var i=btn_id.substring(7,9);
+        var i=btn_id.substring(7,8);
         var data = $('#editR'+i).serialize();
-        
         $.ajax({
                 type:'get',
                 data:data,
@@ -84,15 +79,15 @@
                                 </tr>
                             </thead>
                             <tbody id="justif">
-                                @php $No=1 @endphp
+                                @php $No=0 @endphp
                                 @foreach($justifications as $justification)
                                  <tr id="row{{$justification->idAbs}}">
                                     <td></td>
-                                    <td>{{$No++}}</td>
+                                    <td>{{$No+1}}</td>
                                     <td>{{$justification->matricule}}</td>
                                     <td>{{$justification->nom}} {{$justification->prenom}}</td>
                                     <td>{{$justification->date_naissance}}</td>
-                                    <td class="datatable-ct">{{$justification->type}}</td>
+                                    <td class="datatable-ct">{{$justification->etat}}</td>
                                     <td class="datatable-ct">{{$justification->date}}</td>
                                     <td class="datatable-ct">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -100,13 +95,11 @@
                                                     <div class="button-style-three">
                                                         <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                         <form id="editA{{$justification->idAbs}}">
-                                                            {{ csrf_field() }}
                                                             <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
                                                             <button type="button" id="valider{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Accepter</button>
                                                         </form>
 
                                                         <form id="editR{{$justification->idAbs}}">
-                                                                {{ csrf_field() }}
                                                             <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
                                                             <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
                                                         </form>
