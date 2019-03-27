@@ -27,6 +27,10 @@ Route::get('groupes', function () {
     return view('EnseignantR/groupes');
 });
 
+Route::get('liste_groupes', function () {
+    return view('admin/groupes');
+});
+
 Route::get('correction/controle', function () {
     return view('EnseignantR/correction/controle');
 });
@@ -34,3 +38,10 @@ Route::get('correction/controle', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/Emplois_du_Temps', 'EmploiTemps@afficher');
+Route::get('/ess', 'EmploiTemps@afficheress');
+Route::post('empCour', 'EmploiTemps@storeCOUR');
+Route::post('empTP', 'EmploiTemps@storeTP');
+Route::post('empTD', 'EmploiTemps@storeTD');
+Route::post('empMod', 'EmploiTemps@empMod');
+Route::post('popEmp', 'EmploiTemps@empTab');
