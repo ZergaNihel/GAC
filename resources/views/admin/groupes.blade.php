@@ -429,20 +429,25 @@
                        <div class="basic-login-inner modal-basic-inner">
                                                                             <h3>Nouveau Groupe</h3>
                             <p>Register User can get sign in from here</p>
-                               <form action="#">
+                             @if($message = Session::get('success'))
+   <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+           <strong>{{ $message }}</strong>
+   </div>
+   @endif
+      <form method="post" enctype="multipart/form-data" action="{{ url('groupes') }}">
+    {{ csrf_field() }}
                  <div class="form-group-inner">
                                                         <div class="row">
                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                                 <label class="login2">Section</label>
                                                             </div>
      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="form-select-list"> <select class="form-control custom-select-value" name="account" placeholder="password" style="width: 80%;">
+        <div class="form-select-list"> <select class="form-control custom-select-value" name="section" placeholder="password" style="width: 80%;">
                <option disabled >choisissez la section</option>
-                                                                            <option value="1">Section A</option>
-                                                                            <option value="2">Section B</option>
-                                                                            <option value="3">Section C </option>
-                                                                            <option> Section D </option>
-                                                                            <option> Section E </option>
+                                         @foreach($sections as $sec)                                
+                                            <option value="{{$sec->idSec}}">{{$sec->nomSec}}</option>
+                                         @endforeach
                                                                         </select>
                                                                 </div>
                                                             </div>
@@ -454,15 +459,10 @@
                                                                 <label class="login2">Type</label>
                                                             </div>
      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="form-select-list"> <select class="form-control custom-select-value" name="account" placeholder="password" style="width: 80%;">
-               <option disabled >choisissez le groupe</option>
-                                                                            <option value="1"> A1</option>
-                                                                            <option value="2">Section B</option>
-                                                                            <option value="3">Section C </option>
-                                                                            <option> Section D </option>
-                                                                            <option> Section E </option>
-                                                                        </select>
-                                                                </div>
+         <div class="form-group">
+                  
+      <input name="groupe" type="text" class="form-control" id="nameMod" style="width: 80%;"> </div>
+  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -477,7 +477,7 @@
                                                                        
                                                                         <div class="file-button">
                                                                           <i class="fa fa-download"></i>
-                                                                            <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%">
+                                                                            <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" >
                                                                         </div>
                                                                         <input type="text" id="prepend-big-btn" placeholder="no file selected" style="width:80%">
                                                                     </div>
