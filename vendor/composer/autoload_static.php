@@ -536,8 +536,12 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+
         'App\\Http\\Controllers\\EmploiTemps' => __DIR__ . '/../..' . '/app/Http/Controllers/EmploiTemps.php',
         'App\\Http\\Controllers\\GroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupController.php',
+
+        'App\\Http\\Controllers\\Presence' => __DIR__ . '/../..' . '/app/Http/Controllers/Presence.php',
+
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -559,7 +563,11 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'App\\Seance' => __DIR__ . '/../..' . '/app/Seance.php',
         'App\\Section' => __DIR__ . '/../..' . '/app/Section.php',
         'App\\Semestre' => __DIR__ . '/../..' . '/app/Semestre.php',
+
         'App\\TDTP' => __DIR__ . '/../..' . '/app/TDTP.php',
+
+        'App\\Td_tp' => __DIR__ . '/../..' . '/app/Td_tp.php',
+
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',

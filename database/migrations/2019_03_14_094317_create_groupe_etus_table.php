@@ -16,15 +16,13 @@ class CreateGroupeEtusTable extends Migration
         Schema::create('groupe_etus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sem_groupe')->unsigned()->nullable();
-            $table->integer('etu_groupe')->unsigned()->nullable();
             $table->integer('sec_groupe')->unsigned()->nullable();
             $table->integer('groupe')->unsigned()->nullable();
-            $table->unique(['sem_groupe','etu_groupe','sec_groupe','groupe']);
+            $table->unique(['sem_groupe','sec_groupe','groupe']);
             $table->timestamps();
             $table-> foreign('sem_groupe')->references('idSem')->on('semestres')->onDelete('cascade');
-            $table-> foreign('etu_groupe')->references('idEtu')->on('etudiants')->onDelete('cascade');
             $table-> foreign('sec_groupe')->references('idSec')->on('sections')->onDelete('cascade');
-           $table-> foreign('groupe')->references('idG')->on('groupes')->onDelete('cascade');
+            $table-> foreign('groupe')->references('idG')->on('groupes')->onDelete('cascade');
         });
     }
 
