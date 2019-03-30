@@ -363,7 +363,26 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 															<img src="img/product/pro4.jpg" alt="" />
-															<span class="admin-name">Prof.Anderson</span>
+															<span class="admin-name">
+                                                                @if(Auth::user()->role == '0')
+
+                                                                {{Auth::user()->etudiant->nom}} 
+                                                                {{Auth::user()->etudiant->prenom}}
+                                                                @elseif(Auth::user()->role == '3')
+
+                                                                {{Auth::user()->enseignant->nom}} 
+                                                                {{Auth::user()->enseignant->prenom}}
+                                                              
+                                                              @else
+                                                                  
+                                                                     {{Auth::user()->name}}
+                                                                  
+                                                                  @endif
+
+
+
+
+                                                            </span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">

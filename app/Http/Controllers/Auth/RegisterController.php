@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
-       public function redirectTo()
+   /*    public function redirectTo()
     {
             $p = DB::table('etudiants')
                 ->where('matricule',$data['matricule'] )
@@ -77,7 +77,7 @@ class RegisterController extends Controller
             return '/home';
         }
    
-    }
+    }*/
 
     /**
      * Create a new user instance after a valid registration.
