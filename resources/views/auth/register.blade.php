@@ -68,8 +68,7 @@
                                 
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-success loginbtn"> {{ __('Register') }}</button>
-                               
+                                <button type="submit" class="btn btn-success loginbtn"> {{ __('Register') }}</button>    
                             </div>
                         </form>
                     </div>

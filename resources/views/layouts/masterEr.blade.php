@@ -51,12 +51,12 @@
     <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu-vertical.css')}}">
     <!-- calendar CSS
 		============================================ -->
-    <link rel="stylesheet" href="{{('css/calendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.print.min.css')}}">
     <!-- x-editor CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
-    <link rel="stylesheet" href="{{('css/editor/datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('css/editor/datetimepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/editor/bootstrap-editable.css')}}">
     <link rel="stylesheet" href="{{asset('css/editor/x-editor-style.css')}}">
     <!-- normalize CSS
@@ -128,6 +128,7 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
 
+    @yield('script1')
         
 </head>
 
@@ -157,8 +158,8 @@
 								   <span class="mini-click-non">Présence</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Liste du groupe" href="{{url('liste')}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
-                                <li><a title="Gestion des justificatifs" href="index.html"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
+                                <li><a title="Liste du groupe" href="{{url('presence')}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
+                                <li><a title="Gestion des justificatifs" href="{{url('justifications')}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
                                 <li><a title="Liste des exclus" href="index-1.html"><span class="mini-sub-pro">Liste des exclus</span></a></li>
                                 <li><a title="Historique" href="index.html"><span class="mini-sub-pro">Historique</span></a></li>
                             </ul>
@@ -395,15 +396,11 @@
                                                         <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
                                                         </li>
                                                         <!--nihel 19/03/2019-->
-                                                        <li> <a  href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>log out
-                                        
-                                    </a>
+                                                        <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>log out </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
                                                         </li>
                                                         <!--fin nihel-->
                                                     </ul>
@@ -865,7 +862,7 @@
                                         <li><a href="events.html">Dashboard</a></li>
                                         <li><a data-toggle="collapse" data-target="#Charts" href="#">Présence <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="{{url('liste')}}">Liste du groupe</a></li>
+                                                <li><a href="{{url('presence')}}">Liste du groupe</a></li>
                                                 <li><a href="index-1.html">Gestion des justificatifs</a></li>
                                                 <li><a href="index-3.html">Liste des exclus</a></li>
                                                 <li><a href="analytics.html">Historique</a></li>
@@ -1017,7 +1014,7 @@
     <!-- select2 JS
 		============================================ -->
     <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
-    <script src="js/select2/select2-active.js"></script>
+    <script src="{{asset('js/select2/select2-active.js')}}"></script>
     <!-- chosen JS
 		============================================ -->
     <script src="{{asset('js/chosen/chosen.jquery.js')}}"></script>
@@ -1070,22 +1067,7 @@
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
 
-   <script>
-       function presence(test) {
-          if(test==1)
-          {
-              document.getElementById("pr").style.backgroundColor= '#1DC712';
-              document.getElementById("abs").style.backgroundColor= '#f6f8fa';
-          }
-
-          else
-          {
-              document.getElementById("abs").style.backgroundColor= '#FF3737';
-              document.getElementById("pr").style.backgroundColor= '#f6f8fa';
-          }
-            
-       }
-   </script>
+    @yield('script2')
       
         
 </body>

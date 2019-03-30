@@ -64,20 +64,33 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
+
    /*    public function redirectTo()
     {
             $p = DB::table('etudiants')
                 ->where('matricule',$data['matricule'] )
                 ->count();
                 if($p>0){ 
+
+    //    public function redirectTo()
+    // {
+    //         $p = DB::table('etudiants')
+    //             ->where('matricule',$data['matricule'] )
+    //             ->count();
+    //             if($p>0){ 
+
          
         
-            return '/presence';
-        } else {
-            return '/home';
-        }
+    //         return '/presence';
+    //     } else {
+    //         return '/home';
+    //     }
    
+<<<<<<< HEAD
     }*/
+
+    // }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -104,10 +117,10 @@ class RegisterController extends Controller
         return User::create([
             //'name' => $data['name'],
 
-            'matricule' => $data['matricule'],
+           
+            'role' => 0,
             'email' => $data['email'],
             'id_Etu' => $id,
-            'role' => 0,
             'password' => Hash::make($data['password']),
         ]);
     }
