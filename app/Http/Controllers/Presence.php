@@ -202,16 +202,7 @@ class Presence extends Controller
 
     public function justification()
     {
-        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat ,E.matricule,E.idEtu, E.nom ,E.prenom,E.date_naissance FROM absences A,etudiants E WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=1 ) and A.justification IS NOT NULL and A.etat_just=2 and A.id_Etu=E.idEtu");
-      //justifiation
-    //   $justif=DB::table('absences')
-    //   ->join('etudiants','absences.id_Etu', '=', 'etudiants.idEtu')
-    //   ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
-    //   ->where('td_tps.id_ens','=', 1)
-    //   ->where('absences.justification','<>','')
-    //   ->where('absences.etat_just','=',2)
-    //   ->select('absences.*','etudiants.*')
-    //   ->get();
+        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance FROM absences A,etudiants E WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=1 ) and A.justification IS NOT NULL and A.etat_just=2 and A.id_Etu=E.idEtu");
         return view('EnseignantR.justifications',
             [
                 'justifications'=> $justif, 

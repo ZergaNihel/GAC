@@ -77,66 +77,59 @@ class Anonymat extends Controller
 
     public function import(Request $request)
     {
-      $tab[]=null; 
 
-     $this->validate($request, [
-      'listeEtu'  => 'required|mimes:xls,xlsx'
-     ]);
+        $exam=DB::table('examens')
+                ->where('examens.module_Exam','=',$request->input('moduleEx'))
+                ->where('examens.type','=',$request->input('typeEx'))
+                ->get();
 
-     $path = $request->file('listeEtu')->getRealPath();
-
-     dd($path);
-
-     $data = Excel::load($path)->get();
-     
-     if($data->count() > 0)
-     {
-      foreach($data->toArray() as $key => $value)
-      {
-        $i=0; 
-       foreach($value as $row)
-       { 
-          $tab[$i]=$row; $i++;   
-       }
-       $insert_data[] = array(
-            'code'    => rand(),
-            'etu_code' => $tab[0]
-       );
-      }
-      
-      //return $tab;
-
-      if(!empty($insert_data))
-      {
-       DB::table('codes')->insert($insert_data);
-      }
-     }
-     return back()->with('success', 'Excel Data Imported successfully.');
-
-    return response()->json(['a1'=>'hello']);
-    }
-
-    // public function import(Request $request)
-    // {
-    //     $idmodule = $request->input('moduleEx');
-    //     $type = $request->input('typeEx');
-    //     $path = $request->file('listeEtu')->getRealPath();
-    //     return [ "m" => $idmodule , "t" => $type , "p" => $path];
-
-    //     $exam=DB::table('examens')
-    //             ->where('examens.module_Exam','=',$request->input('moduleEx'))
-    //             ->where('examens.type','=',$request->input('typeEx'))
-    //             ->get();
-    //             dd($request->input('typeEx'));
-    //             return $request->input('typeEx');
-    //     $paquet= new Paquet();
-    //     $paquet->nom_paq=$request->input('salle');
-    //     $paquet->salle=$request->input('salle');
-    //     $paquet->paq_Exam=$exam->idExam;
+        $paquet= new Paquet();
+        $paquet->nom_paq=$request->input('salle');
+        $paquet->salle=$request->input('salle');
+        $paquet->paq_Exam=$exam[0]->idExam;
         
-    //     $paquet->save();
-    //     dd($paquet);
-    //     return $paquet;
-    //     return response()->json($paquet);
-    // }
+        $paquet->save();
+        
+        $p=DB::table('paquets')
+            ->where('salle' ,'=', $request->input('salle'))
+            ->where('paq_Exam', '=', $exam[0]->idExam)
+            ->get();
+
+        $tab[]=null; 
+
+        $this->validate($request, [
+        'listeEtu'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('listeEtu')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value)
+            {
+                $i=0; 
+                foreach($value as $row)
+                    { 
+                        $tab[$i]=$row; $i++;   
+                    }
+                $insert_data[] = array(
+                    'code'    => mt_rand(1000, 9999),
+                    'etu_code' => $tab[0],
+                    'paq_code' => $p[0]->idPaq
+                );
+            }
+
+            if(!empty($insert_data))
+            {
+            DB::table('codes')->insert($insert_data);
+            }
+        }
+        $nbr = DB::table('codes')
+            ->where('paq_code','=',$p[0]->idPaq)
+            ->groupBy('paq_code')
+            ->count();
+        return ["paquet" => $paquet , "nbrCopies" => $nbr];
+    }
 }

@@ -6,30 +6,41 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-        $(document).ready(function () {
-
-            $('#formadd').on('submit', function(event){
-                alert($('#moduleEx').val());
-               alert( $('#typeEx').val() );
+        $(document).ready(function () { 
+            var i;
+            $("#formadd").submit(function(e){
                 $('#addp').modal('hide');
-                event.preventDefault();
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr("action");
+                var data = new FormData(form[0]);
                 $.ajax({
-                 url:'/import_excel/import',
-                 method:"get",
-                 data:new FormData(this),
-                 dataType:'JSON',
-                 contentType: false,
-                 cache: false,
-                 processData: false,
-                 success:function(data){
-                    
-                    alert(data);
-                }
-            });
+                    url: url,
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType : false,
+                    success: function (data) {
+                        $('#table').append(
 
+                            "<tr>"+
+                                "<td>"+ (i+1) +"</td>"+
+                                "<td>"+data["paquet"].nom_paq+"</td>"+
+                                "<td>"+ data["nbrCopies"] +"</td>"+
+                                "<td>"+
+                                    "<div class='btn-group btn-custom-groups btn-custom-groups-one'>"+
+                                        "<button type='button' id=''  class='btn btn-custon-four btn-primary'>" + "<i class='fa fa-eye' aria-hidden='true'>" + "</i>" + "Détail" + "</button>" +
+                                    "</div>"+
+                                "</td>"+
+                            "</tr>"
+                        );
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR, textStatus, errorThrown);
+                    }
+                });
             });
-            
-
 
 
             $('#listep').modal('show');
@@ -50,9 +61,9 @@
                         $('#ensR').after(
                             " "+data["ensR"][0].nom + " " + data["ensR"][0].prenom
                         );
-                        // $('#typeEx').val(data["type"]);
-                        // $('#moduleEx').val(data["module"].idMod);
-                        var i;
+                        $('#typeEx').val(data["type"]);
+                        $('#moduleEx').val(data["module"].idMod);
+                        
                         for(i=0;i<data["paquets"].length;i++)
                         {
                             $('#table').append(
@@ -74,38 +85,6 @@
             $('#nouveau').click(function(){
                 $('#addp').modal('show');
             });
-            // $('#ajouter').click(function(){
-            //     $('#addp').modal('hide'); 
-            //     $.ajax({
-            //         type:'get',
-            //         data:new FormData(document.querySelector('form'));,
-            //         url:'/import_excel/import',
-            //         success:function(data){
-            //         }
-            //     });
-            // });
-
-
-            // $('#formadd').on('submit', function(event){
-            //     event.preventDefault();
-            //     $.ajax({
-            //      url:'/import_excel/import',
-            //      method:"POST",
-            //      data:new FormData(this),
-            //      dataType:'JSON',
-            //      contentType: false,
-            //      cache: false,
-            //      processData: false,
-            //      success:function(data)
-            //         // console.log(response);
-            //         alert('data.a1');
-            //     }
-            // });
-
-            // });
-            
-
-
 
         });
 
@@ -119,7 +98,7 @@
     <div id="listep" data-keyboard="false" data-backdrop="static" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-
+                
                 <form id="popup">
                     {{ csrf_field() }}
                     <div class="modal-body">
@@ -162,16 +141,16 @@
                 <div class="modal-close-area modal-close-df">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
-                <form id="formadd" enctype="multipart/form-data">
+                <form id="formadd" method="POST" action="{{url('/import_excel/import')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="modal-body">
 
                         <div class="form-group-inner">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" id="typeEx" name="typeEx" value="Examen">
-                                    <input type="text" id="moduleEx" name="moduleEx" value="2">
-                                    <input type="text" name="salle" class="form-control" placeholder="Salle" required/>
+                                    <input type="hidden" id="typeEx" name="typeEx" value="">
+                                    <input type="hidden" id="moduleEx" name="moduleEx" value="">
+                                    <input type="text" id="salle" name="salle" class="form-control" placeholder="Salle" required/>
                                 </div>
                             </div>
                         </div>

@@ -7,17 +7,13 @@
     <script>
       $(document).on("click",".btn-success",function(){
         var btn_id = $(this).attr("id");
-        alert(btn_id);
         var i=btn_id.substring(7,btn_id.length);
-        alert(i);
         var data = $('#editA'+i).serialize();
-        alert(data);
         $.ajax({
                 type:'get',
                 data:data,
                 url:'justifications/accepter',
                 success:function(data){
-                   alert(data);
                      $('#row'+i).remove();
                 }
         });
@@ -94,25 +90,32 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="button-ap-list responsive-btn">
                                                     <div class="button-style-three">
-                                                        <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
-                                                        <form id="editA{{$justification->idAbs}}">
-                                                            {{ csrf_field() }}
-                                                            <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
-                                                            <button type="button" id="valider{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Accepter</button>
-                                                        </form>
-
-                                                        <form id="editR{{$justification->idAbs}}">
-                                                                {{ csrf_field() }}
-                                                            <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
-                                                            <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
-                                                        </form>
+                                                        <div class="row" style="width:300px;">
+                                                            <div class="col-lg-3">
+                                                                <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <form id="editA{{$justification->idAbs}}">
+                                                                    {{ csrf_field() }}
+                                                                    <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
+                                                                    <button type="button" id="valider{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-success"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i> Accepter</button>
+                                                                </form>
+                                                            </div>  
+                                                            <div class="col-lg-4">
+                                                                <form id="editR{{$justification->idAbs}}">
+                                                                    {{ csrf_field() }}
+                                                                    <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
+                                                                    <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
+                                                                </form>
+                                                            </div> 
+                                                        </div>
                                                     </div>
                                                 </div>
                                         </div> 
                                     </td>
                                 </tr>
                                 
-                                <div id="detail" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                <div id="detail{{$justification->matricule}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-close-area modal-close-df">
