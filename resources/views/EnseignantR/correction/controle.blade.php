@@ -123,51 +123,7 @@
                                 <div class="sparkline13-list">
                                     <div class="sparkline13-hd">
                                         <div class="">
-                                            <!-- Modals Start-->
-                                            <div class="login-form-area edu-pd mg-b-15">
-                                                <div class="container-fluid">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="modal-bootstrap shadow-inner mg-tb-30 responsive-mg-b-0">
-                                                                <div class="modal-area-button">
-                                                                    <a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModalalert">Primary</a>
-                                                                </div>
-                                                            </div>
-                                                            <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-close-area modal-close-df">
-                                                                            <a class="close" data-dismiss="modal" href="#">
-                                                                                <i class="fa fa-close"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                                <div class="advanced-form-area mg-b-15">
-                                                                                    <select data-placeholder="Module..." class="chosen-select" tabindex="-1">
-                                                                                        <optgroup label="Analyse">
-                                                                                            <option value="S101">S101</option>
-                                                                                            <option value="N203">N203</option>
-                                                                                        </optgroup>
-                                                                                        <optgroup label="Algèbre">
-                                                                                            <option value="S101">S101</option>
-                                                                                            <option value="N203">N203</option>
-                                                                                        </optgroup>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <a data-dismiss="modal" href="#">Annuler</a>
-                                                                            <a href="#">Choisir</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
 
                                             <div class="row container-fluid">
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -282,7 +238,7 @@
                                                     <div class="modal-area-button">
                                                         <a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#Valider">Valider</a>
                                                     </div>
-                                                    <div id="Valider" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog">
+                                                    <div id="Valider" data-keyboard="false" data-backdrop="static" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-close-area modal-close-df">

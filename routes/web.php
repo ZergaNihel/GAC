@@ -47,13 +47,23 @@ Route::get('absent','Presence@absent');
 
 Route::get('groupes','Groupe@index');
 
+Route::get('exclus','Presence@exclus');
+
 Route::get('tst', function () {
         return view('EnseignantR/test');
     });
-Route::get('correction/controle', function () {
-    return view('EnseignantR/correction/controle');
+Route::get('correction/controle', 'Correction@index');
+
+Route::get('paquets', function () {
+    return view('Anonymat/paquets');
 });
+
+Route::get('anonymat/paquets','Anonymat@index');
+
+Route::get('anonymat/paquets/liste','Anonymat@lister');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/import_excel/import', 'Anonymat@import');

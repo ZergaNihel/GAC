@@ -166,13 +166,12 @@
     // });
     $(document).on("click",".pd-setting-ed",function(){
 
-      //  $(this).attr("disabled", true);
         var btn_id = $(this).attr("id");
         
         if(!btn_id.search("present"))
         {
             var date=$('#date').val();
-            var i=btn_id.substring(7,8);
+            var i=btn_id.substring(7,btn_id.length);
             $('#datep'+i).val(date);
             $(this).css("background-color", "green");
             $('#absent'+i).css("background-color", "#F6F8FA");
@@ -188,7 +187,7 @@
         else
         {
             var date=$('#date').val();
-            var i=btn_id.substring(6,7);
+            var i=btn_id.substring(6,btn_id.length);
             $('#datep'+i).val(date);
             $(this).css("background-color", "red");
             $('#present'+i).css("background-color", "#F6F8FA");
@@ -216,8 +215,6 @@
              data:data,
              url:'/justifications/accepter',
              success:function(data){
-                // window.location.reload();
-                alert(data);
                   $('#row'+i).remove();
              }
      });
@@ -226,7 +223,7 @@
 
     $(document).on("click",".btn-danger",function(){
      var btn_id = $(this).attr("id");
-     var i=btn_id.substring(7,9);
+     var i=btn_id.substring(7,btn_id.length);
      var data = $('#editR'+i).serialize();
      $.ajax({
              type:'get',
@@ -237,6 +234,23 @@
              }
      });
 
+    });
+ </script>
+ <script>
+     $(document).ready(function () {
+         $('#date').change(function(){
+
+             var d=$('#date').val();
+             if(d==="")
+             {
+                 $('.pd-setting-ed').attr('disabled',true);
+                 
+             }
+             else{
+                $('.pd-setting-ed').attr('disabled',false);
+                $('.pd-setting-ed').prop('title','');
+             }
+         });
     });
  </script>
 @endsection
@@ -260,7 +274,6 @@
             <div id="myTabContent" class="tab-content custom-product-edit">
                 <div class="product-tab-list tab-pane fade active in" id="description">
                     <!-- Static Table Start -->
-                    <button id="test" class="btn">test</button>
                     <div class="data-table-area mg-b-15">
                         <div class="container-fluid">
                             <div class="row">
@@ -285,7 +298,7 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <br><br>
+                                                {{-- <br><br>
                                                 <div class="row">
                                                     <form id="selectform" method="get">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -321,7 +334,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                                 
                                             </div>
                                         </div>
@@ -368,7 +381,7 @@
                                                                                 <input type="hidden" id="groupe" name="groupe" value="{{$idgroupe}}">
                                                                                 <input type="hidden" id="seance" name="seance" value="{{$idseance}}">
                                                                                 <input type="hidden" id="datep{{$etudiant->idEtu}}" name="datep" value="">
-                                                                                <button type="button" name="present" id="present{{$etudiant->idEtu}}"  class="pd-setting-ed"><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i></button>
+                                                                                <button type="button" name="present" id="present{{$etudiant->idEtu}}" title="veuillez d'abord renseigner la date"  class="pd-setting-ed" disabled><i class="fa fa-check edu-checked-pro" aria-hidden="true"></i></button>
                                                                             </form> 
                                                                         </div>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -379,7 +392,7 @@
                                                                                     <input type="hidden" id="groupe" name="groupe" value="{{$idgroupe}}">
                                                                                     <input type="hidden" id="seance" name="seance" value="{{$idseance}}">
                                                                                     <input type="hidden" id="datep{{$etudiant->idEtu}}" name="datep" value="">
-                                                                                    <button type="button" name="absent" id="absent{{$etudiant->idEtu}}"  class="pd-setting-ed"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i></button>
+                                                                                    <button type="button" name="absent" id="absent{{$etudiant->idEtu}}" title="veuillez d'abord renseigner la date"  class="pd-setting-ed" disabled><i class="fa fa-times edu-danger-error" aria-hidden="true"></i></button>
                                                                                 </form>  
                                                                         </div>
                                                                     </div>
@@ -470,7 +483,7 @@
                                                                 </td>
                                                             </tr>
                                                             
-                                                            <div id="detail" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                                            <div id="detail{{$justification->matricule}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-close-area modal-close-df">
@@ -648,22 +661,6 @@
         })
     </script> --}}
 
-    <script>
-        function presence(test) {
-           if(test==1)
-           {
-               document.getElementById("pr").style.backgroundColor= '#1DC712';
-               document.getElementById("abs").style.backgroundColor= '#f6f8fa';
-           }
- 
-           else
-           {
-               document.getElementById("abs").style.backgroundColor= '#FF3737';
-               document.getElementById("pr").style.backgroundColor= '#f6f8fa';
-           }
-             
-        }
-    </script>
          
 
 @endsection

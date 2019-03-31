@@ -5,13 +5,10 @@
     ============================================ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-       // $(document).ready(function () {
-            
-      //  });
       $(document).on("click",".btn-success",function(){
         var btn_id = $(this).attr("id");
         alert(btn_id);
-        var i=btn_id.substring(7,9);
+        var i=btn_id.substring(7,btn_id.length);
         alert(i);
         var data = $('#editA'+i).serialize();
         alert(data);
@@ -20,7 +17,6 @@
                 data:data,
                 url:'justifications/accepter',
                 success:function(data){
-                   // window.location.reload();
                    alert(data);
                      $('#row'+i).remove();
                 }
@@ -30,7 +26,7 @@
 
        $(document).on("click",".btn-danger",function(){
         var btn_id = $(this).attr("id");
-        var i=btn_id.substring(7,9);
+        var i=btn_id.substring(7,btn_id.length);
         var data = $('#editR'+i).serialize();
         
         $.ajax({
@@ -48,7 +44,7 @@
 
 @section('path')
 <li>
-    <span class="bread-blod">Présence</span>
+    <span class="bread-blod">Justifications</span>
 </li>
 @endsection
 

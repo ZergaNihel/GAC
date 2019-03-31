@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-<body>
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -54,7 +52,7 @@
                                     @endif
                                 </div>    
                             </div>
-                            <a class="btn btn-default btn-block loginbtn">Login</a>
+                            <button class="btn btn-default btn-block loginbtn" >Login</button>
                             
                             <a class="btn btn-default btn-block " href="{{ route('register') }}">Register</a>
                             
@@ -68,8 +66,4 @@
             
          
     </div>
-   
-</body>
-
-</html>
 @endsection

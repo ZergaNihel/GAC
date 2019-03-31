@@ -10,6 +10,7 @@ use App\Module;
 use App\Seance;
 use App\Groupe;
 use App\Absence;
+use Auth;
 
 class Presence extends Controller
 {
@@ -218,14 +219,17 @@ class Presence extends Controller
         );
     }
 
-    public function justificationGroupe()
+    public function exclus()
     {
-        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat ,E.matricule,E.idEtu, E.nom ,E.prenom,E.date_naissance FROM absences A,etudiants E WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=1 and id_module= and id_groupe= and) and A.justification IS NOT NULL and A.etat_just=2 and A.id_Etu=E.idEtu");
-       
-        return view('EnseignantR.justificatio',
-            [
-                'justifications'=> $justif, 
-            ] 
-        );
+        $seance=Seance::find(1);
+        $td_tp=DB::select("SELECT id from td_tps where id_groupe = 1 and id_module=1 and id_Ens=1 and id_seance in (select idSea from seances where type ='$seance->type' ) ");
+
+            $abs=DB::select("SELECT id_Etu , etat , idAbs from absences where etat=0 and id_td_tp in 
+                            (SELECT id from td_tps where id_groupe = 1 and id_module=1 and 
+                            id_Ens=1 and id_seance in (select idSea from seances 
+                                                        where type ='$seance->type' )) ");
+                                            
+        return $abs;
+        
     }
 }
