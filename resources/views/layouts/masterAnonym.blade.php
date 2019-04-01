@@ -133,42 +133,7 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-     <!-- Start Left menu area -->
-     {{-- <div class="left-sidebar-pro">
-        <nav id="sidebar" class="">
-            <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" style="width:100px;height:100px;" /></a>
-                <strong><a href="index.html"><img src="" alt="" /></a></strong>
-            </div>
 
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
-                <nav class="sidebar-nav left-sidebar-menu-pro">
-                    <ul class="metismenu" id="menu1">
-                        <br> <br> <br>
-                        <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-home icon-wrap"></span> <span class="mini-click-non">Dashboard</span></a>
-                        </li>
-
-                        <li>
-                            <a class="has-arrow" href="index.html">
-                                <i class="fa fa-folder-open"></i>
-								   <span class="mini-click-non">Paquets</span>
-								</a>
-                            <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Nouveau" href="{{url('paquets')}}"><i class="fa fa-plus"></i><span class="mini-sub-pro">  Nouveau</span></a></li>
-                                <li><a title="Liste paquets" href=""><i class="fa fa-list" aria-hidden="true"></i><span class="mini-sub-pro">  Liste</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </nav>
-    </div> --}}
-    <!-- End Left menu area -->
-    <!-- Start Welcome area -->
     <div >
         <div class="container-fluid">
             <div class="row">
@@ -781,29 +746,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Mobile Menu start -->
-            <div class="mobile-menu-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="mobile-menu">
-                                <nav id="dropdown">
-                                    <ul class="mobile-menu-nav">
-                                        <li><a href="events.html">Dashboard</a></li>
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Paquets <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul class="collapse dropdown-header-top">
-                                                <li><a href="{{url('presence')}}">Nouveau</a></li>
-                                                <li><a href="index-1.html">Liste</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu end -->
+
             <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -816,6 +759,7 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Liste des paquets</a> <span class="bread-slash"></span>
                                             </li>
+                                            @yield('path')
                                         </ul>
                                     </div>
                                 </div>

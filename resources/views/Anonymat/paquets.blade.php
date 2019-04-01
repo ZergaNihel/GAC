@@ -28,9 +28,9 @@
                                 "<td>"+ (i+1) +"</td>"+
                                 "<td>"+data["paquet"].nom_paq+"</td>"+
                                 "<td>"+ data["nbrCopies"] +"</td>"+
-                                "<td>"+
+                                "<td>"+ //ajouter 2 href
                                     "<div class='btn-group btn-custom-groups btn-custom-groups-one'>"+
-                                        "<button type='button' id=''  class='btn btn-custon-four btn-primary'>" + "<i class='fa fa-eye' aria-hidden='true'>" + "</i>" + "Détail" + "</button>" +
+                                        "<a href='{{url('/anonymat/paquet//details')}}' class='btn btn-custon-four btn-primary'>" + "<i class='fa fa-eye' aria-hidden='true'>" + "</i>" + "Détail" + "</a>" +
                                     "</div>"+
                                 "</td>"+
                             "</tr>"
@@ -66,17 +66,19 @@
                         
                         for(i=0;i<data["paquets"].length;i++)
                         {
+                            var path="/anonymat/paquet/"+data["paquets"][i].idPaq+"/details";
                             $('#table').append(
-                                "<tr>"+
-                                    "<td>"+ (i+1) +"</td>"+
-                                    "<td>"+data["paquets"][i].nom_paq+"</td>"+
-                                    "<td>"+ data["nbrCopies"][i] +"</td>"+
-                                    "<td>"+
-                                        "<div class='btn-group btn-custom-groups btn-custom-groups-one'>"+
-                                            "<button type='button' id=''  class='btn btn-custon-four btn-primary'>" + "<i class='fa fa-eye' aria-hidden='true'>" + "</i>" + "Détail" + "</button>" +
-                                        "</div>"+
-                                    "</td>"+
-                                "</tr>"
+                                '<tr>'+
+                                    '<td>'+ (i+1) +'</td>'+
+                                    '<td>'+data["paquets"][i].nom_paq+'</td>'+
+                                    '<td>'+ data["nbrCopies"][i] +'</td>'+
+                                    '<td>'+  
+                                    // ajouter 2 href
+                                        '<div class="btn-group btn-custom-groups btn-custom-groups-one">'+
+                                            '<a href="" class="btn btn-custon-four btn-primary">' + '<i class="fa fa-eye" aria-hidden="true">' + '</i>' + 'Détail' + '</a>' +
+                                        '</div>'+
+                                    '</td>'+
+                                '</tr>'
                             );
                         }
                     }
@@ -141,7 +143,7 @@
                 <div class="modal-close-area modal-close-df">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
-                <form id="formadd" method="POST" action="{{url('/import_excel/import')}}" enctype="multipart/form-data">
+                <form id="formadd" method="POST" action="{{url('/anonymat/import')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="modal-body">
 
@@ -181,8 +183,9 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"></div>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 mg-tb-30">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mg-tb-30">
+        <a href="{{url('anonymat/paquets')}}" class="btn btn-custon-two btn-default"><i class="fa fa-exchange"></i> Changer le module</a>
         <button type="button" id="nouveau" data-toggle="modal" data-target="#add" class="btn btn-custon-two btn-success"><i class="fa fa-plus"></i> Nouveau paquet</button>
     </div>
 </div>

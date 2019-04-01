@@ -132,4 +132,17 @@ class Anonymat extends Controller
             ->count();
         return ["paquet" => $paquet , "nbrCopies" => $nbr];
     }
+
+    public function details($id)
+    {
+        $paquet = Paquet::find($id);
+        $etudiants=DB::table('codes')
+        ->join('etudiants','codes.etu_code','=','etudiants.matricule')
+        ->where('paq_code','=',$paquet->idPaq)
+        ->select('etudiants.*','codes.*')
+        ->get();
+        return view('Anonymat.paquet')->with([
+            'etudiants' => $etudiants,
+        ]);
+    }
 }

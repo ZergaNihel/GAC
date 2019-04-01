@@ -41,7 +41,9 @@ Route::get('anonymat/paquets','Anonymat@index');
 
 Route::get('anonymat/paquets/liste','Anonymat@lister');
 
-Route::post('/import_excel/import', 'Anonymat@import');
+Route::post('/anonymat/import', 'Anonymat@import');
+
+Route::get('/anonymat/paquet/{id}/details','Anonymat@details');
 
 Auth::routes();
 

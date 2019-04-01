@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paquet extends Model
 {
-    //
+    protected $primaryKey = 'idPaq';
 }
