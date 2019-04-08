@@ -127,6 +127,9 @@
     <!-- modals CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
+    <!-- dropzone CSS
+		============================================ -->
+        <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}"> 
 
     @yield('script1')
         
@@ -153,40 +156,38 @@
                         </li>
 
                         <li>
-                            <a class="has-arrow" href="index.html">
-                                    <i class="fa fa-list" aria-hidden="true"></i>
-								   <span class="mini-click-non">Présence</span>
-								</a>
+                            <a class="has-arrow" href="#">
+                                <i class="fa fa-list" aria-hidden="true"></i>
+                                <span class="mini-click-non">Présence</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
                                 <li><a title="Liste du groupe" href="{{url('presence')}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
                                 <li><a title="Gestion des justificatifs" href="{{url('justifications')}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
-                                <li><a title="Liste des exclus" href="index-1.html"><span class="mini-sub-pro">Liste des exclus</span></a></li>
-                                <li><a title="Historique" href="index.html"><span class="mini-sub-pro">Historique</span></a></li>
+                                <li><a title="Liste des exclus" href="#"><span class="mini-sub-pro">Liste des exclus</span></a></li>
+                                <li><a title="Historique" href="#"><span class="mini-sub-pro">Historique</span></a></li>
                             </ul>
                         </li>
 
                         <li>
                             <a title="Groupes" href="{{url('groupes')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
                         </li>
-                      
+
                         <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap">
-                                </span> <span class="mini-click-non">Correction</span>
-                            </a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Controle continu" href="{{url('correction/controle')}}"><span class="mini-sub-pro">Controle continu</span></a></li>
-                                <li><a title="Examen" href="add-professor.html"><span class="mini-sub-pro">Examen</span></a></li>
-                                <li><a title="Test de TP" href="edit-professor.html"><span class="mini-sub-pro">Test de TP</span></a></li>
-                            </ul>
+                            <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Correction</span></a>
                         </li>
 
                         <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap">
-                                </span> <span class="mini-click-non">Gestion paquets</span>
-                            </a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Controle continu" href="cc.html"><span class="mini-sub-pro">Controle continu</span></a></li>
-                                <li><a title="Examen" href="exm.html"><span class="mini-sub-pro">Examen</span></a></li>
+                            <a title="Correction" href="{{url('#')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Gestion notes</span></a>
+                        </li>
+
+                        <li>
+                            <a class="has-arrow" href="index.html">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+								   <span class="mini-click-non">Gestion paquets</span>
+								</a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="Controle continu" href="{{url('gestion/paquet/controle')}}"><span class="mini-sub-pro">Controle continu</span></a></li>
+                                <li><a title="Examen" href="{{url('gestion/paquet/examen')}}"><span class="mini-sub-pro">Examen</span></a></li>
                             </ul>
                         </li>
 
@@ -869,21 +870,13 @@
                                             </ul>
                                         </li>
                                         <li><a href="{{url('groupes')}}">Groupes</a></li>
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Correction <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="{{url('correction/controle')}}">Controle continu</a>
+                                        <li><a href="{{url('correction/choix')}}">Correction</a></li>
+                                        <li><a href="{{url('#')}}">Gestion notes</a></li>
+                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Gestion paquets <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demopro" class="collapse dropdown-header-top">
+                                                <li><a href="{{url('gestion/paquet/controle')}}">Controle continu</a>
                                                 </li>
-                                                <li><a href="add-professor.html">Examen</a>
-                                                </li>
-                                                <li><a href="edit-professor.html">Test de TP</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Gestion paquets <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">Controle continu</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Examen</a>
+                                                <li><a href="add-student.html">Examen</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -1017,7 +1010,7 @@
     <script src="{{asset('js/select2/select2-active.js')}}"></script>
     <!-- chosen JS
 		============================================ -->
-    <script src="{{asset('js/chosen/chosen.jquery.js')}}"></script>
+    <script src="{{asset('js/chosen/chosen2.jquery.js')}}"></script>
     <script src="{{asset('js/chosen/chosen-active.js')}}"></script>
 
     <!-- touchspin JS
@@ -1066,6 +1059,9 @@
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
+    <!-- dropzone JS
+    ============================================ -->
+    <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
 
     @yield('script2')
       

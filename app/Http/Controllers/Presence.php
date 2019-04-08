@@ -14,6 +14,11 @@ use Auth;
 
 class Presence extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function lister(Request $request)
     {
         //select

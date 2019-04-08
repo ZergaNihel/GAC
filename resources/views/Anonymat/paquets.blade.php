@@ -9,37 +9,55 @@
         $(document).ready(function () { 
             var i;
             $("#formadd").submit(function(e){
-                $('#addp').modal('hide');
                 e.preventDefault();
                 var form = $(this);
                 var url = form.attr("action");
-                var data = new FormData(form[0]);
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: data,
-                    cache: false,
-                    processData: false,
-                    contentType : false,
-                    success: function (data) {
-                        $('#table').append(
+                var path=$('#listeEtu').val();
+                if( path.search(".xlsx") > 0 || path.search(".xls") > 0)
+                {
+                    $('#addp').modal('hide');
+                    var data = new FormData(form[0]);
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: data,
+                        cache: false,
+                        processData: false,
+                        contentType : false,
+                        success: function (data) {
+                            $('#table').append(
 
-                            "<tr>"+
-                                "<td>"+ (i+1) +"</td>"+
-                                "<td>"+data["paquet"].nom_paq+"</td>"+
-                                "<td>"+ data["nbrCopies"] +"</td>"+
-                                "<td>"+ //ajouter 2 href
-                                    "<div class='btn-group btn-custom-groups btn-custom-groups-one'>"+
-                                        "<a href='{{url('/anonymat/paquet//details')}}' class='btn btn-custon-four btn-primary'>" + "<i class='fa fa-eye' aria-hidden='true'>" + "</i>" + "Détail" + "</a>" +
-                                    "</div>"+
-                                "</td>"+
-                            "</tr>"
-                        );
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(jqXHR, textStatus, errorThrown);
-                    }
-                });
+                                "<tr id='row"+data["paquet"].idPaq+"'>"+
+                                    "<td>"+ (i+1) +"</td>"+
+                                    "<td>"+data["paquet"].nom_paq+"</td>"+
+                                    "<td>"+ data["nbrCopies"] +"</td>"+
+                                    "<td>"+  
+                                        "<div class='btn-group btn-custom-groups btn-custom-groups-one'>"+
+                                            "<div class='row' style='width:160px;'>"+
+                                                "<div class='col-lg-6'>"+
+                                                    "<a href='{!! asset('anonymat/paquet/details/"+data["paquet"].idPaq+"') !!}' class='btn btn-custon-four btn-primary'>" + "<i class='fa fa-eye' aria-hidden='true'>" + "</i>" + "Détail" + "</a>" +
+                                                "</div>"+
+                                                "<div class='col-lg-6'>"+
+                                                    "<form id='form"+data["paquet"].idPaq+"'>"+
+                                                        "<input type='hidden' name='idP' value='"+data["paquet"].idPaq+"'>"+
+                                                    "</form>"+                                                                      
+                                                    "<button class='btn btn-custon-four btn-danger' id='supprimer"+data["paquet"].idPaq+"' name='supprimer'>" + "<i class='fa fa-trash' aria-hidden='true'>" + "</i>" + "Supprimer" + "</button>" + 
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>"+
+                                    "</td>"+
+                                "</tr>"
+                            );
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR, textStatus, errorThrown);
+                        }
+                    });
+                }
+                else{
+                    alert("veuillez importer un fichier excel");
+                }
+                
             });
 
 
@@ -66,16 +84,43 @@
                         
                         for(i=0;i<data["paquets"].length;i++)
                         {
-                            var path="/anonymat/paquet/"+data["paquets"][i].idPaq+"/details";
+                            var path=data["paquets"][i].idPaq;
                             $('#table').append(
-                                '<tr>'+
+                                '<tr id="row'+data["paquets"][i].idPaq+'">'+
                                     '<td>'+ (i+1) +'</td>'+
                                     '<td>'+data["paquets"][i].nom_paq+'</td>'+
                                     '<td>'+ data["nbrCopies"][i] +'</td>'+
                                     '<td>'+  
-                                    // ajouter 2 href
                                         '<div class="btn-group btn-custom-groups btn-custom-groups-one">'+
-                                            '<a href="" class="btn btn-custon-four btn-primary">' + '<i class="fa fa-eye" aria-hidden="true">' + '</i>' + 'Détail' + '</a>' +
+                                            '<div class="row" style="width:160px;">'+
+                                                '<div class="col-lg-6">'+
+                                                    '<a href="{!! asset("anonymat/paquet/details/'+data['paquets'][i].idPaq+'") !!}" class="btn btn-custon-four btn-primary">' + '<i class="fa fa-eye" aria-hidden="true">' + '</i>' + 'Détail' + '</a>' +
+                                                '</div>'+
+                                                '<div class="col-lg-6">'+
+                                                    '<form id="form'+data["paquets"][i].idPaq+'">'+
+                                                        '<input type="hidden" name="idP" value="'+data["paquets"][i].idPaq+'">' +
+                                                    '</form>'+
+                                                        '<button class="btn btn-custon-four btn-danger" id="supprimer'+data["paquets"][i].idPaq+'" name="supprimer">' + '<i class="fa fa-trash" aria-hidden="true">' + '</i>' + 'Supprimer' + '</button>' +   
+                                                        // '<button class="btn btn-custon-four btn-danger" data-toggle="modal" data-target="#supp'+data["paquets"][i].idPaq+'">'+ '<i class="fa fa-trash" aria-hidden="true">' + '</i>' +'Danger</button>'+
+                                                        // '<div id="supp'+data["paquets"][i].idPaq+'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">'+
+                                                        //     '<div class="modal-dialog">'+
+                                                        //         '<div class="modal-content">'+
+                                                        //             '<div class="modal-close-area modal-close-df">'+
+                                                        //                 '<a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>'+
+                                                        //             '</div>'+
+                                                        //             '<div class="modal-body">'+
+                                                        //                 '<span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>'+
+                                                        //                 '<h3>Voulez vous vraiment supprimer le paquet !</h3>'+
+                                                        //             '</div>'+
+                                                        //             '<div class="modal-footer danger-md">'+
+                                                        //                 '<button class="btn btn-custon-four btn-primary" data-dismiss="modal">Cancel</button>'+
+                                                        //                 '<button class="btn btn-custon-four btn-success" id="supprimer'+data["paquets"][i].idPaq+'" name="supprimer" >Process</button>'+
+                                                        //             '</div>'+
+                                                        //         '</div>'+
+                                                        //     '</div>'+
+                                                        // '</div>'+
+                                                '</div>'+
+                                            '</div>'+
                                         '</div>'+
                                     '</td>'+
                                 '</tr>'
@@ -87,6 +132,19 @@
             $('#nouveau').click(function(){
                 $('#addp').modal('show');
             });
+            $(document).on("click",".btn-danger",function(){
+                var btn_id = $(this).attr("id");
+                var i=btn_id.substring(9,btn_id.length);
+                var data = $('#form'+i).serialize(); 
+                $.ajax({
+                    type:'get',
+                    data:data,
+                    url:'/supprimer/paquet',
+                    success:function(data){
+                        $('#row'+i).remove();
+                    }
+                });
+            });
 
         });
 
@@ -97,7 +155,7 @@
 @section('content')
 
 <div class="row">
-    <div id="listep" data-keyboard="false" data-backdrop="static" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+    <div id="listep" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 
@@ -170,6 +228,7 @@
                         <button type="submit" class=" btn btn-custon-four btn-primary" name="ajouter" id="ajouter">Valider</button>
                     </div>
                 </form>
+                
                     
             </div>
         </div>
@@ -192,7 +251,7 @@
 
 
 <div class="static-table-area"  >
-    <div class="container-fluid" style="width:1200px; left:150px;">
+    <div class="container-fluid" style="width:1100px; left:150px;">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="sparkline8-list">

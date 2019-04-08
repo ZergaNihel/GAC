@@ -145,4 +145,9 @@ class Anonymat extends Controller
             'etudiants' => $etudiants,
         ]);
     }
+
+    public function delete(Request $request)
+    {
+        $paquet=Paquet::find($request->idP)->delete();
+    }
 }

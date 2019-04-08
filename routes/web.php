@@ -35,7 +35,21 @@ Route::get('exclus','Presence@exclus');
 
 Route::get('liste_groupes', 'GroupController@index');
 
-Route::get('correction/controle', 'Correction@index');
+Route::get('correction/choix', 'CorrectionCopies@index');
+
+Route::get('choix/module', 'CorrectionCopies@module');
+
+Route::get('choix/paquet', 'CorrectionCopies@paquet');
+
+Route::post('corriger', 'CorrectionCopies@corriger');
+
+Route::get('attribuer/note', 'CorrectionCopies@noter');
+
+Route::get('gestion/paquet/controle', 'CorrectionCopies@GstpaquetCtrl');
+
+Route::get('gestion/paquet/examen', 'CorrectionCopies@GstpaquetExm');
+
+Route::get('attribuer/correcteur', 'CorrectionCopies@correcteur');
 
 Route::get('anonymat/paquets','Anonymat@index');
 
@@ -43,7 +57,9 @@ Route::get('anonymat/paquets/liste','Anonymat@lister');
 
 Route::post('/anonymat/import', 'Anonymat@import');
 
-Route::get('/anonymat/paquet/{id}/details','Anonymat@details');
+Route::get('anonymat/paquet/details/{id}','Anonymat@details');
+
+Route::get('/supprimer/paquet','Anonymat@delete');
 
 Auth::routes();
 
