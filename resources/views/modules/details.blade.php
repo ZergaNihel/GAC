@@ -1,7 +1,7 @@
 <html class="no-js" lang="en">
 
 <head>
-  <meta charset="utf-8">
+     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Dashboard V.1 | Kiaalap - Kiaalap Admin Template</title>
     <meta name="description" content="">
@@ -55,16 +55,9 @@
     <!-- x-editor CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
-    <link rel="stylesheet" href="{{('css/editor/datetimepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('css/editor/bootstrap-editable.css')}}">
-    <link rel="stylesheet" href="{{asset('css/editor/x-editor-style.css')}}">
-    <!-- normalize CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-table.css')}}">
-    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-editable.css')}}">
-    <!-- style CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('style.css')}}">
+
+
+    
     <!-- responsive CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
@@ -94,16 +87,12 @@
 
     <!-- touchspin CSS
     ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/touchspin/jquery.bootstrap-touchspin.min.css')}}">
-    <!-- datapicker CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/datapicker/datepicker3.css')}}">
-    <!-- forms CSS
-    ============================================ -->
+   
     <link rel="stylesheet" href="{{asset('css/form/themesaller-forms.css')}}">
-    <!-- colorpicker CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/colorpicker/colorpicker.css')}}">
+     <!-- tabs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/tabs.css')}}">
+    
     <!-- select2 CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/select2/select2.min.css')}}">
@@ -125,111 +114,27 @@
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <!-- modals CSS
     ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
-    <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}s">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script type="">
-       
-
-  $(document).ready(function(){
-       $(document).on('click','#deleteBtn',function(){
-        alert("hhh");
-        $.ajax({
-type: "POST",
-data: $('#deleteForm').serialize(),                             // to submit fields at once
-url: $('#deleteForm').attr('action'),                        // use the form's action url
-success: function(data) {
-    $("#delete").modal("hide");
- alert(data.success);
- $("#panel"+data.id+"").remove();
-}
-});
-       });
-
-    alert($("#EditError").val());
-     if( $("#EditError").val() == 1){
-         $("#edit").modal("show");
-        }
-     $("#edit").on('show.bs.modal', function(event) {
-    var a = $(event.relatedTarget).data('groupe');
-    var b = $(event.relatedTarget).data('id');
-    var c = $(event.relatedTarget).data('section');
-    var e = $(event.relatedTarget).data('ids1');
-
-//alert("e="+e+"a="+a+"b="+b+"c="+c);
-    var m = $(this)
-    m.find('#editGrp').val(a);
-    m.find('#editSec').val(e);
-    m.find('#editSec').text(c);
-    m.find("#idGroupe").val(b);
-    m.find("#idGroupe_etu").val(e);
-
-   // alert(m.find("#idGroupe_etu").val());
-    //m.find('#prepend-big-btn').val(c);
-});
-$("#delete").on('show.bs.modal', function(event) {
-    var a = $(event.relatedTarget).data('groupe');
-    var b = $(event.relatedTarget).data('id');
-    alert(b);
-     var m = $(this)
-   // m.find('#editGrp').val(a);
-    m.find("#idGrpDel").val(b);
-    alert("groupe = "+m.find("#idGrpDel").val(b));
-    //m.find('#prepend-big-btn').val(c);
-});
-
-var groupe;
-  $("input:hidden.groupe").each(function() {
-      // alert( $(this).val());
-   groupe = $(this).val();
-$.ajax({
-  type: "get",
-  url: "{{url('statGroupe')}}/"+groupe+"/" ,
-  success: function(data){
-   //alert("groupe = "+data.id+"nbr = "+data.nbr);
-     $(".nbr"+data.id+"").append(data.nbr);
-    var ctx = document.getElementById("piechart"+data.id+"");
-    var piechart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-        labels: ["Endétté", "Répétitifs", "Nouveau"],
-            datasets: [{
-                label: 'pie Chart',
-                backgroundColor: [
-                    
-                    '#65b12d',
-                    '#D80027',
-                    '#006DF0'
-                ],
-                data: [data.endette,data.repetitif, data.nouveau]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
-  
-  }
-});
-
- });
-          });
-    </script>
-
-
+    <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
+    <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
+<script ></script>
+    
 </head>
 
 <body>
-       <div class="left-sidebar-pro">
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+    <!-- Start Left menu area -->
+    <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                 <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
                 <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
                 <br>
                 <br>
                        
-                                        <div class="breadcome-heading">
+                                          <div class="breadcome-heading">
                                             <form role="search" class="sr-input-func">
                                                 <input type="text" placeholder="Search..." class="search-int form-control">
                                                 <a href="#"><i class="fa fa-search"></i></a>
@@ -243,57 +148,66 @@ $.ajax({
                         <li class="active">
                             <a class="has-arrow" href="index.html">
                                    <span class="educate-icon educate-home icon-wrap"></span>
-                                   <span class="mini-click-non">Groupes</span>
+                                   <span class="mini-click-non">Semestre</span>
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Nouveau groupe</span></a></li>
-                                <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Liste de groupe</span></a></li>
+                                <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">nouveau semestre</span></a></li>
+                                <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Semestre actuel</span></a></li>
                                
                               
                             </ul>
                         </li>
                      
                         <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Emplois du temps</span></a>
+                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Module</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">E.P générale</span></a></li>
-                                <li><a href="#" ><span class="mini-sub-pro">E.P par module</span></a></li>
+                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">Nouveau module</span></a></li>
+                                <li><a title="Add Professor" href="add-professor.html"><span class="mini-sub-pro">Modules</span></a></li>
                                 
                             </ul>
                         </li>
-
-                     
-              
-                     
-                    <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Délibération</span></a>
+                        <li>
+                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Enseignant</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">Nouveau enseignant</span></a></li>
+                                <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Enseignants</span></a></li>
+                                
+                            </ul>
                         </li>
                      
+                    <li>
+                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Historique</span></a>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Mailbox</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Inbox</span></a></li>
+                                <li><a title="View Mail" href="mailbox-view.html"><span class="mini-sub-pro">View Mail</span></a></li>
+                                <li><a title="Compose Mail" href="mailbox-compose.html"><span class="mini-sub-pro">Compose Mail</span></a></li>
+                            </ul>
+                        </li>
                 
                  
              
                     </ul>
                 </nav>
             </div>
-              
         </nav>
     </div>
-
-             
-    <div class="all-content-wrapper"> 
- 
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <br> 
+                    <br>
                     <div class="logo-pro">
-                        <br>  <br>
-                        <a href="index.html"></a>
+                       <br><br>
                     </div>
                 </div>
             </div>
         </div>
-         <div class="header-advance-area">
+             <div class="header-advance-area">
             <div class="header-top-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -412,46 +326,28 @@ $.ajax({
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Semestre <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Groupe <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="index.html">Nouveau Semestre</a></li>
-                                                <li><a href="index-1.html">Semestre Actuel</a></li>
+                                                <li><a href="index.html">Nouveau Groupe</a></li>
+                                                <li><a href="index-1.html">liste de groupe</a></li>
                                                
                                             </ul>
                                         </li>
-                                        <li><a href="events.html">Historique</a></li>
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Enseignants <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        
+                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Emploi du temps <span class="calendar-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">Enseignants</a>
+                                                <li><a href="all-professors.html">E.P générale</a>
                                                 </li>
-                                                <li><a href="add-professor.html">Nouveau Enseignant</a>
+                                                <li><a href="add-professor.html">E.P par module</a>
                                                 </li>
                                                 
                                             </ul>
                                         </li>
-                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Etudiants <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                          
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Modules <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                              <li><a href="all-professors.html">Modules</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Nouveau module</a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="events.html">Délibération</a></li>
+                                        
+                                       
                                    
                                    
-                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demo" class="collapse dropdown-header-top">
-                                                <li><a href="mailbox.html">Inbox</a>
-                                                </li>
-                                                <li><a href="mailbox-view.html">View Mail</a>
-                                                </li>
-                                                <li><a href="mailbox-compose.html">Compose Mail</a>
-                                                </li>
-                                            </ul>
-                                        </li>
                            
                                     </ul>
                                 </nav>
@@ -477,9 +373,9 @@ $.ajax({
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Dashboard / Semestre actuel</a> <span class="bread-slash">/</span>
+                                            <li><a href="#">Modules</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Emploie du temps</span>
+                                            <li><span class="bread-blod"></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -490,303 +386,165 @@ $.ajax({
                 </div>
             </div>
         </div>
-         <div class="edu-accordion-area mg-b-15">
+
+
+     <div class="admintab-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="tab-content-details mg-b-30">
-                            <h2>Groupe étudiants par section</h2>
-                         
+                        <div class="tab-content-details shadow-reset">
+                            <h2>Custom Animate Tab Bootstrap</h2>
+                            <p></p>
                         </div>
-                           <div class="add-product pull-right">
-                                                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1">Nouveau Groupe</a>
-                                            </div>
-                                          
                     </div>
                 </div>
-
-
-                  <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="modal-login-form-inner">
-                                            
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                       <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Nouveau Groupe</h3>
-                            <p>Register User can get sign in from here</p>
-                             @if($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
-   @endif
-      <form method="post" enctype="multipart/form-data" action="{{ url('groupes') }}">
-    {{ csrf_field() }}
-                 <div class="form-group-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2">Section</label>
-                                                            </div>
-     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="form-select-list"> <select class="form-control custom-select-value" name="section" placeholder="password" style="width: 80%;">
-               <option disabled >choisissez la section</option>
-                         @foreach($sections as $sec)                                
-  <option value="{{$sec->idSec}}">{{$sec->nomSec}}  </option>
-                         @endforeach
-                                                                        </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                          <div class="form-group-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2">Groupe</label>
-                                                            </div>
-     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-         <div class="form-group">
-                  
-      <input name="groupe" type="text" placeholder="Nom de Groupe" class="form-control" id="" style="width: 80%;"> </div>
-  
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                            <div class="form-group-inner"  >
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Liste d'étudiants</label>
-                                                            </div>
-                                                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                                                                <div class="file-upload-inner ts-forms">
-                                                                    <div class="input prepend-small-btn">
-                                                                       
-                                                                        <div class="file-button">
-                                                                          <i class="fa fa-download"></i>
-                                                                            <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" >
-                                                                        </div>
-                                                                        <input type="text" id="prepend-big-btn" placeholder="no file selected" style="width:80%">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                         <div class="login-btn-inner">
-                                                                                    
-                   <div class="row">
-           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Ajouter</button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-            <!--  njgjbxkgnbjlxk  -->
                 <div class="row">
-       @if($message = Session::get('succ'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
- 
-  
-   @endif
-                    <?php $var=1; ?>
-@foreach($section as $s)
-
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="admintab-wrap edu-tab1 mg-t-30">
+                            <ul class="nav nav-tabs custom-menu-wrap custon-tab-menu-style1">
+                                <li class="active"><a data-toggle="tab" href="#TabProject"><span class="edu-icon edu-analytics tab-custon-ic"></span>Informations</a>
+                                </li>
+                                <li><a data-toggle="tab" href="#TabDetails"><span class="edu-icon edu-analytics-arrow tab-custon-ic"></span>Sujets & Corrections</a>
+                                </li>
+                               
+                            </ul>
+                            <div class="tab-content">
+                                <div id="TabProject" class="tab-pane in active animated flipInX custon-tab-style1">
+                                 
+                           <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Module</b><br /> Fly Zend</p>
+                                                        </div>
+                                                    </div>
+                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Acronyme</b><br /> UK</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Code</b><br /> 01962067309</p>
+                                                        </div>
+                                                    </div>
+                                                  
+                                                   
+                            </div>
+                            <br>
+                           <div class="row">
+                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Type</b><br /> fly@gmail.com</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Semetre</b><br /> Fly Zend</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Status</b><br /> 01962067309</p>
+                                                        </div>
+                                                    </div>
+                                              
+                            </div>
+                            <br>
+                           <div class="row">
+                                                 
+                                                   
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Année Universitaire</b><br /> fly@gmail.com</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Enseignant Responsable</b><br /> UK</p>
+                                                        </div>
+                                                    </div>
+                                                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                        <div class="address-hr biography">
+                                                            <p><b>Nombre heures par semaine</b><br /> Fly Zend</p>
+                                                        </div>
+                                                    </div>
+                            </div>
+<br>
+                                </div>
+                                <div id="TabDetails" class="tab-pane animated flipInX custon-tab-style1">
+                               
+                                <!-- accordion start-->
+        <div class="edu-accordion-area mg-b-15">
+            <div class="container-fluid">
+              
+                <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
                             <div class="alert-title">
-                                <h2>{{$s->section->nomSec}}</h2>
-                              
+                                <h2>Sujets</h2>
+                                <p>Vous trouvez ici les sujets d'examens et contrôles pour chaque année</p>
                             </div>
                             <div class="panel-group edu-custon-design" id="accordion">
-                               
-                                @foreach(App\Groupe_etu::where('sem_groupe','=',$semestre)->where('sec_groupe','=',$s->sec_groupe)->select('groupe')->get() as $grp)
-                           <div class="panel panel-default" id="panel{{$grp->groupe1->idG}}">      
+                        <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
-            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}" > Groupe {{$grp->groupe1->nomG}}  </a>
-  <a class="zoomInDown mg-t" href="#" data-ids1="{{$s->section->idSec}}" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#edit"><i class="fa fa-edit pull-right"> </i> </a>
-   
-<a href="{{url('groupe/detail/'.$grp->groupe1->idG)}}"> <i class="fa fa-eye pull-right"> </i></a>
-<a  href="#" class="zoomInDown mg-t" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#delete" > <i class="fa fa-trash pull-right"> </i></a>
-            
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                     Année université 2018/2019</a>
                                         </h4>
                                     </div>
-                                    <div id="delete" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"  style="background: #d80027"><i class="fa fa-close"></i></a>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="modal-login-form-inner">
-                                            <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
-                                        <h2>Suppression !</h2>
-                                        <p>Voulez-Vous vraiment supprimer le Groupe : <b>{{$grp->groupe1->nomG}}</b></p>
-                                         </div>
-                                                        </div>
-                                       <div class="modal-footer danger-md">
-     <form method="post"  action="{{ url('DeleteGroupes') }}" id="deleteForm">
-    {{ csrf_field() }}
-
-    <input type="hidden" name="idGrpDel" id="idGrpDel">
-      
-      <a data-dismiss="modal" href="#"  style="background: #d80027">Annuler</a>
-      <a href="#" id="deleteBtn" style="background: #d80027">supprimer</a>
-    </form>
-                                        
-                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="edit" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="modal-login-form-inner">
-                                            
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                       <div class="basic-login-inner modal-basic-inner">
-                             <h3>Modifier le Groupe : {{$grp->groupe1->nomG}}</h3>
-                            
-     @if(count($errors) > 0)
-    <div class="alert alert-danger">
-     Upload Validation Error<br><br>
-     <ul>
-      @foreach($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-     </ul>
-    </div>
-     <input type="hidden" name="EditError" value="1">
-   @endif
-   
-  
-      <form method="post"  action="{{ url('EditGroupes') }}">
-    {{ csrf_field() }}
-    <input type="hidden" name="idGrp" id="idGroupe">
-      <input type="hidden" name="idGrp_etu" id="idGroupe_etu">
-                 <div class="form-group-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2">Section</label>
-                                                            </div>
-     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="form-select-list"> <select class="form-control custom-select-value" name="section"  style="width: 80%;" >
-             <option id="editSec" selected></option>
-               <option disabled >choisissez la section</option>
-                         @foreach($sections as $sec)                                
-  <option value="{{$sec->idSec}}">{{$sec->nomSec}}  </option>
-                         @endforeach
-                                                                        </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                          <div class="form-group-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                <label class="login2">Groupe</label>
-                                                            </div>
-     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-         <div class="form-group">
-                  
-      <input  type="text" value="" placeholder="Nom de Groupe" class="form-control" id="editGrp" style="width: 80%;" name="groupe"> </div>
-  
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                       
-                         <div class="login-btn-inner">
-                                                                                    
-                   <div class="row">
-           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" id="submitEdit" type="submit">Modifier</button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                         <?php if($var == 1){ ?> 
-          <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse in">
-                                         <?php }else{ ?>
-           <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse">
-                                          <?php } ?>
+                                    <div id="collapse3" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content animated bounce">
-                                         <div class="alert-title">
-                                         <h4>Section : {{$s->section->nomSec}}</h4>
-                                         </div> 
-                                           <br>
-                                           <div class="alert-title">
-                                         <h4>Groupe : {{$grp->groupe1->nomG}}</h4>
-
-                                         </div>   <br>
-                                           <div class="alert-title">
-                                         <h4 class="nbr{{$grp->groupe1->idG}}">Nombre d'étudiants : </h4>
-
-                                         </div><br>
-                                          <input type="hidden" id="groupe_id" class="groupe" name="group[]" value="{{$grp->groupe}}">
-                                            <div class="charts-area mg-b-15">
-                                                    <div class="charts-single-pro responsive-mg-b-30">
-                                                        <div class="alert-title">
-                                                            <h2>Statistiques groupe</h2>
+                                                <div class="ex-pro">
+                                                            <ul>
+  <a href="{{ url('modules/pdf') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i> Examen Algorithemique 2018/2019.</li> </a>
+                                                            </ul>
                                                         </div>
-                                                        <div id="pie-chart">
-                                                            <canvas id="piechart{{$grp->groupe1->idG}}"></canvas>
-                                                        </div>
-                                                    </div>
-                                            </div>
-
                                         </div>
                                     </div>
-
                                 </div>
-                                <?php $var++; ?> 
-                               
-                                @endforeach
-                             </div>
+                            </div>
                         </div>
                     </div>
-   
-  @endforeach
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="admin-pro-accordion-wrap shadow-inner">
+                            <div class="alert-title">
+                                <h2>Corrigés</h2>
+                                <p>Vous trouvez ici les corrections d'examens et contrôles pour chaque année</p>
+                            </div>
+                            <div class="panel-group edu-custon-design" id="accordion2">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
+                                     Collapsible Group 2</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse6" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content animated flash">
+                                            <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions.</p>
+                                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua of Lorem Ipsum.</p>
+                                            <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo consequat consectetur adipisicing elit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            <!--    cvbcj -->
             </div>
         </div>
-            
-        <!-- accordion End-->
-        <div class="footer-copyright-area">
+                                </div>
+                           
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+
+         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -798,11 +556,10 @@ $.ajax({
             </div>
         </div>
     </div>
-
-
-
-
-    <script src="{{asset('js/vendor/jquery-1.12.4.min.js')}}"></script>
+      
+     <!-- icheck JS
+        ============================================ -->
+     <script src="{{asset('js/vendor/jquery-1.12.4.min.js')}}"></script>
     <!-- bootstrap JS
     ============================================ -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -922,8 +679,6 @@ $.ajax({
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
-
-    
 
 </body>
 

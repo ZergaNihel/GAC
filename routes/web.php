@@ -19,18 +19,22 @@ Route::get('/', function () {
 //     return view('abs');
 // });
 
-// Route::get('presence', function () {
-//     return view('EnseignantR/presence');
-// });
+ Route::get('modules/details', function () {
+     return view('modules.details');
+ });
+ Route::get('modules/pdf', function () {
+     return view('modules.pdf');
+ });
 
-// Route::get('groupes', function () {
-//     return view('EnseignantR/groupes');
-// });
-
-// Route::get('correction/controle', function () {
-//     return view('EnseignantR/correction/controle');
-// });
-
+ Route::get('modules/index', 'ModuleController@index');
+ Route::get('DeleteModule/{id}/', 'ModuleController@delete');
+ Route::post('addModule', 'ModuleController@store');
+ Route::post('EditModule', 'ModuleController@edit');
+Route::get('statGroupe/{id}/','GroupController@statistique');
+ Route::post('EditGroupes','GroupController@edit');
+Route::post('DeleteGroupes','GroupController@delete');
+ Route::get('groupe/detail/{id}','GroupController@groupe');
+ Route::post('NouveauEtudiant','GroupController@new_student');
 Route::get('presence','Presence@index');
 
 Route::post('presence/liste','Presence@lister');

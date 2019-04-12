@@ -11,7 +11,7 @@ use App\Groupe;
 use App\Module;
 use App\Cour;
 use App\TDTP;
-
+use App\Semestre;
 class EmploiTemps extends Controller
 {
   function afficher (){
@@ -28,51 +28,18 @@ class EmploiTemps extends Controller
     }
 
     function afficheress (){
-    	 $tab = TDTP::where('id_module',3 )->count();
-        $tab1 = Cour::where('id_module',3)->count();
-       /* $k= DB::table('abcenses')
-            ->join('etudiants', 'abcenses.id', '=', 'etudiants.id')
-            ->join('td_tps', 'abcenses.id', '=', 'td_tps.id')
-            ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
-            ->where('td_tps.id_module','=', 2)
-            ->where('td_tps.id_groupe','=', 2)
-            ->where('td_tps.id_ens','=', 2)
-            ->where('seances.type','=', 'td')
-            ->where('abcenses.etat','=', '0')
-            ->select('abcenses.*','etudiants.*')
-            ->orderBy('etat')
-            ->count(); 
+         $semestres = Semestre::where('active','=',1)->get();
+         
+         foreach ($semestres as $key ) {
+        $semestre = $key->idSem;
+    }
+    //dd($semestre);
+        $modules = Module::where('semestre','=',$semestre)->get();
 
-    */
+    	
 
-            $m = 1;
- $pop1 = DB::table('cours')
-            ->join('enseignants', 'cours.id_Ens', '=', 'enseignants.idEns')
-            ->join('modules', 'cours.id_module', '=', 'modules.idMod')
-            ->join('sections', 'cours.id_section', '=', 'sections.idSec')
-            ->join('seances', 'cours.id_seance', '=', 'seances.idSea')
-            ->where('cours.id_module','=', $m)
-            ->select('seances.*','enseignants.*','sections.*')
-            ->get();
-    dd($pop1);
-    	$sec = Section::all();
-    	$pro = Enseignant::all();
-    	$seances = Seance::where('type','=','Cour')->get();
-    	//dd($seances);
-    	$nbr = Section::count();
-    	$seances = Seance::all();
-    	$groupes = Groupe::all();
-    	$mod = Module::where('idMod',1)->limit(1)->get();
-    	foreach ($mod as $key ) {
-	$mo1= $key->idMod;
-	$mo2= $key->nom;
-	$mo3= $key->code;
-	
-	$mo2= $key->nom;
-	$mo3= $key->code;
-}
 
-    	return view('ess',compact('pro','sec','nbr','seances','groupes','mod'));
+    	return view('ess',compact('modules'));
     }
      function empMod (Request $request){
      	$m = $request->input('moduleCh');
