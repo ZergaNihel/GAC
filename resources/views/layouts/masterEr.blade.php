@@ -128,8 +128,10 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
     <!-- dropzone CSS
-		============================================ -->
-        <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}"> 
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}"> 
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     @yield('script1')
         
@@ -173,16 +175,16 @@
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Correction</span></a>
+                            <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><i class="fas fa-marker" aria-hidden="true"></i> <span class="mini-click-non"> Correction</span></a>
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('#')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Gestion notes</span></a>
+                            <a title="Correction" href="{{url('#')}}" aria-expanded="false"><i class="fas fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
                         </li>
 
                         <li>
                             <a class="has-arrow" href="index.html">
-                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                   <i class="fas fa-folder" aria-hidden="true"></i>
 								   <span class="mini-click-non">Gestion paquets</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
@@ -1051,17 +1053,13 @@
     <script src="{{asset('js/calendar/moment.min.js')}}"></script>
     <script src="{{asset('js/calendar/fullcalendar.min.js')}}"></script>
     <script src="{{asset('js/calendar/fullcalendar-active.js')}}"></script>
-    <!-- Charts JS
-    ============================================ -->
-    <script src="{{asset('js/charts/Chart.js')}}"></script>
-    <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
     <!-- pdf JS
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
     <!-- dropzone JS
     ============================================ -->
-    <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
+    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script> --}}
 
     @yield('script2')
       

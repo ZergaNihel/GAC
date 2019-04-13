@@ -17,7 +17,6 @@
                     success:function(data){
 
                         $.each($('select[name="paquet"] > option'), function () {
-                            alert("b,db");
                             this.remove();
                             });
                     

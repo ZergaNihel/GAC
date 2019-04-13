@@ -47,6 +47,12 @@ Route::get('attribuer/note', 'CorrectionCopies@noter');
 
 Route::get('gestion/paquet/controle', 'CorrectionCopies@GstpaquetCtrl');
 
+Route::get('date/limite/controle', 'CorrectionCopies@datelimite');
+
+Route::post('sujet/controle', 'CorrectionCopies@sujet');
+
+Route::post('corrige/controle', 'CorrectionCopies@corrige');
+
 Route::get('gestion/paquet/examen', 'CorrectionCopies@GstpaquetExm');
 
 Route::get('attribuer/correcteur', 'CorrectionCopies@correcteur');

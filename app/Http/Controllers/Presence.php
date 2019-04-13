@@ -14,10 +14,10 @@ use Auth;
 
 class Presence extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     
     public function lister(Request $request)
     {
@@ -44,7 +44,7 @@ class Presence extends Controller
         ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
         ->where('td_tps.id_module','=', $idmodule)
         ->where('td_tps.id_groupe','=', $idgroupe)
-        ->where('td_tps.id_ens','=', 1)
+        ->where('td_tps.id_ens','=', Auth::user()->enseignant->idEns)
         ->where('seances.type','=', $seance->type)
         ->where('absences.justification','<>','')
         ->where('absences.etat_just','=',2)
@@ -119,8 +119,8 @@ class Presence extends Controller
         $module=$request->input('module');
         $seance=$request->input('seance');
         $groupe=$request->input('groupe');
-
-        $td_tp=DB::select("SELECT id FROM td_tps WHERE id_module=$module and id_Ens=1 and id_groupe=$groupe and id_seance=$seance");
+        $auth=Auth::user()->enseignant->idEns;
+        $td_tp=DB::select("SELECT id FROM td_tps WHERE id_module=$module and id_Ens=$auth and id_groupe=$groupe and id_seance=$seance");
         foreach($td_tp as $td_tp){
             $a=$td_tp->id;
         }
@@ -156,8 +156,8 @@ class Presence extends Controller
         $module=$request->input('module');
         $seance=$request->input('seance');
         $groupe=$request->input('groupe');
-
-        $td_tp=DB::select("SELECT id FROM td_tps WHERE id_module=$module and id_Ens=1 and id_groupe=$groupe and id_seance=$seance");
+        $auth=Auth::user()->enseignant->idEns;
+        $td_tp=DB::select("SELECT id FROM td_tps WHERE id_module=$module and id_Ens=$auth and id_groupe=$groupe and id_seance=$seance");
         foreach($td_tp as $td_tp){
             $a=$td_tp->id;
         }
@@ -207,7 +207,8 @@ class Presence extends Controller
 
     public function justification()
     {
-        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance FROM absences A,etudiants E WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=1 ) and A.justification IS NOT NULL and A.etat_just=2 and A.id_Etu=E.idEtu");
+        $auth=Auth::user()->enseignant->idEns;
+        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance FROM absences A,etudiants E WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=$auth) and A.justification IS NOT NULL and A.etat_just=2 and A.id_Etu=E.idEtu");
         return view('EnseignantR.justifications',
             [
                 'justifications'=> $justif, 

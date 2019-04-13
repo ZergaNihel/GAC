@@ -6,7 +6,7 @@
 ============================================ -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function () {
+
     // $('#note').change(function(){
     //     alert("bjr");
     // });
@@ -14,19 +14,16 @@ $(document).ready(function () {
     $(document).on("change",".txt",function(){
 
         var btn_id = $(this).attr("id");
-
-        
-            var i=btn_id.substring(4,btn_id.length);
-            var data = $('#formN'+i).serialize(); 
-            $.ajax({
-                type:'get',
-                data:data,
-                url:'/attribuer/note',
-                success:function(data){
-                }
-            });
+        var i=btn_id.substring(4,btn_id.length);
+        $.ajax({
+            type:'get',
+            data:'code=' + $('#code'+i).val() + '&note=' + $('#note'+i).val(),
+            url:'/attribuer/note',
+            success:function(data){
+            }
+        });
     });
-});
+
     
 
 </script>
@@ -34,7 +31,7 @@ $(document).ready(function () {
 
 @section('path')
     <li>
-        <span class="bread-blod">Groupe</span>
+        <span class="bread-blod">Correction/Paquet</span>
     </li>
 @endsection
 @section('content')
@@ -92,14 +89,12 @@ $(document).ready(function () {
                                             <tr>
                                                 <td></td>
                                                 <td>{{$No++}}</td>
-                                                <td> {{$code->code}} </td>
+                                                <td> {{$code->code}}</td>
                                                 <form id="formN{{$code->idC}}" >
-                                                <td style="text-align:center;">
-                                                    
-                                                        <input type="hidden" name="code" value="{{$code->idC}}">
-                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="{{$code->note}}" style="width:80px;"/>
-                                                    
-                                                </td>
+                                                    <td style="text-align:center;">
+                                                        <input type="hidden" id="code{{$code->idC}}" name="code" value="{{$code->idC}}">
+                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="" style="width:80px;"/>
+                                                    </td>
                                                </form>
                                             </tr>
                                             @endforeach

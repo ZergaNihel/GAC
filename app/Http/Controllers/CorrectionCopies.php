@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\support\Facades\DB;
 
 use App\Paquet;
+use App\Examen;
 use App\Enseignant;
 use App\Correction;
 use App\Paquet_en;
 use Auth;
+use File;
 
 class CorrectionCopies extends Controller
 {
@@ -42,6 +44,7 @@ class CorrectionCopies extends Controller
                     ->join('semestres','modules.semestre','=','semestres.idSem')
                     ->join('examens','modules.idMod','=','examens.module_Exam')
                     ->where('semestres.active','=',1)
+                    ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                     ->where('examens.type','=',$type)
                     ->get(); 
         return response()->json($modules);
@@ -63,14 +66,24 @@ class CorrectionCopies extends Controller
 
     public function corriger(Request $request)
     {
+        $i=0;
         $p = $request->input('paquet');
         $paquet=Paquet::find($p);
         $codes= DB::table('codes')
-                  ->join('corrections','codes.idC','=','corrections.code_etu')
+                  ->join('paquet_ens','codes.paq_code','=','paquet_ens.id_paq')
                   ->where('codes.paq_code','=',$p)
-                  ->where('corrections.correcteur','=', 1 )
-                  ->select('corrections.*','codes.*')
+                  ->where('paquet_ens.id_Ens','=',Auth::user()->enseignant->idEns)
+                  ->select('codes.*')
                   ->get();
+        foreach($codes as $c)
+        {
+            $note[$i]=DB::table('corrections')
+                    ->where('code_etu','=',$c->idC)
+                    ->where('correcteur','=',Auth::user()->enseignant->idEns)
+                    ->get();
+            $i++;
+        }
+        
         return view('EnseignantR.correction.corriger',
             [
                 'paquet' => $paquet ,
@@ -86,49 +99,47 @@ class CorrectionCopies extends Controller
         $id=DB::table('corrections')
                 ->join('paquet_ens','corrections.correcteur','=','paquet_ens.id')
                 ->where('code_etu', '=', $code)
-                ->where('paquet_ens.id_Ens', '=', 1)
-                ->select('id')
+                ->where('paquet_ens.id_Ens', '=',Auth::user()->enseignant->idEns)
+                ->select('corrections.id')
                 ->get();
-        $note=Correction::find($id[0]->id);
-        $note->note=$n;
-        $note->save();
+        if(count($id)>0)
+        {
+            $note=Correction::find($id[0]->id);
+            $note->note=$n;
+            $note->save();
+        }
+        else
+        {
+            $note= new Correction();
+            $note->note=$n;
+            $note->correcteur=Auth::user()->enseignant->idEns;
+            $note->code_etu=$code;
+            $note->save();
+        }
+            
         
         return response()->json($note);
     }
 
     public function GstpaquetCtrl()
     {
-        $paquets=DB::table('paquet_ens')
-                ->join('enseignants','enseignants.idEns','=','paquet_ens.id_Ens')
-                ->join('paquets','paquets.idPaq','=','paquet_ens.id_paq')
-                ->join('examens','examens.idExam','=','paquets.paq_Exam')
+        $date=DB::table('examens')
                 ->join('modules','examens.module_Exam','=','modules.idMod')
-                ->where('modules.ens_responsable','=',1)
+                ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->where('examens.type','=','Controle')
-                ->select('paquets.*','enseignants.*')
-                ->get();
+                ->first();
 
         $module=DB::table('modules')
                 ->join('semestres','modules.semestre','=','semestres.idSem')
                 ->where('semestres.active','=',1)
-                ->where('ens_responsable','=',1)
+                ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->first();
-
-        $correcteurs=DB::table('td_tps')
-                    ->join('enseignants','enseignants.idEns','=','td_tps.id_Ens')
-                    ->where('id_module','=',$module->idMod)
-                    ->get();
-        $correcteursC=DB::table('cours')
-                    ->join('enseignants','enseignants.idEns','=','cours.id_Ens')
-                    ->where('id_module','=',$module->idMod)
-                    ->select('id_Ens','enseignants.*')
-                    ->distinct()
-                    ->get();
-                    
+        $correcteurs=DB::select("SELECT distinct * FROM enseignants WHERE idEns in(SELECT id_Ens FROM cours WHERE cours.id_module = $module->idMod) OR idEns in(SELECT id_Ens FROM td_tps WHERE td_tps.id_module = $module->idMod) ");
+        
         $nompaq=DB::table('paquets')
         ->join('examens','examens.idExam','=','paquets.paq_Exam')
         ->join('modules','examens.module_Exam','=','modules.idMod')
-        ->where('modules.ens_responsable','=',1)
+        ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
         ->where('examens.type','=','Controle')
         ->select('paquets.idPaq','paquets.salle')
         ->groupby('idPaq','salle')
@@ -137,11 +148,27 @@ class CorrectionCopies extends Controller
         return view('EnseignantR.gestion_paquets.controle')->with(
             [
                 'nompaq'=> $nompaq,
-                'paquets'=> $paquets,
-                'correcteurs'=> $correcteurs,
-                'correcteursC'=> $correcteursC
+                'date'=> $date,
+                'correcteurs'=> $correcteurs
             ] 
         );
+    }
+
+    public function datelimite(Request $request)
+    {
+        $module=DB::table('modules')
+                ->join('semestres','modules.semestre','=','semestres.idSem')
+                ->where('semestres.active','=',1)
+                ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
+                ->first();
+        $ex=DB::table('examens')
+                ->where('type','=','Controle')
+                ->where('module_Exam','=',$module->idMod)
+                ->first();
+        $examen=Examen::find($ex->idExam);
+        $examen->delais=$request->input('date');
+        $examen->save();
+        return $examen;
     }
 
     public function GstpaquetExm()
@@ -151,7 +178,7 @@ class CorrectionCopies extends Controller
                 ->join('paquets','paquets.idPaq','=','paquet_ens.id_paq')
                 ->join('examens','examens.idExam','=','paquets.paq_Exam')
                 ->join('modules','examens.module_Exam','=','modules.idMod')
-                ->where('modules.ens_responsable','=',1)
+                ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->where('examens.type','=','Examen')
                 ->select('paquets.*','enseignants.nom')
                 ->get();
@@ -164,17 +191,85 @@ class CorrectionCopies extends Controller
 
     public function correcteur(Request $request)
     {
-        $correcteurs=$request->input('correcteurs'); $i=0;
-        foreach($correcteurs as $correcteur)
+        $i=0;
+        $correcteurs=$request->input('correcteurs'); 
+        $paquet=$request->input('paquets');
+        $paq_ens=DB::table('paquet_ens')
+        ->where('id_paq','=',$paquet)
+        ->get();
+        if(count($paq_ens) != 0 )
         {
-                $corriger = new Paquet_en();
-                $corriger->id_paq= $request->input('paquets');
-                $corriger->id_Ens = $correcteur;
-                $corriger->save();
+            foreach($correcteurs as $correcteur)
+            {
+                $tab[$i]=$correcteur;
+                $i++;
+            }
+            $i=0;
+            foreach($paq_ens as $p)
+            {
+                $exam=Paquet_en::find($p->id);
+                $exam->id_Ens=$tab[$i];
+                $exam->save();
+                $i++;
+            }
+            $i=0;
+            foreach($correcteurs as $correcteur)
+            {
                 $correc[$i]=Enseignant::find($correcteur);
                 $i++;
+            }
+            $paquet=Paquet::find($request->input('paquets'));
+            return ["paquet" => $paquet , "correcteur" => $correc];
         }
-        $paquet=Paquet::find($request->input('paquets'));
-        return ["paquet" => $paquet , "correcteur" => $correc];
+        else
+        {
+            $i=0;
+            foreach($correcteurs as $correcteur)
+            {
+                    $corriger = new Paquet_en();
+                    $corriger->id_paq= $request->input('paquets');
+                    $corriger->id_Ens = $correcteur;
+                    $corriger->save();
+                    $correc[$i]=Enseignant::find($correcteur);
+                    $i++;
+            }
+            $paquet=Paquet::find($request->input('paquets'));
+            return ["paquet" => $paquet , "correcteur" => $correc];
+        }
+        
+    }
+
+    public function sujet(Request $request)
+    {
+        if($request->hasFile('file'))
+    	{
+            $imageFile = $request->file('file');
+            return $imageFile;
+    		$imageName = uniqid().$imageFile->getClientOriginalName();
+    		$module=DB::table('modules')
+                ->join('semestres','modules.semestre','=','semestres.idSem')
+                ->where('semestres.active','=',1)
+                ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
+                ->first();
+            $ex=DB::table('examens')
+                    ->where('type','=','Controle')
+                    ->where('module_Exam','=',$module->idMod)
+                    ->first();
+            $examen=Examen::find($ex->idExam);
+            $examen->sujet=$imageName;
+            $examen->save();
+    	}
+    	return response()->json(['Status'=>true, 'Message'=>'Image(s) Uploaded.']);
+    }
+
+    public function corrige(Request $request)
+    {
+        if($request->hasFile('file'))
+    	{
+    		$imageFile = $request->file('file');
+    		$imageName = uniqid().$imageFile->getClientOriginalName();
+    		$imageFile->move(public_path('uploads'), $imageName);
+    	}
+    	return response()->json(['Status'=>true, 'Message'=>'Image(s) Uploaded.']);
     }
 }

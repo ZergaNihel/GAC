@@ -155,7 +155,7 @@
 @section('content')
 
 <div class="row">
-    <div id="listep" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+    <div id="listep" data-keyboard="false" data-backdrop="static" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 
