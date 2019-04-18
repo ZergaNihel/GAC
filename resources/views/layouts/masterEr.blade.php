@@ -102,6 +102,7 @@
     <!-- forms CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset('css/form/themesaller-forms.css')}}">
+    <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
     <!-- colorpicker CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset('css/colorpicker/colorpicker.css')}}">
@@ -131,8 +132,6 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}"> 
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
     @yield('script1')
         
 </head>
@@ -145,7 +144,7 @@
      <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" style="width:100px;height:100px;" /></a>
+                <a href="index.html"><img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt="" style="width:100px;height:100px;" /></a>
                 <strong><a href="index.html"><img src="" alt="" /></a></strong>
             </div>
 
@@ -159,7 +158,7 @@
 
                         <li>
                             <a class="has-arrow" href="#">
-                                <i class="fa fa-list" aria-hidden="true"></i>
+                                <span class="educate-icon educate-library icon-wrap"></span>
                                 <span class="mini-click-non">Présence</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="true">
@@ -175,16 +174,16 @@
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><i class="fas fa-marker" aria-hidden="true"></i> <span class="mini-click-non"> Correction</span></a>
+                            <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="mini-click-non"> Correction</span></a>
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('#')}}" aria-expanded="false"><i class="fas fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
+                            <a title="Correction" href="{{url('#')}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
                         </li>
 
                         <li>
                             <a class="has-arrow" href="index.html">
-                                   <i class="fas fa-folder" aria-hidden="true"></i>
+                                    <span class="educate-icon educate-course icon-wrap"></span>
 								   <span class="mini-click-non">Gestion paquets</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
@@ -221,7 +220,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logosn.png" alt="" /></a>
+                        <a href="index.html"><img class="main-logo" src="{{asset('img/logo/logosn.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -366,7 +365,7 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-															<img src="img/product/pro4.jpg" alt="" />
+															<img src="{{asset('img/product/avatar.png')}}" alt="" />
 															<span class="admin-name">
                                                                 @if(Auth::user()->role == '0')
 
@@ -1057,9 +1056,6 @@
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
-    <!-- dropzone JS
-    ============================================ -->
-    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script> --}}
 
     @yield('script2')
       

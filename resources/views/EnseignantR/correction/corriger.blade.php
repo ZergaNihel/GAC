@@ -50,7 +50,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <span>
                                                 <br>
-                                                <b>Paquet:</b> {{$paquet->salle}} </span>
+                                                <h3>Paquet: {{$paquet->salle}}</h3>  </span>
                                         </div>
                                     </div>
                                     <br>
@@ -93,7 +93,7 @@
                                                 <form id="formN{{$code->idC}}" >
                                                     <td style="text-align:center;">
                                                         <input type="hidden" id="code{{$code->idC}}" name="code" value="{{$code->idC}}">
-                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="" style="width:80px;"/>
+                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',Auth::user()->enseignant->idEns)->get() as $c){{$c->note}}@endforeach" style="width:50px; text-align:center;"/>
                                                     </td>
                                                </form>
                                             </tr>

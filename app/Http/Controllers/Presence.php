@@ -10,6 +10,7 @@ use App\Module;
 use App\Seance;
 use App\Groupe;
 use App\Absence;
+use App\Etudiant;
 use Auth;
 
 class Presence extends Controller
@@ -218,15 +219,91 @@ class Presence extends Controller
 
     public function exclus()
     {
-        $seance=Seance::find(1);
-        $td_tp=DB::select("SELECT id from td_tps where id_groupe = 1 and id_module=1 and id_Ens=1 and id_seance in (select idSea from seances where type ='$seance->type' ) ");
+        $etudiants=Absence::all();
+        $i=0; $j=0;
+        $td_tp=DB::table('td_tps')
+                ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                ->pluck('id');
+                
+        $etu=DB::table('absences')
+                    ->where('etat','=',0)
+                    ->wherein('id_td_tp',$td_tp)
+                    ->select('id_Etu')
+                    ->distinct()
+                    ->get();
 
-            $abs=DB::select("SELECT id_Etu , etat , idAbs from absences where etat=0 and id_td_tp in 
-                            (SELECT id from td_tps where id_groupe = 1 and id_module=1 and 
-                            id_Ens=1 and id_seance in (select idSea from seances 
-                                                        where type ='$seance->type' )) ");
-                                            
-        return $abs;
-        
+        foreach($etu as $e)
+        {
+            $nb[$i]=DB::table('absences')
+                    ->where('id_Etu','=',$e->id_Etu)
+                    ->where('etat','=',0)
+                    ->count();
+            if($nb[$i]>=5)
+            {
+                $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                $abs[$j]=$nb[$i];
+                $j++;
+            }
+            if($nb[$i]==3)
+            {
+                $justif=DB::table('absences')
+                        ->where('id_Etu','=',$e->id_Etu)
+                        ->whereNull('justification')
+                        ->count();
+                if($justif==3)
+                {
+                    $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                    $abs[$j]=$nb[$i];
+                    $j++;   
+                }
+                $justifA=DB::table('absences')
+                        ->where('id_Etu','=',$e->id_Etu)
+                        ->whereNotNull('justification')
+                        ->where('etat_just','=',1)
+                        ->count();
+                $justifAtt=DB::table('absences')
+                ->where('id_Etu','=',$e->id_Etu)
+                ->whereNotNull('justification')
+                ->where('etat_just','=',2)
+                ->count();
+
+                if($justifA<1 && $justifAtt<1)
+                {
+                    $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                    $abs[$j]=$nb[$i];
+                    $j++;    
+                }
+            }
+            if($nb[$i]==4)
+            {
+                $justifA=DB::table('absences')
+                        ->where('id_Etu','=',$e->id_Etu)
+                        ->whereNotNull('justification')
+                        ->where('etat_just','=',1)
+                        ->count();
+                $justifAtt=DB::table('absences')
+                ->where('id_Etu','=',$e->id_Etu)
+                ->whereNotNull('justification')
+                ->where('etat_just','=',2)
+                ->count();
+
+                if($justifA<2 && $justifAtt<2)
+                {
+                    $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                    $abs[$j]=$nb[$i];
+                    $j++;    
+                }
+            }
+            $i++;
+        }
+        return view('EnseignantR.exclus',["exclus" => $exclus , "abs" => $abs]);
     }
 }

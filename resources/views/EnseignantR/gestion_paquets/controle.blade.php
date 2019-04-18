@@ -38,6 +38,69 @@
                     }
                 });
             });
+
+            $("#formadd").submit(function(e){
+                e.preventDefault();
+                var form = $(this);
+                var path=$('#file').val();
+                if( path.search(".pdf") > 0)
+                {
+                var data = new FormData(form[0]); 
+                $('#Newfile').modal('hide');
+                $.ajax({
+                    type:'post',
+                    data:data,
+                    url:'/sujet/controle',
+                    cache: false,
+                    processData: false,
+                    contentType : false,
+                    success:function(data){
+                        var href='pdf/'+data.sujet;
+                        alert(href);
+                        // $('#pdfviewer1').remove();
+                        // $('#pdfviewer').append(
+                        //     "<div class='pdf-viewer-area'>"+
+                        //         "<div class='row'>"+
+                        //             "<div class='pdf-single-pro'>"+
+                        //                 "<a class='media medi' href='#'>" +"</a>"+
+                        //             "</div>"+
+                        //         "</div>"+
+                        //     "</div>"
+                        // );
+                        $('#lien').attr('href', href);
+                    }
+                });
+                 }
+                else{
+                    alert("veuillez importer un fichier PDF");
+                }
+            });
+
+            $("#formaddC").submit(function(e){
+                e.preventDefault();
+                var form = $(this);
+                var path=$('#fileC').val();
+                if( path.search(".pdf") > 0)
+                {
+                var data = new FormData(form[0]); 
+                $('#NewfileC').modal('hide');
+                $.ajax({
+                    type:'post',
+                    data:data,
+                    url:'/corrige/controle',
+                    cache: false,
+                    processData: false,
+                    contentType : false,
+                    success:function(data){
+                        var href='pdf/'+data.sujet;
+                        $('#lien').attr('href', href);
+                    }
+                });
+                 }
+                else{
+                    alert("veuillez importer un fichier PDF");
+                }
+            });
         });
 
         $(document).on("click","#popupAttr",function(){
@@ -88,7 +151,7 @@
                                                     <div class="form-group data-custon-pick" id="data_2">
                                                         <div class="input-group date"> 
                                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                            <input id="date" name="date" type="text" class="form-control" placeholder="Date limite" @if($date->delais != "")value="{{$date->delais}}"@else value="" @endif >
+                                                            <input id="date" name="date" type="text" class="form-control" placeholder="Date limite" @if($exam->delais != "")value="{{$exam->delais}}"@else value="" @endif >
                                                         </div>
                                                     </div>
                                                 </form>
@@ -184,44 +247,122 @@
             </div>
             
             <div class="product-tab-list tab-pane fade " id="Details">
-                <!-- Multi Upload Start-->
-                    <div class="multi-uploaded-area mg-b-15">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="dropzone-pro mg-tb-30">
-                                        <div id="dropzone1" class="multi-uploader-cs">
-                                            <form action="/sujet/controle"  method="POST" class="dropzone" enctype="multipart/form-data">
-                                                {{ csrf_field() }}
-                                                <div class="dz-message needsclick download-custom">
-                                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                                    <h2>Le sujet du controle.</h2>
-                                                    <p><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                    </p>
+                <div class="row mg-tb-30">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
+                            <div class="panel-group edu-custon-design" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <div class="row">
+                                            <div class="col-lg-11">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse"> Sujet: </a>
+                                            </h4></div>
+                                            <div class="col-lg-1">
+                                                <a class href="#" data-toggle="modal" data-target="#Newfile"><i class="fa fa-plus" style="color:black;"></i></a>
+                                                <div id="Newfile" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-close-area modal-close-df">
+                                                                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                            </div>
+                                                            <form id="formadd" enctype="multipart/form-data">
+                                                                {{ csrf_field() }}
+                                                                <div class="modal-body">
+                                                                        <div class="form-group-inner">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                                    <input type="file" name="file" id="file" class="form-control" placeholder="Liste des étudiants" required/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class=" btn btn-custon-four btn-primary" data-dismiss="modal">Quitter</button>
+                                                                    <button class=" btn btn-custon-four btn-primary" type="submit">Valider</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="dropzone-pro">
-                                        <div id="dropzone" class="multi-uploader-cs">
-                                            <form action="/corrige/controle"  method="POST" class="dropzone" enctype="multipart/form-data">
-                                                {{ csrf_field() }}
-                                                <div class="dz-message needsclick download-custom">
-                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                    <h2>La correction du controle.</h2>
-                                                    <p><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                    </p>
+                                    <div id="collapse1" class="panel-collapse panel-ic collapse in">
+                                        <div class="panel-body admin-panel-content animated bounce" id="pdfviewer">
+                                            @if($exam->sujet != "")
+                                            <div id="pdfviewer1" class="pdf-viewer-area">
+                                                <div class="row">
+                                                    <div class="pdf-single-pro">
+                                                        <a class="media medi" id="lien" href="{{asset('pdf/'.$exam->sujet)}}"></a>
+                                                    </div>
                                                 </div>
-                                            </form>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <!-- Multi Upload End-->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="admin-pro-accordion-wrap shadow-inner">
+                            <div class="panel-group edu-custon-design" id="accordion2">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading accordion-head">
+                                        <div class="row">
+                                            <div class="col-lg-11">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4"> Corrigé type: </a>
+                                            </h4></div>
+                                            <div class="col-lg-1">
+                                                <a class href="#" data-toggle="modal" data-target="#NewfileC"><i class="fa fa-plus" style="color:black;"></i></a>
+                                                <div id="NewfileC" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-close-area modal-close-df">
+                                                                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                            </div>
+                                                            <form id="formaddC" enctype="multipart/form-data">
+                                                                {{ csrf_field() }}
+                                                                <div class="modal-body">
+                                                                        <div class="form-group-inner">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                                    <input type="file" name="file" id="fileC" class="form-control" placeholder="Liste des étudiants" required/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class=" btn btn-custon-four btn-primary" data-dismiss="modal">Quitter</button>
+                                                                    <button class=" btn btn-custon-four btn-primary" type="submit">Valider</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="collapse4" class="panel-collapse panel-ic collapse in">
+                                        <div class="panel-body admin-panel-content animated flash">
+                                            @if($exam->corrige_type != "")
+                                            <div id="pdfviewer1" class="pdf-viewer-area">
+                                                <div class="row">
+                                                    <div class="pdf-single-pro">
+                                                        <a class="media medi" id="lien" href="{{asset('pdf/'.$exam->corrige_type)}}"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

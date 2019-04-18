@@ -3467,7 +3467,7 @@ td.text-right.mail-date {
     text-align: center;
 }
 .modal-bootstrap.modal-login-form a{
-    color:#fff;
+    color:rgb(0, 0, 0);
 }
 .login-btn-inner .btn-primary.active.focus, .login-btn-inner .btn-primary.active:focus, .login-btn-inner .btn-primary.active:hover, .login-btn-inner .btn-primary:active.focus, .login-btn-inner .btn-primary:active:focus, .login-btn-inner .btn-primary:active:hover, .login-btn-inner .btn-primary:hover, .login-btn-inner .btn-primary:active, .login-btn-inner .btn-primary:focus{
 	background-color: #006DF0;
@@ -3771,8 +3771,8 @@ div#sparklinehome canvas {
     color: #303030;
 }
 .edu-custon-design .panel-heading {
-    background: #006DF0;
-    color: #fff;
+    background: #737779;
+    color: rgb(2, 2, 2);
 }
 .panel-group.edu-custon-design .accordion-head a:hover, .panel-group.edu-custon-design .accordion-head a:focus, .panel-group.edu-custon-design .accordion-head a:active {
     color: #fff;

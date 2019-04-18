@@ -13,6 +13,7 @@ use App\Correction;
 use App\Paquet_en;
 use Auth;
 use File;
+use Validator;
 
 class CorrectionCopies extends Controller
 {
@@ -123,7 +124,7 @@ class CorrectionCopies extends Controller
 
     public function GstpaquetCtrl()
     {
-        $date=DB::table('examens')
+        $exam=DB::table('examens')
                 ->join('modules','examens.module_Exam','=','modules.idMod')
                 ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->where('examens.type','=','Controle')
@@ -148,7 +149,7 @@ class CorrectionCopies extends Controller
         return view('EnseignantR.gestion_paquets.controle')->with(
             [
                 'nompaq'=> $nompaq,
-                'date'=> $date,
+                'exam'=> $exam,
                 'correcteurs'=> $correcteurs
             ] 
         );
@@ -241,12 +242,21 @@ class CorrectionCopies extends Controller
 
     public function sujet(Request $request)
     {
-        if($request->hasFile('file'))
-    	{
-            $imageFile = $request->file('file');
-            return $imageFile;
-    		$imageName = uniqid().$imageFile->getClientOriginalName();
-    		$module=DB::table('modules')
+        $validator = Validator::make($request->all(), [
+            'file' => 'required',
+          ]);
+    
+    
+          if ($validator->passes()) {
+    
+    
+            $File = $request->file('file');
+    		$fileName = uniqid().$File->getClientOriginalName();
+            $File->move(public_path('pdf'), $fileName);
+            
+
+
+            $module=DB::table('modules')
                 ->join('semestres','modules.semestre','=','semestres.idSem')
                 ->where('semestres.active','=',1)
                 ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
@@ -256,20 +266,47 @@ class CorrectionCopies extends Controller
                     ->where('module_Exam','=',$module->idMod)
                     ->first();
             $examen=Examen::find($ex->idExam);
-            $examen->sujet=$imageName;
+            $examen->sujet=$fileName;
             $examen->save();
-    	}
-    	return response()->json(['Status'=>true, 'Message'=>'Image(s) Uploaded.']);
+            return response()->json($examen);
+          }
+    
+    
+          return response()->json(['error'=>$validator->errors()->all()]);
     }
 
     public function corrige(Request $request)
     {
-        if($request->hasFile('file'))
-    	{
-    		$imageFile = $request->file('file');
-    		$imageName = uniqid().$imageFile->getClientOriginalName();
-    		$imageFile->move(public_path('uploads'), $imageName);
-    	}
-    	return response()->json(['Status'=>true, 'Message'=>'Image(s) Uploaded.']);
+        $validator = Validator::make($request->all(), [
+            'file' => 'required',
+          ]);
+    
+    
+          if ($validator->passes()) {
+    
+    
+            $File = $request->file('file');
+    		$fileName = uniqid().$File->getClientOriginalName();
+            $File->move(public_path('pdf'), $fileName);
+            
+
+
+            $module=DB::table('modules')
+                ->join('semestres','modules.semestre','=','semestres.idSem')
+                ->where('semestres.active','=',1)
+                ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
+                ->first();
+            $ex=DB::table('examens')
+                    ->where('type','=','Controle')
+                    ->where('module_Exam','=',$module->idMod)
+                    ->first();
+            $examen=Examen::find($ex->idExam);
+            $examen->corrige_type=$fileName;
+            $examen->save();
+            return response()->json($examen);
+          }
+    
+    
+          return response()->json(['error'=>$validator->errors()->all()]);
     }
 }
