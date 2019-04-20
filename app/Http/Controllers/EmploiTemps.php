@@ -13,7 +13,10 @@ use App\Cour;
 use App\TDTP;
 
 class EmploiTemps extends Controller
-{
+{ public function __construct()
+    {
+        $this->middleware('auth');
+    }
   function afficher (){
     	$sec = Section::all();
     	$pro = Enseignant::all();

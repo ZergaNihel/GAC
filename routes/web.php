@@ -1,5 +1,6 @@
 <?php
-
+use App\User;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,9 +12,19 @@
 |
 */
 
+/*Route::get('/', function () {
+    return view('auth/login');
+});*/
 Route::get('/', function () {
     return view('auth/login');
 });
+//dd(Auth::user());
+//if(Auth::user()->role == '0'){
+//Route::get('/','Presence@justification');
+//}
+//else if (Auth::user()->role == '3'){
+//Route::get('/','Presence@index');
+//}
 
 // Route::get('abs', function () {
 //     return view('abs');
@@ -30,6 +41,17 @@ Route::get('/', function () {
 // Route::get('correction/controle', function () {
 //     return view('EnseignantR/correction/controle');
 // });
+//nihel etudiants
+Route::get('membre/{id}/details','UserController@details');
+Route::get('membre/{id}/edite','UserController@edit');
+Route::put('membre/{id}','UserController@update');
+//Route::post('/mdp','UserController@mdp');
+
+//nihel enseignants
+Route::get('membreE/{id}/details','UserEController@details');
+Route::get('membreE/{id}/edite','UserEController@edit');
+Route::put('membreE/{id}','UserEController@update');
+//Route::post('/mdp','UserController@mdp');
 
 Route::get('presence','Presence@index');
 
@@ -45,7 +67,7 @@ Route::get('present','Presence@present');
 
 Route::get('absent','Presence@absent');
 
-Route::get('groupes','Groupe@index');
+Route::get('enseignant/groupes','Groupe@index');
 
 
 Route::get('liste_groupes', 'GroupController@index');

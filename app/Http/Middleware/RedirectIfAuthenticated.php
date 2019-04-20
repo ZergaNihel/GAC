@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -23,4 +22,16 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
+
+
+    protected function redirectTo()
+{ 
+    if(Auth::user()->role == '0'){
+    return '/justifications';
+     }
+    else if(Auth::user()->role == '3'){
+        return '/presence';
+    }
+}
+
 }

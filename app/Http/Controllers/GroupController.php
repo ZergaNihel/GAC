@@ -10,7 +10,10 @@ use App\Section;
 
 
 class GroupController extends Controller
-{
+{  public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	function index(){
 		$sections = Section::all();
 		 return view('admin.groupes', compact('sections'));

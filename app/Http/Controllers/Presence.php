@@ -12,7 +12,12 @@ use App\Groupe;
 use App\Absence;
 
 class Presence extends Controller
-{
+{ 
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function lister(Request $request)
     {
         //select
