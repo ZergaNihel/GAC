@@ -11,6 +11,7 @@ use App\Seance;
 use App\Groupe;
 use App\Absence;
 use App\Etudiant;
+use App\Exclu;
 use Auth;
 
 class Presence extends Controller
@@ -31,6 +32,8 @@ class Presence extends Controller
         $idmodule = $request->input('module');
         $idseance = $request->input('seance');
 
+        //$section = Section::where()
+
         // popup result
         $seance = Seance::find($request->input('seance'));
         $module= Module::find($request->input('module')); 
@@ -39,7 +42,7 @@ class Presence extends Controller
         $nomgroupe = $groupe->nomG;
         
         //justifiation
-        $justif=DB::table('absences')
+        $justifiations=DB::table('absences')
         ->join('etudiants','absences.id_Etu', '=', 'etudiants.idEtu')
         ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
         ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
@@ -53,34 +56,104 @@ class Presence extends Controller
         ->get();
 
 
-        // // //exclus
-        // $seanceType= Seance::where('type',$seance->type)->get();
-        // //return $seanceType;
-        // foreach($seanceType as $seanceType){
-        // $td_tp=DB::select("SELECT id FROM td_tps WHERE 
-        // id_module=$idmodule and id_Ens=1 and id_groupe=$idgroupe 
-        // and id_seance = $seanceType->idSea");}
-        // return $td_tp;
-        // foreach($td_tp as $td_tp){
-        //     $exclus=DB::select("SELECT id_Etu, count(etat) , count(justification) FROM absences WHERE id_td_tp=$td_tp->id and etat=0 GROUP BY id_Etu");
-        // }
-        //     return $exclus;
-        // $k= DB::table('absences')
-        // ->join('etudiants', 'absences.id_Etu', '=', 'etudiants.idEtu')
-        // ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
-        // ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
-        // ->where('td_tps.id_module','=', $idmodule)
-        // ->where('td_tps.id_groupe','=', $idgroupe)
-        // ->where('td_tps.id_ens','=', 1)
-        // ->where('seances.type','=', $seance->type)
-        // ->where('absences.etat','=', '0')
-        // ->select('absences.*','etudiants.*')
-        // ->get();
-        // return $k;
+        // exclus
+        $i=0; $j=0;
+        $td_tp=DB::table('td_tps')
+                ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
+                ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                ->where('id_groupe','=',$request->input('groupe'))
+                ->where('id_module','=',$request->input('module'))
+                ->where('seances.type','=', $seance->type)
+                ->pluck('id');
+                
+        $etu=DB::table('absences')
+                    ->where('etat','=',0)
+                    ->wherein('id_td_tp',$td_tp)
+                    ->select('id_Etu')
+                    ->distinct()
+                    ->get();
+
+        foreach($etu as $e)
+        {
+            $nb[$i]=DB::table('absences')
+                    ->where('id_Etu','=',$e->id_Etu)
+                    ->where('etat','=',0)
+                    ->count();
+            if($nb[$i]>=5)
+            {
+                $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                $abs[$j]=$nb[$i];
+                $j++;
+            }
+            if($nb[$i]==3)
+            {
+                $justif=DB::table('absences')
+                        ->where('id_Etu','=',$e->id_Etu)
+                        ->whereNull('justification')
+                        ->count();
+                if($justif==3)
+                {
+                    $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                    $abs[$j]=$nb[$i];
+                    $j++;   
+                }
+                $justifA=DB::table('absences')
+                        ->where('id_Etu','=',$e->id_Etu)
+                        ->whereNotNull('justification')
+                        ->where('etat_just','=',1)
+                        ->count();
+                $justifAtt=DB::table('absences')
+                ->where('id_Etu','=',$e->id_Etu)
+                ->whereNotNull('justification')
+                ->where('etat_just','=',2)
+                ->count();
+
+                if($justifA<1 && $justifAtt<1)
+                {
+                    $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                    $abs[$j]=$nb[$i];
+                    $j++;    
+                }
+            }
+            if($nb[$i]==4)
+            {
+                $justifA=DB::table('absences')
+                        ->where('id_Etu','=',$e->id_Etu)
+                        ->whereNotNull('justification')
+                        ->where('etat_just','=',1)
+                        ->count();
+                $justifAtt=DB::table('absences')
+                ->where('id_Etu','=',$e->id_Etu)
+                ->whereNotNull('justification')
+                ->where('etat_just','=',2)
+                ->count();
+
+                if($justifA<2 && $justifAtt<2)
+                {
+                    $exclus[$j]=DB::table('etudiants')
+                            ->where('idEtu','=',$e->id_Etu)
+                            ->get();
+                    $abs[$j]=$nb[$i];
+                    $j++;    
+                }
+            }
+            $i++;
+        }
 
         //liste
-        $etudiants = DB::select("SELECT * FROM etudiants WHERE idG = $idgroupe"); 
+        $etuExclus = DB::table('exclus')
+                    ->pluck('Etu_exc');
 
+        $etudiants = DB::table('etudiants')
+                    ->where('idG','=',$idgroupe)
+                    ->whereNotIn('idEtu',$etuExclus)
+                    ->get();
         
         return view('EnseignantR.presence')->with( 
             [
@@ -93,7 +166,9 @@ class Presence extends Controller
             'groupes'=> $groupes,
             'etudiants' => $etudiants,
             'nomgroupe' => $nomgroupe,
-            'justifications' => $justif
+            'justifications' => $justifiations,
+            'exclus' => $exclus , 
+            'abs' => $abs
             ]);
 
     }
@@ -305,5 +380,16 @@ class Presence extends Controller
             $i++;
         }
         return view('EnseignantR.exclus',["exclus" => $exclus , "abs" => $abs]);
+    }
+
+    public function exclure(Request $request)
+    {
+        $exclus= new Exclu();
+        $exclus->Etu_exc=$request->input('etudiant');
+        $exclus->module_exc=$request->input('module');
+        $exclus->save();
+
+        return response()->json($exclus);
+
     }
 }

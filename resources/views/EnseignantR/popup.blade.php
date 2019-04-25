@@ -96,9 +96,3 @@
     </div>
 </div>
 @endsection
-
-@section('script2')
-
-    
-
-@endsection

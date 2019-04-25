@@ -33,6 +33,8 @@ Route::get('enseignant/groupes','Groupe@index');
 
 Route::get('exclus','Presence@exclus');
 
+Route::get('exclure/etudiant','Presence@exclure');
+
 Route::get('liste_groupes', 'GroupController@index');
 
 Route::get('correction/choix', 'CorrectionCopies@index');
@@ -56,6 +58,18 @@ Route::post('corrige/controle', 'CorrectionCopies@corrige');
 Route::get('gestion/paquet/examen', 'CorrectionCopies@GstpaquetExm');
 
 Route::get('attribuer/correcteur', 'CorrectionCopies@correcteur');
+
+Route::get('gestion/correction/choix', 'GestionCorrection@index');
+
+Route::get('gestion/choix/paquet', 'GestionCorrection@paquet');
+
+Route::post('gestion/notes', 'GestionCorrection@lister');
+
+Route::get('choix/ecart', 'GestionCorrection@ecart');
+
+Route::get('attribuer/note/finale', 'GestionCorrection@noter');
+
+Route::get('choix/formule', 'GestionCorrection@formule');
 
 Route::get('anonymat/paquets','Anonymat@index');
 

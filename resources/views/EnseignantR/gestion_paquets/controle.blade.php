@@ -57,7 +57,7 @@
                     success:function(data){
                         var href='pdf/'+data.sujet;
                         alert(href);
-                        // $('#pdfviewer1').remove();
+                         $('#pdfviewer1').remove();
                         // $('#pdfviewer').append(
                         //     "<div class='pdf-viewer-area'>"+
                         //         "<div class='row'>"+

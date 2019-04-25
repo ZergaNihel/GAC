@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCodesTable extends Migration
+class CodeCreate extends Migration
 {
     /**
      * Run the migrations.
@@ -20,10 +20,8 @@ class CreateCodesTable extends Migration
             $table->integer('paq_code')->unsigned()->nullable();
             $table->integer('etu_code')->unsigned()->nullable();
             $table->timestamps();
-             $table-> foreign('paq_code')->references('idPaq')->on('paquets')->onDelete('cascade');
-              $table-> foreign('etu_code')->references('idEtu')->on('etudiants')->onDelete('cascade');
-            
-            
+            $table-> foreign('paq_code')->references('idPaq')->on('paquets')->onDelete('cascade');
+            $table->foreign('etu_code')->references('matricule')->on('etudiants')->onDelete('cascade');
         });
     }
 

@@ -221,7 +221,7 @@
 
     });
 
-    $(document).on("click",".btn-danger",function(){
+    $(document).on("click",".btn-danger jst",function(){
      var btn_id = $(this).attr("id");
      var i=btn_id.substring(7,btn_id.length);
      var data = $('#editR'+i).serialize();
@@ -254,10 +254,21 @@
     });
  </script>
  <script>
-     jQuery('#datetimepicker3').datetimepicker({
-        format:'d.m.Y H:i',
-        inline:true,
-        lang:'ru'
+     //exclure
+    $(document).on("click",".exc",function(){
+        var btn_id = $(this).attr("id");
+        var i=btn_id.substring(6,btn_id.length);
+        var data = $('#exclusform'+i).serialize();
+        $.ajax({
+            type:'get',
+            data:data,
+            url:'/exclure/etudiant',
+            success:function(data){
+                $('#rowExc'+i).remove();
+                $('#rowEtu'+i).remove();
+            }
+        });
+
     });
  </script>
 @endsection
@@ -371,7 +382,7 @@
                                                     <tbody id="bodytablePopup">
                                                         @php $No=1 @endphp
                                                         @foreach($etudiants as $etudiant)
-                                                        <tr>
+                                                        <tr id="rowEtu{{$etudiant->idEtu}}">
                                                             <td></td>
                                                             <td>{{$No++}}</td>
                                                             <td>{{$etudiant->matricule}}</td>
@@ -480,7 +491,7 @@
                                                                                             <form id="editR{{$justification->idAbs}}">
                                                                                                 {{ csrf_field() }}
                                                                                                 <input type="hidden" id="idjustification" name="idjustification" value="{{$justification->idAbs}}">
-                                                                                                <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
+                                                                                                <button type="button" id="refuser{{$justification->idAbs}}" class="btn btn-custon-rounded-three btn-danger jst"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Refuser</button>
                                                                                             </form>
                                                                                         </div> 
                                                                                     </div>
@@ -539,87 +550,40 @@
                                                         <tr>
                                                             <th data-field="state" data-checkbox="true"></th>
                                                             <th data-field="id">No</th>
-                                                            <th data-field="Matricule" data-editable="true">Matricule</th>
-                                                            <th data-field="Nom_Prenom" data-editable="true">Nom_Prenom</th>
-                                                            <th data-field="Date" data-editable="true">Date de naissance</th>
-                                                            <th data-field="Etat" data-editable="true">Etat</th>
+                                                            <th data-field="Matricule">Matricule</th>
+                                                            <th data-field="Nom_Prenom">Nom_Prenom</th>
+                                                            <th data-field="Date">Date de naissance</th>
+                                                            <th data-field="Etat">Etat</th>
                                                             <th data-field="absences">Nombre d'absences</th>
                                                             <th data-field="action">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        @php $N=0 @endphp
+                                                        @foreach($exclus as $e)
+                                                        <tr id="rowExc{{$e[0]->idEtu}}">
                                                             <td></td>
                                                             <td>1</td>
-                                                            <td>17009215</td>
-                                                            <td>Kalfat Hind</td>
-                                                            <td>03/03/1998</td>
-                                                            <td class="datatable-ct">N</td>
-                                                            <td class="datatable-ct">3</td>
+                                                            <td> {{$e[0]->matricule}} </td>
+                                                            <td>{{$e[0]->nom}} {{$e[0]->prenom}}</td>
+                                                            <td>{{$e[0]->date_naissance}}</td>
+                                                            <td class="datatable-ct">{{$e[0]->type}}</td>
+                                                            <td class="datatable-ct">{{$abs[$N++]}}</td>
                                                             <td class="datatable-ct">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                         <div class="button-ap-list responsive-btn">
                                                                             <div class="button-style-three">
-                                                                                <button type="button" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
+                                                                                <form id="exclusform{{$e[0]->idEtu}}">
+                                                                                    <input type="hidden" name="module" value="{{$idmodule}}">
+                                                                                    <input type="hidden" id="etudiant" name="etudiant" value="{{$e[0]->idEtu}}">
+                                                                                    <button type="button" id="exclus{{$e[0]->idEtu}}" class="btn btn-custon-rounded-three btn-danger exc"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
+                                                                                </form>
                                                                             </div>
                                                                         </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>2</td>
-                                                            <td>17009216</td>
-                                                            <td>Bachiri Wahiba</td>
-                                                            <td>27/04/1997</td>
-                                                            <td class="datatable-ct">N</td>
-                                                            <td class="datatable-ct">5</td>
-                                                            <td class="datatable-ct">
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="button-ap-list responsive-btn">
-                                                                        <div class="button-style-three">
-                                                                            <button type="button" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>3</td>
-                                                            <td>17009217</td>
-                                                            <td>Zerga Nihel</td>
-                                                            <td>26/02/1998</td>
-                                                            <td class="datatable-ct">N</td>
-                                                            <td class="datatable-ct">8</td>
-                                                            <td>
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="button-ap-list responsive-btn">
-                                                                        <div class="button-style-three">
-                                                                            <button type="button" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>4</td>
-                                                            <td>17009218</td>
-                                                            <td>kyum@frok.com</td>
-                                                            <td>+8801962066547</td>
-                                                            <td class="datatable-ct">R </td>
-                                                            <td class="datatable-ct">3</td>
-                                                            <td class="datatable-ct"> 
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="button-ap-list responsive-btn">
-                                                                        <div class="button-style-three">
-                                                                            <button type="button" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
-                                                            </td>
-                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -632,42 +596,8 @@
                 </div>
 
                 <div class="product-tab-list tab-pane fade" id="historique">
-                    <div class="calender-area mg-b-15">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="calender-inner">
-                                        <div id='calendar'></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('script2')
-
-    {{-- <script>
-        $document.ready(function(){
-            $('#valider').click(function(){
-                $('#liste').modal('hide');
-                var data = $('#popup').serialize();
-                alert(data);
-                // $.ajax({
-                //     type:'get',
-                //     data:data,
-                //     url:'presence/liste',
-                //     success:function
-                // })
-
-            })
-        })
-    </script> --}}
-
-         
-
 @endsection

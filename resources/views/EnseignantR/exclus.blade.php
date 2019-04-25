@@ -1,5 +1,28 @@
 @extends('layouts.masterEr')
 
+@section('script1')
+<!-- modals jquery
+    ============================================ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).on("click",".btn-danger",function(){
+        var btn_id = $(this).attr("id");
+        var i=btn_id.substring(6,btn_id.length);
+        alert(i);
+        alert(btn_id);
+        var data = $('#exclusform'+i).serialize();
+        $.ajax({
+                type:'post',
+                data:data,
+                url:'exclure/etudiant',
+                success:function(data){
+                     $('#row'+i).remove();
+                }
+        });
+
+       });
+    </script>
+@endsection
 
 @section('path')
     <li>
@@ -56,7 +79,10 @@
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                         <div class="button-ap-list responsive-btn">
                                                                             <div class="button-style-three">
-                                                                                <button type="button" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
+                                                                                <form id="exclusform{{$e[0]->idEtu}}">
+                                                                                    <input type="hidden" id="etudiant" name="etudiant" value="{{$e[0]->idEtu}}">
+                                                                                    <button type="button" id="exclus{{$e[0]->idEtu}}" class="btn btn-custon-rounded-three btn-danger"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
+                                                                                </form>
                                                                             </div>
                                                                         </div>
                                                                 </div>
