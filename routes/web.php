@@ -19,13 +19,23 @@ Route::get('/', function () {
 //     return view('abs');
 // });
 
- Route::get('modules/details', function () {
-     return view('modules.details');
- });
+ Route::get('modules/details/{id}','ModuleController@details');
+    
  Route::get('modules/pdf', function () {
      return view('modules.pdf');
  });
+ Route::get('Semestres/dashboard/{id}','SemestreController@dash');
+ 
+ Route::get('new_sem', 'SemestreController@new_sem');
+ Route::post('addSem', 'SemestreController@store');
 
+ Route::get('Semestres/index', 'SemestreController@index');
+  Route::get('Enseignants/index', 'EnseignantController@index');
+  Route::get('random_pwd', 'EnseignantController@rand');
+  
+ Route::post('addEnsExcel', 'EnseignantController@storeEns');
+ Route::post('DeleteEns', 'EnseignantController@delete');
+ Route::post('addEns', 'EnseignantController@store');
  Route::get('modules/index', 'ModuleController@index');
  Route::get('DeleteModule/{id}/', 'ModuleController@delete');
  Route::post('addModule', 'ModuleController@store');
@@ -33,7 +43,7 @@ Route::get('/', function () {
 Route::get('statGroupe/{id}/','GroupController@statistique');
  Route::post('EditGroupes','GroupController@edit');
 Route::post('DeleteGroupes','GroupController@delete');
- Route::get('groupe/detail/{id}','GroupController@groupe');
+ Route::get('groupe/detail/{id}/{idSem}','GroupController@groupe');
  Route::post('NouveauEtudiant','GroupController@new_student');
 Route::get('presence','Presence@index');
 
@@ -52,7 +62,7 @@ Route::get('absent','Presence@absent');
 Route::get('groupes','Groupe@index');
 
 
-Route::get('liste_groupes', 'GroupController@index');
+Route::get('liste_groupes/{id}', 'GroupController@index');
 
 
 Route::get('tst', function () {
@@ -66,9 +76,11 @@ Route::get('correction/controle', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/Emplois_du_Temps', 'EmploiTemps@afficher');
+Route::get('/Emplois_du_Temps/{id}', 'EmploiTemps@afficher');
+Route::get('/Emplois_du_Temps_generale/{id}', 'EmploiTemps@generale');
 Route::get('/ess', 'EmploiTemps@afficheress');
 Route::post('empCour', 'EmploiTemps@storeCOUR');
+Route::post('addSeance', 'EmploiTemps@addSeance');
 Route::post('empTP', 'EmploiTemps@storeTP');
 Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');

@@ -12,19 +12,60 @@ use App\Module;
 use App\Cour;
 use App\TDTP;
 use App\Semestre;
+use App\Groupe_etu;
 class EmploiTemps extends Controller
 {
-  function afficher (){
-    	$sec = Section::all();
+function addSeance(Request $request)
+{
+    
+}
+
+    function generale ($id){
+        $mods = Module::where('semestre','=',$id)->get();
+            $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+    $semestre = Semestre::find($id);
+    $sec = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
+                           ->join('sections','sec_groupe','idSec')
+                           ->select('idSec','nomSec')
+                           ->distinct('idSec')
+                           ->get();
+                                $pro = Enseignant::all();
+                                $seancesTP=Seance::where('type','tp')->get();
+        return view('admin.emp_générale',compact('mods','semestre','sem1','sem2','pro','sec','seancesTP'));
+    }
+  function afficher ($id){
+    $cour = Seance::where('type','=','Cour')->get();
+    $td = Seance::where('type','=','td')->get();
+    $tp = Seance::where('type','=','tp')->get();
+    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+    $semestre = Semestre::find($id);
+    	$sec = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
+                           ->join('sections','sec_groupe','idSec')
+                           ->select('idSec','nomSec')
+                           ->distinct('idSec')
+                           ->get();
+                          // dd($sec);
     	$pro = Enseignant::all();
-    	$nbr = Section::count();
+    	$nbr = Groupe_etu::where('sem_groupe','=',$id)
+                           ->select('sec_groupe')
+                           ->distinct('sec_groupe')
+                           ->count('sec_groupe');
+                           //dd($nbr);
     	$seances = Seance::where('type','Cour')->get();
     	$seancesTD= Seance::where('type','td')->get();
     	$seancesTP=Seance::where('type','tp')->get();
-    	$groupes = Groupe::all();
-    	$mods = Module::all();
+
+    	$groupes  = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
+                           ->join('groupes','groupe','idG')
+                           ->select('idG','nomG')
+                           ->distinct('idG')
+                           ->get();
+                           //dd($groupes);
+    	$mods = Module::where('semestre','=',$id)->get();
     	//$mod = Module::where('idMod',1)->limit(1)->get();
-    	return view('admin.emploi_du_temp',compact('pro','sec','nbr','seances','groupes','mods','seancesTD','seancesTP'));
+    	return view('admin.emploi_du_temp',compact('semestre','sem1','sem2','pro','sec','nbr','seances','groupes','mods','seancesTD','seancesTP','cour','td','tp'));
     }
 
     function afficheress (){
