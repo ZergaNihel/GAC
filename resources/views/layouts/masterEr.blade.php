@@ -170,7 +170,7 @@
                         </li>
 
                         <li>
-                            <a title="Groupes" href="{{url('groupes')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
+                            <a title="Groupes" href="{{url('enseignant/groupes')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
                         </li>
 
                         <li>
@@ -369,21 +369,19 @@
 															<span class="admin-name">
                                                                 @if(Auth::user()->role == '0')
 
-                                                                {{Auth::user()->etudiant->nom}} 
-                                                                {{Auth::user()->etudiant->prenom}}
+                                                                    {{Auth::user()->etudiant->nom}} 
+                                                                    {{Auth::user()->etudiant->prenom}}
+                                                                    
                                                                 @elseif(Auth::user()->role == '3')
 
-                                                                {{Auth::user()->enseignant->nom}} 
-                                                                {{Auth::user()->enseignant->prenom}}
+                                                                    {{Auth::user()->enseignant->nom}} 
+                                                                    {{Auth::user()->enseignant->prenom}}
                                                               
-                                                              @else
+                                                                @else
                                                                   
                                                                      {{Auth::user()->name}}
                                                                   
-                                                                  @endif
-
-
-
+                                                                @endif
 
                                                             </span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
@@ -792,7 +790,7 @@
                                                 <li><a href="analytics.html">Historique</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{url('groupes')}}">Groupes</a></li>
+                                        <li><a href="{{url('enseignant/groupes')}}">Groupes</a></li>
                                         <li><a href="{{url('correction/choix')}}">Correction</a></li>
                                         <li><a href="{{url('gestion/correction/choix')}}">Gestion notes</a></li>
                                         <li><a data-toggle="collapse" data-target="#demopro" href="#">Gestion paquets <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
@@ -836,12 +834,7 @@
                             <div class="breadcome-list single-page-breadcome">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
@@ -911,10 +904,10 @@
     <script src="{{asset('js/editable/bootstrap-datetimepicker.js')}}"></script>
     <script src="{{asset('js/editable/bootstrap-editable.js')}}"></script>
     <script src="{{asset('js/editable/xediable-active.js')}}"></script>
-    <!-- Chart JS
-		============================================ -->
-    <script src="{{asset('js/chart/jquery.peity.min.js')}}"></script>
-    <script src="{{asset('js/peity/peity-active.js')}}"></script>
+    <!-- Charts JS
+    ============================================ -->
+    <script src="{{asset('js/charts/Chart.js')}}"></script>
+    <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
     <!-- tab JS
 		============================================ -->
     <script src="{{asset('js/tab.js')}}"></script>

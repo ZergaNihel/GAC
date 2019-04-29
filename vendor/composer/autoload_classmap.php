@@ -26,21 +26,19 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
-<<<<<<< HEAD
+
     'App\\Http\\Controllers\\Correction' => $baseDir . '/app/Http/Controllers/Correction.php',
     'App\\Http\\Controllers\\Groupe' => $baseDir . '/app/Http/Controllers/Groupe.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Presence' => $baseDir . '/app/Http/Controllers/Presence.php',
-=======
+
 
     'App\\Http\\Controllers\\EmploiTemps' => $baseDir . '/app/Http/Controllers/EmploiTemps.php',
     'App\\Http\\Controllers\\GroupController' => $baseDir . '/app/Http/Controllers/GroupController.php',
-
-    'App\\Http\\Controllers\\Presence' => $baseDir . '/app/Http/Controllers/Presence.php',
-
+    'App\\Http\\Controllers\\Groupe' => $baseDir . '/app/Http/Controllers/Groupe.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
 
->>>>>>> 4b8cb31bb1b07148c1af3e58f66ae4f8548720f7
+    'App\\Http\\Controllers\\Presence' => $baseDir . '/app/Http/Controllers/Presence.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -61,11 +59,7 @@ return array(
     'App\\Seance' => $baseDir . '/app/Seance.php',
     'App\\Section' => $baseDir . '/app/Section.php',
     'App\\Semestre' => $baseDir . '/app/Semestre.php',
-
     'App\\TDTP' => $baseDir . '/app/TDTP.php',
-
-    'App\\Td_tp' => $baseDir . '/app/Td_tp.php',
-
     'App\\User' => $baseDir . '/app/User.php',
     'BeyondCode\\DumpServer\\DumpServerCommand' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
     'BeyondCode\\DumpServer\\DumpServerServiceProvider' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',

@@ -1,5 +1,70 @@
 @extends('layouts.masterEr')
 
+@section('script1')
+<!-- modals jquery
+    ============================================ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="">
+
+        $(document).ready(function(){
+            $(document).on('click','#deleteBtn',function(){
+            alert("hhh");
+            $.ajax({
+                type: "POST",
+                data: $('#deleteForm').serialize(),                             // to submit fields at once
+                url: $('#deleteForm').attr('action'),                        // use the form's action url
+                success: function(data) {
+                        $("#delete").modal("hide");
+                        alert(data.success);
+                        $("#panel"+data.id+"").remove();
+                    }
+                });
+            });
+
+    
+     if( $("#EditError").val() == 1){
+         $("#edit").modal("show");
+        }
+
+var groupe;
+  $("input:hidden.groupe").each(function() {
+      // alert( $(this).val());
+   groupe = $(this).val();
+$.ajax({
+  type: "get",
+  url: "{{url('enseignant/statGroupe')}}/"+groupe+"/" ,
+  success: function(data){
+   //alert("groupe = "+data.id+"nbr = "+data.nbr);
+     $(".nbr"+data.id+"").append(data.nbr);
+    var ctx = document.getElementById("piechart"+data.id+"");
+    var piechart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+        labels: ["Endétté", "Répétitifs", "Nouveau"],
+            datasets: [{
+                label: 'pie Chart',
+                backgroundColor: [
+                    
+                    '#65b12d',
+                    '#D80027',
+                    '#006DF0'
+                ],
+                data: [data.endette,data.repetitif, data.nouveau]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+  
+  }
+});
+
+ });
+          });
+    </script>
+@endsection
+
 @section('path')
     <li>
         <span class="bread-blod">Groupe</span>
@@ -7,7 +72,7 @@
 @endsection
 
 @section('content')
-<!-- accordion start-->
+{{-- <!-- accordion start-->
 <div class="edu-accordion-area mg-b-15">
     <div class="container-fluid">
         <div class="row">
@@ -462,5 +527,67 @@
         </div>
     </div>
 </div>
-<!-- accordion End-->
+<!-- accordion End--> --}}
+<div class="edu-accordion-area mg-b-15">
+    <div class="container-fluid">
+        @if($message = Session::get('succ'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+
+        @endif
+        <?php $var=1; ?>
+        @foreach($section as $s)
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
+                <div class="alert-title">
+                    <h2>{{$s->section->nomSec}}</h2>
+
+                </div>
+                <div class="panel-group edu-custon-design" id="accordion">
+
+                    @foreach(App\Groupe_etu::where('sem_groupe','=',$semestre)->where('sec_groupe','=',$s->sec_groupe)->select('groupe')->get()
+                    as $grp)
+                    <div class="panel panel-default" id="panel{{$grp->groupe1->idG}}">
+                        <div class="panel-heading accordion-head">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"href="#collapse{{$var}}"> Groupe {{$grp->groupe1->nomG}} </a>
+                            </h4>
+                        </div>
+                        <?php if($var == 1){ ?>
+                        <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse in">
+                            <?php }else{ ?>
+                            <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse">
+                                <?php } ?>
+                                <div class="panel-body admin-panel-content animated bounce">
+                                    <div class="alert-title">
+                                        <h4 class="nbr{{$grp->groupe1->idG}}">Nombre d'étudiants : </h4>
+                                    </div><br>
+                                    <input type="hidden" id="groupe_id" class="groupe" name="group[]"
+                                        value="{{$grp->groupe}}">
+                                    <div class="charts-area mg-b-15">
+                                        <div class="charts-single-pro responsive-mg-b-30">
+                                            <div id="pie-chart">
+                                                <canvas id="piechart{{$grp->groupe1->idG}}"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <?php $var++; ?>
+
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+        </div>
+    </div>
+</div>
 @endsection

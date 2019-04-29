@@ -15,6 +15,26 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+// Route::get('abs', function () {
+//     return view('abs');
+// });
+
+ Route::get('modules/details', function () {
+     return view('modules.details');
+ });
+ Route::get('modules/pdf', function () {
+     return view('modules.pdf');
+ });
+
+Route::get('modules/index', 'ModuleController@index');
+Route::get('DeleteModule/{id}/', 'ModuleController@delete');
+Route::post('addModule', 'ModuleController@store');
+Route::post('EditModule', 'ModuleController@edit');
+Route::get('statGroupe/{id}/','GroupController@statistique');
+Route::post('EditGroupes','GroupController@edit');
+Route::post('DeleteGroupes','GroupController@delete');
+Route::get('groupe/detail/{id}','GroupController@groupe');
+Route::post('NouveauEtudiant','GroupController@new_student');
 Route::get('presence','Presence@index');
 
 Route::post('presence/liste','Presence@lister');
@@ -29,7 +49,9 @@ Route::get('present','Presence@present');
 
 Route::get('absent','Presence@absent');
 
-Route::get('enseignant/groupes','Groupe@index');
+Route::get('enseignant/groupes','Groupes@index');
+
+Route::get('enseignant/statGroupe/{id}/','Groupes@statistique');
 
 Route::get('exclus','Presence@exclus');
 
