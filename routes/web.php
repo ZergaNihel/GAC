@@ -81,6 +81,7 @@ Route::get('/Emplois_du_Temps_generale/{id}', 'EmploiTemps@generale');
 Route::get('/ess', 'EmploiTemps@afficheress');
 Route::post('empCour', 'EmploiTemps@storeCOUR');
 Route::post('addSeance', 'EmploiTemps@addSeance');
+Route::post('empGenerale', 'EmploiTemps@empGen');
 Route::post('empTP', 'EmploiTemps@storeTP');
 Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');

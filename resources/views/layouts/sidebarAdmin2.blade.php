@@ -24,9 +24,9 @@
                         </li>
                      
                         <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap"></span> <span class="mini-click-non">Emplois du temps</span></a>
+                            <a class="has-arrow" aria-expanded="false"><span class="educate-icon educate-event icon-wrap"></span> <span class="mini-click-non">Emplois du temps</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">E.P générale</span></a></li>
+                                <li><a title="All Professors" href="{{url('/Emplois_du_Temps_generale/'.$semestre->idSem)}}"><span class="mini-sub-pro">E.P générale</span></a></li>
                                 <li><a href="{{url('/Emplois_du_Temps/'.$semestre->idSem)}}" ><span class="mini-sub-pro">E.P par module</span></a></li>
                                 
                             </ul>

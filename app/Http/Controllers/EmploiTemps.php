@@ -17,12 +17,66 @@ class EmploiTemps extends Controller
 {
 function addSeance(Request $request)
 {
+    if($request->newType == "Cour"){
+        //dd($request->newEns);
+    $emp = Cour::create(["id_module"=>$request->idmodule,"id_Ens"=>$request->newEns,"id_section"=>$request->newSec,"id_seance"=>$request->newSeance,]);
+    $emp1 = Cour::where('id','=',$emp->id)
+                   ->join('enseignants','id_Ens','idEns')
+                   ->join('seances','id_seance','idSea')
+                   ->join('sections','id_section','idSec')
+                   ->select('enseignants.nom','enseignants.prenom','seances.jour','seances.heure','seances.salle' , 'sections.nomSec','cours.id')
+                   ->get();
+    }
+    if($request->newType == "TP" || $request->newType == "TD"  ){
+    $emp = TDTP::create(["id_module"=>$request->idmodule,"id_Ens"=>$request->newEns,"id_groupe
+        "=>$request->newGrp,"id_seance"=>$request->newSeance,]);
+    $emp1 = TDTP::where('id','=',$emp->id)
+                   ->join('enseignants','id_Ens','idEns')
+                   ->join('seances','id_seance','idSea')
+                   ->join('groupes','id_groupe','idG')
+                   ->select('enseignants.nom','enseignants.prenom','seances.jour','seances.heure','seances.salle' , 'sections.nomSec','td_tps.id','seances.type')
+                   ->get();
+    }
     
+//dd($emp1);
+    return response()->json(["emp" =>$emp1]);
+}
+function empGen (Request $request){
+$m = $request->input('section');
+$sem = $request->input('semestre');
+$sec = Section::find($m);
+$pop = DB::table('td_tps')
+            ->join('enseignants', 'td_tps.id_Ens', '=', 'enseignants.idEns')
+            ->join('modules', 'td_tps.id_module', '=', 'modules.idMod')
+            ->join('groupes', 'td_tps.id_groupe', '=', 'groupes.idG')
+            ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
+            ->join('groupe_etus', 'td_tps.id_groupe', '=', 'groupe_etus.groupe')
+            ->where('groupe_etus.sec_groupe','=', $m)
+            ->where('groupe_etus.sem_groupe','=', $sem)
+            ->select('seances.*','enseignants.*','groupes.nomG','groupes.idG','modules.nom as nomModule','modules.code','modules.idMod')
+            ->get();
+            //dd($pop); 
+$pop1 = DB::table('cours')
+            ->join('enseignants', 'cours.id_Ens', '=', 'enseignants.idEns')
+            ->join('modules', 'cours.id_module', '=', 'modules.idMod')
+            ->join('sections', 'cours.id_section', '=', 'sections.idSec')
+            ->join('seances', 'cours.id_seance', '=', 'seances.idSea')
+             ->join('groupe_etus', 'cours.id_section', '=', 'groupe_etus.sec_groupe')
+            ->where('groupe_etus.sem_groupe','=', $sem)
+             ->where('groupe_etus.sec_groupe','=', $m)
+              ->where('cours.id_section','=', $m)
+            ->select('seances.*','enseignants.*','sections.*','modules.nom as nomModule','modules.code','modules.idMod')
+            ->distinct('section.idSec')
+            ->get(); 
+//dd($pop1);
+
+return response()->json(['sec' => $sec,'pop' => $pop ,'pop1' => $pop1]);
+
 }
 
     function generale ($id){
-        $mods = Module::where('semestre','=',$id)->get();
-            $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+        
+    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     $semestre = Semestre::find($id);
     $sec = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
@@ -30,9 +84,8 @@ function addSeance(Request $request)
                            ->select('idSec','nomSec')
                            ->distinct('idSec')
                            ->get();
-                                $pro = Enseignant::all();
-                                $seancesTP=Seance::where('type','tp')->get();
-        return view('admin.emp_générale',compact('mods','semestre','sem1','sem2','pro','sec','seancesTP'));
+   
+        return view('admin.emp_générale',compact('semestre','sem1','sem2','sec'));
     }
   function afficher ($id){
     $cour = Seance::where('type','=','Cour')->get();
@@ -57,7 +110,7 @@ function addSeance(Request $request)
     	$seancesTD= Seance::where('type','td')->get();
     	$seancesTP=Seance::where('type','tp')->get();
 
-    	$groupes  = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
+    	$groupes  = Groupe_etu::where('sem_groupe','=',$id)
                            ->join('groupes','groupe','idG')
                            ->select('idG','nomG')
                            ->distinct('idG')
@@ -83,6 +136,7 @@ function addSeance(Request $request)
     	return view('ess',compact('modules'));
     }
      function empMod (Request $request){
+        $sem = $request->semestre;
      	$m = $request->input('moduleCh');
 $module= Module::where('idMod',$m)->limit(1)->get();
  $tab = TDTP::where('id_module',$m )->count();
@@ -92,6 +146,8 @@ $pop = DB::table('td_tps')
             ->join('modules', 'td_tps.id_module', '=', 'modules.idMod')
             ->join('groupes', 'td_tps.id_groupe', '=', 'groupes.idG')
             ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
+            ->join('groupe_etus', 'td_tps.id_groupe', '=', 'groupe_etus.groupe')
+            ->where('groupe_etus.sem_groupe','=', $sem)
             ->where('td_tps.id_module','=', $m)
             ->select('seances.*','enseignants.*','groupes.nomG','groupes.idG')
             ->get(); 
@@ -100,8 +156,11 @@ $pop = DB::table('td_tps')
             ->join('modules', 'cours.id_module', '=', 'modules.idMod')
             ->join('sections', 'cours.id_section', '=', 'sections.idSec')
             ->join('seances', 'cours.id_seance', '=', 'seances.idSea')
+            ->join('groupe_etus', 'cours.id_section', '=', 'groupe_etus.sec_groupe')
+            ->where('groupe_etus.sem_groupe','=', $sem)
             ->where('cours.id_module','=', $m)
             ->select('seances.*','enseignants.*','sections.*')
+            ->distinct('cours.id_section')
             ->get(); 
 
 
@@ -159,7 +218,7 @@ return response()->json(['module' => $module,'mo4' => $tab+$tab1 ,'pop' => $pop 
             ->where('td_tps.id_module','=', $m)
             ->select('seances.*','enseignants.*','groupes.nomG','groupes.idG')
             ->get(); 
-            $pop1 = DB::table('cours')
+         $pop1 = DB::table('cours')
             ->join('enseignants', 'cours.id_Ens', '=', 'enseignants.idEns')
             ->join('modules', 'cours.id_module', '=', 'modules.idMod')
             ->join('sections', 'cours.id_section', '=', 'sections.idSec')
@@ -167,10 +226,8 @@ return response()->json(['module' => $module,'mo4' => $tab+$tab1 ,'pop' => $pop 
             ->where('cours.id_module','=', $m)
             ->select('seances.*','enseignants.*','sections.*')
             ->get(); 
-         $var = "hello"; 
-        // dd($pop); 
-         //console.log($pop);  
-return response()->json(['pop' => $pop , 'var' => $var , 'pop1' => $pop1]);
+        
+return response()->json(['pop' => $pop  , 'pop1' => $pop1]);
      }
 
 

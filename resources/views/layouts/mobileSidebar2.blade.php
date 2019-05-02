@@ -6,15 +6,15 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Groupe <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <li><a  href="{{url('liste_groupes/'.$semestre->idSem)}}">Groupe <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                            
                                         </li>
                                         
                                         <li><a data-toggle="collapse" data-target="#demoevent" href="#">Emploi du temps <span class="calendar-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">E.P générale</a>
+                                                <li><a href="{{url('/Emplois_du_Temps_generale/'.$semestre->idSem)}}">E.P générale</a>
                                                 </li>
-                                                <li><a href="add-professor.html">E.P par module</a>
+                                                <li><a href="{{url('/Emplois_du_Temps/'.$semestre->idSem)}}">E.P par module</a>
                                                 </li>
                                                 
                                             </ul>
