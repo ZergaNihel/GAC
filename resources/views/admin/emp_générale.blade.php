@@ -14,9 +14,7 @@
     var e = $(event.relatedTarget).data('seaj');
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
-   // var h = $(event.relatedTarget).data('sec');
 
-//alert("e="+e+"a="+a+"b="+b+""+f+""+g);
     var m = $(this)
     m.find('#ens').text(a+" "+b);
     m.find('#mod').text(c);
@@ -24,8 +22,7 @@
     m.find("#sec").text(d);
    
 
-   // alert(m.find("#idGroupe_etu").val());
-    //m.find('#prepend-big-btn').val(c);
+   
 });
          $("#InformationTP").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('ensn');
@@ -189,7 +186,7 @@ if(data.pop[i].heure === "10h" && data.pop[i].jour === "mardi"){
     if(data.pop[i].type === 'tp' ){
     	x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomModule +' -- '+data.pop[i].nomG+' </a></div>';
 
-      $('#D13').append(x2);
+      $('#Ma13').append(x2);
     }
   }
        if(data.pop[i].heure === "15h" && data.pop[i].jour === "mardi"){

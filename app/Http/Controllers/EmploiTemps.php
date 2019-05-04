@@ -30,7 +30,13 @@ return response()->json(["id" =>$id]);
 
 function addSeance(Request $request)
 {
+   $emp1 = 0;
     if($request->newType == "Cour"){
+        $c = Cour::where("id_seance","=",$request->newSeance)
+                   ->where("id_section","=",$request->newSec)
+                   ->where("id_module","=",$request->idmodule)
+                   ->count();
+                    if($c == 0){
         //dd($request->newEns);
     $emp = Cour::create(["id_module"=>$request->idmodule,"id_Ens"=>$request->newEns,"id_section"=>$request->newSec,"id_seance"=>$request->newSeance,]);
     $emp1 = Cour::where('id','=',$emp->id)
@@ -39,8 +45,14 @@ function addSeance(Request $request)
                    ->join('sections','id_section','idSec')
                    ->select('enseignants.nom','enseignants.prenom','seances.jour','seances.heure','seances.salle' , 'sections.nomSec','cours.id','seances.type')
                    ->get();
+               }
     }
     if($request->newType == "TP" || $request->newType == "TD"  ){
+         $c = TDTP::where("id_seance","=",$request->newSeance)
+                   ->where("id_groupe","=",$request->newGrp)
+                   ->where("id_module","=",$request->idmodule)
+                   ->count();
+                   if($c == 0){
         //  dd($request->newGrp);
     $emp = TDTP::create(["id_module"=>$request->idmodule,"id_Ens"=>$request->newEns,
         "id_groupe"=>$request->newGrp,"id_seance"=>$request->newSeance,]);
@@ -50,10 +62,12 @@ function addSeance(Request $request)
                    ->join('groupes','id_groupe','idG')
                    ->select('enseignants.nom','enseignants.prenom','seances.jour','seances.heure','seances.salle' , 'groupes.nomG','td_tps.id','seances.type')
                    ->get();
+               }
+
     }
     
 //dd($emp1);
-    return response()->json(["emp" =>$emp1]);
+    return response()->json(["emp" =>$emp1,"c"=>$c]);
 }
 function empGen (Request $request){
 $m = $request->input('section');

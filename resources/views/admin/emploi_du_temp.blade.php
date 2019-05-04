@@ -14,8 +14,7 @@ $(document).ready(function(){
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
   var h = $(event.relatedTarget).data('id');
-alert(h);
-//alert("e="+e+"a="+a+"b="+b+""+f+""+g);
+
     var m = $(this)
     m.find('#ens').text(a+" "+b);
     m.find("#supID").val(h);
@@ -23,8 +22,6 @@ alert(h);
     m.find("#sec").text(d);
    
 
-   // alert(m.find("#idGroupe_etu").val());
-    //m.find('#prepend-big-btn').val(c);
 });
          $("#InformationTP").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('ensn');
@@ -34,7 +31,7 @@ alert(h);
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
     var h = $(event.relatedTarget).data('id');
-alert(h);
+
    // var h = $(event.relatedTarget).data('sec');
 
 //alert("e="+e+"a="+a+"b="+b+""+f+""+g);
@@ -57,7 +54,7 @@ alert(h);
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
      var h = $(event.relatedTarget).data('id');
-alert(h);
+
    // var h = $(event.relatedTarget).data('sec');
 
 //alert("e="+e+"a="+a+"b="+b+""+f+""+g);
@@ -523,7 +520,7 @@ alert(""+pop[1].heure+""+pop[1].jour+""+pop[1].type);*/
 if(pop.length > 0){
   for( i =0;i<pop.length ;i++){
 //alert(i);
-alert(""+pop[i].heure+""+pop[i].jour+""+pop[i].type);
+
   if(pop[i].heure === "8h30" && pop[i].jour === "dimanche"){
 
     if(pop[i].type === "td" ){
@@ -624,7 +621,7 @@ if(pop[i].heure === "10h" && pop[i].jour === "mardi"){
     if(pop[i].type === 'tp' ){
         x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
-      $('#D13').append(x2);
+      $('#Ma13').append(x2);
     }
   }
        if(pop[i].heure === "15h" && pop[i].jour === "mardi"){
@@ -995,11 +992,15 @@ type: "POST",
 data: $('#supSea').serialize(),                             // to submit fields at once
 url: $('#supSea').attr('action'),                        // use the form's action url
 success: function(data) {
-    alert(data.id);
+ 
 $("#poptp"+data.id+"").remove();
 $("#InformationTP").modal("hide"); 
 
-
+$("#inf").addClass("active"); 
+$("#sup").removeClass("active");
+$("#desc").addClass("active in"); 
+$("#supp").removeClass("active in");
+$("#supBtn").css("display","none");
 }
 
 }); 
@@ -1011,11 +1012,15 @@ type: "POST",
 data: $('#supSea2').serialize(),                             // to submit fields at once
 url: $('#supSea2').attr('action'),                        // use the form's action url
 success: function(data) {
-    alert(data.id);
+   
 $("#poptd"+data.id+"").remove();
 
 $("#InformationTD").modal("hide"); 
-
+$("#inf2").addClass("active"); 
+$("#sup2").removeClass("active");
+$("#desc2").addClass("active in"); 
+$("#supp2").removeClass("active in");
+$("#supBtn2").css("display","none");
 }
 
 }); 
@@ -1028,30 +1033,55 @@ type: "POST",
 data: $('#supSea3').serialize(),                             // to submit fields at once
 url: $('#supSea3').attr('action'),                        // use the form's action url
 success: function(data) {
-    alert(data.id);
+    
 $("#courtd"+data.id+"").remove();
 
 $("#InformationCour").modal("hide"); 
-
+$("#inf1").addClass("active"); 
+$("#sup1").removeClass("active");
+$("#desc1").addClass("active in"); 
+$("#supp1").removeClass("active in");
+$("#supBtn3").css("display","none");
 }
 
 }); 
 });
 
  $(document).on("click","#add",function(){
-    //if($())
+ 
+if($("#newType").val() == 0 || $("#newEns").val()== 0 || $("#newSeance").val()== 0){
+     $('#newError').css("display","");
+    
+    }
+
+else if($("#newType").val() === "Cour" &&  $("#newSec").val()== 0){
+ $('#newError').css("display","");
+ 
+}
+else if(($("#newType").val() === "TP" || $("#newType").val() === "TD") &&  $("#newGrp").val()== 0){
+ $('#newError').css("display","");
+ 
+}else{
+$('#newError').css("display","none");
    $.ajax({
 type: "POST",
 data: $('#addSeance').serialize(),                             // to submit fields at once
 url: $('#addSeance').attr('action'),                        // use the form's action url
 success: function(data) {
+   
+    if(data.c>0){
+    $('#newError1').css("display","");    
+    }else{
 $(".chosen-select option:selected").removeAttr('selected');
 $(".chosen-select").trigger('chosen:updated');
 $("#nouvel").modal("hide"); 
+$('#newError1').css("display","none");    
 seance(data.emp);
+}
 }
 
 }); 
+}
 
 });
   
@@ -1068,11 +1098,11 @@ $(document).on("click","#inf1",function(){
 $("#supBtn3").css('display','none');
 }); 
 $(document).on("click","#sup2",function(){
-    alert("dgd");
+   
 $("#supBtn2").css('display','');
 });
 $(document).on("click","#inf2",function(){
-     alert("dgd");
+     
 $("#supBtn2").css('display','none');
 });
  var tp1 = 0;
@@ -1080,26 +1110,22 @@ $("#supBtn2").css('display','none');
 var called = 0;
 var nmbr=0 ;
 
-//alert(tp1);
+
  $("#PrimaryModalalert").modal("show");
-//$("#InformationTP").modal("show");
+
  var nbr =$("#nbrSec").val();
 var idmodule;
-   // alert($("#section1").attr("id"));
-   // alert(nbr);
+  
     var l=1;
     var i=0 ;
     while(l<=nbr)  {
-        
-       // alert("hii"+i);
-       // var s = $("#section"+l+"").attr("id");
-          
+       
            $(document).on("click","#ajouterTD"+l+"",function(){
             var kl = $(this).attr("id").substring(9);
 
             i++;
             var text ='<form class="formTD" method="post" id="groupe'+i+'" action="{{ url("empTD") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input class="hiddenid" type="hidden" name="idmodule" value=""><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTD" class="chosen-select" tabindex="-1" id="ensTD'+i+'">@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTD'+i+'" name="idgrpTD" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTD[]" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seaTD'+i+'">@foreach($seancesTD as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
-               // alert("k="+l+" i ="+i);
+              
            
 
   
@@ -1109,10 +1135,7 @@ $("select").chosen();
 $(".chosen-select").trigger('chosen:updated');
 
 $('input[name="idmodule"]').val(idmodule);
-            /* var b=$("input[type='number']").attr("id");
-            alert(b);*/
-         
-//}
+
        } );
 l++;
 } 
@@ -1195,7 +1218,7 @@ success: function(data) {
    
   $('input[name="idmodule"]').val(mo1);
   $('input[name="modhid"]').val(mo1);
-alert("la lengueur : "+data.pop.length);
+
 
 idmodule = mo1;
 
@@ -1207,31 +1230,26 @@ idmodule = mo1;
  $('.ch > option').remove();
  $('.sea > option').remove();
   if(mo3 ==="CTT"){
-    $('.ch').append('<option disabled selected>Select your option </option><option > Cour </option><option > TD </option><option > TP </option>');
+    $('.ch').append('<option selected value="0">Select your option </option><option > Cour </option><option > TD </option><option > TP </option>');
     $('.ch').trigger("chosen:updated");
      $('#newGrpRow').css('display','none');
       $('#newSecRow').css('display','none');
   }
     if(mo3 ==="CTd"){
-$('.ch').append('<option disabled selected >Select your option </option><option> Cour </option><option > TD </option>');
+$('.ch').append('<option selected value="0">Select your option </option><option> Cour </option><option > TD </option>');
     $('.ch').trigger("chosen:updated");
      $('#newGrpRow').css('display','none');
       $('#newSecRow').css('display','none');
   }
-  if(mo3 ==="CTp"){
-    $('.ch').append('<option disabled selected >Select your option </option><option > Cour </option><option> TP </option>');
-    $('.ch').trigger("chosen:updated");
-     $('#newGrpRow').css('display','none');
-      $('#newSecRow').css('display','none');
-  }
-//alert(mo3);
+
+
     if(mo3 ==="Cour"){
     
     $('.ch').append('<option selected> Cour </option>');
     $('.ch').trigger("chosen:updated");
     $('#newGrpRow').css('display','none');
     $('#newSecRow').css('display','');
-    $('.sea').append("@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
 
   }
@@ -1242,7 +1260,7 @@ $('.ch').append('<option disabled selected >Select your option </option><option>
     $('.ch').trigger("chosen:updated");
     $('#newSecRow').css('display','none');
     $('#newGrpRow').css('display','');
-    $('.sea').append("@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
   }
 emploi_du_temps(data.pop,data.pop1);
@@ -1378,17 +1396,14 @@ var mo1;
   $('.ch > option').remove();
  $('.sea > option').remove();
   if(mo3 ==="CTT"){
-    $('.ch').append('<option disabled selected>Select your opyion </option><option > Cour </option><option > TD </option><option> TP </option>');
+    $('.ch').append('<option value="0" selected>Select your opyion </option><option > Cour </option><option > TD </option><option> TP </option>');
     $('.ch').trigger("chosen:updated");
   }
     if(mo3 ==="CTd"){
-$('.ch').append('<option disabled selected>Select your opyion </option><option > Cour </option><option > TD </option>');
+$('.ch').append('<option selected value="0">Select your opyion </option><option > Cour </option><option > TD </option>');
     $('.ch').trigger("chosen:updated");
   }
-  if(mo3 ==="CTp"){
-    $('.ch').append('<option disabled selected>Select your opyion </option><option > Cour </option><option > TP </option>');
-    $('.ch').trigger("chosen:updated");
-  }
+ 
 alert(mo3);
     if(mo3 ==="Cour"){
     
@@ -1396,7 +1411,7 @@ alert(mo3);
     $('.ch').trigger("chosen:updated");
     $('#newGrpRow').css('display','none');
     $('#newSecRow').css('display','');
-    $('.sea').append("@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
 
   }
@@ -1407,7 +1422,7 @@ alert(mo3);
     $('.ch').trigger("chosen:updated");
     $('#newSecRow').css('display','none');
     $('#newGrpRow').css('display','');
-    $('.sea').append("@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
   }
 
@@ -1472,10 +1487,7 @@ $("#popnew").css('display','none');
  $('#description').removeClass('active in');
  $('#reviews').removeClass('active in');
   }
-  if(mo3 === 'CTp'){
-    tp1=2;
 
-  }
    if(mo3 === 'CTT'){
     tp1=2;
 $('.ttp').removeClass('active');
@@ -1507,26 +1519,26 @@ $(document).on('change','#newType',function(){
  if(type === "Cour"){
     $("#newSecRow").css('display','');
     $("#newGrpRow").css('display','none');
-   $('.sea').append("@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+   $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
  }
   if(type === "TP"){
     $("#newSecRow").css('display','none');
     $("#newGrpRow").css('display','');
-   $('.sea').append("@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+   $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
  }
    if(type === "TD"){
     $("#newSecRow").css('display','none');
     $("#newGrpRow").css('display','');
-   $('.sea').append("@foreach($td as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+   $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($td as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
  }
 });
 
  
 $(document).on('click','#submitCour',function(){
-  alert('hello');
+ 
  var tab = new Array();
    var tab1 = new Array();
    var cmpt=0;
@@ -1837,7 +1849,7 @@ x++;
 }
 });
 $(document).on('click','#suivtd',function(){
-alert("eehoo"); 
+
    var tab = new Array();
    var tab1 = new Array();
    var cmpt=0;
@@ -2047,6 +2059,15 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="review-content-section">
                                 <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2 style="color:#006DF0;">Nouvelle Séance</h2><br>
+                                              <div class="alert-wrap1 shadow-inner wrap-alert-b">
+                                <div class="alert alert-danger alert-mg-b" role="alert" id="newError" style="display: none;">
+                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                            </div>
+                            <br>
+                            <div class="alert alert-danger alert-mg-b" role="alert" id="newError1" style="display: none;">
+                                <strong>Erreur!</strong> la séance est déjà prise!!
+                            </div>
+                          </div>
                                 <form action="{{url('addSeance')}}" method="post" id="addSeance">
                                       {!! csrf_field() !!}  
                                    <input  type="hidden" name="idmodule" value="">
@@ -2062,7 +2083,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Enseignant </h4></div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
-                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="" name="newEns" class="chosen-select" id="newEns" tabindex="-1"> <option value="" disabled selected>Select your option</option>
+                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="" name="newEns" class="chosen-select" id="newEns" tabindex="-1"> <option value="0" selected>Select your option</option>
                                     @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}}{{$p->nom}} </option>@endforeach</select></div></div>
                                     </div></div>
                                     <div class="row">
@@ -2070,10 +2091,10 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         <h4>Seance </h4></div>
                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                             <div class="form-group-inner"  id="module">
-                                            <div class="chosen-select-single">
-                                                <select id="newSeance" data-placeholder="Choisir une seance" class="chosen-select sea" multiple="multiple"  name="newSeance">@foreach($seancesTP as $sea)
-                                                <option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>
-                                            @endforeach</select>
+                                            <div class="chosen-select-single mg-b-20">
+                                                <select id="newSeance"  class="chosen-select sea"   name="newSeance">
+                                                <option value="0">Select your Option</option>
+                                            </select>
                                         </div>
                                         </div>
                                        </div>
@@ -2084,14 +2105,14 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                 <div class="form-group-inner">
                                                     <div class="chosen-select-single mg-b-20"><select id="newGrp" name="newGrp" class="chosen-select" id="group" tabindex="-1">
-                                                     <option value="" disabled selected>Select your option</option>
+                                                     <option value="0"  selected>Select your option</option>
                                     @foreach($groupes as $s)<option value="{{$s->idG}}">{{$s->nomG}} </option>@endforeach</select></div></div></div></div>
                                               <div class="row" id="newSecRow" style="display: none;">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Section  </h4></div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                 <div class="form-group-inner">
                                                     <div class="chosen-select-single mg-b-20"><select id="newSec" name="newSec" class="chosen-select" id="group" tabindex="-1">
-                                                     <option value="" disabled selected>Select your option</option>
+                                                     <option value="0" selected>Select your option</option>
                                     @foreach($sec as $s)<option value="{{$s->idSec}}">{{$s->nomSec}} </option>@endforeach</select></div></div></div></div>
                                         <div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                      <div class="login-btn-inner">       
@@ -2433,7 +2454,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                   <div class="product-payment-inner-st">
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active" id="inf"><a href="#desc">Information</a></li>
-                                <li ><a href="#supp" id="sup"> Suppression </a></li>
+                                <li id="sup"><a href="#supp" > Suppression </a></li>
                             
                             </ul>
                 <div id="myTabContent" class="tab-content custom-product-edit">
@@ -2509,8 +2530,8 @@ var c1=""+$("#grpTD"+num+"").val()+"";
             <div class="modal-body">
                   <div class="product-payment-inner-st">
                             <ul id="myTabedu1" class="tab-review-design">
-                    <li class="active" ><a id="inf2" href="#desc2" >Information</a></li>
-                    <li ><a href="#supp2"  id="sup2"> Suppression </a></li>
+                    <li class="active" id="inf2" ><a  href="#desc2" >Information</a></li>
+                    <li  id="sup2"><a href="#supp2" > Suppression </a></li>
                             
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
@@ -2595,7 +2616,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                  <div class="product-payment-inner-st">
                             <ul id="myTabedu1" class="tab-review-design">
                        <li class="active" id="inf1"><a href="#desc1">Information</a></li>
-                                <li ><a href="#supp1" id="sup1"> Suppression </a></li>
+                                <li id="sup1"><a href="#supp1" > Suppression </a></li>
                             
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
@@ -2641,7 +2662,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-           <h2>Suppresion!</h2>
+           <h2 style="color:#006DF0 ;">Suppresion!</h2>
            <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br>  
                                             </div>
                                         </div>
