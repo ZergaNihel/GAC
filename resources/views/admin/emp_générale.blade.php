@@ -260,7 +260,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#L15').append(x2);
     }
   }
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "Mercredi"){
+  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
       x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
       $('#Me8').append(x3);
@@ -272,7 +272,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
     }
   }
 
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "Mercredi"){
+  if(data.pop[i].heure === "10h" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
     	x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
     $('#Me10').append(x3);
@@ -283,7 +283,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#Me10').append(x2);
     }
   }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "Mercredi"){
+    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
       x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
       $('#Me11').append(x3);
@@ -294,7 +294,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#Me11').append(x2);
     }
   }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "Mercredi"){
+       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
       x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
       $('#Me13').append(x3);
@@ -305,7 +305,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#Me13').append(x2);
     }
   }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "Mercredi"){
+       if(data.pop[i].heure === "15h" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>'; 
       $('#Me15').append(x3);
@@ -475,7 +475,7 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
     $('#L15').append(x1);
   
   }
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "Mercredi"){
+  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "mercredi"){
   	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom+' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
@@ -483,28 +483,28 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
    
   }
 
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "Mercredi"){
+  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "mercredi"){
   	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
    $('#Me10').append(x1);
    
   }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "Mercredi"){
+    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "mercredi"){
     	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
    $('#Me11').append(x1);
    
   }
-   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "Mercredi"){
+   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "mercredi"){
    	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
   $('#Me13').append(x1);
  
   }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "Mercredi"){
+ if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "mercredi"){
  	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
@@ -755,7 +755,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#L15').append(x2);
     }
   }
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "Mercredi"){
+  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
       x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
       $('#Me8').append(x3);
@@ -767,7 +767,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
     }
   }
 
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "Mercredi"){
+  if(data.pop[i].heure === "10h" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
     	x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
     $('#Me10').append(x3);
@@ -778,7 +778,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#Me10').append(x2);
     }
   }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "Mercredi"){
+    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
       x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
       $('#Me11').append(x3);
@@ -789,7 +789,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#Me11').append(x2);
     }
   }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "Mercredi"){
+       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
       x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>';
       $('#Me13').append(x3);
@@ -800,7 +800,7 @@ if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
       $('#Me13').append(x2);
     }
   }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "Mercredi"){
+       if(data.pop[i].heure === "15h" && data.pop[i].jour === "mercredi"){
     if(data.pop[i].type === 'td' ){
      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop[i].nom+'" data-ensp="'+data.pop[i].prenom+'" data-mod="'+data.pop[i].nomModule+'" data-grp="'+data.pop[i].nomG+'" data-seaj="'+data.pop[i].jour+'" data-seah="'+data.pop[i].heure+'" data-seas="'+data.pop[i].salle+'">'+data.pop[i].nomG +' -- '+data.pop[i].nomModule+' </a></div>'; 
       $('#Me15').append(x3);
@@ -970,7 +970,7 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
     $('#L15').append(x1);
   
   }
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "Mercredi"){
+  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "mercredi"){
   	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom+' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
@@ -978,28 +978,28 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
    
   }
 
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "Mercredi"){
+  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "mercredi"){
   	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
    $('#Me10').append(x1);
    
   }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "Mercredi"){
+    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "mercredi"){
     	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
    $('#Me11').append(x1);
    
   }
-   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "Mercredi"){
+   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "mercredi"){
    	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
   $('#Me13').append(x1);
  
   }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "Mercredi"){
+ if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "mercredi"){
  	x1 = '<div class="modal-area-button" id="courtd">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+data.pop1[i].prenom+'" data-mod="'+data.pop1[i].nomModule+'" data-sec="'+data.pop1[i].nomSec+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+data.pop1[i].salle+'">'+data.pop1[i].nom +' -- '+data.pop1[i].nomModule+' </a>'+
  '</div>';
@@ -1216,7 +1216,7 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
                                        
                                     </tr>
                                     <tr>
-                                        <th>Mercredi</th>
+                                        <th>mercredi</th>
                                         <td id="Me8"></td>
                                         <td id="Me10"></td>
                                         <td id="Me11"></td>
@@ -1315,13 +1315,14 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
                                     </div>
 			<div class="modal-body">
 				<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section">
-				<span class="educate-icon educate-warning modal-check-pro information-icon-pro">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="review-content-section">
+				<span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
 									<h2 style="color:#65b12d ;">Travaux Dirigés (TD)!</h2>
 									<br>
 																<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<h4>Module  </h4>
+						<h4 >Module  </h4>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="mod"></p>
 					</div>
@@ -1372,7 +1373,7 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
 			<div class="modal-body">
 				<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section">
-				<i class="educate-icon educate-checked modal-check-pro"></i>
+				<span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
 									<h2 style="color:#006DF0 ;">Cour</h2>
 									<br>
 																				<div class="row">

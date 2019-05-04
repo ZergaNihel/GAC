@@ -9,17 +9,16 @@ $(document).ready(function(){
     $("#InformationCour").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('ensn');
     var b = $(event.relatedTarget).data('ensp');
-    var c = $(event.relatedTarget).data('mod');
     var d = $(event.relatedTarget).data('sec');
     var e = $(event.relatedTarget).data('seaj');
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
- // var h = $(event.relatedTarget).data('sec');
-
+  var h = $(event.relatedTarget).data('id');
+alert(h);
 //alert("e="+e+"a="+a+"b="+b+""+f+""+g);
     var m = $(this)
     m.find('#ens').text(a+" "+b);
-    m.find('#mod').text(c);
+    m.find("#supID").val(h);
     m.find('#sea').text(e+" "+f+" "+g);
     m.find("#sec").text(d);
    
@@ -30,17 +29,19 @@ $(document).ready(function(){
          $("#InformationTP").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('ensn');
     var b = $(event.relatedTarget).data('ensp');
-    var c = $(event.relatedTarget).data('mod');
     var d = $(event.relatedTarget).data('grp');
     var e = $(event.relatedTarget).data('seaj');
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
+    var h = $(event.relatedTarget).data('id');
+alert(h);
    // var h = $(event.relatedTarget).data('sec');
 
 //alert("e="+e+"a="+a+"b="+b+""+f+""+g);
     var m = $(this)
     m.find('#ens').text(a+" "+b);
-    m.find('#mod').text(c);
+    m.find("#supID").val(h);
+   
     m.find('#sea').text(e+" "+f+" "+g);
     m.find("#grp").text(d);
    
@@ -48,20 +49,21 @@ $(document).ready(function(){
    // alert(m.find("#idGroupe_etu").val());
     //m.find('#prepend-big-btn').val(c);
 });
-                  $("#InformationTD").on('show.bs.modal', function(event) {
+  $("#InformationTD").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('ensn');
     var b = $(event.relatedTarget).data('ensp');
-    var c = $(event.relatedTarget).data('mod');
     var d = $(event.relatedTarget).data('grp');
     var e = $(event.relatedTarget).data('seaj');
     var f = $(event.relatedTarget).data('seah');
     var g = $(event.relatedTarget).data('seas');
+     var h = $(event.relatedTarget).data('id');
+alert(h);
    // var h = $(event.relatedTarget).data('sec');
 
 //alert("e="+e+"a="+a+"b="+b+""+f+""+g);
     var m = $(this)
+     m.find("#supID").val(h);
     m.find('#ens').text(a+" "+b);
-    m.find('#mod').text(c);
     m.find('#sea').text(e+" "+f+" "+g);
     m.find("#grp").text(d);
    
@@ -69,45 +71,489 @@ $(document).ready(function(){
    // alert(m.find("#idGroupe_etu").val());
     //m.find('#prepend-big-btn').val(c);
 });
+
+seance = function(pop){
+var x1;
+var x2;
+var x3;
+
+if(pop[i].heure === "8h30" && pop[i].jour === "dimanche"){
+
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D8').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D8').append(x2);
+    }
+    if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D8').append(x1); 
+    }
+  }
+    if(pop[i].heure === "10h" && pop[i].jour === "dimanche"){
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D10').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D10').append(x1); 
+    }
+  }
+   if(pop[i].heure === "11h30" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D11').append(x1); 
+    }
+  }
+
+
+     if(pop[i].heure === "13h30" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D15').append(x1); 
+    }
+  }
+if(pop[i].heure === "8h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma8').append(x1); 
+    }
+  }
+
+if(pop[i].heure === "10h" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma10').append(x1); 
+    }
+  }
+  if(pop[i].heure === "11h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma11').append(x1); 
+    }
+  }
+     if(pop[i].heure === "13h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma15').append(x1); 
+    }
+  }
+
+if(pop[i].heure === "8h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L8').append(x1); 
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#L10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L10').append(x1); 
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L11').append(x1); 
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L15').append(x1); 
+    }
+  }
+  if(pop[i].heure === "8h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me8').append(x1); 
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#Me10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me10').append(x1); 
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me11').append(x1); 
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me13').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>'; 
+      $('#Me15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me15').append(x1); 
+    }
+  }
+
+
+  if(pop[i].heure === "8h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#J8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J8').append(x1); 
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#J10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J10').append(x1); 
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J11').append(x1); 
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J15').append(x1); 
+    }
+  }
+
+
+}
 
 emploi_du_temps = function(pop,pop1){
 var x1;
 var x2;
 var x3;
 var i;
-alert(pop1.length);
+/*alert("L ="+pop.length);
+alert(""+pop[1].heure+""+pop[1].jour+""+pop[1].type);*/
 if(pop.length > 0){
   for( i =0;i<pop.length ;i++){
-
+//alert(i);
+alert(""+pop[i].heure+""+pop[i].jour+""+pop[i].type);
   if(pop[i].heure === "8h30" && pop[i].jour === "dimanche"){
+
     if(pop[i].type === "td" ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#D8').append(x3);
      }
     if(pop[i].type === "tp" ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#D8').append(x2);
     }
   }
     if(pop[i].heure === "10h" && pop[i].jour === "dimanche"){
-    if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#D10').append(x3);
      }
-    if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#D10').append(x2);
     }
   }
    if(pop[i].heure === "11h30" && pop[i].jour === "dimanche"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#D11').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#D11').append(x2);
     }
@@ -116,33 +562,33 @@ if(pop.length > 0){
 
      if(pop[i].heure === "13h30" && pop[i].jour === "dimanche"){
     if(pop[i].type === 'td' ){
-     x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#D13').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#D13').append(x2);
     }
   }
        if(pop[i].heure === "15h" && pop[i].jour === "dimanche"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#D15').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#D15').append(x2);
     }
   }
 if(pop[i].heure === "8h30" && pop[i].jour === "mardi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Ma8').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Ma8').append(x2);
     }
@@ -150,44 +596,44 @@ if(pop[i].heure === "8h30" && pop[i].jour === "mardi"){
 
 if(pop[i].heure === "10h" && pop[i].jour === "mardi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Ma10').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Ma10').append(x2);
     }
   }
   if(pop[i].heure === "11h30" && pop[i].jour === "mardi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Ma11').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Ma11').append(x2);
     }
   }
      if(pop[i].heure === "13h30" && pop[i].jour === "mardi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Ma13').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#D13').append(x2);
     }
   }
        if(pop[i].heure === "15h" && pop[i].jour === "mardi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Ma15').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Ma15').append(x2);
     }
@@ -195,11 +641,11 @@ if(pop[i].heure === "10h" && pop[i].jour === "mardi"){
 
 if(pop[i].heure === "8h30" && pop[i].jour === "lundi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#L8').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#L8').append(x2);
     }
@@ -207,100 +653,101 @@ if(pop[i].heure === "8h30" && pop[i].jour === "lundi"){
 
   if(pop[i].heure === "10h" && pop[i].jour === "lundi"){
     if(pop[i].type === 'td' ){
-        x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
     $('#L10').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#L10').append(x2);
     }
   }
     if(pop[i].heure === "11h30" && pop[i].jour === "lundi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#L11').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#L11').append(x2);
     }
   }
        if(pop[i].heure === "13h30" && pop[i].jour === "lundi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#L13').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#L13').append(x2);
     }
   }
        if(pop[i].heure === "15h" && pop[i].jour === "lundi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#L15').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#L15').append(x2);
     }
   }
-  if(pop[i].heure === "8h30" && pop[i].jour === "Mercredi"){
+  if(pop[i].heure === "8h30" && pop[i].jour === "mercredi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Me8').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Me8').append(x2);
     }
   }
 
-  if(pop[i].heure === "10h" && pop[i].jour === "Mercredi"){
+  if(pop[i].heure === "10h" && pop[i].jour === "mercredi"){
     if(pop[i].type === 'td' ){
-        x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
     $('#Me10').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Me10').append(x2);
     }
   }
-    if(pop[i].heure === "11h30" && pop[i].jour === "Mercredi"){
+    if(pop[i].heure === "11h30" && pop[i].jour === "mercredi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Me11').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Me11').append(x2);
     }
   }
-       if(pop[i].heure === "13h30" && pop[i].jour === "Mercredi"){
+       if(pop[i].heure === "13h30" && pop[i].jour === "mercredi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#Me13').append(x3);
      }
-    if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+    if(pop[i].type === "tp" ){
+
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Me13').append(x2);
     }
   }
-       if(pop[i].heure === "15h" && pop[i].jour === "Mercredi"){
+       if(pop[i].heure === "15h" && pop[i].jour === "mercredi"){
     if(pop[i].type === 'td' ){
-     x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>'; 
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>'; 
       $('#Me15').append(x3);
      }
     if(pop[i].type === 'tp' ){
-        x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#Me15').append(x2);
     }
@@ -309,11 +756,11 @@ if(pop[i].heure === "8h30" && pop[i].jour === "lundi"){
 
   if(pop[i].heure === "8h30" && pop[i].jour === "jeudi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#J8').append(x3);
      }
     if(pop[i].type === 'tp' ){
-x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
 
       $('#J8').append(x2);
     }
@@ -321,41 +768,41 @@ x2 = '<div class="modal-area-button" id="poptp"><a class="Information Informatio
 
   if(pop[i].heure === "10h" && pop[i].jour === "jeudi"){
     if(pop[i].type === 'td' ){
-        x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
     $('#J10').append(x3);
      }
     if(pop[i].type === 'tp' ){
-x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
       $('#J10').append(x2);
     }
   }
     if(pop[i].heure === "11h30" && pop[i].jour === "jeudi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#J11').append(x3);
      }
     if(pop[i].type === 'tp' ){
-x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
       $('#J11').append(x2);
     }
   }
        if(pop[i].heure === "13h30" && pop[i].jour === "jeudi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#J13').append(x3);
      }
     if(pop[i].type === 'tp' ){
-x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
       $('#J13').append(x2);
     }
   }
        if(pop[i].heure === "15h" && pop[i].jour === "jeudi"){
     if(pop[i].type === 'td' ){
-      x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
       $('#J15').append(x3);
      }
     if(pop[i].type === 'tp' ){
-x2 = '<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'" data-mod="'+pop[i].nom+'" data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
       $('#J15').append(x2);
     }
   }
@@ -367,132 +814,132 @@ x2 = '<div class="modal-area-button" id="poptp"><a class="Information Informatio
             for( i =0;i<pop1.length ;i++){
   // alert("pop1 = tptd");
   if(pop1[i].heure === "8h30" && pop1[i].jour === "dimanche"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
  $('#D8').append(x1);
 }
     if(pop1[i].heure === "10h" && pop1[i].jour === "dimanche"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
      $('#D10').append(x1);
     
   }
    if(pop1[i].heure === "11h30" && pop1[i].jour === "dimanche"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#D11').append(x1);
 }
 if(pop1[i].heure === "13h30" && pop1[i].jour === "dimanche"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#D13').append(x1); }
 
  if(pop1[i].heure === "15h" && pop1[i].jour === "dimanche"){
-      x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+      x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#D15').append(x1);
 }
 if(pop1[i].heure === "8h30" && pop1[i].jour === "mardi"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
  $('#Ma8').append(x1); }
 
 if(pop1[i].heure === "10h" && pop1[i].jour === "mardi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
  $('#Ma10').append(x1);
  }
   if(pop1[i].heure === "11h30" && pop1[i].jour === "mardi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#Ma11').append(x1); }
 
   if(pop1[i].heure === "13h30" && pop1[i].jour === "mardi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
 $('#Ma13').append(x1);
  }
  if(pop1[i].heure === "15h" && pop1[i].jour === "mardi"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#Ma15').append(x1);
    }
 
 if(pop1[i].heure === "8h30" && pop1[i].jour === "lundi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#L8').append(x1); }
 
   if(pop1[i].heure === "10h" && pop1[i].jour === "lundi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#L10').append(x1);
   
   }
     if(pop1[i].heure === "11h30" && pop1[i].jour === "lundi"){
-     x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#L11').append(x1); }
 
   if(pop1[i].heure === "13h30" && pop1[i].jour === "lundi"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
    $('#L13').append(x1);
      
   }
   if(pop1[i].heure === "15h" && pop1[i].jour === "lundi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#L15').append(x1);
   
   }
-  if(pop1[i].heure === "8h30" && pop1[i].jour === "Mercredi"){
-     x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+  if(pop1[i].heure === "8h30" && pop1[i].jour === "mercredi"){
+     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#Me8').append(x1);
    
   }
 
-  if(pop1[i].heure === "10h" && pop1[i].jour === "Mercredi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+  if(pop1[i].heure === "10h" && pop1[i].jour === "mercredi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
    $('#Me10').append(x1);
    
   }
-    if(pop1[i].heure === "11h30" && pop1[i].jour === "Mercredi"){
-       x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    if(pop1[i].heure === "11h30" && pop1[i].jour === "mercredi"){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
    $('#Me11').append(x1);
    
   }
-   if(pop1[i].heure === "13h30" && pop1[i].jour === "Mercredi"){
-     x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   if(pop1[i].heure === "13h30" && pop1[i].jour === "mercredi"){
+     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
   $('#Me13').append(x1);
  
   }
- if(pop1[i].heure === "15h" && pop1[i].jour === "Mercredi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ if(pop1[i].heure === "15h" && pop1[i].jour === "mercredi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#Me15').append(x1);
   
@@ -500,37 +947,37 @@ if(pop1[i].heure === "8h30" && pop1[i].jour === "lundi"){
 
 
   if(pop1[i].heure === "8h30" && pop1[i].jour === "jeudi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#J8').append(x1);
    
   }
 
   if(pop1[i].heure === "10h" &&pop1[i].jour === "jeudi"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
    $('#J10').append(x1);
    
   }
     if(pop1[i].heure === "11h30" && pop1[i].jour === "jeudi"){
-   x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#J11').append(x1);
    
   }
   if(pop1[i].heure === "13h30" && pop1[i].jour === "jeudi"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
    $('#J13').append(x1);
   
   }
    if(pop1[i].heure === "15h" && pop1[i].jour === "jeudi"){
-    x1 = '<div class="modal-area-button" id="courtd">'+
- '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'" data-mod="'+pop1[i].nomSec+'" data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
  '</div>';
     $('#J15').append(x1); }
     
@@ -541,19 +988,93 @@ if(pop1[i].heure === "8h30" && pop1[i].jour === "lundi"){
         }
 
     };
-  $(document).on("click","#add",function(){
+$(document).on("click","#supBtn",function(){
+
+$.ajax({
+type: "POST",
+data: $('#supSea').serialize(),                             // to submit fields at once
+url: $('#supSea').attr('action'),                        // use the form's action url
+success: function(data) {
+    alert(data.id);
+$("#poptp"+data.id+"").remove();
+$("#InformationTP").modal("hide"); 
+
+
+}
+
+}); 
+});
+$(document).on("click","#supBtn2",function(){
+
+$.ajax({
+type: "POST",
+data: $('#supSea2').serialize(),                             // to submit fields at once
+url: $('#supSea2').attr('action'),                        // use the form's action url
+success: function(data) {
+    alert(data.id);
+$("#poptd"+data.id+"").remove();
+
+$("#InformationTD").modal("hide"); 
+
+}
+
+}); 
+});
+
+$(document).on("click","#supBtn3",function(){
+
+$.ajax({
+type: "POST",
+data: $('#supSea3').serialize(),                             // to submit fields at once
+url: $('#supSea3').attr('action'),                        // use the form's action url
+success: function(data) {
+    alert(data.id);
+$("#courtd"+data.id+"").remove();
+
+$("#InformationCour").modal("hide"); 
+
+}
+
+}); 
+});
+
+ $(document).on("click","#add",function(){
     //if($())
    $.ajax({
 type: "POST",
 data: $('#addSeance').serialize(),                             // to submit fields at once
 url: $('#addSeance').attr('action'),                        // use the form's action url
 success: function(data) {
+$(".chosen-select option:selected").removeAttr('selected');
+$(".chosen-select").trigger('chosen:updated');
 $("#nouvel").modal("hide"); 
+seance(data.emp);
 }
 
 }); 
 
-  });
+});
+  
+$(document).on("click","#sup",function(){
+$("#supBtn").css('display','');
+});
+$(document).on("click","#inf",function(){
+$("#supBtn").css('display','none');
+}); 
+$(document).on("click","#sup1",function(){
+$("#supBtn3").css('display','');
+});
+$(document).on("click","#inf1",function(){
+$("#supBtn3").css('display','none');
+}); 
+$(document).on("click","#sup2",function(){
+    alert("dgd");
+$("#supBtn2").css('display','');
+});
+$(document).on("click","#inf2",function(){
+     alert("dgd");
+$("#supBtn2").css('display','none');
+});
  var tp1 = 0;
 /* this is our ajax function created for an arrayed forms */
 var called = 0;
@@ -561,7 +1082,7 @@ var nmbr=0 ;
 
 //alert(tp1);
  $("#PrimaryModalalert").modal("show");
-
+//$("#InformationTP").modal("show");
  var nbr =$("#nbrSec").val();
 var idmodule;
    // alert($("#section1").attr("id"));
@@ -577,28 +1098,16 @@ var idmodule;
             var kl = $(this).attr("id").substring(9);
 
             i++;
-            var text ='<form class="formTD" method="post" id="groupe'+i+'" action="{{ url("empTD") }}">'+
-            '{!! csrf_field() !!}'+
-            '<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" >'+ 
-            '<div class="row">'+
-            '<div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10">'+
-            '<button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'">'+
-            '<i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input class="hiddenid" type="hidden" name="idmodule" value=""><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20">'+
-        '<select name="idensTD" class="chosen-select" tabindex="-1" id="ensTD'+i+'">'+
-
-        '@foreach($pro as $p)'+
-
-        '<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}}</option>'+
-        '@endforeach'+
-        '</select>'+
-        '</div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTD'+i+'" name="idgrpTD" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTD[]" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seaTD'+i+'">@foreach($seancesTD as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
+            var text ='<form class="formTD" method="post" id="groupe'+i+'" action="{{ url("empTD") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input class="hiddenid" type="hidden" name="idmodule" value=""><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTD" class="chosen-select" tabindex="-1" id="ensTD'+i+'">@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTD'+i+'" name="idgrpTD" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTD[]" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seaTD'+i+'">@foreach($seancesTD as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
                // alert("k="+l+" i ="+i);
            
-      
+
+  
 $("#section"+kl+"").append(text);
-$(".chosen_select").chosen();
-//$(".chosen-select").trigger('chosen:updated');
-//alert(idmodule);
+//$('select').chosen('destroy');
+$("select").chosen();  
+$(".chosen-select").trigger('chosen:updated');
+
 $('input[name="idmodule"]').val(idmodule);
             /* var b=$("input[type='number']").attr("id");
             alert(b);*/
@@ -686,7 +1195,7 @@ success: function(data) {
    
   $('input[name="idmodule"]').val(mo1);
   $('input[name="modhid"]').val(mo1);
-
+alert("la lengueur : "+data.pop.length);
 
 idmodule = mo1;
 
@@ -818,17 +1327,7 @@ $(".chosen-select").trigger('chosen:updated');
 });
  
 }
-/*reset = function(forms){
-for(var k=0;k<forms.length;k++){
-  nmbr = forms[k].attr('id').substring(6);
-  if(forms[k].attr('class') === "Cour"){
-$("#ensC"+nmbr+" option[value=""]").prop('selected', true);
-$("#secC"+nmbr+" option[value=""]").prop('selected', true);
-$("#seaC"+nmbr+" option:selected").prop("selected", false);
-}
-}
 
-}*/
 
 
 $(document).on('click','#popTab',function(){
@@ -842,9 +1341,9 @@ success: function(data) {
 $("#empForm").css('display','none');
 
   $(".modal-area-button").each(function(){
-   $("#courtd").remove();
-   $("#poptd").remove();
-   $("#poptp").remove();
+   $(".courTable").remove();
+   $(".tdTable").remove();
+   $(".tpTable").remove();
 });
   emploi_du_temps(data.pop,data.pop1);
 $("#InformationproModalalert").modal("hide"); 
@@ -918,20 +1417,16 @@ alert(mo3);
    idmodule = mo1;
 
 
-/*alert(idmodule);
-alert(data.pop);
-alert(data.pop1);
-  alert(data.mo4);*/
- //alert("hii"+data.mo1+""+data.mo2+""+data.mo3);
  if(data.mo4>0){
     $("#tabEmpTemps").css('display','');
     $("#empForm").css('display','none');
     $("#popnew").css('display','');
- $(".modal-area-button").each(function(){
-   $("#courtd").remove();
-   $("#poptd").remove();
-   $("#poptp").remove();
+  $(".modal-area-button").each(function(){
+   $(".courTable").remove();
+   $(".tdTable").remove();
+   $(".tpTable").remove();
 });
+
 emploi_du_temps(data.pop,data.pop1);
     }else{
 $("#empForm").css('display','');
@@ -1024,7 +1519,7 @@ $(document).on('change','#newType',function(){
    if(type === "TD"){
     $("#newSecRow").css('display','none');
     $("#newGrpRow").css('display','');
-   $('.sea').append("@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+   $('.sea').append("@foreach($td as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
  }
 });
@@ -1453,6 +1948,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         
                                         <form action="{{url('popEmp')}}" method="post" id="popEmp">
                                       {!! csrf_field() !!}
+                                      <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                        <input type="hidden" name="modhid">
                                        
                                       </form>
@@ -1471,10 +1967,8 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                       {!! csrf_field() !!}
                                        <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                     <div class="modal-body">
-                                                             <div class="alert-wrap1 shadow-inner wrap-alert-b">
-                                <div class="alert alert-danger alert-mg-b" role="alert" id="alertreq" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser le champs.
-                            </div></div>
+                                  
+
                                         <i class="educate-icon educate-checked modal-check-pro"></i>
                                         <h2>Modules</h2>
                                         <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="moduleCh" class="chosen-select error" tabindex="-1" id="" >
@@ -1555,7 +2049,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                 <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2 style="color:#006DF0;">Nouvelle Séance</h2><br>
                                 <form action="{{url('addSeance')}}" method="post" id="addSeance">
                                       {!! csrf_field() !!}  
-                                    <input type="text" name="idmodule" value="">
+                                   <input  type="hidden" name="idmodule" value="">
                                             <div class="row">
 
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Type </h4></div>
@@ -1892,7 +2386,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                        
                                     </tr>
                                     <tr>
-                                        <th>Mercredi</th>
+                                        <th>mercredi</th>
                                         <td id="Me8"></td>
                                         <td id="Me10"></td>
                                         <td id="Me11"></td>
@@ -1935,29 +2429,32 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         </div>
                                     </div>
             <div class="modal-body">
-                <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section">
-                <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
-                                    <h2 style="color:#8e44ad ;">Travaux Pratique (TP)!</h2>
-                                    <br>
-                                        <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <h4>Module  </h4>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="mod"></p>
-                    </div>
-                </div>
+
+                  <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active" id="inf"><a href="#desc">Information</a></li>
+                                <li ><a href="#supp" id="sup"> Suppression </a></li>
+                            
+                            </ul>
+                <div id="myTabContent" class="tab-content custom-product-edit">
+                  <div class="product-tab-list tab-pane fade active in" id="desc">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+               
+           <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#8e44ad ;">Travaux Pratique (TP)!</h2> <br>
+                               <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
                             <p style="text-align: left" id="ens"></p></div>
-                        </div>
-                        <div class="row">
+                </div>
+                <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
                             <p style="text-align: left" id="sea"></p>
                         </div>
-                    </div>
+                </div>
                     <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <h4>Groupe  </h4>
@@ -1965,13 +2462,34 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="grp"></p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="supp">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                               
+                                               <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#8e44ad ;">Suppresion!</h2>
+           <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br> 
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                  
+                            </div>
+                        </div>
+      </div>
 <div class="modal-footer info-md" >
-    <a data-dismiss="modal" href="#" style="background-color: #8e44ad ;border-color: #8e44ad ;">OK</a>
+    <form method="post" action="{{url('DeleteSea')}}" id="supSea">
+        {!! csrf_field() !!}
+        <input type="hidden" name="supID" id="supID">
+         <input type="hidden" name="supType" value="3"></form>
+         <a data-dismiss="modal" href="#" style="background-color: #8e44ad ;border-color: #8e44ad ;">OK</a>
+<a  href="#" style="background-color: #8e44ad ;border-color: #8e44ad ; display: none;" id="supBtn">Supprimer</a>
 </div>
 </div>
 </div>
@@ -1989,18 +2507,24 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         </div>
                                     </div>
             <div class="modal-body">
+                  <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                    <li class="active" ><a id="inf2" href="#desc2" >Information</a></li>
+                    <li ><a href="#supp2"  id="sup2"> Suppression </a></li>
+                            
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="desc2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
                 <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section">
-                <span class="educate-icon educate-warning modal-check-pro information-icon-pro">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="review-content-section">
+            <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
                                     <h2 style="color:#65b12d ;">Travaux Dirigés (TD)!</h2>
                                     <br>
-                                                                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <h4>Module  </h4>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="mod"></p>
-                    </div>
-                </div>
+            
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 style="color:#303030 ;">Enseignant </h4></div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
@@ -2023,10 +2547,33 @@ var c1=""+$("#grpTD"+num+"").val()+"";
             </div>
         </div>
     </div>
-
+                         </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="supp2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                         <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#65b12d;">Suppresion!</h2>
+           <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br>     
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                  
+                            </div>
+                        </div>
 </div>
 <div class="modal-footer info-md" >
-    <a data-dismiss="modal" href="#" style="background-color: #65b12d ;border-color: #65b12d ;">OK</a>
+    <form method="post" action="{{url('DeleteSea')}}" id="supSea2">
+        {!! csrf_field() !!}
+        <input type="hidden" name="supID" id="supID">
+         <input type="hidden" name="supType" value="2"></form>
+<a data-dismiss="modal" href="#" style="background-color: #65b12d ;border-color: #65b12d ;">OK</a>
+<a href="#" id="supBtn2" style="background-color: #65b12d ;border-color: #65b12d ; display: none;">Supprimer
+</a>
 </div>
 </div>
 </div>
@@ -2045,18 +2592,24 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         </div>
                                     </div>
             <div class="modal-body">
+                 <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                       <li class="active" id="inf1"><a href="#desc1">Information</a></li>
+                                <li ><a href="#supp1" id="sup1"> Suppression </a></li>
+                            
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="desc1">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
                 <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section">
-                <i class="educate-icon educate-checked modal-check-pro"></i>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="review-content-section">
+               <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
                                     <h2 style="color:#006DF0 ;">Cour</h2>
                                     <br>
-                                                                                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <h4>Module  </h4>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="mod"></p>
-                    </div>
-                </div>
+                                                                                
                         <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 style="color:#303030 ;">Enseignant </h4></div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
@@ -2079,10 +2632,34 @@ var c1=""+$("#grpTD"+num+"").val()+"";
             </div>
         </div>
     </div>
+     </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="supp1">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                               <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+           <h2>Suppresion!</h2>
+           <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                  
+                            </div>
+                        </div>
 
 </div>
 <div class="modal-footer info-md" >
+    <form method="post" action="{{url('DeleteSea')}}" id="supSea3">
+        {!! csrf_field() !!}
+        <input type="hidden" name="supID" id="supID">
+         <input type="hidden" name="supType" value="1">
+    </form>
     <a data-dismiss="modal" href="#" >OK</a>
+     <a  href="#" id="supBtn3" style="display: none;">Supprimer</a>
 </div>
 </div>
 </div>
@@ -2093,3 +2670,9 @@ var c1=""+$("#grpTD"+num+"").val()+"";
 
 
 @endsection
+
+
+
+             
+                                               
+                   

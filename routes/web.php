@@ -87,3 +87,4 @@ Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');
 Route::post('popEmp', 'EmploiTemps@empTab');
 Route::post('groupes', 'GroupController@import');
+Route::post('DeleteSea', 'EmploiTemps@destroy');
