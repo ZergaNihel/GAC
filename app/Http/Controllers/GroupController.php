@@ -17,19 +17,23 @@ use App\Endette;
 use Session;
 use Illuminate\Support\Facades\Validator;
 class GroupController extends Controller
+
 {
+   public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	function index($id){
 		$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 	  $semestre = Semestre::find($id);
-    
-   
-		$section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
-//dd($section);
-		$sections = Section::all();
+    $section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
+    $sections = Section::all();
 
 		 return view('admin.groupes', compact('semestre','section','sections','sem1','sem2'));
 	}
+  
 	function groupe($id,$idSem){
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();

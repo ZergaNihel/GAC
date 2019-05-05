@@ -54,7 +54,7 @@
                                     @endif
                                 </div>    
                             </div>
-                            <a class="btn btn-default btn-block loginbtn">Login</a>
+                            <button class="btn btn-default btn-block loginbtn">Login</button> 
                             
                             <a class="btn btn-default btn-block " href="{{ route('register') }}">Register</a>
                             

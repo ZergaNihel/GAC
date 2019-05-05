@@ -541,6 +541,10 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'App\\Http\\Controllers\\Groupe' => __DIR__ . '/../..' . '/app/Http/Controllers/Groupe.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\Presence' => __DIR__ . '/../..' . '/app/Http/Controllers/Presence.php',
+
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
+        'App\\Http\\Controllers\\UserEController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserEController.php',
+
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',

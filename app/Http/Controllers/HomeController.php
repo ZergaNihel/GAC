@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\support\Facades\DB;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -22,7 +25,38 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('EnseignantR/presence');
+    { /*$m=User::all();
+      $id=$m->id;
+      $membre =User::find($id);*/
+     $membre= DB::table('users');
+        
+         if(Auth::user()->role == '0'){
+        return view('membre/details')->with([
+            'membre' => $membre,
+            ]);
+          }
+
+        else if(Auth::user()->role == '3'){
+           return view('home');
+       }
+        
+        
     }
+     /*  protected function redirectTo()
+      { 
+       
+
+
+
+
+
+       {
+          return '/justifications';
+       }
+       else if(Auth::user()->role == '3'){
+          return '/presence';
+       }
+     }*/
+        
+    
 }

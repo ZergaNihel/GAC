@@ -30,6 +30,10 @@ return array(
     'App\\Http\\Controllers\\Groupe' => $baseDir . '/app/Http/Controllers/Groupe.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Presence' => $baseDir . '/app/Http/Controllers/Presence.php',
+
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\UserEController' => $baseDir . '/app/Http/Controllers/UserEController.php',
+
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',

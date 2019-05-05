@@ -364,18 +364,50 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 															<img src="img/product/pro4.jpg" alt="" />
-															<span class="admin-name">Prof.Anderson</span>
+															<span class="admin-name">
+                                                                @if(Auth::user()->role == '0')
+
+                                                                {{Auth::user()->etudiant->nom}} 
+                                                                {{Auth::user()->etudiant->prenom}}
+                                                                @elseif(Auth::user()->role == '3')
+
+                                                                {{Auth::user()->enseignant->nom}} 
+                                                                {{Auth::user()->enseignant->prenom}}
+                                                              
+                                                              @else
+                                                                  
+                                                                     {{Auth::user()->name}}
+                                                                  
+                                                                  @endif
+
+
+
+
+                                                            </span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                         <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
                                                         </li>
-                                                        <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
-                                                        </li>
+                                                        <!--nihel-->
+                                                      @if(Auth::user()->role == '0'|| Auth::user()->role == '1' || Auth::user()->role == '2')
+                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
+                                                          </li>
+                                                   @elseif(Auth::user()->role == '3')
+                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
+                                                          </li>
+
+                                                          @endif
                                                         <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>User Billing</a>
                                                         </li>
-                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
+                                                    @if(Auth::user()->role == '0' || Auth::user()->role == '1' || Auth::user()->role == '2')
+                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
                                                         </li>
+                                                    @elseif(Auth::user()->role == '3')
+                                                         <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
+                                                        </li>
+                                                    @endif
+                                                    <!--fin nihel-->
                                                         <!--nihel 19/03/2019-->
                                                         <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>log out </a>
 
@@ -752,7 +784,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </li>
-                                                                        <li>
+                                                                <li>
                                                                             <div class="checkbox-setting-pro">
                                                                                 <div class="checkbox-title-pro">
                                                                                     <h2>Show charts</h2>

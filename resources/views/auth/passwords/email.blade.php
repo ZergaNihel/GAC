@@ -4,8 +4,8 @@
     <div class="error-pagewrap">
         <div class="error-page-int">
             <div class="text-center ps-recovered">
-                <h3>PASSWORD RECOVER</h3>
-                <p>Please fill the form to recover your password</p>
+                <h3>MOT DE PASSE RECUPERER</h3>
+                <p>Veuillez remplir le formulaire pour récupérer votre mot de passe</p>
             </div>
             <div class="content-error">
                   @if (session('status'))
@@ -16,7 +16,7 @@
                 <div class="hpanel">
                     <div class="panel-body poss-recover">
                         <p>
-                            Enter your email address and your password will be reset and emailed to you.
+                            Entrez votre adresse e-mail et votre mot de passe sera réinitialisé et envoyé par courrier électronique.
                         </p>
                         <form method="POST" action="{{ route('password.email') }}">
                         @csrf
@@ -31,7 +31,7 @@
                                 @endif
                             </div>
 
-                            <button class="btn btn-success btn-block">Reset password</button>
+                            <button class="btn btn-success btn-block">réinitialisé le mot de passe </button>
                         </form>
                     </div>
                 </div>

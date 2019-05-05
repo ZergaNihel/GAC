@@ -14,15 +14,22 @@ use App\TDTP;
 use App\Semestre;
 use App\Groupe_etu;
 class EmploiTemps extends Controller
+
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
 function destroy(Request $request){
     
     $id = $request->supID;
     if($request->supType == 2 || $request->supType == 3){
     $sea = TDTP::find($request->supID);}
     if ($request->supType == 1) {
-    $sea = Cour::find($request->supID);
-    }
+    $sea = Cour::find($request->supID); }
+
+
 $sea->delete();
 
 return response()->json(["id" =>$id]);

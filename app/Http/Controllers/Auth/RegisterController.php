@@ -37,7 +37,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/presence';
+    protected $redirectTo = '/justifications';
 
     /**
      * Create a new controller instance.
@@ -62,14 +62,24 @@ class RegisterController extends Controller
             'matricule' => ['required', 'string', 'max:255','unique:users'],
             'email' => ['required', 'string', 'email', 'max:255','unique:users' ],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            
         ]);
     }
+
+   /*    public function redirectTo()
+    {
+            $p = DB::table('etudiants')
+                ->where('matricule',$data['matricule'] )
+                ->count();
+                if($p>0){ 
+
     //    public function redirectTo()
     // {
     //         $p = DB::table('etudiants')
     //             ->where('matricule',$data['matricule'] )
     //             ->count();
     //             if($p>0){ 
+
          
         
     //         return '/presence';
@@ -77,7 +87,11 @@ class RegisterController extends Controller
     //         return '/home';
     //     }
    
+
+    }*/
+
     // }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -89,28 +103,28 @@ class RegisterController extends Controller
 
     { 
      
-    $ids= DB::table('etudiants')
+   $ids= DB::table('etudiants')
                 ->where('matricule',$data['matricule'] )
                 ->select('idEtu')
                 ->get();
                 foreach ($ids as $key) {
                    $id = $key->idEtu;
                 }
-             $p = DB::table('etudiants')
+            /* $p = DB::table('etudiants')
                 ->where('matricule',$data['matricule'] )
                 ->count();
-                if($p>0){   
+                if($p>0){   */
          
         return User::create([
             //'name' => $data['name'],
 
-           
+           'matricule' => $data['matricule'],
             'role' => 0,
             'email' => $data['email'],
             'id_Etu' => $id,
             'password' => Hash::make($data['password']),
         ]);
-    }
+    //}
   
     }
 }

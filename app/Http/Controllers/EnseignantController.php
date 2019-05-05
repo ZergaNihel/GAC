@@ -16,6 +16,11 @@ use App\Semestre;
 
 class EnseignantController extends Controller
 {
+ function rand(){
+$rand = Str::random(8);
+   return response()->json(['rand' => $rand]);
+ } 
+  
     function index(){
       $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     
@@ -88,10 +93,7 @@ Mail::send('emails.contact', $data, function($message) use ($email) {
 return Redirect::to('Enseignants/index');
     }
 
- function rand(){
-$rand = Str::random(8);
-   return response()->json(['rand' => $rand]);
- } 
+
 
   function delete(Request $request){
         $id= $request->input('idens');
