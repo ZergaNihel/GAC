@@ -16,6 +16,10 @@ use App\Semestre;
 
 class EnseignantController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
  function rand(){
 $rand = Str::random(8);
    return response()->json(['rand' => $rand]);

@@ -244,7 +244,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                            <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-menu"></i></a>
+                                            <li class="nav-item nav-setting-open"><a href="{{url('admin/parametre') }}" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-settings"></i></a>
                                           </li>
                                             </ul>
                                         </div>

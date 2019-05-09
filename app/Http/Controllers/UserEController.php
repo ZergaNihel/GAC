@@ -51,18 +51,8 @@ class UserEController extends Controller
 
     public function update(Request $request , $id)
     {
-       /* request()->validate([
-        'password' => ['required', 'confirmed', 'min:6'],
-        'password_confirmation' => ['required'],
-    ]);*/
         $membreE = User::find($id);
-       /* $membre=DB::table('users')
-            ->where('users.id','=',$id)
-            ->join('etudiants', 'users.id_Etu', '=', 'etudiants.idEtu')
-            
-            ->select('users.*','etudiants.*')
-            ->get();*/
-           // dd($membre);
+
 
         $etudiant = Etudiant::all();
         if($request->hasFile('img')){
@@ -70,7 +60,7 @@ class UserEController extends Controller
             $file = $request->file('img');
             $file_name = time().'.'.$file->getClientOriginalExtension();
             $file->move(public_path('/uploads/photo'),$file_name);
-	 	     $membreE->photo = '/uploads/photo/'.$file_name;
+	 	 $membreE->photo = '/uploads/photo/'.$file_name;
            
         }
 
@@ -90,15 +80,6 @@ class UserEController extends Controller
        // $enseignant->grade = $request->input('grade');
          $etudiant->date_naissance = $request->input('date_naissance');
 
-                
-                //$membre->password =Hash::make($request->input('password'));
-               
-               
-               /*  if((Auth::id() == $membre->id))
-                { //dd($membre);
-                $membre->password =Hash::make($request->input('password'));
-                }*/
-                
        
 
           

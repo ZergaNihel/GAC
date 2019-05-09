@@ -25,6 +25,9 @@ Route::get('/', function () {
  Route::get('new_sem', 'SemestreController@new_sem');
  Route::post('addSem', 'SemestreController@store');
  Route::get('Semestres/index', 'SemestreController@index');
+ Route::get('admin/parametre', 'ParametresController@index');
+ Route::post('param', 'ParametresController@store');
+ Route::post('EditParam', 'ParametresController@edit');
 //------------------ EnseignantController ----------------------------
   Route::get('Enseignants/index', 'EnseignantController@index');
   Route::get('random_pwd', 'EnseignantController@rand');

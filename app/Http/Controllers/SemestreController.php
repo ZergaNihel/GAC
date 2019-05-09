@@ -14,6 +14,10 @@ use App\Absence;
 use Illuminate\Support\Facades\Redirect;
 class SemestreController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
    public function index (){
    	$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
    	//dd($sem1);
