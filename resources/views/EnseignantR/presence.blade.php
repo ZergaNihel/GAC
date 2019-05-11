@@ -238,10 +238,10 @@
  </script>
  <script>
      $(document).ready(function () {
-         $('#date').change(function(){
-
+         $('#date').unbind('change').change(function(){
+            alert("bjr");
              var d=$('#date').val();
-             if(d==="")
+             if(date == null && date == "")
              {
                  $('.pd-setting-ed').attr('disabled',true);
                  
@@ -249,7 +249,25 @@
              else{
                 $('.pd-setting-ed').attr('disabled',false);
                 $('.pd-setting-ed').prop('title','');
+                $('#hist').append(
+                '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">'+
+                    '<div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">'+
+                        '<div class="skill-content-3 analytics-edu analytics-edu2">'+
+                            '<div class="skill">'+
+                                '<div class="progress progress-bt">'+
+                                    '<div class="lead-content">'+
+                                        '<h3> <a href=""> </a> </h3>'+
+                                       ' <p>  absent(s)</p>'+
+                                    '</div>'+
+                                    '<div class="progress-bar wow fadeInLeft" data-progress="20%" style="width: 20%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>20%</span> </div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'
+             );
              }
+             
          });
     });
  </script>
@@ -300,7 +318,7 @@
                                         <div class="sparkline13-hd">
                                             <div class="">
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Section:</b> B</span></div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Section:</b> </span></div>
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                         <div class="sparkline16-graph">
@@ -596,6 +614,30 @@
                 </div>
 
                 <div class="product-tab-list tab-pane fade" id="historique">
+                    <div class="dashtwo-order-area mg-tb-30">
+                        <div class="container-fluid">
+                            <div class="row" id="hist">
+                                @php $i=0; $j=0; @endphp
+                                @foreach ($historiques as $historique)
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">
+                                            <div class="skill-content-3 analytics-edu analytics-edu2">
+                                                <div class="skill">
+                                                    <div class="progress progress-bt">
+                                                        <div class="lead-content">
+                                                            <h3> <a href="{{url('historique/'.$historique->date.'/'.$id_td_tp)}}"> {{$historique->date}} </a> </h3>
+                                                            <p> {{$absents[$j++]}} absent(s)</p>
+                                                        </div>
+                                                        <div class="progress-bar wow fadeInLeft" data-progress="{{$pourcentage[$i]}}%" style="width: {{$pourcentage[$i]}}%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>{{$pourcentage[$i++]}}%</span> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

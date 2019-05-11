@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\support\Facades\DB;
+use Illuminate\Support\Str;
 
 use App\Module;
 use App\Seance;
@@ -115,7 +116,7 @@ class Anonymat extends Controller
                         $tab[$i]=$row; $i++;   
                     }
                 $insert_data[] = array(
-                    'code'    => mt_rand(1000, 9999),
+                    'code'    => str::random(6),
                     'etu_code' => $tab[0],
                     'paq_code' => $p[0]->idPaq
                 );

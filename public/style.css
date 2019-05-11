@@ -1054,7 +1054,7 @@ ul.breadcome-menu li a:hover{
 .skill .progress.progress-bt {
     margin-bottom:0px;
 }
-.skill .progress-bar > span {
+.skill .progress-bar:hover > span {
     background: #333 none repeat scroll 0 0;
     float: right;
     font-size: 11px;
@@ -2627,7 +2627,7 @@ li.multipleInput-email {
     border-radius: 2px;
 }
 li.multipleInput-email a{
-    background: #none;
+    background: none;
     color: #fff;
     margin-left: 4px;
     display: inline-block;

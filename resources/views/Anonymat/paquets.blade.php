@@ -100,30 +100,30 @@
                                                     '<form id="form'+data["paquets"][i].idPaq+'">'+
                                                         '<input type="hidden" name="idP" value="'+data["paquets"][i].idPaq+'">' +
                                                     '</form>'+
-                                                        '<button class="btn btn-custon-four btn-danger" id="supprimer'+data["paquets"][i].idPaq+'" name="supprimer">' + '<i class="fa fa-trash" aria-hidden="true">' + '</i>' + 'Supprimer' + '</button>' +   
-                                                        // '<button class="btn btn-custon-four btn-danger" data-toggle="modal" data-target="#supp'+data["paquets"][i].idPaq+'">'+ '<i class="fa fa-trash" aria-hidden="true">' + '</i>' +'Danger</button>'+
-                                                        // '<div id="supp'+data["paquets"][i].idPaq+'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">'+
-                                                        //     '<div class="modal-dialog">'+
-                                                        //         '<div class="modal-content">'+
-                                                        //             '<div class="modal-close-area modal-close-df">'+
-                                                        //                 '<a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>'+
-                                                        //             '</div>'+
-                                                        //             '<div class="modal-body">'+
-                                                        //                 '<span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>'+
-                                                        //                 '<h3>Voulez vous vraiment supprimer le paquet !</h3>'+
-                                                        //             '</div>'+
-                                                        //             '<div class="modal-footer danger-md">'+
-                                                        //                 '<button class="btn btn-custon-four btn-primary" data-dismiss="modal">Cancel</button>'+
-                                                        //                 '<button class="btn btn-custon-four btn-success" id="supprimer'+data["paquets"][i].idPaq+'" name="supprimer" >Process</button>'+
-                                                        //             '</div>'+
-                                                        //         '</div>'+
-                                                        //     '</div>'+
-                                                        // '</div>'+
+                                                        // '<button class="btn btn-custon-four btn-danger" id="supprimer'+data["paquets"][i].idPaq+'" name="supprimer">' + '<i class="fa fa-trash" aria-hidden="true">' + '</i>' + 'Supprimer' + '</button>' +   
+                                                        '<button class="btn btn-custon-four btn-danger" data-toggle="modal" data-target="#supp">'+ '<i class="fa fa-trash" aria-hidden="true">' + '</i>' +'Danger</button>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div id="supp" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">'+
+                                            '<div class="modal-dialog">'+
+                                                '<div class="modal-content">'+
+                                                    '<div class="modal-close-area modal-close-df">'+
+                                                        '<a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>'+
+                                                    '</div>'+
+                                                    '<div class="modal-body">'+
+                                                        '<span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>'+
+                                                        '<h3>Voulez vous vraiment supprimer le paquet !</h3>'+
+                                                    '</div>'+
+                                                    '<div class="modal-footer danger-md">'+
+                                                        '<button class="btn btn-custon-four btn-danger" id="supprimer'+data["paquets"][i].idPaq+'" name="supprimer" >Process</button>'+
+                                                    '</div>'+
                                                 '</div>'+
                                             '</div>'+
                                         '</div>'+
                                     '</td>'+
                                 '</tr>'
+                                
                             );
                         }
                     }

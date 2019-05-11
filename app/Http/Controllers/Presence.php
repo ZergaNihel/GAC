@@ -12,6 +12,7 @@ use App\Groupe;
 use App\Absence;
 use App\Etudiant;
 use App\Exclu;
+use App\TDTP;
 use Auth;
 
 class Presence extends Controller
@@ -20,6 +21,32 @@ class Presence extends Controller
     // {
     //     $this->middleware('auth');
     // }
+
+    public function index()
+    {
+        $modules= DB::table('modules')
+                    ->join('td_tps', 'td_tps.id_module', '=', 'modules.idMod')
+                    ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                    ->distinct()
+                    ->get();
+        $seances= DB::table('seances')
+                    ->join('td_tps', 'td_tps.id_seance', '=', 'seances.idSea')
+                    ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                    ->get();
+        $groupes= DB::table('groupes')
+                    ->join('td_tps', 'td_tps.id_groupe', '=', 'groupes.idG')
+                    ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                    ->get();
+        $etudiants=NULL;
+        
+        return view('EnseignantR.popup')->with(
+            ['modules'=> $modules ,
+            'seances'=> $seances ,
+            'groupes'=> $groupes,
+            'etudiants' => $etudiants
+             ] 
+        );
+    }
     
     public function lister(Request $request)
     {
@@ -154,7 +181,54 @@ class Presence extends Controller
                     ->where('idG','=',$idgroupe)
                     ->whereNotIn('idEtu',$etuExclus)
                     ->get();
-        
+
+        //historique
+        $historiques = DB::table('absences')
+                    ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
+                    ->where('td_tps.id_seance','=', $idseance)
+                    ->where('td_tps.id_module','=', $idmodule)
+                    ->where('td_tps.id_groupe','=', $idgroupe)
+                    ->where('td_tps.id_ens','=', Auth::user()->enseignant->idEns)
+                    ->select('date')
+                    ->distinct()
+                    ->orderBy('date')
+                    ->get();
+        $idhistoriques = DB::table('absences')
+                    ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
+                    ->where('td_tps.id_seance','=', $idseance)
+                    ->where('td_tps.id_module','=', $idmodule)
+                    ->where('td_tps.id_groupe','=', $idgroupe)
+                    ->where('td_tps.id_ens','=', Auth::user()->enseignant->idEns)
+                    ->select('idAbs')
+                    ->get();
+
+        $nbrEtu = DB::table('etudiants')
+                ->where('idG','=',$idgroupe)
+                ->count();
+        $i=0;
+        foreach($historiques as $h)
+        {
+            $p[$i]= DB::table('absences')
+                            ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
+                            ->where('td_tps.id_seance','=', $idseance)
+                            ->where('td_tps.id_module','=', $idmodule)
+                            ->where('td_tps.id_groupe','=', $idgroupe)
+                            ->where('td_tps.id_ens','=', Auth::user()->enseignant->idEns)
+                            ->where('date','=',$h->date)
+                            ->where('etat','=',0)
+                            ->select('date')
+                            ->count();
+            $pourcentage[$i]=($p[$i]*100)/$nbrEtu;
+                            $i++;
+        }
+
+        $id_td_tp=DB::table('td_tps')
+                        ->where('td_tps.id_seance','=', $idseance)
+                        ->where('td_tps.id_module','=', $idmodule)
+                        ->where('td_tps.id_groupe','=', $idgroupe)
+                        ->where('td_tps.id_ens','=', Auth::user()->enseignant->idEns)
+                        ->first();
+
         return view('EnseignantR.presence')->with( 
             [
             'seance'=> $seance ,
@@ -168,27 +242,30 @@ class Presence extends Controller
             'nomgroupe' => $nomgroupe,
             'justifications' => $justifiations,
             'exclus' => $exclus , 
-            'abs' => $abs
+            'abs' => $abs,
+            'historiques' => $historiques,
+            'absents' => $p,
+            'pourcentage' => $pourcentage,
+            'id_td_tp' => $id_td_tp->id
             ]);
 
     }
 
-
-    public function index()
+    public function historique($d,$m,$y,$id)
     {
-        $modules= Module::all();
-        $seances= Seance::all();
-        $groupes= Groupe::all();
-        $etudiants=NULL;
-        
-        return view('EnseignantR.popup')->with(
-            ['modules'=> $modules ,
-            'seances'=> $seances ,
-            'groupes'=> $groupes,
-            'etudiants' => $etudiants
-             ] 
-        );
-    }
+        $date=$d.'/'.$m.'/'.$y;
+        $abs = DB::table('absences')
+                ->join('etudiants', 'absences.id_Etu', '=', 'etudiants.idEtu')
+                ->where('id_td_tp','=',$id)
+                ->where('date','=',$date)
+                ->get();
+
+        return view('EnseignantR.historique',
+        [
+            'abs'=> $abs, 
+        ] 
+    );
+    } 
 
     public function present(Request $request)
     {

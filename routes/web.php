@@ -49,13 +49,15 @@ Route::get('present','Presence@present');
 
 Route::get('absent','Presence@absent');
 
-Route::get('enseignant/groupes','Groupes@index');
-
-Route::get('enseignant/statGroupe/{id}/','Groupes@statistique');
-
 Route::get('exclus','Presence@exclus');
 
 Route::get('exclure/etudiant','Presence@exclure');
+
+Route::get('historique/{d}/{m}/{y}/{id}','Presence@historique');
+
+Route::get('enseignant/groupes','Groupes@index');
+
+Route::get('enseignant/statGroupe/{id}/','Groupes@statistique');
 
 Route::get('liste_groupes', 'GroupController@index');
 

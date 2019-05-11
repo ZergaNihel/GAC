@@ -100,7 +100,7 @@
     text-decoration: none;
     color: #fff;
     position: relative;
-    z-index: 11;
+    z-index: -1;
     font-size: 14px;
 	display:inline-block;
 }
