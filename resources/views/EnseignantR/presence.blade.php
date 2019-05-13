@@ -238,7 +238,9 @@
  </script>
  <script>
      $(document).ready(function () {
+         
          $('#date').unbind('change').change(function(){
+            
             alert("bjr");
              var d=$('#date').val();
              if(date == null && date == "")
@@ -249,23 +251,6 @@
              else{
                 $('.pd-setting-ed').attr('disabled',false);
                 $('.pd-setting-ed').prop('title','');
-                $('#hist').append(
-                '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">'+
-                    '<div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">'+
-                        '<div class="skill-content-3 analytics-edu analytics-edu2">'+
-                            '<div class="skill">'+
-                                '<div class="progress progress-bt">'+
-                                    '<div class="lead-content">'+
-                                        '<h3> <a href=""> </a> </h3>'+
-                                       ' <p>  absent(s)</p>'+
-                                    '</div>'+
-                                    '<div class="progress-bar wow fadeInLeft" data-progress="20%" style="width: 20%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>20%</span> </div>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                '</div>'
-             );
              }
              
          });

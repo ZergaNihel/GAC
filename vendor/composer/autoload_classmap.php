@@ -34,11 +34,16 @@ return array(
 
 
     'App\\Http\\Controllers\\EmploiTemps' => $baseDir . '/app/Http/Controllers/EmploiTemps.php',
+    'App\\Http\\Controllers\\EnseignantController' => $baseDir . '/app/Http/Controllers/EnseignantController.php',
     'App\\Http\\Controllers\\GroupController' => $baseDir . '/app/Http/Controllers/GroupController.php',
     'App\\Http\\Controllers\\Groupe' => $baseDir . '/app/Http/Controllers/Groupe.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
-
+    'App\\Http\\Controllers\\ModuleController' => $baseDir . '/app/Http/Controllers/ModuleController.php',
+    'App\\Http\\Controllers\\ParametresController' => $baseDir . '/app/Http/Controllers/ParametresController.php',
     'App\\Http\\Controllers\\Presence' => $baseDir . '/app/Http/Controllers/Presence.php',
+    'App\\Http\\Controllers\\SemestreController' => $baseDir . '/app/Http/Controllers/SemestreController.php',
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\UserEController' => $baseDir . '/app/Http/Controllers/UserEController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -47,6 +52,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Mail\\Contact' => $baseDir . '/app/Mail/Contact.php',
     'App\\Module' => $baseDir . '/app/Module.php',
     'App\\Paquet' => $baseDir . '/app/Paquet.php',
     'App\\Paquet_en' => $baseDir . '/app/Paquet_en.php',

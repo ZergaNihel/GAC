@@ -1,5 +1,6 @@
 <?php
-
+use App\User;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,30 +12,55 @@
 |
 */
 
+/*Route::get('/', function () {
+    return view('auth/login');
+});*/
 Route::get('/', function () {
     return view('auth/login');
 });
 
-// Route::get('abs', function () {
-//     return view('abs');
-// });
-
- Route::get('modules/details', function () {
-     return view('modules.details');
- });
+ 
+ //------------------ SemestreController ----------------------------
+ Route::get('Semestres/dashboard/{id}','SemestreController@dash');
+ Route::get('new_sem', 'SemestreController@new_sem');
+ Route::post('addSem', 'SemestreController@store');
+ Route::get('Semestres/index', 'SemestreController@index');
+ Route::get('admin/parametre', 'ParametresController@index');
+ Route::post('param', 'ParametresController@store');
+ Route::post('EditParam', 'ParametresController@edit');
+//------------------ EnseignantController ----------------------------
+  Route::get('Enseignants/index', 'EnseignantController@index');
+  Route::get('random_pwd', 'EnseignantController@rand');
+  Route::post('addEnsExcel', 'EnseignantController@storeEns');
+ Route::post('DeleteEns', 'EnseignantController@delete');
+ Route::post('addEns', 'EnseignantController@store');
+ //------------------ ModuleController ----------------------------
+ Route::get('modules/index', 'ModuleController@index');
+ Route::get('DeleteModule/{id}/', 'ModuleController@delete');
+ Route::post('addModule', 'ModuleController@store');
+ Route::post('EditModule', 'ModuleController@edit');
+ Route::get('modules/details/{id}','ModuleController@details');
  Route::get('modules/pdf', function () {
      return view('modules.pdf');
  });
-
-Route::get('modules/index', 'ModuleController@index');
-Route::get('DeleteModule/{id}/', 'ModuleController@delete');
-Route::post('addModule', 'ModuleController@store');
-Route::post('EditModule', 'ModuleController@edit');
+ //------------------ GroupController ----------------------------
 Route::get('statGroupe/{id}/','GroupController@statistique');
 Route::post('EditGroupes','GroupController@edit');
 Route::post('DeleteGroupes','GroupController@delete');
-Route::get('groupe/detail/{id}','GroupController@groupe');
-Route::post('NouveauEtudiant','GroupController@new_student');
+ Route::get('groupe/detail/{id}/{idSem}','GroupController@groupe');
+ Route::post('NouveauEtudiant','GroupController@new_student');
+Route::get('liste_groupes/{id}', 'GroupController@index');
+Route::post('groupes', 'GroupController@import');
+//------------------UserController ----------------------------
+Route::get('membre/{id}/details','UserController@details');
+Route::get('membre/{id}/edite','UserController@edit');
+Route::put('membre/{id}','UserController@update');
+Route::get('membreE/{id}/details','UserEController@details');
+Route::get('membreE/{id}/edite','UserEController@edit');
+Route::put('membreE/{id}','UserEController@update');
+
+//------------------ Presence ----------------------------
+
 Route::get('presence','Presence@index');
 
 Route::post('presence/liste','Presence@lister');
@@ -58,8 +84,6 @@ Route::get('historique/{d}/{m}/{y}/{id}','Presence@historique');
 Route::get('enseignant/groupes','Groupes@index');
 
 Route::get('enseignant/statGroupe/{id}/','Groupes@statistique');
-
-Route::get('liste_groupes', 'GroupController@index');
 
 Route::get('correction/choix', 'CorrectionCopies@index');
 
@@ -111,9 +135,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/Emplois_du_Temps', 'EmploiTemps@afficher');
 Route::get('/ess', 'EmploiTemps@afficheress');
+//------------------ Emploi_du_temps ----------------------------
+Route::get('/Emplois_du_Temps/{id}', 'EmploiTemps@afficher');
+Route::get('/Emplois_du_Temps_generale/{id}', 'EmploiTemps@generale');
 Route::post('empCour', 'EmploiTemps@storeCOUR');
+Route::post('addSeance', 'EmploiTemps@addSeance');
+Route::post('empGenerale', 'EmploiTemps@empGen');
 Route::post('empTP', 'EmploiTemps@storeTP');
 Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');
 Route::post('popEmp', 'EmploiTemps@empTab');
-Route::post('groupes', 'GroupController@import');
+Route::post('DeleteSea', 'EmploiTemps@destroy');

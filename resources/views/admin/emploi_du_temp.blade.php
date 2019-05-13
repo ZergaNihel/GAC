@@ -1,180 +1,1148 @@
-<html class="no-js" lang="en">
+@extends('layouts.header')
 
-<head>
-  <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard V.1 | Kiaalap - Kiaalap Admin Template</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-    ============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/favicon.ico')}}">
-    <!-- Google Fonts
-    ============================================ -->
-    <link href="{{asset('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900')}}" rel="stylesheet">
-    <!-- Bootstrap CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <!-- Bootstrap CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-    <!-- owl.carousel CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('css/owl.theme.css')}}">
-    <link rel="stylesheet" href="{{asset('css/owl.transitions.css')}}">
-    <!-- animate CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/animate.css')}}">
-    <!-- normalize CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
-    <!-- meanmenu icon CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/meanmenu.min.css')}}">
-    <!-- main CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/main.css')}}">
-    <!-- educate icon CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/educate-custon-icon.css')}}">
-    <!-- morrisjs CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/morrisjs/morris.css')}}">
-    <!-- mCustomScrollbar CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/scrollbar/jquery.mCustomScrollbar.min.css')}}">
-    <!-- metisMenu CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu-vertical.css')}}">
-    <!-- calendar CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{('css/calendar/fullcalendar.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.print.min.css')}}">
-    <!-- x-editor CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
-    <link rel="stylesheet" href="{{('css/editor/datetimepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('css/editor/bootstrap-editable.css')}}">
-    <link rel="stylesheet" href="{{asset('css/editor/x-editor-style.css')}}">
-    <!-- normalize CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-table.css')}}">
-    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-editable.css')}}">
-    <!-- style CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-    <!-- responsive CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    <!-- modernizr JS
-    ============================================ -->
-    <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-    <!-- select2 CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/select2/select2.min.css')}}">
-    <!-- chosen CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/chosen/bootstrap-chosen.css')}}">
-
-    <!-- ionRangeSlider CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/ionRangeSlider/ion.rangeSlider.css')}}">
-    <link rel="stylesheet" href="{{asset('css/ionRangeSlider/ion.rangeSlider.skinFlat.css')}}">
-    <!-- style CSS
-        ============================================ -->
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-    <!-- responsive CSS
-        ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    <!-- modernizr JS
-        ============================================ -->
-    <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-
-    <!-- touchspin CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/touchspin/jquery.bootstrap-touchspin.min.css')}}">
-    <!-- datapicker CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/datapicker/datepicker3.css')}}">
-    <!-- forms CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/form/themesaller-forms.css')}}">
-    <!-- colorpicker CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/colorpicker/colorpicker.css')}}">
-    <!-- select2 CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/select2/select2.min.css')}}">
-    <!-- chosen CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/chosen/bootstrap-chosen.css')}}">
-    <!-- ionRangeSlider CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/ionRangeSlider/ion.rangeSlider.css')}}">
-    <link rel="stylesheet" href="{{asset('css/ionRangeSlider/ion.rangeSlider.skinFlat.css')}}">
-    <!-- style CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-    <!-- responsive CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    <!-- modernizr JS
-    ============================================ -->
-    <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-    <!-- modals CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@section('title','Emploi du Temps')
+@section('js')
  
-  <script>
+  <script >
 
 $(document).ready(function(){
+    $("#InformationCour").on('show.bs.modal', function(event) {
+    var a = $(event.relatedTarget).data('ensn');
+    var b = $(event.relatedTarget).data('ensp');
+    var d = $(event.relatedTarget).data('sec');
+    var e = $(event.relatedTarget).data('seaj');
+    var f = $(event.relatedTarget).data('seah');
+    var g = $(event.relatedTarget).data('seas');
+  var h = $(event.relatedTarget).data('id');
+
+    var m = $(this)
+    m.find('#ens').text(a+" "+b);
+    m.find("#supID").val(h);
+    m.find('#sea').text(e+" "+f+" "+g);
+    m.find("#sec").text(d);
+   
+
+});
+         $("#InformationTP").on('show.bs.modal', function(event) {
+    var a = $(event.relatedTarget).data('ensn');
+    var b = $(event.relatedTarget).data('ensp');
+    var d = $(event.relatedTarget).data('grp');
+    var e = $(event.relatedTarget).data('seaj');
+    var f = $(event.relatedTarget).data('seah');
+    var g = $(event.relatedTarget).data('seas');
+    var h = $(event.relatedTarget).data('id');
+
+   // var h = $(event.relatedTarget).data('sec');
+
+//alert("e="+e+"a="+a+"b="+b+""+f+""+g);
+    var m = $(this)
+    m.find('#ens').text(a+" "+b);
+    m.find("#supID").val(h);
+   
+    m.find('#sea').text(e+" "+f+" "+g);
+    m.find("#grp").text(d);
+   
+
+   // alert(m.find("#idGroupe_etu").val());
+    //m.find('#prepend-big-btn').val(c);
+});
+  $("#InformationTD").on('show.bs.modal', function(event) {
+    var a = $(event.relatedTarget).data('ensn');
+    var b = $(event.relatedTarget).data('ensp');
+    var d = $(event.relatedTarget).data('grp');
+    var e = $(event.relatedTarget).data('seaj');
+    var f = $(event.relatedTarget).data('seah');
+    var g = $(event.relatedTarget).data('seas');
+     var h = $(event.relatedTarget).data('id');
+
+   // var h = $(event.relatedTarget).data('sec');
+
+//alert("e="+e+"a="+a+"b="+b+""+f+""+g);
+    var m = $(this)
+     m.find("#supID").val(h);
+    m.find('#ens').text(a+" "+b);
+    m.find('#sea').text(e+" "+f+" "+g);
+    m.find("#grp").text(d);
+   
+
+   // alert(m.find("#idGroupe_etu").val());
+    //m.find('#prepend-big-btn').val(c);
+});
+
+seance = function(pop){
+var x1;
+var x2;
+var x3;
+
+if(pop[i].heure === "8h30" && pop[i].jour === "dimanche"){
+
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D8').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D8').append(x2);
+    }
+    if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D8').append(x1); 
+    }
+  }
+    if(pop[i].heure === "10h" && pop[i].jour === "dimanche"){
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D10').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D10').append(x1); 
+    }
+  }
+   if(pop[i].heure === "11h30" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D11').append(x1); 
+    }
+  }
+
+
+     if(pop[i].heure === "13h30" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#D15').append(x1); 
+    }
+  }
+if(pop[i].heure === "8h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma8').append(x1); 
+    }
+  }
+
+if(pop[i].heure === "10h" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma10').append(x1); 
+    }
+  }
+  if(pop[i].heure === "11h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma11').append(x1); 
+    }
+  }
+     if(pop[i].heure === "13h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Ma15').append(x1); 
+    }
+  }
+
+if(pop[i].heure === "8h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L8').append(x1); 
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#L10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L10').append(x1); 
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L11').append(x1); 
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#L15').append(x1); 
+    }
+  }
+  if(pop[i].heure === "8h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me8').append(x1); 
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#Me10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me10').append(x1); 
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me11').append(x1); 
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me13').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>'; 
+      $('#Me15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me15').append(x1); 
+    }
+  }
+
+
+  if(pop[i].heure === "8h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#J8').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J8').append(x1); 
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#J10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J10').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J10').append(x1); 
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J11').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J11').append(x1); 
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J13').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J13').append(x1); 
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J15').append(x2);
+    }
+        if(pop[i].type === "Cour" ){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-sec="'+pop[i].nomSec+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomSec+' </a>'+
+ '</div>';
+    $('#J15').append(x1); 
+    }
+  }
+
+
+}
+
+emploi_du_temps = function(pop,pop1){
+var x1;
+var x2;
+var x3;
+var i;
+/*alert("L ="+pop.length);
+alert(""+pop[1].heure+""+pop[1].jour+""+pop[1].type);*/
+if(pop.length > 0){
+  for( i =0;i<pop.length ;i++){
+//alert(i);
+
+  if(pop[i].heure === "8h30" && pop[i].jour === "dimanche"){
+
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D8').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D8').append(x2);
+    }
+  }
+    if(pop[i].heure === "10h" && pop[i].jour === "dimanche"){
+    if(pop[i].type === "td" ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D10').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D10').append(x2);
+    }
+  }
+   if(pop[i].heure === "11h30" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D11').append(x2);
+    }
+  }
+
+
+     if(pop[i].heure === "13h30" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D13').append(x2);
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "dimanche"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#D15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#D15').append(x2);
+    }
+  }
+if(pop[i].heure === "8h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma8').append(x2);
+    }
+  }
+
+if(pop[i].heure === "10h" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma10').append(x2);
+    }
+  }
+  if(pop[i].heure === "11h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma11').append(x2);
+    }
+  }
+     if(pop[i].heure === "13h30" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma13').append(x2);
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "mardi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Ma15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Ma15').append(x2);
+    }
+  }
+
+if(pop[i].heure === "8h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+data.pop1[i].jour+'" data-seah="'+data.pop1[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L8').append(x2);
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#L10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L10').append(x2);
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L11').append(x2);
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L13').append(x2);
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "lundi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#L15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#L15').append(x2);
+    }
+  }
+  if(pop[i].heure === "8h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me8').append(x2);
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#Me10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me10').append(x2);
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me11').append(x2);
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#Me13').append(x3);
+     }
+    if(pop[i].type === "tp" ){
+
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me13').append(x2);
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "mercredi"){
+    if(pop[i].type === 'td' ){
+     x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>'; 
+      $('#Me15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+        x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#Me15').append(x2);
+    }
+  }
+
+
+  if(pop[i].heure === "8h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J8').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+data.pop1[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+
+      $('#J8').append(x2);
+    }
+  }
+
+  if(pop[i].heure === "10h" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+        x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+    $('#J10').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J10').append(x2);
+    }
+  }
+    if(pop[i].heure === "11h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J11').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J11').append(x2);
+    }
+  }
+       if(pop[i].heure === "13h30" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J13').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J13').append(x2);
+    }
+  }
+       if(pop[i].heure === "15h" && pop[i].jour === "jeudi"){
+    if(pop[i].type === 'td' ){
+      x3 = '<div class="modal-area-button tdTable" id="poptd'+pop[i].id+'"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTD" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nomG +' -- '+pop[i].nom+' </a></div>';
+      $('#J15').append(x3);
+     }
+    if(pop[i].type === 'tp' ){
+x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#InformationTP" data-id="'+pop[i].id+'" data-ensn="'+pop[i].nom+'" data-ensp="'+pop[i].prenom+'"  data-grp="'+pop[i].nomG+'" data-seaj="'+pop[i].jour+'" data-seah="'+pop[i].heure+'" data-seas="'+pop[i].salle+'">'+pop[i].nom +' -- '+pop[i].nomG+' </a></div>';
+      $('#J15').append(x2);
+    }
+  }
+  
+}
+
+        }
+        if(pop1.length !=0){
+            for( i =0;i<pop1.length ;i++){
+  // alert("pop1 = tptd");
+  if(pop1[i].heure === "8h30" && pop1[i].jour === "dimanche"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+ $('#D8').append(x1);
+}
+    if(pop1[i].heure === "10h" && pop1[i].jour === "dimanche"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+     $('#D10').append(x1);
+    
+  }
+   if(pop1[i].heure === "11h30" && pop1[i].jour === "dimanche"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#D11').append(x1);
+}
+if(pop1[i].heure === "13h30" && pop1[i].jour === "dimanche"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#D13').append(x1); }
+
+ if(pop1[i].heure === "15h" && pop1[i].jour === "dimanche"){
+      x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#D15').append(x1);
+}
+if(pop1[i].heure === "8h30" && pop1[i].jour === "mardi"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+ $('#Ma8').append(x1); }
+
+if(pop1[i].heure === "10h" && pop1[i].jour === "mardi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+ $('#Ma10').append(x1);
+ }
+  if(pop1[i].heure === "11h30" && pop1[i].jour === "mardi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#Ma11').append(x1); }
+
+  if(pop1[i].heure === "13h30" && pop1[i].jour === "mardi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+$('#Ma13').append(x1);
+ }
+ if(pop1[i].heure === "15h" && pop1[i].jour === "mardi"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#Ma15').append(x1);
+   }
+
+if(pop1[i].heure === "8h30" && pop1[i].jour === "lundi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#L8').append(x1); }
+
+  if(pop1[i].heure === "10h" && pop1[i].jour === "lundi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#L10').append(x1);
+  
+  }
+    if(pop1[i].heure === "11h30" && pop1[i].jour === "lundi"){
+     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#L11').append(x1); }
+
+  if(pop1[i].heure === "13h30" && pop1[i].jour === "lundi"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+   $('#L13').append(x1);
+     
+  }
+  if(pop1[i].heure === "15h" && pop1[i].jour === "lundi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#L15').append(x1);
+  
+  }
+  if(pop1[i].heure === "8h30" && pop1[i].jour === "mercredi"){
+     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#Me8').append(x1);
+   
+  }
+
+  if(pop1[i].heure === "10h" && pop1[i].jour === "mercredi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+   $('#Me10').append(x1);
+   
+  }
+    if(pop1[i].heure === "11h30" && pop1[i].jour === "mercredi"){
+       x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+   $('#Me11').append(x1);
+   
+  }
+   if(pop1[i].heure === "13h30" && pop1[i].jour === "mercredi"){
+     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+  $('#Me13').append(x1);
  
+  }
+ if(pop1[i].heure === "15h" && pop1[i].jour === "mercredi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#Me15').append(x1);
+  
+  }
+
+
+  if(pop1[i].heure === "8h30" && pop1[i].jour === "jeudi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#J8').append(x1);
+   
+  }
+
+  if(pop1[i].heure === "10h" &&pop1[i].jour === "jeudi"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+   $('#J10').append(x1);
+   
+  }
+    if(pop1[i].heure === "11h30" && pop1[i].jour === "jeudi"){
+   x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#J11').append(x1);
+   
+  }
+  if(pop1[i].heure === "13h30" && pop1[i].jour === "jeudi"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+   $('#J13').append(x1);
+  
+  }
+   if(pop1[i].heure === "15h" && pop1[i].jour === "jeudi"){
+    x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
+ '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
+ '</div>';
+    $('#J15').append(x1); }
+    
+
+}
+
+            
+        }
+
+    };
+$(document).on("click","#supBtn",function(){
+
+$.ajax({
+type: "POST",
+data: $('#supSea').serialize(),                             // to submit fields at once
+url: $('#supSea').attr('action'),                        // use the form's action url
+success: function(data) {
+ 
+$("#poptp"+data.id+"").remove();
+$("#InformationTP").modal("hide"); 
+
+$("#inf").addClass("active"); 
+$("#sup").removeClass("active");
+$("#desc").addClass("active in"); 
+$("#supp").removeClass("active in");
+$("#supBtn").css("display","none");
+}
+
+}); 
+});
+$(document).on("click","#supBtn2",function(){
+
+$.ajax({
+type: "POST",
+data: $('#supSea2').serialize(),                             // to submit fields at once
+url: $('#supSea2').attr('action'),                        // use the form's action url
+success: function(data) {
+   
+$("#poptd"+data.id+"").remove();
+
+$("#InformationTD").modal("hide"); 
+$("#inf2").addClass("active"); 
+$("#sup2").removeClass("active");
+$("#desc2").addClass("active in"); 
+$("#supp2").removeClass("active in");
+$("#supBtn2").css("display","none");
+}
+
+}); 
+});
+
+$(document).on("click","#supBtn3",function(){
+
+$.ajax({
+type: "POST",
+data: $('#supSea3').serialize(),                             // to submit fields at once
+url: $('#supSea3').attr('action'),                        // use the form's action url
+success: function(data) {
+    
+$("#courtd"+data.id+"").remove();
+
+$("#InformationCour").modal("hide"); 
+$("#inf1").addClass("active"); 
+$("#sup1").removeClass("active");
+$("#desc1").addClass("active in"); 
+$("#supp1").removeClass("active in");
+$("#supBtn3").css("display","none");
+}
+
+}); 
+});
+
+ $(document).on("click","#add",function(){
+ 
+if($("#newType").val() == 0 || $("#newEns").val()== 0 || $("#newSeance").val()== 0){
+     $('#newError').css("display","");
+    
+    }
+
+else if($("#newType").val() === "Cour" &&  $("#newSec").val()== 0){
+ $('#newError').css("display","");
+ 
+}
+else if(($("#newType").val() === "TP" || $("#newType").val() === "TD") &&  $("#newGrp").val()== 0){
+ $('#newError').css("display","");
+ 
+}else{
+$('#newError').css("display","none");
+   $.ajax({
+type: "POST",
+data: $('#addSeance').serialize(),                             // to submit fields at once
+url: $('#addSeance').attr('action'),                        // use the form's action url
+success: function(data) {
+   
+    if(data.c>0){
+    $('#newError1').css("display","");    
+    }else{
+$(".chosen-select option:selected").removeAttr('selected');
+$(".chosen-select").trigger('chosen:updated');
+$("#nouvel").modal("hide"); 
+$('#newError1').css("display","none");    
+seance(data.emp);
+}
+}
+
+}); 
+}
+
+});
+  
+$(document).on("click","#sup",function(){
+$("#supBtn").css('display','');
+});
+$(document).on("click","#inf",function(){
+$("#supBtn").css('display','none');
+}); 
+$(document).on("click","#sup1",function(){
+$("#supBtn3").css('display','');
+});
+$(document).on("click","#inf1",function(){
+$("#supBtn3").css('display','none');
+}); 
+$(document).on("click","#sup2",function(){
+   
+$("#supBtn2").css('display','');
+});
+$(document).on("click","#inf2",function(){
+     
+$("#supBtn2").css('display','none');
+});
  var tp1 = 0;
 /* this is our ajax function created for an arrayed forms */
 var called = 0;
 var nmbr=0 ;
 
+
  $("#PrimaryModalalert").modal("show");
- 
-    var nbr =$("#nbrSec").val();
-   var idmodule;
-   // alert($("#section1").attr("id"));
-   // alert(nbr);
+
+ var nbr =$("#nbrSec").val();
+var idmodule;
+  
     var l=1;
     var i=0 ;
     while(l<=nbr)  {
-        
-       // alert("hii"+i);
-       // var s = $("#section"+l+"").attr("id");
-          
+       
            $(document).on("click","#ajouterTD"+l+"",function(){
             var kl = $(this).attr("id").substring(9);
 
             i++;
-            var text ='<form class="formTD" method="post" id="groupe'+i+'" action="{{ url("empTD") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input class="hiddenid" type="hidden" name="idmodule" value=""><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTD" class="chosen-select" tabindex="-1" id="ensTD'+i+'">@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->nom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTD'+i+'" name="idgrpTD" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTD[]" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seaTD'+i+'">@foreach($seancesTD as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
-               // alert("k="+l+" i ="+i);
+            var text ='<form class="formTD" method="post" id="groupe'+i+'" action="{{ url("empTD") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input class="hiddenid" type="hidden" name="idmodule" value=""><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTD" class="chosen-select" tabindex="-1" id="ensTD'+i+'">@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTD'+i+'" name="idgrpTD" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTD[]" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seaTD'+i+'">@foreach($seancesTD as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
+              
            
-            
-$("#section"+kl+"").append(text);
-//alert(idmodule);
-$('input[name="idmodule"]').val(idmodule);
-            /* var b=$("input[type='number']").attr("id");
-            alert(b);*/
-         
-//}
-        } );
-l++;
-}
 
- 
- 
   
+$("#section"+kl+"").append(text);
+//$('select').chosen('destroy');
+$("select").chosen();  
+$(".chosen-select").trigger('chosen:updated');
+
+$('input[name="idmodule"]').val(idmodule);
+
+       } );
+l++;
+} 
 
 
- var tp=1;
+
+var tp=1;
    while(tp<=nbr)  {
         
       //  alert("hii tp"+tp);
@@ -189,6 +1157,8 @@ l++;
            
             
 $("#sectionTP"+ktp+"").append(text);
+$(".chosen-select").chosen();
+//$(".chosen-select").trigger('chosen:updated');
 //alert(idmodule);
 $('input[name="idmodule"]').val(idmodule);
 //alert($('input[name="idmodule"]').val());
@@ -242,9 +1212,7 @@ success: function(data) {
     mo2 = data.module[j].nom;
     mo3 = data.module[j].type;
   }
- /* alert( mo1);
-  alert( mo2);
-  alert( mo3);*/
+
   $("#PrimaryModalalert").modal("hide");
   $("#nameMod").val(mo2);
    
@@ -253,393 +1221,54 @@ success: function(data) {
 
 
 idmodule = mo1;
-//alert(idmodule);alert(data.mo4);
+
   if(data.mo4>0){
     $("#tabEmpTemps").css('display','');
     $("#empForm").css('display','none');
+    $("#popnew").css('display','');
     //alert("L1= "+data.pop1.length);alert("L2="+data.pop.length);
-
-
-var x1;
-var x2;
-var x3;
-//alert(data.var);
-var i=0;
-if(data.pop1.length!=0){
- x1 = '<div class="modal-area-button" id="courtd"><a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModal">'+data.pop1[i].nomSec +' -- '+data.pop1[i].nom+' </a></div><div id="PrimaryModal" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Cour</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].nom+' '+data.pop1[i].prenom+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].jour+' '+data.pop1[i].heure+' '+data.pop1[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Section </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].nomSec+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer"><a data-dismiss="modal" href="#">Cancel</a><a href="#">Process</a></div></div></div></div>';
-}
-//var res = data.pop;
-//alert(data.pop);
-if(data.pop.length!=0){
-x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#WarningModalalert">'+data.pop[i].nomG +' -- '+data.pop[i].nom+' </a></div><div id="WarningModalalert" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Travaux Dirigés (TD)!</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nom+' '+data.pop[i].prenom+' </p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].jour+' '+data.pop[i].heure+' '+data.pop[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Groupe  </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nomG+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer warning-md"><a data-dismiss="modal" href="#">Annuler</a><a href="#">OK</a></div></div></div></div>';
-
-
-x2 ='<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#Informationpro">'+data.pop[i].nomG +' -- '+data.pop[i].nom+' </a></div>  <div id="Informationpro" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Travaux Pratique (TP)!</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nom+' '+data.pop[i].prenom+' </p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].jour+' '+data.pop[i].heure+' '+data.pop[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Groupe  </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nomG+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer info-md"><a data-dismiss="modal" href="#">Cancel</a><a href="#">Process</a></div></div></div></div>';
-}
-for( i =0;i<data.pop.length ;i++){
-  //alert("pop = cour");
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D8').append(x2);
-    }
+ $('.ch > option').remove();
+ $('.sea > option').remove();
+  if(mo3 ==="CTT"){
+    $('.ch').append('<option selected value="0">Select your option </option><option > Cour </option><option > TD </option><option > TP </option>');
+    $('.ch').trigger("chosen:updated");
+     $('#newGrpRow').css('display','none');
+      $('#newSecRow').css('display','none');
   }
-    if(data.pop[i].heure === "10h" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D10').append(x2);
-    }
-  }
-   if(data.pop[i].heure === "11h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D11').append(x2);
-    }
+    if(mo3 ==="CTd"){
+$('.ch').append('<option selected value="0">Select your option </option><option> Cour </option><option > TD </option>');
+    $('.ch').trigger("chosen:updated");
+     $('#newGrpRow').css('display','none');
+      $('#newSecRow').css('display','none');
   }
 
 
-     if(data.pop[i].heure === "13h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D15').append(x2);
-    }
-  }
-if(data.pop[i].heure === "8h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma8').append(x2);
-    }
-  }
-
-if(data.pop[i].heure === "10h" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma10').append(x2);
-    }
-  }
-  if(data.pop[i].heure === "11h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma11').append(x2);
-    }
-  }
-     if(data.pop[i].heure === "13h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma15').append(x2);
-    }
-  }
-
-if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-    $('#L10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L15').append(x2);
-    }
-  }
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-    $('#Me10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me15').append(x2);
-    }
-  }
-
-
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-    $('#J10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J15').append(x2);
-    }
-  }
-  
-}
-
-
-alert(data.pop1.length);
-for( i =0;i<data.pop1.length ;i++){
-  // alert("pop1 = tptd");
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "dimanche"){
- $('#D8').append(x1);
-}
-    if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "dimanche"){
-     $('#D10').append(x1);
+    if(mo3 ==="Cour"){
     
-  }
-   if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "dimanche"){
-    $('#D11').append(x1);
-}
-if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "dimanche"){
-  $('#D13').append(x1); }
+    $('.ch').append('<option selected> Cour </option>');
+    $('.ch').trigger("chosen:updated");
+    $('#newGrpRow').css('display','none');
+    $('#newSecRow').css('display','');
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
 
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "dimanche"){
-  $('#D15').append(x1);
-}
-if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "mardi"){
- $('#Ma8').append(x1); }
-
-if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "mardi"){
- $('#Ma10').append(x1);
- }
-  if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "mardi"){
-  $('#Ma11').append(x1); }
-
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "mardi"){
-$('#Ma13').append(x1);
- }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "mardi"){
-  $('#Ma15').append(x1);
-   }
-
-if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
-    $('#L8').append(x1); }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "lundi"){
-  $('#L10').append(x1);
-  
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "lundi"){
-  $('#L11').append(x1); }
-
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "lundi"){
-   $('#L13').append(x1);
-     
-  }
-  if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "lundi"){
-    $('#L15').append(x1);
-  
-  }
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "Mercredi"){
-  $('#Me8').append(x1);
-   
   }
 
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "Mercredi"){
-   $('#Me10').append(x1);
-   
+    if(mo3 ==="TP"){
+        //alert("hi");
+     $('.ch').append('<option selected> TP </option>');
+    $('.ch').trigger("chosen:updated");
+    $('#newSecRow').css('display','none');
+    $('#newGrpRow').css('display','');
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
   }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "Mercredi"){
-   $('#Me11').append(x1);
-   
-  }
-   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "Mercredi"){
-  $('#Me13').append(x1);
- 
-  }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "Mercredi"){
-    $('#Me15').append(x1);
-  
-  }
-
-
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "jeudi"){
-    $('#J8').append(x1);
-   
-  }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "jeudi"){
-   $('#J10').append(x1);
-   
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "jeudi"){
-    $('#J11').append(x1);
-   
-  }
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "jeudi"){
-   $('#J13').append(x1);
-  
-  }
-   if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "jeudi"){
-    $('#J15').append(x1); }
-    
-
-}
+emploi_du_temps(data.pop,data.pop1);
 
  }else{
 $("#empForm").css('display','');
 $("#tabEmpTemps").css('display','none');
+$("#popnew").css('display','none');
   if(mo3 === 'Cour'){
    // alert("lala");
      $('.c').css('display','');
@@ -669,6 +1298,7 @@ $("#tabEmpTemps").css('display','none');
  $('.ttp').addClass('active');
  $('#INFORMATION').addClass('active in');
  $('#description').removeClass('active');
+ $('#precTD').css('display','none');
   }
   if(mo3 === 'CTp'){
     tp1=2;
@@ -685,11 +1315,15 @@ $("#tabEmpTemps").css('display','none');
 
 
 ajax_recaller = function(forms){
+    var id = forms[called].attr("id").substring(6);
+    alert(id);
 $.ajax({
 type: "POST",
 data: forms[called].serialize(),                             // to submit fields at once
 url: forms[called].attr('action'),                        // use the form's action url
 success: function(data) {
+
+    /**/
  //forms[called].reset();
 called++;                                                                 // this will serve as a key
  
@@ -697,7 +1331,12 @@ if(called < forms.length) {
 ajax_recaller(forms);                                            // call the ajax function again
 } else {
 called=0;
- $("#InformationproModalalert").modal("show");                                                        
+
+$(".chosen-select option:selected").removeAttr('selected');
+$(".chosen-select").trigger('chosen:updated');
+ 
+ $("#InformationproModalalert").modal("show");
+
 
 }
  
@@ -706,17 +1345,7 @@ called=0;
 });
  
 }
-/*reset = function(forms){
-for(var k=0;k<forms.length;k++){
-  nmbr = forms[k].attr('id').substring(6);
-  if(forms[k].attr('class') === "Cour"){
-$("#ensC"+nmbr+" option[value=""]").prop('selected', true);
-$("#secC"+nmbr+" option[value=""]").prop('selected', true);
-$("#seaC"+nmbr+" option:selected").prop("selected", false);
-}
-}
 
-}*/
 
 
 $(document).on('click','#popTab',function(){
@@ -728,395 +1357,13 @@ url: $('#popEmp').attr('action'),                        // use the form's actio
 success: function(data) {
   $("#tabEmpTemps").css('display','');
 $("#empForm").css('display','none');
-    
-var x1;
-var x2;
-var x3;
+
   $(".modal-area-button").each(function(){
-   $("#courtd").remove();
-   $("#poptd").remove();
-   $("#poptp").remove();
+   $(".courTable").remove();
+   $(".tdTable").remove();
+   $(".tpTable").remove();
 });
-    $(".modal modal-edu-general").each(function(){
-   $("#PrimaryModal").remove();
-   $("#WarningModalalert").remove();
-   $("#Informationpro").remove();
-});
-//alert(data.var);
-var i=0;
-if(data.pop1.length!=0){
- x1 = '<div class="modal-area-button" id="courtd"><a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModal">'+data.pop1[i].nomSec +' -- '+data.pop1[i].nom+' </a></div><div id="PrimaryModal" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Cour</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].nom+' '+data.pop1[i].prenom+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].jour+' '+data.pop1[i].heure+' '+data.pop1[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Section </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].nomSec+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer"><a data-dismiss="modal" href="#">Cancel</a><a href="#">Process</a></div></div></div></div>';
-}
-//var res = data.pop;
-//alert(data.pop);
-if(data.pop.length!=0){
-x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#WarningModalalert">'+data.pop[i].nomG +' -- '+data.pop[i].nom+' </a></div><div id="WarningModalalert" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Travaux Dirigés (TD)!</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nom+' '+data.pop[i].prenom+' </p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].jour+' '+data.pop[i].heure+' '+data.pop[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Groupe  </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nomG+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer warning-md"><a data-dismiss="modal" href="#">Annuler</a><a href="#">OK</a></div></div></div></div>';
-
-
-x2 ='<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#Informationpro">'+data.pop[i].nomG +' -- '+data.pop[i].nom+' </a></div>  <div id="Informationpro" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Travaux Pratique (TP)!</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nom+' '+data.pop[i].prenom+' </p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].jour+' '+data.pop[i].heure+' '+data.pop[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Groupe  </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nomG+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer info-md"><a data-dismiss="modal" href="#">Cancel</a><a href="#">Process</a></div></div></div></div>';
-}
-for( i =0;i<data.pop.length ;i++){
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D8').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "10h" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D10').append(x2);
-    }
-  }
-   if(data.pop[i].heure === "11h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D11').append(x2);
-    }
-  }
-
-
-     if(data.pop[i].heure === "13h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D15').append(x2);
-    }
-  }
-if(data.pop[i].heure === "8h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma8').append(x2);
-    }
-  }
-
-if(data.pop[i].heure === "10h" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma10').append(x2);
-    }
-  }
-  if(data.pop[i].heure === "11h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma11').append(x2);
-    }
-  }
-     if(data.pop[i].heure === "13h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma15').append(x2);
-    }
-  }
-
-if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-    $('#L10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L15').append(x2);
-    }
-  }
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-    $('#Me10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me15').append(x2);
-    }
-  }
-
-
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-    $('#J10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J15').append(x2);
-    }
-  }
-  
-}
-
-
-
-for( i =0;i<data.pop1.length ;i++){
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "dimanche"){
- $('#D8').append(x1);
-}
-    if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "dimanche"){
-     $('#D10').append(x1);
-    
-  }
-   if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "dimanche"){
-    $('#D11').append(x1);
-}
-if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "dimanche"){
-  $('#D13').append(x1); }
-
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "dimanche"){
-  $('#D15').append(x1);
-}
-if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "mardi"){
- $('#Ma8').append(x1); }
-
-if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "mardi"){
- $('#Ma10').append(x1);
- }
-  if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "mardi"){
-  $('#Ma11').append(x1); }
-
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "mardi"){
-$('#Ma13').append(x1);
- }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "mardi"){
-  $('#Ma15').append(x1);
-   }
-
-if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
-    $('#L8').append(x1); }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "lundi"){
-  $('#L10').append(x1);
-  
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "lundi"){
-  $('#L11').append(x1); }
-
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "lundi"){
-   $('#L13').append(x1);
-     
-  }
-  if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "lundi"){
-    $('#L15').append(x1);
-  
-  }
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "Mercredi"){
-  $('#Me8').append(x1);
-   
-  }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "Mercredi"){
-   $('#Me10').append(x1);
-   
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "Mercredi"){
-   $('#Me11').append(x1);
-   
-  }
-   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "Mercredi"){
-  $('#Me13').append(x1);
- 
-  }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "Mercredi"){
-    $('#Me15').append(x1);
-  
-  }
-
-
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "jeudi"){
-    $('#J8').append(x1);
-   
-  }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "jeudi"){
-   $('#J10').append(x1);
-   
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "jeudi"){
-    $('#J11').append(x1);
-   
-  }
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "jeudi"){
-   $('#J13').append(x1);
-  
-  }
-   if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "jeudi"){
-    $('#J15').append(x1); }
-    
-
-}
-
-
-//alert("data"+data.pop);
-  
+  emploi_du_temps(data.pop,data.pop1);
 $("#InformationproModalalert").modal("hide"); 
 
 }
@@ -1145,414 +1392,61 @@ var mo1;
   }
   /*alert( mo1);
   alert( mo2);
-  alert( mo3);*/
+  alert( mo3);*/ 
+  $('.ch > option').remove();
+ $('.sea > option').remove();
+  if(mo3 ==="CTT"){
+    $('.ch').append('<option value="0" selected>Select your opyion </option><option > Cour </option><option > TD </option><option> TP </option>');
+    $('.ch').trigger("chosen:updated");
+  }
+    if(mo3 ==="CTd"){
+$('.ch').append('<option selected value="0">Select your opyion </option><option > Cour </option><option > TD </option>');
+    $('.ch').trigger("chosen:updated");
+  }
+ 
+alert(mo3);
+    if(mo3 ==="Cour"){
+    
+    $('.ch').append('<option selected> Cour </option>');
+    $('.ch').trigger("chosen:updated");
+    $('#newGrpRow').css('display','none');
+    $('#newSecRow').css('display','');
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
 
-  $("#nameMod").val(mo2);
+  }
+
+    if(mo3 ==="TP"){
+        //alert("hi");
+     $('.ch').append('<option selected> TP </option>');
+    $('.ch').trigger("chosen:updated");
+    $('#newSecRow').css('display','none');
+    $('#newGrpRow').css('display','');
+    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
+  }
+
+  $("#nameMod").val(mo2);   
   $('input[name="idmodule"]').val(mo1);
    $('input[name="modhid"]').val(mo1);
    idmodule = mo1;
 
 
-/*alert(idmodule);
-alert(data.pop);
-alert(data.pop1);
-  alert(data.mo4);*/
- //alert("hii"+data.mo1+""+data.mo2+""+data.mo3);
  if(data.mo4>0){
     $("#tabEmpTemps").css('display','');
     $("#empForm").css('display','none');
- $(".modal-area-button").each(function(){
-   $("#courtd").remove();
-   $("#poptd").remove();
-   $("#poptp").remove();
+    $("#popnew").css('display','');
+  $(".modal-area-button").each(function(){
+   $(".courTable").remove();
+   $(".tdTable").remove();
+   $(".tpTable").remove();
 });
-  $(".modal modal-edu-general").each(function(){
-   $("#PrimaryModal").remove();
-   $("#WarningModalalert").remove();
-   $("#Informationpro").remove();
-});
-   
 
-var x1;
-var x2;
-var x3;
-//alert(data.var);
-var i=0;
-if(data.pop1.length!=0){
- x1 = '<div class="modal-area-button" id="courtd"><a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModal">'+data.pop1[i].nomSec +' -- '+data.pop1[i].nom+' </a></div><div id="PrimaryModal" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Cour</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].nom+' '+data.pop1[i].prenom+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].jour+' '+data.pop1[i].heure+' '+data.pop1[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Section </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop1[i].nomSec+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer"><a data-dismiss="modal" href="#">Cancel</a><a href="#">Process</a></div></div></div></div>';}
-//var res = data.pop;
-//alert(data.pop);
-if(data.pop.length!=0){
-x3 = '<div class="modal-area-button" id="poptd"><a class="Warning Warning-color mg-b-10" href="#" data-toggle="modal" data-target="#WarningModalalert">'+data.pop[i].nomG +' -- '+data.pop[i].nom+' </a></div><div id="WarningModalalert" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Travaux Dirigés (TD)!</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nom+' '+data.pop[i].prenom+' </p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].jour+' '+data.pop[i].heure+' '+data.pop[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Groupe  </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nomG+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer warning-md"><a data-dismiss="modal" href="#">Annuler</a><a href="#">OK</a></div></div></div></div>';
-
-
-
-x2 ='<div class="modal-area-button" id="poptp"><a class="Information Information-color mg-b-10" href="#" data-toggle="modal" data-target="#Informationpro">'+data.pop[i].nomG +' -- '+data.pop[i].nom+' </a></div>  <div id="Informationpro" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div><div class="modal-body"><div class="product-payment-inner-st"><ul id="myTabedu1" class="tab-review-design"><li class="active"><a href="#description">Informations</a></li><li><a href="#reviews"> Modifier </a></li></ul><div id="myTabContent" class="tab-content custom-product-edit"><div class="product-tab-list tab-pane fade active in" id="description"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2>Travaux Pratique (TP)!</h2><br><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nom+' '+data.pop[i].prenom+' </p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].jour+' '+data.pop[i].heure+' '+data.pop[i].salle+'</p></div></div><div class="row"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Groupe  </h4></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left">'+data.pop[i].nomG+'</p></div></div></div></div></div></div><div class="product-tab-list tab-pane fade" id="reviews"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="review-content-section"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="devit-card-custom"><a href="#" class="btn btn-primary waves-effect waves-light">Submit</a></div></div></div></div></div></div></div></div></div></div><div class="modal-footer info-md"><a data-dismiss="modal" href="#">Cancel</a><a href="#">Process</a></div></div></div></div>';
-}
-
-for( i =0;i<data.pop.length ;i++){
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D8').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "10h" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D10').append(x2);
-    }
-  }
-   if(data.pop[i].heure === "11h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D11').append(x2);
-    }
-  }
-
-
-     if(data.pop[i].heure === "13h30" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "dimanche"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#D15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D15').append(x2);
-    }
-  }
-if(data.pop[i].heure === "8h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma8').append(x2);
-    }
-  }
-
-if(data.pop[i].heure === "10h" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma10').append(x2);
-    }
-  }
-  if(data.pop[i].heure === "11h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma11').append(x2);
-    }
-  }
-     if(data.pop[i].heure === "13h30" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#D13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "mardi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Ma15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Ma15').append(x2);
-    }
-  }
-
-if(data.pop[i].heure === "8h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-    $('#L10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "lundi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#L15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#L15').append(x2);
-    }
-  }
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-    $('#Me10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "Mercredi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#Me15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#Me15').append(x2);
-    }
-  }
-
-
-  if(data.pop[i].heure === "8h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J8').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J8').append(x2);
-    }
-  }
-
-  if(data.pop[i].heure === "10h" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-    $('#J10').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J10').append(x2);
-    }
-  }
-    if(data.pop[i].heure === "11h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J11').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J11').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "13h30" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J13').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J13').append(x2);
-    }
-  }
-       if(data.pop[i].heure === "15h" && data.pop[i].jour === "jeudi"){
-    if(data.pop[i].type === 'td' ){
-      
-      $('#J15').append(x3);
-     }
-    if(data.pop[i].type === 'tp' ){
-
-      $('#J15').append(x2);
-    }
-  }
-  
-}
-
-
-
-for( i =0;i<data.pop1.length ;i++){
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "dimanche"){
- $('#D8').append(x1);
-}
-    if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "dimanche"){
-     $('#D10').append(x1);
-    
-  }
-   if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "dimanche"){
-    $('#D11').append(x1);
-}
-if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "dimanche"){
-  $('#D13').append(x1); }
-
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "dimanche"){
-  $('#D15').append(x1);
-}
-if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "mardi"){
- $('#Ma8').append(x1); }
-
-if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "mardi"){
- $('#Ma10').append(x1);
- }
-  if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "mardi"){
-  $('#Ma11').append(x1); }
-
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "mardi"){
-$('#Ma13').append(x1);
- }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "mardi"){
-  $('#Ma15').append(x1);
-   }
-
-if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
-    $('#L8').append(x1); }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "lundi"){
-  $('#L10').append(x1);
-  
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "lundi"){
-  $('#L11').append(x1); }
-
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "lundi"){
-   $('#L13').append(x1);
-     
-  }
-  if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "lundi"){
-    $('#L15').append(x1);
-  
-  }
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "Mercredi"){
-  $('#Me8').append(x1);
-   
-  }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "Mercredi"){
-   $('#Me10').append(x1);
-   
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "Mercredi"){
-   $('#Me11').append(x1);
-   
-  }
-   if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "Mercredi"){
-  $('#Me13').append(x1);
- 
-  }
- if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "Mercredi"){
-    $('#Me15').append(x1);
-  
-  }
-
-
-  if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "jeudi"){
-    $('#J8').append(x1);
-   
-  }
-
-  if(data.pop1[i].heure === "10h" && data.pop1[i].jour === "jeudi"){
-   $('#J10').append(x1);
-   
-  }
-    if(data.pop1[i].heure === "11h30" && data.pop1[i].jour === "jeudi"){
-    $('#J11').append(x1);
-   
-  }
-  if(data.pop1[i].heure === "13h30" && data.pop1[i].jour === "jeudi"){
-   $('#J13').append(x1);
-  
-  }
-   if(data.pop1[i].heure === "15h" && data.pop1[i].jour === "jeudi"){
-    $('#J15').append(x1); }
-    
-
-}
-
-
-  }else{
+emploi_du_temps(data.pop,data.pop1);
+    }else{
 $("#empForm").css('display','');
 $("#tabEmpTemps").css('display','none');
+$("#popnew").css('display','none');
  if(mo3 === 'Cour'){
    // alert("lala");
     $('.c').css('display','');
@@ -1593,10 +1487,7 @@ $("#tabEmpTemps").css('display','none');
  $('#description').removeClass('active in');
  $('#reviews').removeClass('active in');
   }
-  if(mo3 === 'CTp'){
-    tp1=2;
 
-  }
    if(mo3 === 'CTT'){
     tp1=2;
 $('.ttp').removeClass('active');
@@ -1622,12 +1513,32 @@ $('.ttp').css('display','');
 
  });
 
-
-
+$(document).on('change','#newType',function(){
+ var type=$("#newType").val();
+ $('.sea > option').remove();
+ if(type === "Cour"){
+    $("#newSecRow").css('display','');
+    $("#newGrpRow").css('display','none');
+   $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
+ }
+  if(type === "TP"){
+    $("#newSecRow").css('display','none');
+    $("#newGrpRow").css('display','');
+   $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
+ }
+   if(type === "TD"){
+    $("#newSecRow").css('display','none');
+    $("#newGrpRow").css('display','');
+   $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($td as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').trigger("chosen:updated");
+ }
+});
 
  
 $(document).on('click','#submitCour',function(){
-  //alert('hello');
+ 
  var tab = new Array();
    var tab1 = new Array();
    var cmpt=0;
@@ -1687,6 +1598,7 @@ var c1=""+$("#grpTP"+num+"").val()+"";
  // alert("no");
    $("#errortp").css("display","none");
   $("#error1tp").css("display","none");
+   $("#popnew").css("display","");
   var x=0;
 var forms = new Array();
  if(tp1 == 2 ){
@@ -1716,14 +1628,7 @@ x++;
 
 
 });
-/*$(document).on('click','#suivC',function(){ 
-  alert("suiv");
-  $("#c").removeClass("active");
-  $("#td").addClass("active");
-  //$("#description").hide();
-  $("#reviews").show();
 
-});*/
 $(".td" ).css( 'pointer-events', 'none' );
 $(".tp" ).css( 'pointer-events', 'none' );
 $(document).on('click','#submitC',function(){
@@ -1753,7 +1658,7 @@ var c1=""+$("#secC"+i+"").val()+"";
    }
   if( cmpt >0 ){
 
-    alert("hi");
+    //alert("hi");
      $("#error").css("display","");
      
   }else{
@@ -1775,7 +1680,7 @@ var c1=""+$("#secC"+i+"").val()+"";
     }
 
     }
-     alert("ct = "+ct+"ct1 = "+ct1);
+     //alert("ct = "+ct+"ct1 = "+ct1);
     if(ct>0 || ct1>0){
        $("#error1").css("display","");
        $("#error").css("display","none");
@@ -1864,7 +1769,7 @@ var c1=""+$("#secC"+i+"").val()+"";
   
 });
 $(document).on('click','#submitTd',function(){
-alert("eehoo"); 
+//alert("eehoo"); 
    var tab = new Array();
    var tab1 = new Array();
    var cmpt=0;
@@ -1872,7 +1777,7 @@ alert("eehoo");
    var ct =0;
    var ct1 =0;
   $(".formTD").each(function () {
-    alert("id = "+$(this).attr("id").substring(6));
+   // alert("id = "+$(this).attr("id").substring(6));
     var num = $(this).attr("id").substring(6);
    // alert("seances"+$("#seaTD"+num+"").val()+" groupe = "+$("#grpTD"+num+"").val()+"Enseignant"+$("#ensTD"+num+"").val());
  if( $("#seaTD"+num+"").val() == null || $("#grpTD"+num+"").val() == null || $("#ensTD"+num+"").val() == null ){
@@ -1894,7 +1799,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
 });
     if( cmpt >0 ){
 
-    alert("hi");
+   // alert("hi");
      $("#errortd").css("display","");
      
   }else{
@@ -1916,12 +1821,12 @@ var c1=""+$("#grpTD"+num+"").val()+"";
     }
 
     }
-     alert("ct = "+ct+"ct1 = "+ct1);
+     //alert("ct = "+ct+"ct1 = "+ct1);
     if(ct>0 || ct1>0){
        $("#error1td").css("display","");
        $("#errortd").css("display","none");
     }else{
-  alert("no");
+ // alert("no");
    $("#errortd").css("display","none");
 $("#error1td").css("display","none");
     var x=0;
@@ -1929,12 +1834,12 @@ var forms = new Array();
  
 $(".Cour").each(function(){
  forms[x] = $(this);
- alert($(this).attr("class"));
+ //alert($(this).attr("class"));
 x++;
 });
 $(".formTD").each(function(){
  forms[x] = $(this);
- alert($(this).attr("class"));
+ //alert($(this).attr("class"));
 x++;
 });
 
@@ -1944,7 +1849,7 @@ x++;
 }
 });
 $(document).on('click','#suivtd',function(){
-alert("eehoo"); 
+
    var tab = new Array();
    var tab1 = new Array();
    var cmpt=0;
@@ -1952,7 +1857,7 @@ alert("eehoo");
    var ct =0;
    var ct1 =0;
   $(".formTD").each(function () {
-    alert("id = "+$(this).attr("id").substring(6));
+    //alert("id = "+$(this).attr("id").substring(6));
     var num = $(this).attr("id").substring(6);
    // alert("seances"+$("#seaTD"+num+"").val()+" groupe = "+$("#grpTD"+num+"").val()+"Enseignant"+$("#ensTD"+num+"").val());
  if( $("#seaTD"+num+"").val() == null || $("#grpTD"+num+"").val() == null || $("#ensTD"+num+"").val() == null ){
@@ -1974,7 +1879,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
 });
     if( cmpt >0 ){
 
-    alert("hi");
+    //alert("hi");
      $("#errortd").css("display","");
      
   }else{
@@ -1996,12 +1901,12 @@ var c1=""+$("#grpTD"+num+"").val()+"";
     }
 
     }
-     alert("ct = "+ct+"ct1 = "+ct1);
+   //  alert("ct = "+ct+"ct1 = "+ct1);
     if(ct>0 || ct1>0){
        $("#error1td").css("display","");
        $("#errortd").css("display","none");
     }else{
-  alert("no");
+  //alert("no");
    $("#errortd").css("display","none");
      $("#error1td").css("display","none");
   $('.tab-review-design > .active').next('li').find('a').trigger('click');
@@ -2015,106 +1920,67 @@ var c1=""+$("#grpTD"+num+"").val()+"";
 });
 
 });
+
 </script>
 
+@endsection
 
- 
-</head>
+    
+     @section('sidebar')
+  
+     @include('layouts.sidebarAdmin2')
 
-<body>
-       <div class="left-sidebar-pro">
-        <nav id="sidebar" class="">
-            <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                <strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
-                <br>
-                <br>
-                       
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-            </div>
-            <br>
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
-                <nav class="sidebar-nav left-sidebar-menu-pro">
-                     <ul class="metismenu" id="menu1">
-                        <li class="active">
-                            <a class="has-arrow" href="index.html">
-                                   <span class="educate-icon educate-home icon-wrap"></span>
-                                   <span class="mini-click-non">Groupes</span>
-                                </a>
-                            <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Nouveau groupe</span></a></li>
-                                <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Liste de groupe</span></a></li>
-                               
-                              
-                            </ul>
-                        </li>
-                     
-                        <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Emplois du temps</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">E.P générale</span></a></li>
-                                <li><a href="#" ><span class="mini-sub-pro">E.P par module</span></a></li>
-                                
-                            </ul>
-                        </li>
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.mobileSidebar2')
 
-                     
-              
-                     
-                    <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Délibération</span></a>
-                        </li>
-                     
-                
-                 
-             
-                    </ul>
-                </nav>
-            </div>
-              
-        </nav>
-    </div>
-             <div id="InformationproModalalert" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
+     @endsection
+
+    
+                                        @section('search')
+                                        <ul class="breadcome-menu">
+                                            <li><a href="#">Semestre</a> <span class="bread-slash">/</span>
+                                            </li>
+                                            <li><span class="bread-blod">{{$semestre->nomSem}}/Emploi du Temps</span>
+                                            </li>
+                                        </ul>
+                                        @endsection
+                                         @section('content')
+               <div id="InformationproModalalert" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog" data-keyboard="false" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
+                                   
                                     <div class="modal-body">
-                                        <i class="educate-icon educate-checked modal-check-pro"></i>
+                                        <i class="educate-icon educate-checked modal-check-pro" style="color: #8e44ad;"></i>
                                         <h2>Emplois du temps Enregistré</h2>
-                                        <p>The Modal plugin is a dialog box/popup window that is displayed on top of the current page</p>
+                                        
                                     </div>
                                     <div class="modal-footer info-md">
-                                        <a data-dismiss="modal" href="#">Annuler</a>
+                                        
                                         <form action="{{url('popEmp')}}" method="post" id="popEmp">
                                       {!! csrf_field() !!}
+                                      <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                        <input type="hidden" name="modhid">
-                                       <button type="submit"> ok </button>
+                                       
                                       </form>
-                                       <a href="#" id="popTab">valider</a>
+                                       <a href="#" id="popTab" style="background: #8e44ad">Quitter</a>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-              <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+
+                         <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog" data-keyboard="false" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
+                                    
                                     <form action="{{url('empMod')}}" method="post" id="popMod">
                                       {!! csrf_field() !!}
+                                       <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                     <div class="modal-body">
-                                                             <div class="alert-wrap1 shadow-inner wrap-alert-b">
-                                <div class="alert alert-danger alert-mg-b" role="alert" id="alertreq" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser le champs.
-                            </div></div>
+                                  
+
                                         <i class="educate-icon educate-checked modal-check-pro"></i>
                                         <h2>Modules</h2>
                                         <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="moduleCh" class="chosen-select error" tabindex="-1" id="" >
@@ -2126,221 +1992,15 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                     </div>
                                      </form>
                                     <div class="modal-footer">
-                                        <a data-dismiss="modal" href="#">Annuler</a>
+                                      
                                         <a href="#" id="subMod">valider</a>
                                     </div>
                                    
                                 </div>
                             </div>
                         </div>
-    <div class="all-content-wrapper"> 
  
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="header-advance-area">
-            <div class="header-top-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="header-top-wraper">
-                                <div class="row">
-                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
-                                        <div class="menu-switcher-pro">
-                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-                                                    <i class="educate-icon educate-nav"></i>
-                                                </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                        <div class="header-top-menu tabl-d-n">
-                                            <ul class="nav navbar-nav mai-top-nav">
-                                                <li class="nav-item"><a href="#" class="nav-link">Home</a>
-                                                </li>
-                                                <li class="nav-item"><a href="#" class="nav-link">Module</a>
-                                                </li>
-                                                <li class="nav-item"><a href="#" class="nav-link">Semestre</a>
-                                                </li>
-                                    
-                                                <li class="nav-item"><a href="#" class="nav-link">Historique</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                                        <div class="header-right-info">
-                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
-                                                <li class="nav-item dropdown">
-                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i><span class="indicator-ms"></span></a>
-                                                    <div role="menu" class="author-message-top dropdown-menu animated zoomIn">
-                                                        <div class="message-single-top">
-                                                            <h1>Message</h1>
-                                                        </div>
-                                                        <ul class="message-menu">
-                                                       
-                                                      
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="message-img">
-                                                                        <img src="img/contact/2.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="message-content">
-                                                                        <span class="message-date">16 Sept</span>
-                                                                        <h2>Victor Jara</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="message-view">
-                                                            <a href="#">View All Messages</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
-                                                    <div role="menu" class="notification-author dropdown-menu animated zoomIn">
-                                                        <div class="notification-single-top">
-                                                            <h1>Notifications</h1>
-                                                        </div>
-                                                        <ul class="notification-menu">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                    
-                                                            
-                                                        </ul>
-                                                        <div class="notification-view">
-                                                            <a href="#">View All Notification</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                            <img src="img/product/pro4.jpg" alt="" />
-                                                            <span class="admin-name">Prof.Anderson</span>
-                                                            <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-                                                        </a>
-                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>Mon profil</a>
-                                                        </li>
-                                                        <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>Modifier mon Profile</a>
-                                                        </li>
-                                                    
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Déconnecter</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                          
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu start -->
-            <div class="mobile-menu-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="mobile-menu">
-                                <nav id="dropdown">
-                                    <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Semestre <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul class="collapse dropdown-header-top">
-                                                <li><a href="index.html">Nouveau Semestre</a></li>
-                                                <li><a href="index-1.html">Semestre Actuel</a></li>
-                                               
-                                            </ul>
-                                        </li>
-                                        <li><a href="events.html">Historique</a></li>
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Enseignants <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">Enseignants</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Nouveau Enseignant</a>
-                                                </li>
-                                                
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Etudiants <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                          
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Modules <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                              <li><a href="all-professors.html">Modules</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Nouveau module</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                   
-                                   
-                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demo" class="collapse dropdown-header-top">
-                                                <li><a href="mailbox.html">Inbox</a>
-                                                </li>
-                                                <li><a href="mailbox-view.html">View Mail</a>
-                                                </li>
-                                                <li><a href="mailbox-compose.html">Compose Mail</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                           
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">Dashboard / Semestre actuel</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">Emploie du temps</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 
@@ -2348,12 +2008,12 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                 <div class="row">
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
- <input type="hidden" name="nbrSec" id="nbrSec" value="{{ $nbr}}">
+ <input type="hidden" name="nbrSec" id="nbrSec" value="{{$nbr}}">
     <div class="product-status-wrap drp-lst">
                             <h4>Emploi du temps</h4>
                             <br>
                             <div class="row ">           
-                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                               
                     <label class="login2"> Module</label>  
                    <div class="form-group">
@@ -2365,13 +2025,14 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                   
                                                         
                                                             </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                     <label class="login2"> Module</label>  
                                                     <div class="form-group">
                                                         <div class="chosen-select-single mg-b-20">
                                         
           <form action="{{url('empMod')}}" method="post" id="selectMod">
                                       {!! csrf_field() !!}
+            <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
          <select data-placeholder="Choose a Country..." id="selMod" class="chosen-select" tabindex="-1" name="moduleCh">
                <option value="" selected>Selectionner</option>
                 @foreach($mods as $m)
@@ -2386,6 +2047,94 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                                        </div>
                                                           
                                                             </div>
+                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <br> 
+                     <div class="modal-area-button" id="popnew" style="display: none">
+    <a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#nouvel" > <i class="fa fa-plus">  </i></a> </div>
+      <div id="nouvel" class="modal  modal-edu-general default-popup-PrimaryModal fade" role="dialog"><div class="modal-dialog">
+        <div class="modal-content"><div class="modal-close-area modal-close-df"><a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a></div>
+        <div class="modal-body">
+            
+        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="review-content-section">
+                                <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2 style="color:#006DF0;">Nouvelle Séance</h2><br>
+                                              <div class="alert-wrap1 shadow-inner wrap-alert-b">
+                                <div class="alert alert-danger alert-mg-b" role="alert" id="newError" style="display: none;">
+                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                            </div>
+                            <br>
+                            <div class="alert alert-danger alert-mg-b" role="alert" id="newError1" style="display: none;">
+                                <strong>Erreur!</strong> la séance est déjà prise!!
+                            </div>
+                          </div>
+                                <form action="{{url('addSeance')}}" method="post" id="addSeance">
+                                      {!! csrf_field() !!}  
+                                   <input  type="hidden" name="idmodule" value="">
+                                            <div class="row">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Type </h4></div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select  name="newType" class="chosen-select ch" id="newType" tabindex="-1"> <option value="" disabled selected>Select your option</option>
+
+                                   </select></div></div>
+                                    </div></div>
+                                
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Enseignant </h4></div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="" name="newEns" class="chosen-select" id="newEns" tabindex="-1"> <option value="0" selected>Select your option</option>
+                                    @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}}{{$p->nom}} </option>@endforeach</select></div></div>
+                                    </div></div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <h4>Seance </h4></div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="form-group-inner"  id="module">
+                                            <div class="chosen-select-single mg-b-20">
+                                                <select id="newSeance"  class="chosen-select sea"   name="newSeance">
+                                                <option value="0">Select your Option</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                       </div>
+                                    </div>
+                                    <br>
+                                        <div class="row" id="newGrpRow" style="display: none;">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Groupe  </h4></div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                <div class="form-group-inner">
+                                                    <div class="chosen-select-single mg-b-20"><select id="newGrp" name="newGrp" class="chosen-select" id="group" tabindex="-1">
+                                                     <option value="0"  selected>Select your option</option>
+                                    @foreach($groupes as $s)<option value="{{$s->idG}}">{{$s->nomG}} </option>@endforeach</select></div></div></div></div>
+                                              <div class="row" id="newSecRow" style="display: none;">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Section  </h4></div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                <div class="form-group-inner">
+                                                    <div class="chosen-select-single mg-b-20"><select id="newSec" name="newSec" class="chosen-select" id="group" tabindex="-1">
+                                                     <option value="0" selected>Select your option</option>
+                                    @foreach($sec as $s)<option value="{{$s->idSec}}">{{$s->nomSec}} </option>@endforeach</select></div></div></div></div>
+                                        <div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                     <div class="login-btn-inner">       
+                               <div class="login-horizental ">
+         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="add">Ajouter</button>
+          </div>
+           </div>
+
+                                        </div></div>
+                                        </form>
+
+                                    </div>
+
+
+                                        
+
+                                </div></div>
+
+
+                            </div></div>
+                        </div></div>
+                 </div>                                             
                             
                                                         </div></div>
                                                       </div>
@@ -2428,13 +2177,20 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                     
                                  
                                     <div class="row ">
-                          
-                              <form class="Cour" id="groupe{{$i}}" method="post" action="{{ url('empCour') }}"> {!! csrf_field() !!} <fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><br><div class="row ">
-                               <input type="hidden" name="idmodule" value=""><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="idens" class="chosen-select error" tabindex="-1" id="ensC{{$i}}" > <option value="" disabled selected>Select your option</option>
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+ <form class="Cour" id="groupe{{$i}}" method="post" action="{{ url('empCour') }}"> 
+    {!! csrf_field() !!} 
+    <fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 2px;" ><br><div class="row ">
+                               <input type="hidden" name="idmodule" value="">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <label class="login2"> Enseignant</label>
+                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="idens" class="chosen-select" tabindex="-1" id="ensC{{$i}}" > <option value="" disabled selected>Select your option</option>
                                   @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->nom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Section</label><div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="secC{{$i}}" name="idsec" class="chosen-select" id="group" tabindex="-1"> <option value="" disabled selected>Select your option</option>
                                     @foreach($sec as $s)<option value="{{$s->idSec}}">{{$s->nomSec}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select id="seaC{{$i}}" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seance" name="idsea[]">@foreach($seances as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form>
-                                  <br>
-                            </div> 
+                                
+                               </div>   
+                            </div>
+                            <br> 
                              <?php $i++;} ?>
                           </div>
                                                 </div>
@@ -2515,15 +2271,17 @@ var c1=""+$("#grpTD"+num+"").val()+"";
 
                                                 @endforeach
                                             </div>
-                                            
+                                             <div class="login-btn-inner">
                                              <div class="login-horizental pull-right">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="suivtd">Suivant</button>
-                                                                                            </div>
+         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="suivtd">Suivant</button>  </div>
+        
                <div class="login-horizental pull-right" style="display: none;" id="submittedTD">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="submitTd">Submit</button>
-                                                                                            </div>     <div class="login-horizental pull-right">
+         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="submitTd">Valider</button>
+                                         </div> 
+                                         <div class="login-horizental pull-right">
          <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="precTD">précédent </button>
-                                                                                            </div>
+          </div>
+           </div>
                                         </div>
                                     </div>
 
@@ -2572,13 +2330,20 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                                 <br>
                                                 <?php $var++; ?> 
                                                 @endforeach
-                                            </div>
+<div class="login-btn-inner">
                                                  <div class="login-horizental pull-right">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="submitCour">Submit</button>
-                                                                                            </div>
+         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="submitCour">Valider</button>
+          </div>
+           </div>
+                                            <div class="login-btn-inner">                                               
                                                <div class="login-horizental pull-right">
          <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="precTD">précédent </button>
-                                                                                            </div>
+                                                               </div>  </div>
+
+
+                                            </div>
+
+
                                        
                                 </div>
                             </div>
@@ -2642,7 +2407,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                        
                                     </tr>
                                     <tr>
-                                        <th>Mercredi</th>
+                                        <th>mercredi</th>
                                         <td id="Me8"></td>
                                         <td id="Me10"></td>
                                         <td id="Me11"></td>
@@ -2672,147 +2437,263 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                       </div>
                     </div>
  </div>
+
                     </div>
 
+                    <div id="InformationTP" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header header-color-modal bg-color-2">
+                                        <h4 class="modal-title"></h4>
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                    </div>
+            <div class="modal-body">
 
-
-<div class="footer-copyright-area">
-            <div class="container-fluid">
+                  <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active" id="inf"><a href="#desc">Information</a></li>
+                                <li id="sup"><a href="#supp" > Suppression </a></li>
+                            
+                            </ul>
+                <div id="myTabContent" class="tab-content custom-product-edit">
+                  <div class="product-tab-list tab-pane fade active in" id="desc">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+               
+           <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#8e44ad ;">Travaux Pratique (TP)!</h2> <br>
+                               <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Enseignant </h4></div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                            <p style="text-align: left" id="ens"></p></div>
+                </div>
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="footer-copy-right">
-              <p>Copyright © 2018. All rights reserved. Template by <a href="https://colorlib.com/wp/templates/">Colorlib</a></p>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Seance </h4></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                            <p style="text-align: left" id="sea"></p>
                         </div>
+                </div>
+                    <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4>Groupe  </h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="grp"></p>
                     </div>
                 </div>
+                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="supp">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                               
+                                               <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#8e44ad ;">Suppresion!</h2>
+           <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br> 
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                  
+                            </div>
+                        </div>
+      </div>
+<div class="modal-footer info-md" >
+    <form method="post" action="{{url('DeleteSea')}}" id="supSea">
+        {!! csrf_field() !!}
+        <input type="hidden" name="supID" id="supID">
+         <input type="hidden" name="supType" value="3"></form>
+         <a data-dismiss="modal" href="#" style="background-color: #8e44ad ;border-color: #8e44ad ;">OK</a>
+<a  href="#" style="background-color: #8e44ad ;border-color: #8e44ad ; display: none;" id="supBtn">Supprimer</a>
+</div>
+</div>
+</div>
+</div>
+
+<!--            modal mauve TD   -->
+
+<div id="InformationTD" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header header-color-modal bg-color-3" style="background-color: #65b12d ;border-color: #65b12d ;">
+                                        <h4 class="modal-title"></h4>
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                    </div>
+            <div class="modal-body">
+                  <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                    <li class="active" id="inf2" ><a  href="#desc2" >Information</a></li>
+                    <li  id="sup2"><a href="#supp2" > Suppression </a></li>
+                            
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="desc2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="review-content-section">
+            <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
+                                    <h2 style="color:#65b12d ;">Travaux Dirigés (TD)!</h2>
+                                    <br>
+            
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 style="color:#303030 ;">Enseignant </h4></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                            <p style="text-align: left" id="ens"></p></div>
+                        </div>
+                        <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 style="color:#303030 ;">Seance </h4></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left" >
+                            <p style="text-align: left" id="sea"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4 style="color:#303030 ;">Groupe  </h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="grp"></p>
+                    </div>
+                </div>
+            
             </div>
         </div>
     </div>
-  
-  
-    <script src="{{asset('js/vendor/jquery-1.12.4.min.js')}}"></script>
-    <!-- bootstrap JS
-    ============================================ -->
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <!-- wow JS
-    ============================================ -->
-    <script src="{{asset('js/wow.min.js')}}"></script>
-    <!-- price-slider JS
-    ============================================ -->
-    <script src="{{asset('js/jquery-price-slider.js')}}"></script>
-    <!-- meanmenu JS
-    ============================================ -->
-    <script src="{{asset('js/jquery.meanmenu.js')}}"></script>
-    <!-- owl.carousel JS
-    ============================================ -->
-    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
-    <!-- sticky JS
-    ============================================ -->
-    <script src="{{asset('js/jquery.sticky.js')}}"></script>
-    <!-- scrollUp JS
-    ============================================ -->
-    <script src="{{asset('js/jquery.scrollUp.min.js')}}"></script>
-    <!-- mCustomScrollbar JS
-    ============================================ -->
-    <script src="{{asset('js/scrollbar/jquery.mCustomScrollbar.concat.min.js')}}"></script>
-    <script src="{{asset('js/scrollbar/mCustomScrollbar-active.js')}}"></script>
-    <!-- metisMenu JS
-    ============================================ -->
-    <script src="{{asset('js/metisMenu/metisMenu.min.js')}}"></script>
-    <script src="{{asset('js/metisMenu/metisMenu-active.js')}}"></script>
-    <!-- data table JS
-    ============================================ -->
-    <script src="{{asset('js/data-table/bootstrap-table.js')}}"></script>
-    <script src="{{asset('js/data-table/tableExport.js')}}"></script>
-    <script src="{{asset('js/data-table/data-table-active.js')}}"></script>
-    <script src="{{asset('js/data-table/bootstrap-table-editable.js')}}"></script>
-    <script src="{{asset('js/data-table/bootstrap-editable.js')}}"></script>
-    <script src="{{asset('js/data-table/bootstrap-table-resizable.js')}}"></script>
-    <script src="{{asset('js/data-table/colResizable-1.5.source.js')}}"></script>
-    <script src="{{asset('js/data-table/bootstrap-table-export.js')}}"></script>
-    <!--  editable JS
-    ============================================ -->
-    <script src="{{asset('js/editable/jquery.mockjax.js')}}"></script>
-    <script src="{{asset('js/editable/mock-active.js')}}"></script>
-    <script src="{{asset('js/editable/select2.js')}}"></script>
-    <script src="{{asset('js/editable/moment.min.js')}}"></script>
-    <script src="{{asset('js/editable/bootstrap-datetimepicker.js')}}"></script>
-    <script src="{{asset('js/editable/bootstrap-editable.js')}}"></script>
-    <script src="{{asset('js/editable/xediable-active.js')}}"></script>
-    <!-- Chart JS
-    ============================================ -->
-    <script src="{{asset('js/chart/jquery.peity.min.js')}}"></script>
-    <script src="{{asset('js/peity/peity-active.js')}}"></script>
-    <!-- tab JS
-    ============================================ -->
-    <script src="{{asset('js/tab.js')}}"></script>
-    <!-- plugins JS
-    ============================================ -->
-    <script src="{{asset('js/plugins.js')}}"></script>
-    <!-- main JS
-    ============================================ -->
-    <script src="{{asset('js/main.js')}}"></script>
-    <!-- tawk chat JS
-    ============================================ -->
-    <script src="{{asset('js/tawk-chat.js')}}"></script>
-    <!-- select2 JS
-    ============================================ -->
-    <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
-    <script src="js/select2/select2-active.js"></script>
-    <!-- chosen JS
-    ============================================ -->
-    <script src="{{asset('js/chosen/chosen.jquery.js')}}"></script>
-    <script src="{{asset('js/chosen/chosen-active.js')}}"></script>
+                         </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="supp2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                         <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#65b12d;">Suppresion!</h2>
+           <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br>     
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                  
+                            </div>
+                        </div>
+</div>
+<div class="modal-footer info-md" >
+    <form method="post" action="{{url('DeleteSea')}}" id="supSea2">
+        {!! csrf_field() !!}
+        <input type="hidden" name="supID" id="supID">
+         <input type="hidden" name="supType" value="2"></form>
+<a data-dismiss="modal" href="#" style="background-color: #65b12d ;border-color: #65b12d ;">OK</a>
+<a href="#" id="supBtn2" style="background-color: #65b12d ;border-color: #65b12d ; display: none;">Supprimer
+</a>
+</div>
+</div>
+</div>
+</div>
 
-    <!-- touchspin JS
-        ============================================ -->
-    <script src="{{asset('js/touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-    <script src="{{asset('js/touchspin/touchspin-active.js')}}"></script>
-    <!-- colorpicker JS
-        ============================================ -->
-    <script src="{{asset('js/colorpicker/jquery.spectrum.min.js')}}"></script>
-    <script src="{{asset('js/colorpicker/color-picker-active.js')}}"></script>
-    <!-- datapicker JS
-        ============================================ -->
-    <script src="{{asset('js/datapicker/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('js/datapicker/datepicker-active.js')}}"></script>
-    <!-- input-mask JS
-        ============================================ -->
-    <script src="{{asset('js/input-mask/jasny-bootstrap.min.js')}}"></script>
-    <!-- ionRangeSlider JS
-        ============================================ -->
-    <script src="{{asset('js/ionRangeSlider/ion.rangeSlider.min.js')}}"></script>
-    <script src="{{asset('js/ionRangeSlider/ion.rangeSlider.active.js')}}"></script>
-    <!-- rangle-slider JS
-        ============================================ -->
-    <script src="{{asset('js/rangle-slider/jquery-ui-1.10.4.custom.min.js')}}"></script>
-    <script src="{{asset('js/rangle-slider/jquery-ui-touch-punch.min.js')}}"></script>
-    <script src="{{asset('js/rangle-slider/rangle-active.js')}}"></script>
-    <!-- knob JS
-        ============================================ -->
-    <script src="{{asset('js/knob/jquery.knob.js')}}"></script>
-    <script src="{{asset('js/knob/knob-active.js')}}"></script>
-    <!-- morrisjs JS
-    ============================================ -->
-    <script src="{{asset('js/sparkline/jquery.sparkline.min.js')}}"></script>
-    <script src="{{asset('js/sparkline/jquery.charts-sparkline.js')}}"></script>
-    <script src="{{asset('js/sparkline/sparkline-active.js')}}"></script>
-    <!-- calendar JS
-    ============================================ -->
-    <script src="{{asset('js/calendar/moment.min.js')}}"></script>
-    <script src="{{asset('js/calendar/fullcalendar.min.js')}}"></script>
-    <script src="{{asset('js/calendar/fullcalendar-active.js')}}"></script>
-    <!-- Charts JS
-    ============================================ -->
-    <script src="{{asset('js/charts/Chart.js')}}"></script>
-    <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
-    <!-- pdf JS
-    ============================================ -->
-    <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
-    <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
 
-    
+<!--            modal bleu Cour   -->
 
-</body>
+     <div id="InformationCour" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header header-color-modal bg-color-1">
+                                        <h4 class="modal-title"></h4>
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                    </div>
+            <div class="modal-body">
+                 <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                       <li class="active" id="inf1"><a href="#desc1">Information</a></li>
+                                <li id="sup1"><a href="#supp1" > Suppression </a></li>
+                            
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="desc1">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="review-content-section">
+               <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
+                                    <h2 style="color:#006DF0 ;">Cour</h2>
+                                    <br>
+                                                                                
+                        <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 style="color:#303030 ;">Enseignant </h4></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+                            <p style="text-align: left" id="ens"></p></div>
+                        </div>
+                        <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 style="color:#303030 ;">Seance </h4></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left" >
+                            <p style="text-align: left" id="sea"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4 style="color:#303030 ;">Section </h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left"><p style="text-align: left" id="sec"></p>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+     </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="supp1">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                               <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+           <h2 style="color:#006DF0 ;">Suppresion!</h2>
+           <p>Voulez-Vous vraiment supprimer cette seance ?</p> <br>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                  
+                            </div>
+                        </div>
 
-</html>
+</div>
+<div class="modal-footer info-md" >
+    <form method="post" action="{{url('DeleteSea')}}" id="supSea3">
+        {!! csrf_field() !!}
+        <input type="hidden" name="supID" id="supID">
+         <input type="hidden" name="supType" value="1">
+    </form>
+    <a data-dismiss="modal" href="#" >OK</a>
+     <a  href="#" id="supBtn3" style="display: none;">Supprimer</a>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+@endsection
+
+
+
+             
+                                               
+                   

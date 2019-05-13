@@ -12,4 +12,8 @@ class Module extends Model
     {
         return $this->belongsTo('App\Semestre','semestre','idSem');
     }
+     public function ens_R()
+    {
+        return $this->belongsTo('App\Enseignant','ens_responsable','idEns');
+    }
 }

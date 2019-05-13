@@ -23,7 +23,6 @@
     $(document).on("change","#ecart",function(){
         var data = $('#formEcart').serialize();
         var ecart=$('#ecart').val();
-        alert(ecart);
         $('#ecartFormule').val(ecart);
         $.ajax({
             type:'get',

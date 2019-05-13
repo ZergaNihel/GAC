@@ -17,32 +17,34 @@ use App\Endette;
 use Session;
 use Illuminate\Support\Facades\Validator;
 class GroupController extends Controller
-{
-	function index(){
-		
-		$semestres = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-		foreach ($semestres as $key ) {
-    	$semestre = $key->idSem;
-    }
-   
-		$section = Groupe_etu::where('sem_groupe','=',$semestre)->select('sec_groupe')->distinct()->get();
-//dd($section);
-		$sections = Section::all();
 
-		 return view('admin.groupes', compact('semestre','section','sections'));
-	}
-	function groupe($id){
-		$etudiants = Etudiant::where('idG','=',$id)->get();
-		$semestres = Semestre::where('active','=',1)->get();
-		 
-		 foreach ($semestres as $key ) {
-    	$semestre = $key->idSem;
+{
+   public function __construct()
+    {
+        $this->middleware('auth');
     }
+
+	function index($id){
+		$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+	  $semestre = Semestre::find($id);
+    $section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
+    $sections = Section::all();
+
+		 return view('admin.groupes', compact('semestre','section','sections','sem1','sem2'));
+	}
+  
+	function groupe($id,$idSem){
+    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+		$etudiants = Etudiant::where('idG','=',$id)->get();
+	  $semestre = Semestre::find($idSem);
+    
     //dd($semestre);
-		$modules = Module::where('semestre','=',$semestre)->get();
+		$modules = Module::where('semestre','=',$idSem)->get();
 		//dd($modules);
 	
-		 return view('admin.groupe_det', compact('modules','etudiants'));
+		 return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre'));
 	}
 function edit(Request $request){
 
@@ -91,20 +93,18 @@ function edit(Request $request){
     {
 
       $tab[]=null; 
+      $semestre=Semestre::find($request->idsemestre);
 
      $this->validate($request, [
       'select_file'  => 'required|mimes:xls,xlsx'
      ]);
-    $semestres = Semestre::where('active','=',1)->get();
-    foreach ($semestres as $key ) {
-    	$semestre = $key->idSem;
-    }
+   
     $groupe = $request->groupe;
   
     $k = Groupe::create(['nomG'=> $groupe,]);	
     //dd($k->idG);
     $section = $request->section;
-    $grp_etu  = Groupe_etu::create(['sem_groupe'=>$semestre,'sec_groupe'=>$section,'groupe'=>$k->idG,]);
+    $grp_etu  = Groupe_etu::create(['sem_groupe'=>$request->idsemestre,'sec_groupe'=>$section,'groupe'=>$k->idG,]);
     $path = $request->file('select_file')->getRealPath();
     $data = Excel::load($path)->get();
      
@@ -134,7 +134,7 @@ function edit(Request $request){
        DB::table('etudiants')->insert($insert_data);
       }
      }
-     return Redirect::to('groupe/detail/'.$k->idG);
+     return Redirect::to('groupe/detail/'.$k->idG.'/'.$semestre->idSem);
     }
       function statistique ($id){
       	//dd($id);

@@ -16,9 +16,11 @@ class User extends Authenticatable
      * @var array
      */
 
+
+
    
 
-    protected $fillable = ['email', 'password','role','id_Etu',];
+    protected $fillable = ['email', 'password','role','id_Etu','photo','matricule'];
 
 
     /**
@@ -33,10 +35,6 @@ class User extends Authenticatable
 
      public function etudiant()
     {
-
-        //foreign key de role-id dans la table users
-       // return $this->belongsTo('App\Etudiant','idEtu','id_Etu','id');
-         //return $this->belongsTo('App\Etudiant');
          return $this->belongsTo('App\Etudiant','id_Etu');
          
     }
