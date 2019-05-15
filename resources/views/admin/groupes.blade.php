@@ -3,91 +3,89 @@
 @section('title','groupes')
 @section('js')
 <script >
-       
+       $(document).ready(function () {
+           $(document).on('click', '#deleteBtn', function () {
+               // alert("hhh");
+               $.ajax({
+                   type: "POST",
+                   data: $('#deleteForm').serialize(), // to submit fields at once
+                   url: $('#deleteForm').attr('action'), // use the form's action url
+                   success: function (data) {
+                       $("#delete").modal("hide");
+                       //alert(data.success);
+                       $("#panel" + data.id + "").remove();
+                   }
+               });
+           });
 
-  $(document).ready(function(){
-       $(document).on('click','#deleteBtn',function(){
-       // alert("hhh");
-        $.ajax({
-type: "POST",
-data: $('#deleteForm').serialize(),                             // to submit fields at once
-url: $('#deleteForm').attr('action'),                        // use the form's action url
-success: function(data) {
-    $("#delete").modal("hide");
- //alert(data.success);
- $("#panel"+data.id+"").remove();
-}
-});
+           // alert($("#EditError").val());
+           if ($("#EditError").val() == 1) {
+               $("#edit").modal("show");
+           }
+           $("#edit").on('show.bs.modal', function (event) {
+               var a = $(event.relatedTarget).data('groupe');
+               var b = $(event.relatedTarget).data('id');
+               var c = $(event.relatedTarget).data('section');
+               var e = $(event.relatedTarget).data('ids1');
+
+               //alert("e="+e+"a="+a+"b="+b+"c="+c);
+               var m = $(this)
+               m.find('#editGrp').val(a);
+               m.find('#editSec').val(e);
+               m.find('#editSec').text(c);
+               m.find("#idGroupe").val(b);
+               m.find("#idGroupe_etu").val(e);
+
+               // alert(m.find("#idGroupe_etu").val());
+               //m.find('#prepend-big-btn').val(c);
+           });
+           $("#delete").on('show.bs.modal', function (event) {
+               var a = $(event.relatedTarget).data('groupe');
+               var b = $(event.relatedTarget).data('id');
+               alert(b);
+               var m = $(this)
+               // m.find('#editGrp').val(a);
+               m.find("#idGrpDel").val(b);
+               //alert("groupe = "+m.find("#idGrpDel").val(b));
+               //m.find('#prepend-big-btn').val(c);
+           });
+
+           var groupe;
+           $("input:hidden.groupe").each(function () {
+               // alert( $(this).val());
+               groupe = $(this).val();
+               $.ajax({
+                   type: "get",
+                   url: "{{url('statGroupe')}}/" + groupe + "/",
+                   success: function (data) {
+                       //alert("groupe = "+data.id+"nbr = "+data.nbr);
+                       $(".nbr" + data.id + "").append(data.nbr);
+                       var ctx = document.getElementById("piechart" + data.id + "");
+                       var piechart = new Chart(ctx, {
+                           type: 'pie',
+                           data: {
+                               labels: ["Endétté", "Répétitifs", "Nouveau"],
+                               datasets: [{
+                                   label: 'pie Chart',
+                                   backgroundColor: [
+
+                                       '#65b12d',
+                                       '#D80027',
+                                       '#006DF0'
+                                   ],
+                                   data: [data.endette, data.repetitif, data.nouveau]
+                               }]
+                           },
+                           options: {
+                               responsive: true
+                           }
+                       });
+
+                   }
+               });
+
+           });
        });
-
-   // alert($("#EditError").val());
-     if( $("#EditError").val() == 1){
-         $("#edit").modal("show");
-        }
-     $("#edit").on('show.bs.modal', function(event) {
-    var a = $(event.relatedTarget).data('groupe');
-    var b = $(event.relatedTarget).data('id');
-    var c = $(event.relatedTarget).data('section');
-    var e = $(event.relatedTarget).data('ids1');
-
-//alert("e="+e+"a="+a+"b="+b+"c="+c);
-    var m = $(this)
-    m.find('#editGrp').val(a);
-    m.find('#editSec').val(e);
-    m.find('#editSec').text(c);
-    m.find("#idGroupe").val(b);
-    m.find("#idGroupe_etu").val(e);
-
-   // alert(m.find("#idGroupe_etu").val());
-    //m.find('#prepend-big-btn').val(c);
-});
-$("#delete").on('show.bs.modal', function(event) {
-    var a = $(event.relatedTarget).data('groupe');
-    var b = $(event.relatedTarget).data('id');
-    alert(b);
-     var m = $(this)
-   // m.find('#editGrp').val(a);
-    m.find("#idGrpDel").val(b);
-    //alert("groupe = "+m.find("#idGrpDel").val(b));
-    //m.find('#prepend-big-btn').val(c);
-});
-
-var groupe;
-  $("input:hidden.groupe").each(function() {
-      // alert( $(this).val());
-   groupe = $(this).val();
-$.ajax({
-  type: "get",
-  url: "{{url('statGroupe')}}/"+groupe+"/" ,
-  success: function(data){
-   //alert("groupe = "+data.id+"nbr = "+data.nbr);
-     $(".nbr"+data.id+"").append(data.nbr);
-    var ctx = document.getElementById("piechart"+data.id+"");
-    var piechart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-        labels: ["Endétté", "Répétitifs", "Nouveau"],
-            datasets: [{
-                label: 'pie Chart',
-                backgroundColor: [
-                    
-                    '#65b12d',
-                    '#D80027',
-                    '#006DF0'
-                ],
-                data: [data.endette,data.repetitif, data.nouveau]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
-  
-  }
-});
-
- });
-          });
     </script>
 @endsection
 

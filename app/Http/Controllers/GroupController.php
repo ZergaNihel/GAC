@@ -151,7 +151,7 @@ function edit(Request $request){
         $mat = Groupe::find($id);
         //dd($mat);
         $mat->delete();
-        	return  response()->json(['success' => 'deleting ith success','id'=>$id]);
+        	return  response()->json(['success' => 'deleting with success','id'=>$id]);
 
     }
 

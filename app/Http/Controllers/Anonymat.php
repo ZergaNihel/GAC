@@ -150,5 +150,6 @@ class Anonymat extends Controller
     public function delete(Request $request)
     {
         $paquet=Paquet::find($request->idP)->delete();
+        return  response()->json(['success' => 'deleting with success','id'=>$request->idP]);
     }
 }
