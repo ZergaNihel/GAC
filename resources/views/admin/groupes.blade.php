@@ -251,6 +251,7 @@ $.ajax({
   <a class="zoomInDown mg-t" href="#" data-ids1="{{$s->section->idSec}}" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#edit"><i class="fa fa-edit pull-right"> </i> </a>
    
 <a href="{{url('groupe/detail/'.$grp->groupe1->idG.'/'.$semestre->idSem)}}"> <i class="fa fa-eye pull-right"> </i></a>
+
 <a  href="#" class="zoomInDown mg-t" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#delete" > <i class="fa fa-trash pull-right"> </i></a>
             
                                         </h4>

@@ -50,11 +50,11 @@
                             <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Historique</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Mailbox</span></a>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Boite de réception</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Inbox</span></a></li>
-                                <li><a title="View Mail" href="mailbox-view.html"><span class="mini-sub-pro">View Mail</span></a></li>
-                                <li><a title="Compose Mail" href="mailbox-compose.html"><span class="mini-sub-pro">Compose Mail</span></a></li>
+                                <li><a title="Inbox" href="{{url('/boite_de_reception')}}"><span class="mini-sub-pro">E-mails</span></a></li>
+                                
+                                <li><a title="Compose Mail" href="{{url('/form_mail')}}"><span class="mini-sub-pro">Composer un e-mail</span></a></li>
                             </ul>
                         </li>
                 

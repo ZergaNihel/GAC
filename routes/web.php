@@ -12,15 +12,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-/*Route::get('/', function () {
-    return view('auth/login');
-});*/
 Route::get('/', function () {
-    return view('auth/login');
+    return redirect('/login');
 });
 
- 
+
+
+ Route::get('error_500', 'SemestreController@index');
+ //------------------ MailBoxe ----------------------------
+Route::get('/boite_de_reception', 'MailBoxController@index') ;
+Route::get('/form_mail', 'MailBoxController@composer') ;
+Route::get('/emails/view/{id}', 'MailBoxController@detail') ;
+Route::post('send_email', 'MailBoxController@send');
  //------------------ SemestreController ----------------------------
+
  Route::get('Semestres/dashboard/{id}','SemestreController@dash');
  Route::get('new_sem', 'SemestreController@new_sem');
  Route::post('addSem', 'SemestreController@store');
@@ -92,6 +97,7 @@ Route::get('correction/controle', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+/*Route::get('/', 'HomeController@index')->name('home');*/
 //------------------ Emploi_du_temps ----------------------------
 Route::get('/Emplois_du_Temps/{id}', 'EmploiTemps@afficher');
 Route::get('/Emplois_du_Temps_generale/{id}', 'EmploiTemps@generale');

@@ -18,11 +18,17 @@ class ParametresController extends Controller
     }
 
    function index(){
+   	$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+   if(Auth::user()->role == '1'){
    	$param = parametre::where('active','=',1)->get();
    	$paramCount = parametre::where('active','=',1)->count();
-    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+    
     return view('admin.parametre',compact('sem1','sem2','param','paramCount'));
+}
+else{
+	return view('erreur_500',compact('sem1','sem2'));
+}
    }
    function store(Request $request){
    	$messages = [

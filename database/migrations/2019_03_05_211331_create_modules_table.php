@@ -15,7 +15,7 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('idMod');
-             $table->string('nom');
+            $table->string('nom');
             $table->string('code');
             $table->integer('ens_responsable')->unsigned()->nullable();
             $table->integer('semestre')->unsigned()->nullable();

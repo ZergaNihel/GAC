@@ -51,10 +51,7 @@ class UserController extends Controller
 
     public function update(Request $request , $id)
     {
-       /* request()->validate([
-        'password' => ['required', 'confirmed', 'min:6'],
-        'password_confirmation' => ['required'],
-    ]);*/
+      
         $membre = User::find($id);
         $e=$membre->id_Etu;
         $etudiant = Etudiant::find($e);
@@ -84,17 +81,7 @@ class UserController extends Controller
          
           $membre->email = $request->input('email');
                 }
-                //$membre->password =Hash::make($request->input('password'));
-               
-               
-               /*  if((Auth::id() == $membre->id))
-                { //dd($membre);
-                $membre->password =Hash::make($request->input('password'));
-                }*/
-                
-       
-
-          
+           
         $membre->save();
          if(Auth::user()->role == '0')
         $etudiant->save();

@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.transitions.css')}}">
+     <!-- summernote CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
     <!-- animate CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
@@ -108,6 +111,9 @@
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <!-- modals CSS
     ============================================ -->
+    <!-- dropzone CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
     <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
@@ -182,23 +188,27 @@
                                                             <h1>Message</h1>
                                                         </div>
                                                         <ul class="message-menu">
-                                                       
-                                                      
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="message-img">
-                                                                        <img src="img/contact/2.jpg" alt="">
+
+                                           
+                        @foreach(Auth::user()->notifications as $notification)
+                                          <li>
+                                               <a href="{{url('/emails/view/'.$notification->data['id_msg'])}}">
+                                  <div class="message-img">
+                                   <img src="{{asset('img/contact/2.jpg')}}" alt="">
                                                                     </div>
-                                                                    <div class="message-content">
-                                                                        <span class="message-date">16 Sept</span>
-                                                                        <h2>Victor Jara</h2>
-                                                                        <p>Please done this project as soon possible.</p>
+                                <div class="message-content">
+   <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
+   </span>
+                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}</h2>
+                                     <p>{!! substr($notification->data['msg'], 0, 41).' ...' !!}</p>
                                                                     </div>
                                                                 </a>
-                                                            </li>
+                                        </li>
+                                        @endforeach
+                                      
                                                         </ul>
                                                         <div class="message-view">
-                                                            <a href="#">View All Messages</a>
+                                                            <a href="{{url('/boite_de_reception')}}">View All Messages</a>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -230,21 +240,56 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                            <img src="img/product/pro4.jpg" alt="" />
-                                                            <span class="admin-name">Prof.Anderson</span>
+                                                            <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                            <span class="admin-name">
+                                                                     @if(Auth::user()->role == '0')
+
+                                                                {{Auth::user()->etudiant->nom}} 
+                                                                {{Auth::user()->etudiant->prenom}}
+                                                                @elseif(Auth::user()->role == '3')
+
+                                                                {{Auth::user()->enseignant->nom}} 
+                                                                {{Auth::user()->enseignant->prenom}}
+                                                              
+                                                              @else
+                                                                  
+                                                                     {{Auth::user()->name}}
+                                                                  
+                                                                  @endif
+                                                            </span>
                                                             <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                         </a>
-                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>Mon profil</a>
+                                                       <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                       
+                                                        <!--nihel-->
+                                                      @if(Auth::user()->role == '0'|| Auth::user()->role == '1' || Auth::user()->role == '2')
+                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
+                                                          </li>
+                                                   @elseif(Auth::user()->role == '3')
+                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
+                                                          </li>
+
+                                                          @endif
+                                                       
+                                                    @if(Auth::user()->role == '0' || Auth::user()->role == '1' || Auth::user()->role == '2')
+                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
                                                         </li>
-                                                        <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>Modifier mon Profile</a>
+                                                    @elseif(Auth::user()->role == '3')
+                                                         <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
                                                         </li>
-                                                    
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Déconnecter</a>
+                                                    @endif
+                                                    <!--fin nihel-->
+                                                        <!--nihel 19/03/2019-->
+                                                        <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>Se déconnecter</a>
+
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
                                                         </li>
+                                                        <!--fin nihel-->
                                                     </ul>
                                                 </li>
-                                            <li class="nav-item nav-setting-open"><a href="{{url('admin/parametre') }}" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-settings"></i></a>
+                                        <li class="nav-item nav-setting-open"><a href="{{url('admin/parametre') }}"   aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-settings"></i></a>
                                           </li>
                                             </ul>
                                         </div>
@@ -413,7 +458,26 @@
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
-
+<!-- counterup JS
+        ============================================ -->
+    <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('js/counterup/waypoints.min.js')}}"></script>
+    <script src="{{asset('js/counterup/counterup-active.js')}}"></script>
+     <!-- summernote JS
+        ============================================ -->
+    <script src="{{asset('js/summernote/summernote.min.js')}}"></script>
+    <script src="{{asset('js/summernote/summernote-active.js')}}"></script>
+    <!-- form validate JS
+        ============================================ -->
+    <script src="{{asset('js/form-validation/jquery.form.min.js')}}"></script>
+    <script src="{{asset('js/form-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('js/form-validation/form-active.js')}}"></script>
+    <!-- multiple email JS
+        ============================================ -->
+    <script src="{{asset('js/multiple-email/multiple-email-active.js')}}"></script>
+    <!-- dropzone JS
+        ============================================ -->
+    <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
 </body>
 
 

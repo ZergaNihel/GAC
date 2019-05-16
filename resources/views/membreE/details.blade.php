@@ -1,5 +1,31 @@
-@extends('layouts.masterEr')
-@section('content')
+@extends('layouts.header')
+
+@section('title','paramètres')
+@section('js')
+
+@endsection
+
+    
+     @section('sidebar')
+  
+     @include('layouts.sidebarAdmin1')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.mobileSidebar1')
+
+     @endsection
+
+    
+                                        @section('search')
+                                        <ul class="breadcome-menu" >
+                                            <li><a href="#">Profil / </a> 
+
+                                            </li>
+                                        </ul>
+                                        @endsection
+                                         @section('content')
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
@@ -7,7 +33,11 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
                             <div class="profile-img">
+                                @if($membreE->photo == null)
                                 <img class="profile-user-img img-responsive img-fluid" src="{{asset($membreE->photo)}}" alt="User profile picture" />
+                                @else
+                                 <img class="profile-user-img img-responsive img-fluid" src="{{asset('img/profile/profil.png')}}" alt="User profile picture" />
+                                 @endif
                             </div>
 
                             <div class="profile-details-hr">

@@ -32,13 +32,12 @@
                                         </li>
                                     <li><a href="events.html">Historique</a></li>
                                    
-                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Boite de réception<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demo" class="collapse dropdown-header-top">
-                                                <li><a href="mailbox.html">Inbox</a>
+                                                <li><a href="{{url('/boite_de_reception')}}">E-mails</a>
                                                 </li>
-                                                <li><a href="mailbox-view.html">View Mail</a>
-                                                </li>
-                                                <li><a href="mailbox-compose.html">Compose Mail</a>
+                                               
+                                                <li><a href="{{url('/form_mail')}}">Composer un e-Mail</a>
                                                 </li>
                                             </ul>
                                         </li>

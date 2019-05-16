@@ -29,9 +29,9 @@ class LoginController extends Controller
     protected $redirectTo = '/justifications';
     //nihel
     protected function redirectTo()
-      { if(Auth::user()){
-        return '/justifications';
-      }
+      { if(Auth::user()->role == '1'){
+        return '/admin/parametre';
+    }
        if(Auth::user()->role == '0'){
           return '/justifications';
        }

@@ -60,7 +60,8 @@ class ModuleController extends Controller
     public function store(Request $request){
     	if($request->semestre == 0){
  $mod= Module::Create(["nom"=>$request->nom,"type"=>$request->type,"code"=>$request->code,"semestre"=>null,"ens_responsable"=>null,]);
-    	}else{
+    	}
+    else{
 
     	$mod= Module::Create(["nom"=>$request->nom,"type"=>$request->type,"code"=>$request->code,"semestre"=>$request->semestre,"ens_responsable"=>$request->enseignant,]);
 

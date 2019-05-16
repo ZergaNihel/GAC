@@ -25,12 +25,16 @@ class RedirectIfAuthenticated
 
 
     protected function redirectTo()
-{ 
+{ //etudiant
     if(Auth::user()->role == '0'){
     return '/justifications';
      }
+     //ensignant
     else if(Auth::user()->role == '3'){
         return '/presence';
+    }
+      else if(Auth::user()->role == '1'){
+        return '/admin/parametre';
     }
 }
 
