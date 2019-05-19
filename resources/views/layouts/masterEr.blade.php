@@ -919,8 +919,8 @@
     <script src="{{asset('js/editable/xediable-active.js')}}"></script>
     <!-- Charts JS
     ============================================ -->
-    <script src="{{asset('js/charts/Chart.js')}}"></script>
-    <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
+    {{-- <script src="{{asset('js/charts/Chart.js')}}"></script>
+    <script src="{{asset('js/charts/rounded-chart.js')}}"></script> --}}
     <!-- tab JS
 		============================================ -->
     <script src="{{asset('js/tab.js')}}"></script>

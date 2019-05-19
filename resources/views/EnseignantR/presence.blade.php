@@ -164,9 +164,12 @@
     // $(document).on("select","#date",function(){
     //     $("#absent1").attr("disabled", false);
     // });
+
     $(document).on("click",".pd-setting-ed",function(){
 
         var btn_id = $(this).attr("id");
+
+        $('.btn-default').attr('disabled',false); 
         
         if(!btn_id.search("present"))
         {
@@ -238,12 +241,11 @@
  </script>
  <script>
      $(document).ready(function () {
-         
+         var l=0;
          $('#date').unbind('change').change(function(){
-            
-            alert("bjr");
+             l++;
              var d=$('#date').val();
-             if(date == null && date == "")
+             if(d == null && d == "")
              {
                  $('.pd-setting-ed').attr('disabled',true);
                  
@@ -252,10 +254,80 @@
                 $('.pd-setting-ed').attr('disabled',false);
                 $('.pd-setting-ed').prop('title','');
              }
+            //  if(l>1)
+            //  {
+            //     $('#hist').append(
+            //         '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">'+
+            //             '<div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">'+
+            //                 '<div class="skill-content-3 analytics-edu analytics-edu2">'+
+            //                     '<div class="skill">'+
+            //                         '<div class="progress progress-bt">'+
+            //                             '<div class="lead-content">'+
+            //                                 '<h3> <a href="#"> '+ d +' </a> </h3>'+
+            //                                 '<p> 0 absent(s)</p>'+
+            //                             '</div>'+
+            //                             '<div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>0%</span> </div>'+
+            //                         '</div>'+
+            //                     '</div>'+
+            //                 '</div>'+
+            //             '</div>'+
+            //         '</div>'
+            //     );
+            //     l=0;
+            //  }
              
          });
     });
  </script>
+
+ <script>
+     $(document).ready(function () {
+        $(document).on("click","#Reinitialiser",function(){
+            var d=$('#date').val();
+            var td_tp=$('#id_td_tp').val();
+            var abs=0;
+            var NbEtu=$('#NbEtu').val();
+
+            $('.pd-setting-ed').each(function() {
+                                        // if( $(this).css("background-color","rgb(0, 128, 0)") )
+                                        if( $(this).css("background-color")=="rgb(0, 128, 0)" ) 
+                                        {
+                                            alert("non");
+                                        }
+                                        else if ( $(this).css("background-color")=="rgb(255, 0, 0)" )
+                                        {
+                                            abs++;
+                                            alert("oui");
+                                        }
+                                        
+                                    });
+            var pourcentage = (abs*100)/NbEtu;
+            $('#hist').append(
+                '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">'+
+                    '<div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">'+
+                        '<div class="skill-content-3 analytics-edu analytics-edu2">'+
+                            '<div class="skill">'+
+                                '<div class="progress progress-bt">'+
+                                    '<div class="lead-content">'+
+                                        '<h3> <a href="{!! asset("historique/'+d+'/'+td_tp+'") !!}"> '+ d +' </a> </h3>'+
+                                        '<p> '+abs+' absent(s)</p>'+
+                                    '</div>'+
+                                    '<div class="progress-bar wow fadeInLeft" data-progress="'+pourcentage+'%" style="width: '+pourcentage+'%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>'+pourcentage+'%</span> </div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'
+            );
+            $('#date').val('');
+            $('.pd-setting-ed').each(function() {
+                                        $( this ).css("background-color", "#F6F8FA");
+                                    });
+            
+        });
+     });
+ </script>
+
  <script>
      //exclure
     $(document).on("click",".exc",function(){
@@ -303,8 +375,8 @@
                                         <div class="sparkline13-hd">
                                             <div class="">
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Section:</b> </span></div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Section:</b> {{$section[0]->nomSec}} </span></div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                         <div class="sparkline16-graph">
                                                             <div class="date-picker-inner">
@@ -316,6 +388,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                                        <button type="button" class="btn btn-default mg-tb-10" id="Reinitialiser" style="height: 40px;" title="Réinitialiser" disabled><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
                                                     </div>
                                                 </div>
                                                 
@@ -359,7 +434,8 @@
                                                 
                                             </div>
                                         </div>
-                                        
+                                        <input type="hidden" id="NbEtu" value="{{$NbEtu}}">
+                                        <input type="hidden" id="id_td_tp" value="{{$id_td_tp}}">
                                         <div class="sparkline13-graph">
                                             <div class="datatable-dashv1-list custom-datatable-overright">
                                                 <div id="toolbar">
@@ -369,7 +445,7 @@
                                                         <option value="selected">Exporter les lignes selectionnées </option>
                                                     </select>
                                                 </div>
-                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
                                                     data-cookie-id-table="saveId" data-show-export="true"  data-toolbar="#toolbar">
                                                     <thead>
                                                         <tr>

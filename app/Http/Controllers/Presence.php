@@ -37,13 +37,11 @@ class Presence extends Controller
                     ->join('td_tps', 'td_tps.id_groupe', '=', 'groupes.idG')
                     ->where('id_Ens','=',Auth::user()->enseignant->idEns)
                     ->get();
-        $etudiants=NULL;
         
         return view('EnseignantR.popup')->with(
             ['modules'=> $modules ,
             'seances'=> $seances ,
-            'groupes'=> $groupes,
-            'etudiants' => $etudiants
+            'groupes'=> $groupes
              ] 
         );
     }
@@ -58,8 +56,6 @@ class Presence extends Controller
         $idgroupe = $request->input('groupe');
         $idmodule = $request->input('module');
         $idseance = $request->input('seance');
-
-        //$section = Section::where()
 
         // popup result
         $seance = Seance::find($request->input('seance'));
@@ -182,6 +178,17 @@ class Presence extends Controller
                     ->whereNotIn('idEtu',$etuExclus)
                     ->get();
 
+        $NbEtu = DB::table('etudiants')
+                    ->where('idG','=',$idgroupe)
+                    ->whereNotIn('idEtu',$etuExclus)
+                    ->count();
+        
+        $section= DB::table('groupe_etus')
+                    ->join('sections', 'groupe_etus.sec_groupe', '=', 'sections.idSec')
+                    ->where('groupe','=',$groupe->idG) //////////////sem
+                    ->take(1)
+                    ->get();
+
         //historique
         $historiques = DB::table('absences')
                     ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
@@ -239,6 +246,7 @@ class Presence extends Controller
             'seances'=> $seances ,
             'groupes'=> $groupes,
             'etudiants' => $etudiants,
+            'NbEtu' => $NbEtu,
             'nomgroupe' => $nomgroupe,
             'justifications' => $justifiations,
             'exclus' => $exclus , 
@@ -246,7 +254,8 @@ class Presence extends Controller
             'historiques' => $historiques,
             'absents' => $p,
             'pourcentage' => $pourcentage,
-            'id_td_tp' => $id_td_tp->id
+            'id_td_tp' => $id_td_tp->id,
+            'section' => $section
             ]);
 
     }
