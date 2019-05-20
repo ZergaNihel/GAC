@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title','boite de réception')
+@section('title','messages envoy')
 @section('js')
 
 @endsection
@@ -54,23 +54,7 @@
                                 <div class="table-responsive ib-tb">
                                     <table class="table table-hover table-mailbox">
                                         <tbody>
-                                       @foreach(Auth::user()->unreadNotifications as $notification)
-                                            <tr class="active unread">
-                                                <td class="">
-                                                    <div class="checkbox">
-                                                        <input type="checkbox">
-                                                        <label></label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">{{ App\User::find($notification->data['id_emt'])->name}}</a> <span class="label label-danger">Nouveau</span></td>
-                                                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                    {{$notification->data['sujet']}}
-                                                </a></td>
-                                                <td><i class="fa fa-paperclip"></td>
-                                                <td class="text-right mail-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</td>
-                                            </tr>
-                                            @endforeach
-                                            @foreach(Auth::user()->readNotifications as $notification)
+                  @foreach($emails as $e)
                                             <tr class="unread">
                                                 <td class="">
                                                     <div class="checkbox checkbox-single checkbox-success">
@@ -78,15 +62,16 @@
                                                         <label></label>
                                                     </div>
                                                 </td>
-                                             <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">{{ App\User::find($notification->data['id_emt'])->name}}</a> </td>
-                                                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                    {{$notification->data['sujet']}}
+                                             <td><a href="{{url('/emails/view/'.$e->id.'/')}}">{{ $e->Rcp->name}}</a> </td>
+                                                <td><a href="{{url('/emails/view/')}}">
+                                                    {{ $e->sujet}}
                                                 </a></td>
-                                                <td>@if($notification->data['nbr_att'] >0)
+                                                <td>
+
                                                     <i class="fa fa-paperclip">
-                                                        @endif
+                                                      
                                                     </td>
-                                                <td class="text-right mail-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</td>
+                                                <td class="text-right mail-date">{{\Carbon\Carbon::parse($e->created_at)->toFormattedDateString()}}</td>
                                             </tr>
                                       
                                          @endforeach
@@ -98,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="panel-footer ib-ml-ft">
-                                <i class="fa fa-eye">  </i> {{ Auth::user()->unreadNotifications->count() }} unread
+                                
                             </div>
                         </div>
                     </div>

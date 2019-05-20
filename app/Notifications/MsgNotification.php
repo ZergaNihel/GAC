@@ -52,7 +52,8 @@ class MsgNotification extends Notification
             'id_msg' => $this->details['id_msg'],
             'msg' => $this->details['msg'],
             'sujet' => $this->details['sujet'],
-            'id_emt' => $this->details['id_emt']
+            'id_emt' => $this->details['id_emt'],
+            'nbr_att' => $this->details['nbr_att'],
 
         ];
     }

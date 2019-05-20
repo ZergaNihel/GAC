@@ -1,11 +1,17 @@
 @extends('layouts.header')
 
 @section('title','comoposer un e-mail')
+
 @section('js')
-<script>
-        $(document).ready(function() {
-            $('.summernote').summernote();
-        });
+
+<script >
+  $(document).ready(function () {
+    $('.summernote').summernote();
+    $("input[type='file']").on("change", function(){  
+    var numFiles = $(this).get(0).files.length
+    $("#prepend-big-btn").val(numFiles+" fichiers");
+});
+  });
 </script>
 @endsection
 
@@ -34,57 +40,7 @@
 <div class="mailbox-compose-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="hpanel shadow-inner responsive-mg-b-30">
-                            <div class="panel-body">
-                                <a href="mailbox_compose.html" class="btn btn-success compose-btn btn-block m-b-md">Compose</a>
-                                <ul class="mailbox-list">
-                                    <li>
-                                        <a href="#">
-                                                <span class="pull-right">12</span>
-                                                <i class="fa fa-envelope"></i> Inbox
-                                            </a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-paper-plane"></i> Sent</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-pencil"></i> Draft</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-trash"></i> Trash</a>
-                                    </li>
-                                </ul>
-                                <hr>
-                                <ul class="mailbox-list">
-                                    <li>
-                                        <a href="#"><i class="fa fa-plane text-danger"></i> Travel</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-bar-chart text-warning"></i> Finance</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-users text-info"></i> Social</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-tag text-success"></i> Promos</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-flag text-primary"></i> Updates</a>
-                                    </li>
-                                </ul>
-                                <hr>
-                                <ul class="mailbox-list">
-                                    <li>
-                                        <a href="#"><i class="fa fa-gears"></i> Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-info-circle"></i> Support</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+         @include('layouts.composer')
                     <div class="col-md-9 col-md-9 col-sm-9 col-xs-12">
                         <div class="hpanel email-compose">
                             <div class="panel-heading hbuilt">
@@ -92,9 +48,24 @@
                                     New message
                                 </div>
                             </div>
+                                   @if ($errors->any())
+     <input type="hidden" id="errImport" value="1" >
+    <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert">
+      <ul >
+            @foreach ($errors->all() as $error)
+               
+     <li>  <strong>Erreur!</strong> {{ $error }}. </li> 
+        
+         @endforeach
+            </ul>
+          </div>
+          </div>
+     
+@endif
                             <div class="panel-heading hbuilt">
                                 <div class="p-xs">
-                 <form method="post" class="form-horizontal" action="{{url('send_email')}}">
+                 <form method="post" class="form-horizontal" action="{{url('send_email')}}" enctype="multipart/form-data">
                     {!! csrf_field() !!} 
                 <div class="form-group-inner">
                     <label class="col-lg-1 control-label text-left">A:</label>
@@ -128,21 +99,60 @@
                             <div class="panel-body no-padding">
                     <textarea name="msg" class="summernote"></textarea>
                             </div>
-                  
-                            <div class="panel-footer">
+         <br>
+              <div id="dropzone1" class="multi-uploader-cs">
+                                <div  class="dropzone dropzone-custom "   >
+                    <div class="row">
+                       <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                  <div class="file-upload-inner ts-forms">
+                                                            <div class="input prepend-big-btn">
+                                                            
+                                                                <div class="file-button" >
+                                                  <i class="fa fa-paperclip"> </i>
+                                                                    Sélectionner
+  <input type="file" name ="files[]" multiple>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="file-upload-inner ts-forms">
+                                                            <div class="input prepend-big-btn">
+                                                               <label class="icon-right" for="prepend-big-btn">
+                                                                        <i class="fa fa-download"></i>
+                                                                    </label>
+                                                                <input type="text" id="prepend-big-btn" placeholder="no file selected" >
+                                                            </div>
+                                                        </div>  
+                           </div>
+                         </div>
+          </div>
+        </div>
+  <br>
+                               <div class="panel-footer">
                                 <div class="pull-right">
                                     <div class="btn-group active-hook">
-                                        <button class="btn btn-default"><i class="fa fa-edit"></i> Save</button>
-                                        <button class="btn btn-default"><i class="fa fa-trash"></i> Discard</button>
+                                        <button class="btn btn-default"><i class="fa fa-edit"></i>Enregistrer</button>
+                                    
                                     </div>
                                 </div>
                                 <button class="btn btn-primary ft-compse" type="submit">Send email</button>
+                                 </div>
                                  </form>
-                                <div class="btn-group active-hook mail-btn-sd">
-                                    <button class="btn btn-default"><i class="fa fa-paperclip"></i> </button>
-                                    <button class="btn btn-default"><i class="fa fa-image"></i> </button>
-                                </div>
-                            </div>
+
+                              
+
+      
+  
+      
+     
+       
+      
+  
+
+                           
                         </div>
                     </div>
                 </div>

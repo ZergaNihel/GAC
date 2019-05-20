@@ -116,6 +116,7 @@
     <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
     <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
+ 
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 @yield('js') 
 </head>
@@ -182,7 +183,10 @@
                                       <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                      
                                                 <li class="nav-item dropdown">
-                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i><span class="indicator-ms"></span></a>
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
+                                                        <span class="indicator-ms"></span>
+                                                    @endif
+                                                </a>
                                                     <div role="menu" class="author-message-top dropdown-menu animated zoomIn">
                                                         <div class="message-single-top">
                                                             <h1>Message</h1>
@@ -190,9 +194,27 @@
                                                         <ul class="message-menu">
 
                                            
-                        @foreach(Auth::user()->notifications as $notification)
+                        @foreach(Auth::user()->unreadNotifications as $notification)
+                                          <li style="background-color:#f5f5f5;">
+                <a 
+            href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                  <div class="message-img">
+                                   <img src="{{asset('img/contact/2.jpg')}}" alt="">
+                                                                    </div>
+                                <div class="message-content">
+   <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
+   </span>
+                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}  <span class="label label-danger"> Nouveau</span></h2>
+
+                                     <p>{{$notification->data['sujet']}}</p>
+                                                                    </div>
+                                                                </a>
+                                        </li>
+                                        @endforeach
+                 @foreach(Auth::user()->readNotifications->take(1) as $notification)
                                           <li>
-                                               <a href="{{url('/emails/view/'.$notification->data['id_msg'])}}">
+                <a 
+            href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                   <div class="message-img">
                                    <img src="{{asset('img/contact/2.jpg')}}" alt="">
                                                                     </div>
@@ -200,7 +222,7 @@
    <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
    </span>
                         <h2>{{ App\User::find($notification->data['id_emt'])->name}}</h2>
-                                     <p>{!! substr($notification->data['msg'], 0, 41).' ...' !!}</p>
+                                     <p>{{$notification->data['sujet']}}</p>
                                                                     </div>
                                                                 </a>
                                         </li>

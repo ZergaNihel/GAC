@@ -54,7 +54,7 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Inbox" href="{{url('/boite_de_reception')}}"><span class="mini-sub-pro">E-mails</span></a></li>
                                 
-                                <li><a title="Compose Mail" href="{{url('/form_mail')}}"><span class="mini-sub-pro">Composer un e-mail</span></a></li>
+                                <li><a title="Compose Mail" href="{{url('/form_mail')}}"><span class="mini-sub-pro">Envoyer un e-mail</span></a></li>
                             </ul>
                         </li>
                 

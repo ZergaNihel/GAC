@@ -21,9 +21,13 @@ Route::get('/', function () {
  Route::get('error_500', 'SemestreController@index');
  //------------------ MailBoxe ----------------------------
 Route::get('/boite_de_reception', 'MailBoxController@index') ;
+Route::get('/envoye', 'MailBoxController@envoye') ;
+Route::get('/brouillons', 'MailBoxController@brouillons') ;
+Route::get('/corbeille', 'MailBoxController@corbeille') ;
 Route::get('/form_mail', 'MailBoxController@composer') ;
-Route::get('/emails/view/{id}', 'MailBoxController@detail') ;
+Route::get('/emails/view/{id}/{id_notif}', 'MailBoxController@detail') ;
 Route::post('send_email', 'MailBoxController@send');
+Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload');
  //------------------ SemestreController ----------------------------
 
  Route::get('Semestres/dashboard/{id}','SemestreController@dash');
