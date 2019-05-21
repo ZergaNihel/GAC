@@ -168,8 +168,7 @@
     $(document).on("click",".pd-setting-ed",function(){
 
         var btn_id = $(this).attr("id");
-
-        $('.btn-default').attr('disabled',false); 
+        var NbEtu=$('#NbEtu').val();
         
         if(!btn_id.search("present"))
         {
@@ -184,6 +183,10 @@
                 data:data,
                 url:'/present',
                 success:function(data){
+                    if(data == NbEtu)
+                    {
+                        $('.btn-default').attr('disabled',false); 
+                    }
                 }
             });
         }
@@ -191,6 +194,7 @@
         {
             var date=$('#date').val();
             var i=btn_id.substring(6,btn_id.length);
+            
             $('#datep'+i).val(date);
             $(this).css("background-color", "red");
             $('#present'+i).css("background-color", "#F6F8FA");
@@ -200,6 +204,10 @@
                 data:data,
                 url:'/absent',
                 success:function(data){
+                    if(data == NbEtu)
+                    {
+                        $('.btn-default').attr('disabled',false); 
+                    }
                 }
             });
         }
@@ -207,7 +215,7 @@
 
     </script>
 
-    <script>
+ <script>
     // JUSTIFICATIONS
     $(document).on("click",".btn-success",function(){
      var btn_id = $(this).attr("id");
@@ -239,11 +247,13 @@
 
     });
  </script>
+
  <script>
+     //date 
      $(document).ready(function () {
-         var l=0;
+        
          $('#date').unbind('change').change(function(){
-             l++;
+             
              var d=$('#date').val();
              if(d == null && d == "")
              {
@@ -254,33 +264,13 @@
                 $('.pd-setting-ed').attr('disabled',false);
                 $('.pd-setting-ed').prop('title','');
              }
-            //  if(l>1)
-            //  {
-            //     $('#hist').append(
-            //         '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">'+
-            //             '<div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">'+
-            //                 '<div class="skill-content-3 analytics-edu analytics-edu2">'+
-            //                     '<div class="skill">'+
-            //                         '<div class="progress progress-bt">'+
-            //                             '<div class="lead-content">'+
-            //                                 '<h3> <a href="#"> '+ d +' </a> </h3>'+
-            //                                 '<p> 0 absent(s)</p>'+
-            //                             '</div>'+
-            //                             '<div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>0%</span> </div>'+
-            //                         '</div>'+
-            //                     '</div>'+
-            //                 '</div>'+
-            //             '</div>'+
-            //         '</div>'
-            //     );
-            //     l=0;
-            //  }
              
          });
     });
  </script>
 
  <script>
+     //Reinitialiser
      $(document).ready(function () {
         $(document).on("click","#Reinitialiser",function(){
             var d=$('#date').val();
@@ -289,17 +279,13 @@
             var NbEtu=$('#NbEtu').val();
 
             $('.pd-setting-ed').each(function() {
-                                        // if( $(this).css("background-color","rgb(0, 128, 0)") )
                                         if( $(this).css("background-color")=="rgb(0, 128, 0)" ) 
                                         {
-                                            alert("non");
                                         }
                                         else if ( $(this).css("background-color")=="rgb(255, 0, 0)" )
                                         {
                                             abs++;
-                                            alert("oui");
                                         }
-                                        
                                     });
             var pourcentage = (abs*100)/NbEtu;
             $('#hist').append(
@@ -323,6 +309,7 @@
             $('.pd-setting-ed').each(function() {
                                         $( this ).css("background-color", "#F6F8FA");
                                     });
+            $('.btn-default').attr('disabled',true); 
             
         });
      });

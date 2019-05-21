@@ -268,10 +268,19 @@ class Presence extends Controller
                 ->where('id_td_tp','=',$id)
                 ->where('date','=',$date)
                 ->get();
+        $td_tp = TDTP::find($id);
+        $section= DB::table('groupe_etus')
+                    ->join('sections', 'groupe_etus.sec_groupe', '=', 'sections.idSec')
+                    ->where('groupe','=',$td_tp->id_groupe) //////////////sem
+                    ->get();
+        $seance = Seance::find($td_tp->id_seance);
 
         return view('EnseignantR.historique',
         [
             'abs'=> $abs, 
+            'td_tp' => $td_tp,
+            'section' => $section,
+            'seance'=> $seance 
         ] 
     );
     } 
@@ -310,7 +319,13 @@ class Presence extends Controller
         }
         
         $present->save();
-        return response()->json($present);
+
+        $nbr = DB::table('absences')
+                ->where('date','=',$request->input('datep'))
+                ->where('id_td_tp','=',$a)
+                ->count();
+
+        return response()->json($nbr);
     }
 
     public function absent(Request $request)
@@ -346,7 +361,13 @@ class Presence extends Controller
             $present->date=$request->input('datep');
         }
         $present->save();
-        return response()->json($present);
+
+        $nbr = DB::table('absences')
+                ->where('date','=',$request->input('datep'))
+                ->where('id_td_tp','=',$a)
+                ->count();
+
+        return response()->json($nbr);
     }
 
     public function accepterJ(Request $request)
