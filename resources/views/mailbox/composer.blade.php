@@ -11,11 +11,26 @@
     var numFiles = $(this).get(0).files.length
     $("#prepend-big-btn").val(numFiles+" fichiers");
 });
+
+          $(document).on('click','#save',function(){
+       // alert("hhh");
+        $.ajax({
+type: "POST",
+data: $('#formComposer').serialize(),                             // to submit fields at once
+url: "{{url('/save_mail')}}",                        // use the form's action url
+success: function(data) {
+ $("#alertSuc").css("display","");  
+   $("html, body").animate({
+        scrollTop: 0
+    },10); 
+}
+});
+       });
   });
 </script>
 @endsection
 
-    
+      @if(Auth::user()->role == 1)
      @section('sidebar')
   
      @include('layouts.sidebarAdmin1')
@@ -26,6 +41,20 @@
      @include('layouts.mobileSidebar1')
 
      @endsection
+     @endif
+     @if(Auth::user()->role == 0)
+     @section('sidebar')
+  
+     @include('layouts.sidebarEtudiant')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.sidebarEtudiantMobile')
+
+     @endsection
+     @endif
+
 
     
                                         @section('search')
@@ -45,9 +74,19 @@
                         <div class="hpanel email-compose">
                             <div class="panel-heading hbuilt">
                                 <div class="p-xs h4">
-                                    New message
+                                   Nouveau message
                                 </div>
                             </div>
+ <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc" style="display: none">
+                               <div class="alert alert-success alert-success-style1 alert-st-bg alert-st-bg11" style="">
+                                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-sc-cl" aria-hidden="true">&times;</span>
+                  </button>
+                               
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Succés!</strong> le message a été bien enregistrer (voir <a href="{{url('/brouillons')}}">Brouillon </a>).</p>
+                            </div>
+                          </div>
+
                                    @if ($errors->any())
      <input type="hidden" id="errImport" value="1" >
     <div class="alert-wrap1 shadow-inner wrap-alert-b">
@@ -65,7 +104,7 @@
 @endif
                             <div class="panel-heading hbuilt">
                                 <div class="p-xs">
-                 <form method="post" class="form-horizontal" action="{{url('send_email')}}" enctype="multipart/form-data">
+                 <form method="post" class="form-horizontal" action="{{url('send_email')}}" enctype="multipart/form-data" id="formComposer">
                     {!! csrf_field() !!} 
                 <div class="form-group-inner">
                     <label class="col-lg-1 control-label text-left">A:</label>
@@ -132,15 +171,17 @@
         </div>
   <br>
                                <div class="panel-footer">
+                                 <button class="btn btn-primary ft-compse" type="submit">Send email</button>
+                                  </form>
                                 <div class="pull-right">
                                     <div class="btn-group active-hook">
-                                        <button class="btn btn-default"><i class="fa fa-edit"></i>Enregistrer</button>
+                                        <button class="btn btn-default" type="button" id="save"><i class="fa fa-edit"></i>Enregistrer</button>
                                     
                                     </div>
                                 </div>
-                                <button class="btn btn-primary ft-compse" type="submit">Send email</button>
+                               
                                  </div>
-                                 </form>
+                                
 
                               
 

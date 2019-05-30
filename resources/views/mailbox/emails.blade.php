@@ -1,11 +1,19 @@
 @extends('layouts.header')
-
-@section('title','messages envoy')
+       @if($b == 1)
+                                          @section('title','Brouillon')
+                                        @endif
+                                          @if($b == 0)
+                                          @section('title','Messages envoyés') 
+                                         @endif
+                                        @if($b == 2)
+                                      @section('title','Corbeille')
+                                        @endif
+@section('title','Messages envoyés')
 @section('js')
 
 @endsection
 
-    
+        @if(Auth::user()->role == 1)
      @section('sidebar')
   
      @include('layouts.sidebarAdmin1')
@@ -16,11 +24,32 @@
      @include('layouts.mobileSidebar1')
 
      @endsection
+     @endif
+     @if(Auth::user()->role == 0)
+     @section('sidebar')
+  
+     @include('layouts.sidebarEtudiant')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.sidebarEtudiantMobile')
+
+     @endsection
+     @endif
 
     
                                         @section('search')
                                         <ul class="breadcome-menu" >
-                                            <li><a href="#">boite de réception / </a> 
+                                         @if($b == 1)
+                                            <li><a href="{{url('/brouillons')}}">/Brouillon </a> 
+                                        @endif
+                                          @if($b == 0)
+                                           <li><a href="{{url('/envoye')}}">/Messages envoyés </a> 
+                                         @endif
+                                        @if($b == 2)
+                                        <li><a href="{{url('/corbeille')}}">/Corbeille  </a> 
+                                        @endif
 
                                             </li>
                                         </ul>
@@ -62,8 +91,17 @@
                                                         <label></label>
                                                     </div>
                                                 </td>
-                                             <td><a href="{{url('/emails/view/'.$e->id.'/')}}">{{ $e->Rcp->name}}</a> </td>
-                                                <td><a href="{{url('/emails/view/')}}">
+                                             <td>
+                                                @if ($e->Rcp)
+                                                <a href="{{url('/emails/view/'.$e->id.'/0')}}">
+                                                {{ $e->Rcp->name}}</a>
+                                                @else
+
+                                <a href="{{url('/emails/view/'.$e->id.'/0')}}">
+                                                Aucun</a>
+                                                @endif
+                                                </td>
+                                                <td><a href="{{url('/emails/view/'.$e->id.'/0')}}">
                                                     {{ $e->sujet}}
                                                 </a></td>
                                                 <td>

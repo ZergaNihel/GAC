@@ -155,7 +155,7 @@
                                                          <div class="form-group">
                                                           
                                                              
-                                                            <input  name="password" " type="password" class="form-control" placeholder="Password" >
+                                                            <input  name="password" type="password" class="form-control" placeholder="Password" >
                                                             @if($errors->has('password'))
                                                   <p class="help is-danger">{{ $errors->first('password') }}</p>
                                                      @endif

@@ -131,7 +131,7 @@ $.ajax({
                 </div>
 
 
-                  <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+  <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-close-area modal-close-df">
@@ -247,7 +247,7 @@ $.ajax({
                                 @foreach(App\Groupe_etu::where('sem_groupe','=',$semestre->idSem)->where('sec_groupe','=',$s->sec_groupe)->select('groupe')->get() as $grp)
                            <div class="panel panel-default" id="panel{{$grp->groupe1->idG}}">      
                                     <div class="panel-heading accordion-head">
-            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}" > Groupe {{$grp->groupe1->nomG}}  </a>
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}" > Groupe {{ $grp->groupe1->nomG }}  </a>
   <a class="zoomInDown mg-t" href="#" data-ids1="{{$s->section->idSec}}" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#edit"><i class="fa fa-edit pull-right"> </i> </a>
    
 <a href="{{url('groupe/detail/'.$grp->groupe1->idG.'/'.$semestre->idSem)}}"> <i class="fa fa-eye pull-right"> </i></a>

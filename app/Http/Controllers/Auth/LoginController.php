@@ -26,14 +26,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/justifications';
+    //protected $redirectTo = '/justifications';
     //nihel
     protected function redirectTo()
       { if(Auth::user()->role == '1'){
         return '/admin/parametre';
     }
        if(Auth::user()->role == '0'){
-          return '/justifications';
+          return '/absences_Etudiant';
        }
        else if(Auth::user()->role == '3'){
           return '/presence';

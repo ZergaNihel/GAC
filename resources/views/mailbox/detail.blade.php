@@ -6,6 +6,7 @@
 @endsection
 
     
+     @if(Auth::user()->role == 1)
      @section('sidebar')
   
      @include('layouts.sidebarAdmin1')
@@ -16,11 +17,25 @@
      @include('layouts.mobileSidebar1')
 
      @endsection
+     @endif
+     @if(Auth::user()->role == 0)
+     @section('sidebar')
+  
+     @include('layouts.sidebarEtudiant')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.sidebarEtudiantMobile')
+
+     @endsection
+     @endif
+
 
     
                                         @section('search')
                                         <ul class="breadcome-menu" >
-                                            <li><a href="#">boite de réception / </a> 
+                                            <li><a href="#">Email/détails </a> 
 
                                             </li>
                                         </ul>
@@ -35,9 +50,7 @@
                             <div class="panel-heading hbuilt">
 
                                 <div class="p-xs h4">
-                                    <small class="pull-right view-hd-ml">
-                                            08:26 PM (16 hours ago)
-                                        </small> Email view
+                                   Email détails
 
                                 </div>
                             </div>
@@ -45,20 +58,34 @@
                                 <div class="p-m custom-address-mailbox">
 
                                     <div>
-                                        <span class="font-extra-bold">Subject: </span>  {{  $message->sujet   }}
+                                        <span class="font-extra-bold">Subject: </span>
+                       @if($message->sujet)  {{  $message->sujet   }} @else Aucun objet
+                                         @endif
                                     </div>
                                     <div>
+
                                         <span class="font-extra-bold">De: </span>
-                                        <a href="">{{$message->Rcp->name}}</a>
+                                          @if ($message->Rcp)
+                                                <a href="{{url('')}}">
+                                                {{ $message->Rcp->name}}</a>
+                                                @else
+
+                              
+                                                Aucun Emetteur
+                                                @endif
                                     </div>
                                     <div>
-                                        <span class="font-extra-bold">Date: </span> {{$message->created_at->format('d/m/Y')}}
+                                        <span class="font-extra-bold">Date: </span> {{\Carbon\Carbon::parse($message->created_at)->diffForHumans()}}
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-body panel-csm">
                                 <div>
-                          {!!  $message->msg    !!}
+                              @if ($message->Rcp)
+                                 {!!  $message->msg    !!}
+                                   @else
+                       Aucun message
+                          @endif
                                 </div>
                           
                             </div>
@@ -158,7 +185,7 @@
                                             <br>
                                         </div>
                                          @endif
-                                          @endforeach
+                                         @endforeach
                                     </div>
                              
                                 </div>
@@ -167,11 +194,15 @@
                             <div class="panel-footer text-right ft-pn">
                                 <div class="btn-group active-hook">
                                     <button class="btn btn-default"><i class="fa fa-reply"></i> Répondre</button>
-                                    <button class="btn btn-default"> <a href="/boite_de_reception"><i class="fa fa-arrow-right"></i> Précédent</a></button>
+                                    <a class="btn btn-default" href="{{ url()->previous() }}"><i class="fa fa-arrow-right"></i> Précédent</a>
                                     <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Imprimer</button>
-                                    <button class="btn btn-default"><i class="fa fa-trash-o"></i> Supprimer</button>
+                                    @if($message->delete == 0 )
+                                    <a class="btn btn-default" href="{{url('/delete_msg/'.$message->id.'/'.$id_notif)}}"><i class="fa fa-trash-o"></i>  Supprimer</a>
+                                    @endif
+                                   
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

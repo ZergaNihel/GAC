@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //Schema::defaultStringLength(191);
          Carbon::setlocale('fr');
-         Carbon::yesterday()-> diffForHumans();
+         Carbon::yesterday()->diffForHumans();
     }
 
     /**

@@ -4,6 +4,7 @@
      <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
+    @yield('meta')
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -153,30 +154,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                        <div class="header-top-menu tabl-d-n">
-                                            <ul class="nav navbar-nav mai-top-nav">
-                                                <li class="nav-item"><a href="{{url('
-                                                    Semestres/index')}}" class="nav-link">Acceuil</a>
-                                                </li>
-                                                <li class="nav-item"><a href="{{url('modules/index')}}" class="nav-link">Modules</a>
-                                                </li>
-                                                           <li class="nav-item dropdown res-dis-nn">
-                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">Semestres <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span></a>
-                                                    <div role="menu" class="dropdown-menu animated zoomIn">
-                                                        @foreach($sem1 as $s)
-                                                        <a href="{{url('Semestres/dashboard/'.$s->idSem)}}" class="dropdown-item">Semestre 1</a>
-                                                         @endforeach
-                                                      @foreach($sem2 as $s)
-                                                        <a href="{{url('Semestres/dashboard/'.$s->idSem)}}" class="dropdown-item">Semestre 2</a>
-                                                         @endforeach
-                                                    </div>
-                                                </li>
-                                                <li class="nav-item"><a href="{{url('Enseignants/index')}}" class="nav-link">Enseignants</a>
-                                                </li>
-                                              <li class="nav-item"><a href="#" class="nav-link">Historique</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                   @if(Auth::user()->role == '1')
+                                   @include('layouts.enTete')
+                                   @endif
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
@@ -204,9 +184,24 @@
                                 <div class="message-content">
    <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
    </span>
-                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}  <span class="label label-danger"> Nouveau</span></h2>
+   @if( App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role == 2 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 0 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 3)
+                        <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+   @endif
 
-                                     <p>{{$notification->data['sujet']}}</p>
+
+                     
+                          <span class="label label-danger"> Nouveau</span></h2>
+                                    @if($notification->data['sujet'])
+                                     <p>{{ $notification->data['sujet'] }}</p>
+                                     @else
+                                      <p>Aucun Sujet</p>
+                                     @endif
                                                                     </div>
                                                                 </a>
                                         </li>
@@ -221,8 +216,24 @@
                                 <div class="message-content">
    <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
    </span>
-                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}</h2>
-                                     <p>{{$notification->data['sujet']}}</p>
+                     @if( App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role == 2 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 0 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 3)
+                        <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+   @endif
+
+
+                     
+                          <span class="label label-danger"> Nouveau</span></h2>
+                                    @if($notification->data['sujet'])
+                                     <p>{{ $notification->data['sujet'] }}</p>
+                                     @else
+                                      <p>Aucun Sujet</p>
+                                     @endif
                                                                     </div>
                                                                 </a>
                                         </li>
@@ -264,7 +275,7 @@
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                             <img src="{{ asset(Auth::user()->photo) }} " alt="" />
                                                             <span class="admin-name">
-                                                                     @if(Auth::user()->role == '0')
+                                                      @if(Auth::user()->role == '0')
 
                                                                 {{Auth::user()->etudiant->nom}} 
                                                                 {{Auth::user()->etudiant->prenom}}

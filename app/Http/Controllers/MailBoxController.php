@@ -13,6 +13,7 @@ use App\Semestre;
 use App\User;
 use App\Media;
 use Notification;
+use DB;
 use App\Notifications\MsgNotification;
 class MailBoxController extends Controller
 {
@@ -29,36 +30,63 @@ class MailBoxController extends Controller
     return view('mailbox.index',compact('sem1','sem2'));
     }
    function  envoye(){
-   	$emails = Message::where('id_emt','=',Auth::user()->id)->get();
+    $b=0;
+   	$emails = Message::where('id_emt','=',Auth::user()->id)->where('save','=',0)->where('delete','=',0)->get();
    	$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   
     
-     return view('mailbox.emails',compact('sem1','sem2','emails'));
+     return view('mailbox.emails',compact('sem1','sem2','emails','b'));
    }
     function  brouillons(){
-    $emails = Message::where('id_emt','=',Auth::user()->id)->where('id_rcpt','=',NULL)->get();
+         $b=1;
+    $emails = Message::where('id_emt','=',Auth::user()->id)->where('save','=',1)->where('delete','=',0)->get();
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   
-    
-     return view('mailbox.emails',compact('sem1','sem2','emails'));
+
+     return view('mailbox.emails',compact('sem1','sem2','emails','b'));
     }
      function  corbeille(){
+         $b=2;
    $emails = Message::where('id_emt','=',Auth::user()->id)->where('delete','=',1)->get();
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   
     
-    return view('mailbox.emails',compact('sem1','sem2','emails'));
+    return view('mailbox.emails',compact('sem1','sem2','emails','b'));
      }
         function  enregistrer(Request $request){
-   $emails = Message::where('id_emt','=',Auth::user()->id)->where('delete','=',1)->get();
-    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+   $message=Message::create(['msg'=>$request->msg,'sujet'=>$request->sujet,'id_emt'=>Auth::user()->id,'id_rcpt'=>$request->email,'save'=>1]);
+
+            if($request->hasFile('files')){
+        $nbr=0;     
+  foreach ($request->file('files') as $file) {
+    //dd($file->getClientOriginalExtension());
+    $ex = $file->getClientOriginalExtension();
+    $name = $file->getClientOriginalName();
   
+           $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('/uploads/attachements'),$file_name);
+$media = Media::create(['att'=>$file_name,'ex'=>$ex,'file_name'=>$name,'id_msg'=> $message->id,]);
+         $nbr++;  
+        }
+           
+        }
     
-    return view('mailbox.emails',compact('sem1','sem2','emails'));
+    return response()->json(["success"=>"heloo"]);
+     }
+
+    function  delete($id,$id_notif){
+   $message=Message::find($id);
+    $message->delete = 1;
+    $message->save();
+    DB::table('notifications')
+    ->where('id', $id_notif)
+    ->delete();
+    //Auth::user()->notifications
+ 
+    return redirect('/boite_de_reception');
      }
 
      function composer(){
@@ -86,9 +114,9 @@ class MailBoxController extends Controller
         }
     	$user = User::find($request->email);
     $message=Message::create(['msg'=>$request->msg,'sujet'=>$request->sujet,'id_emt'=>Auth::user()->id,'id_rcpt'=>$request->email,]);
-
+   $nbr=0;   
             if($request->hasFile('files')){
-        $nbr=0;    	
+      	
   foreach ($request->file('files') as $file) {
   	//dd($file->getClientOriginalExtension());
   	$ex = $file->getClientOriginalExtension();
@@ -124,7 +152,7 @@ Auth::user()->unreadNotifications->where('id', $id_notif)->markAsRead();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   
     
-    return view('mailbox.detail',compact('sem1','sem2','message','medias','nbr'));
+    return view('mailbox.detail',compact('sem1','sem2','message','medias','nbr','id_notif'));
     }
  
 

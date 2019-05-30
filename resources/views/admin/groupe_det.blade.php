@@ -1,11 +1,34 @@
 @extends('layouts.header')
 
 @section('title','groupes')
+
 @section('js')
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">  
+<link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script >
-    $(document).ready(function(){
+
+$(document).ready(function(){
+
+     $('#laravel_datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('ajax-crud-list') }}",
+        columns:[
+            { data: "idEtu" , name: "idEtu" },
+            { data: "nom" ,  name: "nom" },
+            { data: "prenom" ,  name: "prenom" },
+            { data: "matricule" ,  name: "matricule"},
+            { data: "date_naissance" ,  name: "date_naissance" },
+            { data: "type" ,  name: "type" },
+            
+        ]
+     });
        
-alert("heloo");
+
+
 $(document).on('click','#newStud',function(){
     alert("hii");
     if($("#nom").val() === "" || $("#prenom").val() === "" || $("#matricule").val() === "" ||  $("#birthday").val() === "" || ( !$("#n").is(':checked') && !$("#r").is(':checked') &&  !$("#e").is(':checked')) ){
@@ -91,7 +114,7 @@ ligne = "<tr><td>"+ $("#var").val()+"</td><td>"+data.etud.nom+"</td><td>"+data.e
                                     </div>
                                     <div class="add-product">
                                                 <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1"><i class="fa fa-plus"> </i> Nouveau étudiant</a>
-                                            </div>
+                                     </div>
                                             <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -307,6 +330,30 @@ document.getElementById('module').style.display = "";
                                         </tbody>
                                     </table>
                                     <input type="hidden" id="var" value="{{$var}}">
+
+
+
+                                    <br>
+
+
+    
+
+ 
+<table class="table table-bordered table-striped" id="laravel_datatable">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Nom</th>
+         <th>Prenom</th>
+         <th>matricule</th>
+         <th>date de naissance</th>
+         <th>Type</th>
+      </tr>
+   </thead>
+</table>
+
+ 
+
                                 </div>
                             </div>
                         </div>

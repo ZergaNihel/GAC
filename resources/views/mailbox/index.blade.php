@@ -5,7 +5,7 @@
 
 @endsection
 
-    
+    @if(Auth::user()->role == 1)
      @section('sidebar')
   
      @include('layouts.sidebarAdmin1')
@@ -16,11 +16,24 @@
      @include('layouts.mobileSidebar1')
 
      @endsection
+     @endif
+     @if(Auth::user()->role == 0)
+     @section('sidebar')
+  
+     @include('layouts.sidebarEtudiant')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.sidebarEtudiantMobile')
+
+     @endsection
+     @endif
 
     
                                         @section('search')
                                         <ul class="breadcome-menu" >
-                                            <li><a href="#">boite de réception / </a> 
+                                            <li><a href="#">boite de réception  </a> 
 
                                             </li>
                                         </ul>
@@ -62,12 +75,34 @@
                                                         <label></label>
                                                     </div>
                                                 </td>
-                                                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">{{ App\User::find($notification->data['id_emt'])->name}}</a> <span class="label label-danger">Nouveau</span></td>
                                                 <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                    {{$notification->data['sujet']}}
+                                                    @if( App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role == 2 )
+                                                    {{ App\User::find($notification->data['id_emt'])->name}}
+                                                    @endif
+                                                    @if( App\User::find($notification->data['id_emt'])->role == 0 )
+                        {{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
+                         {{ App\User::find($notification->data['id_emt'])->etudiant->prenom}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 3)
+                       {{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+            {{ App\User::find($notification->data['id_emt'])->etudiant->prenom}}
+
+
+   @endif
+
+
+
+                                                </a> <span class="label label-danger">Nouveau</span></td>
+                                                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                    @if($notification->data['sujet'] )
+                                     {{ $notification->data['sujet'] }}
+                                     @else
+                                      Aucun Sujet
+                                     @endif
+
                                                 </a></td>
                                                 <td><i class="fa fa-paperclip"></td>
-                                                <td class="text-right mail-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</td>
+                                                <td class="text-right mail-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</td>
                                             </tr>
                                             @endforeach
                                             @foreach(Auth::user()->readNotifications as $notification)

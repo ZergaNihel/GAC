@@ -19,11 +19,20 @@ Route::get('/', function () {
 
 
  Route::get('error_500', 'SemestreController@index');
+ //------------------------Etuiants----------------------
+ Route::get('/dates/{id}/', 'EtudiantController@dates') ;
+ Route::get('/absences_Etudiant', 'EtudiantController@index') ;
+ Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
+ Route::post('/add_justif', 'EtudiantController@add_justif') ;
+ Route::post('/edit_justif', 'EtudiantController@modifier') ;
  //------------------ MailBoxe ----------------------------
 Route::get('/boite_de_reception', 'MailBoxController@index') ;
 Route::get('/envoye', 'MailBoxController@envoye') ;
 Route::get('/brouillons', 'MailBoxController@brouillons') ;
 Route::get('/corbeille', 'MailBoxController@corbeille') ;
+
+Route::get('/delete_msg/{id}/{id_notif}', 'MailBoxController@delete') ;
+Route::post('/save_mail', 'MailBoxController@enregistrer') ;
 Route::get('/form_mail', 'MailBoxController@composer') ;
 Route::get('/emails/view/{id}/{id_notif}', 'MailBoxController@detail') ;
 Route::post('send_email', 'MailBoxController@send');
@@ -100,7 +109,7 @@ Route::get('correction/controle', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 /*Route::get('/', 'HomeController@index')->name('home');*/
 //------------------ Emploi_du_temps ----------------------------
 Route::get('/Emplois_du_Temps/{id}', 'EmploiTemps@afficher');
@@ -113,3 +122,8 @@ Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');
 Route::post('popEmp', 'EmploiTemps@empTab');
 Route::post('DeleteSea', 'EmploiTemps@destroy');
+//--------------------------------------------------------------
+
+Route::get('ajax-crud-list', 'GroupController@index1');
+ Route::post('ajax-crud-list/store', 'GroupController@store');
+ Route::get('ajax-crud-list/delete/{id}', 'GroupController@destroy');
