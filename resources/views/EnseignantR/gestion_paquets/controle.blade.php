@@ -56,18 +56,9 @@
                     contentType : false,
                     success:function(data){
                         var href='pdf/'+data.sujet;
-                        alert(href);
-                         $('#pdfviewer1').remove();
-                        // $('#pdfviewer').append(
-                        //     "<div class='pdf-viewer-area'>"+
-                        //         "<div class='row'>"+
-                        //             "<div class='pdf-single-pro'>"+
-                        //                 "<a class='media medi' href='#'>" +"</a>"+
-                        //             "</div>"+
-                        //         "</div>"+
-                        //     "</div>"
-                        // );
+                        var src='http://localhost:8000/pdf/'+data.sujet;
                         $('#lien').attr('href', href);
+                        $('#frame').attr('src',src);
                     }
                 });
                  }
@@ -92,8 +83,10 @@
                     processData: false,
                     contentType : false,
                     success:function(data){
-                        var href='pdf/'+data.sujet;
-                        $('#lien').attr('href', href);
+                        var href='pdf/'+data.corrige_type;
+                        var src='http://localhost:8000/pdf/'+data.corrige_type;
+                        $('#lienC').attr('href', href);
+                        $('#lienC iframe').attr('src',src);
                     }
                 });
                  }
@@ -256,7 +249,7 @@
                                         <div class="row">
                                             <div class="col-lg-11">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse"> Sujet: </a>
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"> Sujet: </a>
                                             </h4></div>
                                             <div class="col-lg-1">
                                                 <a class href="#" data-toggle="modal" data-target="#Newfile"><i class="fa fa-plus" style="color:black;"></i></a>
@@ -290,7 +283,7 @@
                                     </div>
                                     <div id="collapse1" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content animated bounce" id="pdfviewer">
-                                            @if($exam->sujet != "")
+                                            @if($exam->sujet)
                                             <div id="pdfviewer1" class="pdf-viewer-area">
                                                 <div class="row">
                                                     <div class="pdf-single-pro">
@@ -348,10 +341,10 @@
                                     <div id="collapse4" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content animated flash">
                                             @if($exam->corrige_type != "")
-                                            <div id="pdfviewer1" class="pdf-viewer-area">
+                                            <div id="pdfviewer1C" class="pdf-viewer-area">
                                                 <div class="row">
                                                     <div class="pdf-single-pro">
-                                                        <a class="media medi" id="lien" href="{{asset('pdf/'.$exam->corrige_type)}}"></a>
+                                                        <a class="media medi" id="lienC" style="width:250px;" href="{{asset('pdf/'.$exam->corrige_type)}}"></a>
                                                     </div>
                                                 </div>
                                             </div>

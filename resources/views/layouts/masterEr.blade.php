@@ -983,7 +983,7 @@
     <!-- pdf JS
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
-    <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
+    <script src="{{asset('js/pdf/pdf-active-1.js')}}"></script>
 
     @yield('script2')
       

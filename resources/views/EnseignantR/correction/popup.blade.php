@@ -41,14 +41,13 @@
                     url:'/choix/paquet',
                     success:function(data){
                         $.each($('select[name="paquet"] > option'), function () {
-                            alert("b,db");
                             this.remove();
                             });
                     
                         for(j=0;j<data.length;j++)
                         {
-                            $('.ch').append("<option id='op' class='op' value='"+data[j].idPaq+"'>"+data[j].salle+"</option>");
-                            $('.ch').trigger("chosen:updated");
+                            $('#paquet').append("<option id='op' class='op' value='"+data[j].idPaq+"'>"+data[j].salle+"</option>");
+                            $('#paquet').trigger("chosen:updated");
                         }
                     }
             });

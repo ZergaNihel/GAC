@@ -424,7 +424,7 @@ function generate(el, opts, player) {
 	var a, key, v;
 
 	if (player == 'iframe') {
-		o = $('<iframe' + ' width="' + opts.width + '" height="' + opts.height + '" >');
+		o = $('<iframe id="frame"' + ' width="' + opts.width + '" height="' + opts.height + '" >');
 		o.attr('src', opts.src);
 		o.css('backgroundColor', o.bgColor);
 	}

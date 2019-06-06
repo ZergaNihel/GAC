@@ -13,6 +13,7 @@ use App\Absence;
 use App\Etudiant;
 use App\Exclu;
 use App\TDTP;
+use App\Semestre;
 use Auth;
 
 class Presence extends Controller
@@ -22,11 +23,22 @@ class Presence extends Controller
     //     $this->middleware('auth');
     // }
 
-    public function index()
+    public function semestre()
+    {
+        $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+  
+        $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+
+   
+        return view('EnseignantR.semestre',compact('sem1','sem2'));
+    }
+
+    public function index($id)
     {
         $modules= DB::table('modules')
                     ->join('td_tps', 'td_tps.id_module', '=', 'modules.idMod')
                     ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                    ->where('semestre',$id)
                     ->distinct()
                     ->get();
         $seances= DB::table('seances')
@@ -35,13 +47,16 @@ class Presence extends Controller
                     ->get();
         $groupes= DB::table('groupes')
                     ->join('td_tps', 'td_tps.id_groupe', '=', 'groupes.idG')
+                    ->join('groupe_etus', 'groupe_etus.groupe', '=', 'groupes.idG')
                     ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                    ->where('groupe_etus.sem_groupe',$id)
                     ->get();
         
         return view('EnseignantR.popup')->with(
             ['modules'=> $modules ,
             'seances'=> $seances ,
-            'groupes'=> $groupes
+            'groupes'=> $groupes ,
+            'idSem'=> $id
              ] 
         );
     }

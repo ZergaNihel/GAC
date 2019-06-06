@@ -13,6 +13,11 @@ class Enseignant extends Model
   public function users()
 	{
 		return $this->hasMany(User::class);
-	}
+  }
+  
+  public function moduleR1()
+  {
+    return $this->hasMany('App\Module','ens_responsable','idEns');
+  }
 
 }

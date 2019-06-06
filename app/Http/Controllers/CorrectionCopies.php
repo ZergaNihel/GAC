@@ -47,7 +47,9 @@ class CorrectionCopies extends Controller
                     ->where('semestres.active','=',1)
                     ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                     ->where('examens.type','=',$type)
+                    ->distinct()
                     ->get(); 
+
         return response()->json($modules);
     }
 

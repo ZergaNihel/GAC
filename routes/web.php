@@ -61,7 +61,9 @@ Route::put('membreE/{id}','UserEController@update');
 
 //------------------ Presence ----------------------------
 
-Route::get('presence','Presence@index');
+Route::get('semestre/choix','Presence@semestre');
+
+Route::get('presence/{id}','Presence@index');
 
 Route::post('presence/liste','Presence@lister');
 
