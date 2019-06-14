@@ -11,6 +11,8 @@ use App\Cour;
 use App\TDTP;
 use App\Exclu;
 use App\Absence;
+use App\Module;
+use DB;
 use Illuminate\Support\Facades\Redirect;
 class SemestreController extends Controller
 {
@@ -41,6 +43,49 @@ class SemestreController extends Controller
     $sem1 = Semestre::create(['nomSem'=>'Semestre 1' ,'annee'=>$request->anne ,'active'=>1, ]);
     $sem2 = Semestre::create(['nomSem'=>'Semestre 2' ,'annee'=>$request->anne ,'active'=>1 ,]);
      return Redirect::to('Semestres/index');
+    }
+        public function graphe1 ($id){
+      
+    $mod = Module::where("semestre",$id)->select('nom','idMod')->get();
+     
+    $m = array();
+    $m_id = array();
+    $m_a = array();
+    $m_p = array();
+    $i=0;
+    foreach ($mod as $key ) {
+      $m[$i]=$key->nom;
+      $i++;
+    }
+     $i=0;
+    foreach ($mod as $key ) {
+      $m_id[$i]=$key->idMod;
+      $i++;
+    }
+    $abs = Absence::where('etat',0)->where('etat_just',2)->orWhere('etat_just',0)
+                     ->join('td_tps','id_td_tp','id')
+                     ->whereIn('id_module',$m_id)
+                     ->select('id_module', DB::raw('count(*) as total'))
+                 ->groupBy('id_module')
+                 ->get();
+      $pre = Absence::where('etat',1)
+                     ->join('td_tps','id_td_tp','id')
+                     ->whereIn('id_module',$m_id)
+                     ->select('id_module', DB::raw('count(*) as total'))
+                 ->groupBy('id_module')
+                 ->get();
+    $i=0;
+  foreach ($abs as $key ) {
+      $m_a[$i]=$key->total;
+      $i++;
+    }
+        $i=0;
+  foreach ($pre as $key ) {
+      $m_p[$i]=$key->total;
+      $i++;
+    }
+
+     return response()->json(['modules'=>$m,'abs'=> $m_a,'pre'=> $m_p,]);
     }
     public function dash ($id){
    	$semestre = Semestre::find($id);

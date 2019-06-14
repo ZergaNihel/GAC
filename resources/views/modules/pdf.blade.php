@@ -3,7 +3,6 @@
 
 @section('title','Modules/détails')
 
-
     
      @section('sidebar')
   
@@ -35,7 +34,11 @@
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                         <div class="pdf-single-pro">
-                            <a class="media" href="{{ asset('pdf/mamunur.pdf') }}"></a>
+                            @if($sc == 1)
+                            <a class="media" href="{{ asset($pdf->sujet) }}"></a>
+                            @else
+                            <a class="media" href="{{ asset($pdf->corrige_type) }}"></a>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-1 col-md-2 col-sm-1 col-xs-1">
@@ -44,4 +47,9 @@
             </div>
         </div>
 
+@endsection
+@section('pdf')
+
+    <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
+    <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
 @endsection

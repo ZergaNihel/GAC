@@ -20,7 +20,7 @@
     
                                         @section('search')
                                         <ul class="breadcome-menu" >
-                                            <li><a href="#">Profil / </a> 
+                                            <li><a href="#">Profil / {{$membreE->enseignant->nom}} /{{$membreE->enseignant->prenom}} </a> 
 
                                             </li>
                                         </ul>

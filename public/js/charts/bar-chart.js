@@ -185,36 +185,7 @@
 				borderWidth: 1
             }]
 		},
-		options: {
-			responsive: true,
-			legend: {
-				position: 'top',
-			},
-			title: {
-				display: true,
-				text: 'Bar Chart horizontal'
-			},
-			scales: {
-				xAxes: [{
-					ticks: {
-						autoSkip: false,
-						maxRotation: 0
-					},
-					ticks: {
-					  fontColor: "#fff", // this here
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						autoSkip: false,
-						maxRotation: 0
-					},
-					ticks: {
-					  fontColor: "#fff", // this here
-					}
-				}]
-			}
-		}
+
 	});
 	
 	/*----------------------------------------*/

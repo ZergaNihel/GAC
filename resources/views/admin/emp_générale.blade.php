@@ -1052,16 +1052,30 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
 </script>
 @endsection
  
+       @if(Auth::user()->role == 1)
      @section('sidebar')
   
-     @include('layouts.sidebarAdmin2')
+     @include('layouts.sidebarAdmin1')
 
      @endsection
     @section('mobileSidebar')
   
-     @include('layouts.mobileSidebar2')
+     @include('layouts.mobileSidebar1')
 
      @endsection
+     @endif
+     @if(Auth::user()->role == 0)
+     @section('sidebar')
+  
+     @include('layouts.sidebarEtudiant')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.sidebarEtudiantMobile')
+
+     @endsection
+     @endif
 
     
                                         @section('search')
@@ -1098,7 +1112,8 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
                                      </form>
                                     <div class="modal-footer">
                                       
-                                   <a href="#" id="subMod">valider</a> 
+                                   <a href="#" id="subMod">valider</a>
+                                   <a href="{{url()->previous()}}" >Précédent</a> 
                               
                                     </div>
                                    

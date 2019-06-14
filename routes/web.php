@@ -16,15 +16,20 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-
+Route::get('/bar', function () {
+    return view('barview');
+});
 
  Route::get('error_500', 'SemestreController@index');
- //------------------------Etuiants----------------------
+
+ //------------------------Etudiants----------------------
  Route::get('/dates/{id}/', 'EtudiantController@dates') ;
  Route::get('/absences_Etudiant', 'EtudiantController@index') ;
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
  Route::post('/add_justif', 'EtudiantController@add_justif') ;
  Route::post('/edit_justif', 'EtudiantController@modifier') ;
+
+ Route::get('/Etudiant/notes', 'EtudiantController@notes') ;
  //------------------ MailBoxe ----------------------------
 Route::get('/boite_de_reception', 'MailBoxController@index') ;
 Route::get('/envoye', 'MailBoxController@envoye') ;
@@ -41,6 +46,7 @@ Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload
 
  Route::get('Semestres/dashboard/{id}','SemestreController@dash');
  Route::get('new_sem', 'SemestreController@new_sem');
+ Route::get('statdash/{id}', 'SemestreController@graphe1');
  Route::post('addSem', 'SemestreController@store');
  Route::get('Semestres/index', 'SemestreController@index');
  Route::get('admin/parametre', 'ParametresController@index');
@@ -58,9 +64,8 @@ Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload
  Route::post('addModule', 'ModuleController@store');
  Route::post('EditModule', 'ModuleController@edit');
  Route::get('modules/details/{id}','ModuleController@details');
- Route::get('modules/pdf', function () {
-     return view('modules.pdf');
- });
+ Route::get('modules/pdf/{id}/{sc}', 'ModuleController@details_pdf');
+ 
  //------------------ GroupController ----------------------------
 Route::get('statGroupe/{id}/','GroupController@statistique');
  Route::post('EditGroupes','GroupController@edit');
@@ -122,6 +127,9 @@ Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');
 Route::post('popEmp', 'EmploiTemps@empTab');
 Route::post('DeleteSea', 'EmploiTemps@destroy');
+//------------------------CompteEtudiant----------------------
+Route::get('/comptes_etudiants','CompteEtudiant@index');
+
 //--------------------------------------------------------------
 
 Route::get('ajax-crud-list', 'GroupController@index1');

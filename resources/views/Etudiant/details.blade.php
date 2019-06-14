@@ -159,7 +159,7 @@ alert(data.img);
                                </tr>
 @foreach($absences as $a)
                                      <tr>
-                                        <th >{{$var}}</th>
+                                        <th >{{ $var++}}</th>
                                         <td >{{$a->date}}</td>
                                         <td >{{$a->jour}} {{$a->heure}} {{$a->salle}}</td>
                                         <td >{{$a->type}}</td>
@@ -182,7 +182,7 @@ alert(data.img);
                                             @endif
                                         </td>
                                   </tr>
-                                   <?php $var++; ?>   
+                                    
 @endforeach
                                
                           

@@ -16,6 +16,7 @@
     <!-- Bootstrap CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/c3/c3.min.css')}}">
     <!-- Bootstrap CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
@@ -163,7 +164,7 @@
                                       <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                      
                                                 <li class="nav-item dropdown">
-                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
+                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
                                                         <span class="indicator-ms"></span>
                                                     @endif
                                                 </a>
@@ -322,8 +323,10 @@
                                                         <!--fin nihel-->
                                                     </ul>
                                                 </li>
+                                                @if(Auth::user()->role == '1')
                                         <li class="nav-item nav-setting-open"><a href="{{url('admin/parametre') }}"   aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-settings"></i></a>
                                           </li>
+                                          @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -487,10 +490,7 @@
     ============================================ -->
     <script src="{{asset('js/charts/Chart.js')}}"></script>
     <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
-    <!-- pdf JS
-    ============================================ -->
-    <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
-    <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
+@yield('pdf')
 <!-- counterup JS
         ============================================ -->
     <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
@@ -511,6 +511,11 @@
     <!-- dropzone JS
         ============================================ -->
     <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
+     <!-- c3 JS
+        ============================================ -->
+    <script src="{{asset('js/c3-charts/d3.min.js')}}"></script>
+    <script src="{{asset('js/c3-charts/c3.min.js')}}"></script>
+    <script src="{{asset('js/c3-charts/c3-active.js')}}"></script>
 </body>
 
 

@@ -1,6 +1,6 @@
                                <table>
                                     <tr>
-                                        <th>No</th>
+                                        
                                         <th>Module</th>
                                         <th>Code</th>
                                         <th>Type</th>
@@ -9,10 +9,10 @@
                                        
                                         <th>Actions</th>
                                     </tr>
-                                    <?php $var = 1; ?>
+                                    
                                     @foreach($modules as $m)
                                     <tr id="{{$m->idMod}}">
-                                        <td >{{$var}}</td>
+                                       
                                         <td id="nom{{$m->idMod}}"> {{$m->nom}}</td>
                                         
                                         <td id="code{{$m->idMod}}">{{$m->code}}</td>
@@ -51,12 +51,12 @@
                                        
                                         </td>
                                     </tr>
-                                      <?php $var++; ?>
+                                    
                                     @endforeach
-            <input type="hidden" id="var" value="{{$var}}">
+            
 
                                     
                                     
                                 </table>
                         
-                            {{ $modules->links() }} 
+                            {!! $modules->links() !!} 

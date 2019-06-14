@@ -60,7 +60,7 @@
                                                     </div>
                                                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Acronyme</b><br /> UK</p>
+                                                            <p><b>Type</b><br /> {{$module->type}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -73,11 +73,7 @@
                             </div>
                             <br>
                            <div class="row">
-                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <p><b>Type</b><br /> {{$module->type}}</p>
-                                                        </div>
-                                                    </div>
+                              
                                                     @if($module->sem1 != null)
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
@@ -87,13 +83,27 @@
                                                     @if($module->sem1->nomSem == 'Semestre 1')
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Status</b><br /><button class="pd-setting">Active</button> </p>
+                                                            <div class="product-status-wrap">
+                                                            <p><b>Status</b></br>
+                                                     
+                                                        <button class="pd-setting">Active</button> 
+                                                   
+                                                            </p>
+                                                             </div>
                                                         </div>
                                                     </div>
                                                     @else
                                                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Status</b><br /><button class="ps-setting">Active</button> </p>
+                                                            <div class="product-status-wrap">
+                                                            <p><b>Status</b></br>
+                                                                
+                                                 
+                                                <button class="ps-setting">Active</button>
+                                         
+                                      
+                                                 </p>
+                                                   </div>
                                                         </div>
                                                     </div>
                                                     @endif
@@ -105,7 +115,10 @@
                                                     </div>
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Status</b><br /> <button class="ds-setting">Désactivé</button> </p>
+                                                             <div class="product-status-wrap">
+                                                            <p><b>Status</b><br>
+                                                               
+                                                                <button class="ds-setting">Désactivé</button> </p></div>
                                                         </div>
                                                     </div>
                                                     @endif
@@ -139,11 +152,7 @@
                                                         </div>
                                                     </div>
                                                     @endif
-                                                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <p><b>Nombre heures par semaine</b><br /> </p>
-                                                        </div>
-                                                    </div>
+                                                     
                             </div>
 <br>
                                 </div>
@@ -160,25 +169,33 @@
                                 <h2>Sujets</h2>
                                 <p>Vous trouvez ici les sujets d'examens et contrôles pour chaque année</p>
                             </div>
+                           
                             <div class="panel-group edu-custon-design" id="accordion">
+                                <?php $var = 0;?>
+                                  @foreach($exams as $e)
                         <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                     Année université 2018/2019</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}">
+                                    {{ $e->sem_ann->annee }}</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse3" class="panel-collapse panel-ic collapse">
+                         <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse">
                                         <div class="panel-body admin-panel-content animated bounce">
                                                 <div class="ex-pro">
                                                             <ul>
-  <a href="{{ url('modules/pdf') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i> Examen Algorithemique 2018/2019.</li> </a>
+@foreach($ex as $e1)
+  <a href="{{ url('modules/pdf/'.$e1->idExam.'/1') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Sujet {{$e1->type}} -  {{ $e->sem_ann->annee}}</li> </a>
+  @endforeach
                                                             </ul>
                                                         </div>
                                         </div>
                                     </div>
                                 </div>
+                                <?php $var++;?>
+                                 @endforeach
                             </div>
+                           
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -188,21 +205,29 @@
                                 <p>Vous trouvez ici les corrections d'examens et contrôles pour chaque année</p>
                             </div>
                             <div class="panel-group edu-custon-design" id="accordion2">
-                                <div class="panel panel-default">
+                               
+          @foreach($exams as $e)
+                        <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
-                                     Collapsible Group 2</a>
+                                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse{{$var}}">
+                                    {{ $e->sem_ann->annee }}</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse6" class="panel-collapse panel-ic collapse">
-                                        <div class="panel-body admin-panel-content animated flash">
-                                            <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions.</p>
-                                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua of Lorem Ipsum.</p>
-                                            <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo consequat consectetur adipisicing elit.</p>
+                                    <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse">
+                                        <div class="panel-body admin-panel-content animated bounce">
+                                                <div class="ex-pro">
+                                                            <ul>
+@foreach($ex as $e1)
+  <a href="{{ url('modules/pdf/'.$e1->idExam.'/2') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Corrigé {{$e1->type}} -  {{ $e->sem_ann->annee}}</li> </a>
+  @endforeach
+                                                            </ul>
+                                                        </div>
                                         </div>
                                     </div>
                                 </div>
+                                 <?php $var++;?>
+                                 @endforeach
                             </div>
                         </div>
                     </div>

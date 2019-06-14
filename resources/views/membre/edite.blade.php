@@ -1,5 +1,45 @@
-@extends('layouts.masterEr')
-@section('content')
+@extends('layouts.header')
+
+@section('title','Profil')
+@section('js')
+
+@endsection
+
+   
+        @if(Auth::user()->role == 1)
+     @section('sidebar')
+  
+     @include('layouts.sidebarAdmin1')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.mobileSidebar1')
+
+     @endsection
+     @endif
+     @if(Auth::user()->role == 0)
+     @section('sidebar')
+  
+     @include('layouts.sidebarEtudiant')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.sidebarEtudiantMobile')
+
+     @endsection
+     @endif
+
+    
+                                        @section('search')
+                                        <ul class="breadcome-menu" >
+                                            <li><a href="#">Profil  </a> 
+
+                                            </li>
+                                        </ul>
+                                        @endsection
+                                         @section('content')
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">

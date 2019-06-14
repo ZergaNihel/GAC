@@ -16,6 +16,18 @@ class EtudiantController extends Controller
     {
         $this->middleware('auth');
     }
+    function notes(){
+    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+        if(Auth::user()->role == '0'){
+            
+   return view('Etudiant.notes',compact('sem1','sem2'));}
+else{
+  return view('erreur_500',compact('sem1','sem2'));
+}
+
+}
+
     function index(){
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();

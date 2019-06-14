@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 use App\Etudiant;
 use App\Enseignant;
+use App\Semestre; 
 
 class UserController extends Controller
 { 
@@ -19,6 +20,9 @@ class UserController extends Controller
 
      public function details($id)
     {
+      $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+  
         $membre = User::find($id);
         $etudiant = Etudiant::all();
        // $roles = Role::all();
@@ -26,14 +30,16 @@ class UserController extends Controller
         
 
 
-        return view('membre.details', compact('membre','etudiant','enseignant'));
+        return view('membre.details', compact('membre','etudiant','enseignant','sem1','sem2'));
             
             
      }
 
       public function edit($id)
     {
-
+$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+  
         $membre = User::find($id);
         $etudiant = Etudiant::all();
         $enseignant = Enseignant::all();
@@ -43,9 +49,11 @@ class UserController extends Controller
         return view('membre.edite')->with([
             'membre' => $membre,
             'etudiant' => $etudiant,
-            'enseignant' => $enseignant
+            'enseignant' => $enseignant,
+            'sem1'  => $sem1,
+            'sem2'  => $sem2,
             
-        ]);;
+        ]);
     
     }
 

@@ -52,23 +52,7 @@
                 }
             });
 
-            c3.generate({
-                bindto: '#stocked',
-                data:{
-                    columns: [
-                        ['data1', 30,200,100,400,150,250],
-                        ['data2', 50,20,10,40,15,25]
-                    ],
-                    colors:{
-                        data1: '#006DF0',
-                        data2: '#933EC5'
-                    },
-                    type: 'bar',
-                    groups: [
-                        ['data1', 'data2']
-                    ]
-                }
-            });
+   
 
             c3.generate({
                 bindto: '#gauge',
@@ -98,6 +82,44 @@
                     },
                     type : 'pie'
                 }
+            });
+                         c3.generate({
+                bindto: '#stocked',
+                labels: ["algo","fre","jfh","algo","fre","jfh"],
+                data:{
+                    columns: [
+                       /* ["data1_x", "algo","fre","jfh","algo","fre","jfh"],
+                        ["data2_x",10,15,20,25,30,40,50,100,150,200,250,400],*/
+                        ['présence', 30,200,100,400,150,250],
+                        ['absence', 50,20,10,40,15,25]
+                    ],
+                    colors:{
+                        data1: '#006DF0',
+                        data2: '#D80027'
+                    },
+                    type: 'bar',
+                    groups: [
+                        ['data1', 'data2']
+                    ]
+                }
+                /*    options : {
+      scales: {
+        yAxes: [{
+
+          scaleLabel: {
+            display: true,
+            labelString: 'Nombre d\'abcense/présence'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Modules'
+          }
+        }],
+      }
+    }*/
+
             });
 
 
