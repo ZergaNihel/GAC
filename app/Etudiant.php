@@ -11,9 +11,9 @@ class Etudiant extends Model
 
 
 	
-     public function users()
+     public function user_mail()
 	{
-		return $this->hasMany(User::class);
+		return $this->hasOne(User::class);
 	}
 
 
@@ -24,8 +24,8 @@ class Etudiant extends Model
     }
     //
 
-    public function user_mail(){
+   /* public function user_mail(){
         return $this->hasMany('App\User', 'id_Etu', 'idEtu');
-    }
+    }*/
 
 }

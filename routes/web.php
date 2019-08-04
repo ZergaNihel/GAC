@@ -71,9 +71,14 @@ Route::get('statGroupe/{id}/','GroupController@statistique');
  Route::post('EditGroupes','GroupController@edit');
 Route::post('DeleteGroupes','GroupController@delete');
  Route::get('groupe/detail/{id}/{idSem}','GroupController@groupe');
+ Route::get('groupe/index1/{id}','GroupController@index1');
+  Route::get('supprime_etudiant/{id}','GroupController@destroy');
  Route::post('NouveauEtudiant','GroupController@new_student');
 Route::get('liste_groupes/{id}', 'GroupController@index');
+Route::get('edit_Student/{id}', 'GroupController@editStud');
 Route::post('groupes', 'GroupController@import');
+Route::post('update_student', 'GroupController@update_student');
+
 //------------------UserController ----------------------------
 Route::get('membre/{id}/details','UserController@details');
 Route::get('membre/{id}/edite','UserController@edit');
@@ -132,6 +137,6 @@ Route::get('/comptes_etudiants','CompteEtudiant@index');
 
 //--------------------------------------------------------------
 
-Route::get('ajax-crud-list', 'GroupController@index1');
+/*Route::get('ajax-crud-list', 'GroupController@index1');
  Route::post('ajax-crud-list/store', 'GroupController@store');
- Route::get('ajax-crud-list/delete/{id}', 'GroupController@destroy');
+ Route::get('ajax-crud-list/delete/{id}', 'GroupController@destroy');*/

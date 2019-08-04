@@ -20,9 +20,9 @@ class UserController extends Controller
 
      public function details($id)
     {
-      $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
-  
+  //$semestre =2;
         $membre = User::find($id);
         $etudiant = Etudiant::all();
        // $roles = Role::all();

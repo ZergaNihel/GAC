@@ -3,8 +3,9 @@
 namespace App\Providers;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
-//use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Schema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,9 +15,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //Schema::defaultStringLength(191);
+        Schema::defaultStringLength(191);
          Carbon::setlocale('fr');
          Carbon::yesterday()->diffForHumans();
+         Validator::extend('alpha_spaces', function ($attribute, $value) {
+
+            // This will only accept alpha and spaces.
+            // If you want to accept hyphens use: /^[\pL\s-]+$/u.
+            return preg_match('/^[\pL\s]+$/u', $value);
+
+        });
     }
 
     /**

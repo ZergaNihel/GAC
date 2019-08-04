@@ -1,0 +1,2 @@
+{"id":"series/acm/Won95","type":"Book","title":"Modern Database Systems: The Object Model , Interoperability, and beyond" , "year":"1995","publisher":"ACM Press and Addison_Welsey","authors":["Won Kim" , "Yun jin"] , "source":"DBLP"}
+mongoimport.exe --db PubScientifiques --collection publication --file "F:\Publi.json" --jsonArray

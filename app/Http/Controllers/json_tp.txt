@@ -1,0 +1,7 @@
+{"id":"series/acm/Won95","type":"Book","title":"Modern Database Systems: The Object Model , Interoperability, and beyond" , "year":"1995","publisher":"ACM Press and Addison_Welsey","authors":["Won Kim" , "Yun jin"] , "source":"DBLP"}
+
+
+
+//NB :commande exécuté sous CMD windows pas sous cmd mongo
+la touche windows+R -> entrée -> cd \ -> cd C:\Program Files\MongoDB\Server\4.0\bin ->
+mongoimport.exe --db PubScientifiques --collection publication --file "F:\Publi.json" --jsonArray
