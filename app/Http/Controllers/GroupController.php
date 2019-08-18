@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Excel;
@@ -15,6 +15,7 @@ use App\Module;
 use App\Etudiant;
 use App\Endette;
 use Session;
+//use Datatables;
 use Illuminate\Support\Facades\Validator;
 class GroupController extends Controller
 
@@ -154,5 +155,14 @@ function edit(Request $request){
         	return  response()->json(['success' => 'deleting with success','id'=>$id]);
 
     }
+
+
+
+    public function index1(Request $request)
+{
+ 
+  $students = Etudiant::select('idEtu','nom','prenom','matricule','date_naissance','type','created_at')->where('idG','=',18);
+     return Datatables::of($students)->make(true);
+}
 
 }

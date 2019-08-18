@@ -89,6 +89,7 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
+        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -99,6 +100,10 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'Z' => 
         array (
             'Zend\\Diactoros\\' => 15,
+        ),
+        'Y' => 
+        array (
+            'Yajra\\DataTables\\' => 17,
         ),
         'X' => 
         array (
@@ -232,6 +237,10 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'Zend\\Diactoros\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-diactoros/src',
+        ),
+        'Yajra\\DataTables\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -541,9 +550,11 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'App\\Http\\Controllers\\Groupe' => __DIR__ . '/../..' . '/app/Http/Controllers/Groupe.php',
         'App\\Http\\Controllers\\EmploiTemps' => __DIR__ . '/../..' . '/app/Http/Controllers/EmploiTemps.php',
         'App\\Http\\Controllers\\EnseignantController' => __DIR__ . '/../..' . '/app/Http/Controllers/EnseignantController.php',
+        'App\\Http\\Controllers\\EtudiantController' => __DIR__ . '/../..' . '/app/Http/Controllers/EtudiantController.php',
         'App\\Http\\Controllers\\GroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupController.php',
         'App\\Http\\Controllers\\Groupe' => __DIR__ . '/../..' . '/app/Http/Controllers/Groupe.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\MailBoxController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailBoxController.php',
         'App\\Http\\Controllers\\ModuleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ModuleController.php',
         'App\\Http\\Controllers\\ParametresController' => __DIR__ . '/../..' . '/app/Http/Controllers/ParametresController.php',
         'App\\Http\\Controllers\\Presence' => __DIR__ . '/../..' . '/app/Http/Controllers/Presence.php',
@@ -559,7 +570,10 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\Contact' => __DIR__ . '/../..' . '/app/Mail/Contact.php',
+        'App\\Media' => __DIR__ . '/../..' . '/app/Media.php',
+        'App\\Message' => __DIR__ . '/../..' . '/app/Message.php',
         'App\\Module' => __DIR__ . '/../..' . '/app/Module.php',
+        'App\\Notifications\\MsgNotification' => __DIR__ . '/../..' . '/app/Notifications/MsgNotification.php',
         'App\\Paquet' => __DIR__ . '/../..' . '/app/Paquet.php',
         'App\\Paquet_en' => __DIR__ . '/../..' . '/app/Paquet_en.php',
         'App\\Parametre' => __DIR__ . '/../..' . '/app/Parametre.php',
@@ -4678,6 +4692,21 @@ class ComposerStaticInitdbee0b142fe6359c5d514f853c06f5be
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
+        'Yajra\\DataTables\\ApiResourceDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/ApiResourceDataTable.php',
+        'Yajra\\DataTables\\CollectionDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/CollectionDataTable.php',
+        'Yajra\\DataTables\\Contracts\\DataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Contracts/DataTable.php',
+        'Yajra\\DataTables\\DataTableAbstract' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTableAbstract.php',
+        'Yajra\\DataTables\\DataTables' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTables.php',
+        'Yajra\\DataTables\\DataTablesServiceProvider' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTablesServiceProvider.php',
+        'Yajra\\DataTables\\EloquentDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/EloquentDataTable.php',
+        'Yajra\\DataTables\\Exceptions\\Exception' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Exceptions/Exception.php',
+        'Yajra\\DataTables\\Facades\\DataTables' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Facades/DataTables.php',
+        'Yajra\\DataTables\\Processors\\DataProcessor' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Processors/DataProcessor.php',
+        'Yajra\\DataTables\\Processors\\RowProcessor' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Processors/RowProcessor.php',
+        'Yajra\\DataTables\\QueryDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/QueryDataTable.php',
+        'Yajra\\DataTables\\Utilities\\Config' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Config.php',
+        'Yajra\\DataTables\\Utilities\\Helper' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Helper.php',
+        'Yajra\\DataTables\\Utilities\\Request' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Request.php',
         'Zend\\Diactoros\\AbstractSerializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/AbstractSerializer.php',
         'Zend\\Diactoros\\CallbackStream' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/CallbackStream.php',
         'Zend\\Diactoros\\Exception\\DeprecatedMethodException' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Exception/DeprecatedMethodException.php',

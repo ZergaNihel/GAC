@@ -4,7 +4,7 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function(){
-        alert("hh");
+
     $(document).on('click','#pwd',function(){
      $.ajax({
   type: "get",
@@ -27,38 +27,8 @@ $("#delete").on('show.bs.modal', function(event) {
     //alert("groupe = "+m.find("#idGrpDel").val(b));
     //m.find('#prepend-big-btn').val(c);
 });
-function allLetter(inputtxt)
-      { 
-      var letters = /^[A-Za-z]+$/;
-      if(inputtxt.value.match(letters))
-      {
-      alert('Your name have accepted : you can try another');
-      return true;
-      }
-      else
-      {
-      alert('Please input alphabet characters only');
-      return false;
-      }
-      }
-$(document).on('change','#nom',function(){
-    if($(this).val() === "" ){
-        $("#divNom").addClass("input-with-error");
-        $("#divNom").removeClass("input-with-success");
-       $("#divNomp").css('display','');
-    }
-    else if(allLetter($(this).val()) == false ){ 
-        $("#divNom").addClass("input-with-error");
-        $("#divNom").removeClass("input-with-success");
-         $("#divNomp").css('display','');
-}else{
-        $("#divNom").addClass("input-with-success");
-        $("#divNom").removeClass("input-with-error");
-         $("#divNomp").css('display','none');
-        }
 
 
-});
 $(document).on('click','#deleteBtn',function(){
        // alert("hhh");
         $.ajax({
@@ -140,10 +110,21 @@ success: function(data) {
                                                                             <h3>Nouveau Enseignant</h3>
                             <p>Ajouter un nouveau enseignant</p>
                             <br>
-               <div class="alert alert-danger alert-block" style="display: none;" id="error">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>Vous devez remplisser tout les champs</strong>
-   </div>
+       @if ($errors->any())
+     <input type="hidden" id="errImport" value="1" >
+    <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert">
+      <ul >
+            @foreach ($errors->all() as $error)
+               
+     <li>  <strong>Erreur!</strong> {{ $error }}. </li> 
+        
+         @endforeach
+            </ul>
+          </div>
+          </div>
+     
+@endif
          <form action="{{url('addEns')}}" method="post" id="formMod" >
                                   {{ csrf_field() }}
                          <div class="form-group-inner " id="divNom">
@@ -152,7 +133,7 @@ success: function(data) {
                           <label class="login2">Nom</label>
                                                                                      </div>
                           <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                              <input type="text" class="form-control " placeholder="Nom "  name="nom" id="nom"  />
+ <input type="text" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" placeholder="Nom "  name="nom" id="nom" value="{{ old('nom') }}" />
                                <br>
                     <p id="divNomp" style="color: #ed5565; display: none;"> nom nom</p>
                              
@@ -167,7 +148,7 @@ success: function(data) {
                        <label class="login2">Prenom</label>
                                                                                         </div>
                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-         <input type="text" class="form-control" placeholder="Prenom" name="prenom" id="prenom" />
+         <input type="text" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" placeholder="Prenom" name="prenom" id="prenom" value="{{ old('prenom') }}"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -176,7 +157,7 @@ success: function(data) {
                        <label class="login2">Email</label>
                                                                                         </div>
                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-         <input type="Email" class="form-control" placeholder="Email" name="email" id="email" />
+         <input type="Email" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" placeholder="Email" name="email" id="email" value="{{ old('email') }}"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -185,7 +166,7 @@ success: function(data) {
                        <label class="login2">Mot de passe</label>
                                                                                         </div>
                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-         <input type="text" class="form-control" placeholder="Mot de passe" name="pwd" id="pwd" />
+  <input type="text" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" placeholder="Mot de passe" name="pwd" id="pwd"  />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -217,15 +198,27 @@ success: function(data) {
                                                            <div class="modal-login-form-inner">
                                             
                                                                 <div class="row">
+                              
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
                                                                             <h3>Nouveaux Enseignants</h3>
                             <p>Vous pouvez ajouter touts les enseignants par importer un fichier excel qui contient le nom , prenom et l'email de l'enseignant</p>
                             <br>
-               <div class="alert alert-danger alert-block" style="display: none;" id="error">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>Vous devez remplisser tout les champs</strong>
-   </div>
+   @if ($errors->any())
+     <input type="hidden" id="errImport" value="1" >
+    <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert">
+      <ul >
+            @foreach ($errors->all() as $error)
+               
+     <li>  <strong>Erreur!</strong> {{ $error }}. </li> 
+        
+         @endforeach
+            </ul>
+          </div>
+          </div>
+     
+@endif
          <form action="{{url('addEnsExcel')}}" method="post" id="formEns" enctype="multipart/form-data" >
                                   {{ csrf_field() }}
                        <div class="login-btn-inner">
@@ -298,14 +291,18 @@ success: function(data) {
                         <div class="hpanel hblue contact-panel contact-panel-cs res-tablet-mg-t-30 dk-res-t-pro-30" id="panel{{ $e->idEns }}">
                             <div class="panel-body custom-panel-jw">
                                 <div class="social-media-in">
-                                    <a href="#"><i class="fa fa-eye"></i></a>
-                                    <a href="#"><i class="fa fa-edit"></i></a>
+                               @if($e->ensUser1 != null)
+                                    <a href="{{url('membreE/'.$e->ensUser1->id.'/details')}}"><i class="fa fa-eye"> </i></a>
+                               
+                                    <a href="{{url('membreE/'.$e->ensUser1->id.'/edite')}}"><i class="fa fa-edit"></i></a>
+                                     @endif
                                     <a href="#" data-toggle="modal" data-id="{{$e->idEns}}" data-nom="{{$e->nom}}" data-prenom="{{$e->prenom}}"   data-target="#delete" ><i class="fa fa-trash" ></i></a>
                                    
                                 </div>
                   <img alt="logo" class="img-circle m-b" src="{{ asset('img/profile/profil.png') }} ">
                                 <h3><a href="">{{$e->nom}} {{$e->prenom}}</a></h3>
-                                <p class="all-pro-ad">{{$e->grade}}</p>
+                                <p class="all-pro-ad">{{$e->grade}}
+                                 </p>
                                 <p>
                                     {{$e->profil}}
                                 </p>

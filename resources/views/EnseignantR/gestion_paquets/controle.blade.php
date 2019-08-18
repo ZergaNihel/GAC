@@ -340,7 +340,7 @@
                                     </div>
                                     <div id="collapse4" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content animated flash">
-                                            @if($exam->corrige_type != "")
+                                            @if($exam->corrige_type)
                                             <div id="pdfviewer1C" class="pdf-viewer-area">
                                                 <div class="row">
                                                     <div class="pdf-single-pro">

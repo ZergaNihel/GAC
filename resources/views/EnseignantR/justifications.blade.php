@@ -4,7 +4,7 @@
 <!-- modals jquery
     ============================================ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
+    {{-- <script>
       $(document).on("click",".btn-success",function(){
         var btn_id = $(this).attr("id");
         var i=btn_id.substring(7,btn_id.length);
@@ -35,7 +35,39 @@
         });
 
        });
-    </script>
+    </script> --}}
+    <script>
+            // JUSTIFICATIONS
+            $(document).on("click",".btn-success",function(){
+             var btn_id = $(this).attr("id");
+             var i=btn_id.substring(7,btn_id.length);
+             var data = $('#editA'+i).serialize();
+             $.ajax({
+                     type:'get',
+                     data:data,
+                     url:'/justifications/accepter',
+                     success:function(data){
+                          $('#row'+i).remove();
+                     }
+             });
+        
+            });
+        
+            $(document).on("click",".btn-danger jst",function(){
+             var btn_id = $(this).attr("id");
+             var i=btn_id.substring(7,btn_id.length);
+             var data = $('#editR'+i).serialize();
+             $.ajax({
+                     type:'get',
+                     data:data,
+                     url:'/justifications/refuser',
+                     success:function(data){
+                          $('#row'+i).remove();
+                     }
+             });
+        
+            });
+         </script>
 @endsection 
 
 @section('path')
@@ -67,10 +99,10 @@
                                 <tr>
                                     <th data-field="state" data-checkbox="true"></th>
                                     <th data-field="id">No</th>
-                                    <th data-field="Matricule" data-editable="true">Matricule</th>
-                                    <th data-field="Nom_Prenom" data-editable="true">Nom_Prenom</th>
-                                    <th data-field="Date" data-editable="true">Date de naissance</th>
-                                    <th data-field="Etat" data-editable="true">Etat</th>
+                                    <th data-field="Matricule">Matricule</th>
+                                    <th data-field="Nom_Prenom">Nom_Prenom</th>
+                                    <th data-field="Date">Date de naissance</th>
+                                    <th data-field="Etat">Etat</th>
                                     <th data-field="absences">date d'absence</th>
                                     <th data-field="action">Justification</th>
                                 </tr>
@@ -90,7 +122,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="button-ap-list responsive-btn">
                                                     <div class="button-style-three">
-                                                        <div class="row" style="width:300px;">
+                                                        <div class="row" >
                                                             <div class="col-lg-3">
                                                                 <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                             </div>

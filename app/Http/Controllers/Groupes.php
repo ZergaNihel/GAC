@@ -15,16 +15,16 @@ use App\Etudiant;
 
 class Groupes extends Controller
 {
-    function index(){
+    function index($id){
 		
-		$semestres = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-		foreach ($semestres as $key ) {
-    	$semestre = $key->idSem;
-        }
+		// $semestres = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+		// foreach ($semestres as $key ) {
+    	// $semestre = $key->idSem;
+        // }
    
-		$section = Groupe_etu::where('sem_groupe','=',$semestre)->select('sec_groupe')->distinct()->get();
-
-		$sections = Section::all();
+		$section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
+        
+        $semestre= Semestre::find($id); 
 
 		 return view('EnseignantR.groupes', compact('semestre','section','sections'));
     }

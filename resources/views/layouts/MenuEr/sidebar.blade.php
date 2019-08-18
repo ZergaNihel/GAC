@@ -22,8 +22,8 @@
                         </a>
                         <ul class="submenu-angle" aria-expanded="true">
                             <li><a title="Liste du groupe" href="{{url('presence/'.$semestre->idSem)}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
-                            <li><a title="Gestion des justificatifs" href="{{url('justifications')}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
-                            <li><a title="Historique" href="#"><span class="mini-sub-pro">Historique</span></a></li>
+                            <li><a title="Gestion des justificatifs" href="{{url('justifications/'.$semestre->idSem)}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
+                            <li><a title="Liste des exclus" href="{{url('exclus/'.$semestre->idSem)}}"><span class="mini-sub-pro">Liste des exclus</span></a></li>
                         </ul>
                     </li>
 
@@ -32,30 +32,23 @@
                     </li>
 
                     <li>
-                        <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="mini-click-non"> Correction</span></a>
+                        <a title="Correction" href="{{url('correction/choix/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="mini-click-non"> Correction</span></a>
                     </li>
 
                     <li>
-                        <a title="Correction" href="{{url('gestion/correction/choix')}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
+                        <a title="Correction" href="{{url('gestion/correction/choix/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
                     </li>
-                    
-                    @if(App\Enseignant::find(Auth::user()->id_Ens)->moduleR1->isNotEmpty())
-                        @foreach (App\Enseignant::find(Auth::user()->id_Ens)->moduleR1 as $item)
-                            @if($item->semestre == $semestre->idSem)
 
-                                <li>
-                                    <a class="has-arrow" href="index.html">
-                                            <span class="educate-icon educate-course icon-wrap"></span>
-                                        <span class="mini-click-non">Gestion paquets</span>
-                                        </a>
-                                    <ul class="submenu-angle" aria-expanded="true">
-                                        <li><a title="Controle continu" href="{{url('gestion/paquet/controle')}}"><span class="mini-sub-pro">Controle continu</span></a></li>
-                                        <li><a title="Examen" href="{{url('gestion/paquet/examen')}}"><span class="mini-sub-pro">Examen</span></a></li>
-                                    </ul>
-                                </li>
-                            @endif
-                        @endforeach
-                    @endif
+                    <li>
+                        <a class="has-arrow" href="index.html">
+                                <span class="educate-icon educate-course icon-wrap"></span>
+                               <span class="mini-click-non">Gestion paquets</span>
+                            </a>
+                        <ul class="submenu-angle" aria-expanded="true">
+                            <li><a title="Controle continu" href="{{url('gestion/paquet/controle/'.$semestre->idSem)}}"><span class="mini-sub-pro">Controle continu</span></a></li>
+                            <li><a title="Examen" href="{{url('gestion/paquet/examen/'.$semestre->idSem)}}"><span class="mini-sub-pro">Examen</span></a></li>
+                        </ul>
+                    </li>
 
                     <li>
                         <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Emplois du temps</span></a>

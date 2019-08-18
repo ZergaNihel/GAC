@@ -47,7 +47,7 @@ $.ajax({
                     
                     '#65b12d',
                     '#D80027',
-                    '#006DF0'
+                    '#ffde0a'
                 ],
                 data: [data.endette,data.repetitif, data.nouveau]
             }]
@@ -548,7 +548,7 @@ $.ajax({
                 </div>
                 <div class="panel-group edu-custon-design" id="accordion">
 
-                    @foreach(App\Groupe_etu::where('sem_groupe','=',$semestre)->where('sec_groupe','=',$s->sec_groupe)->select('groupe')->get()
+                    @foreach(App\Groupe_etu::where('sem_groupe','=',$semestre->idSem)->where('sec_groupe','=',$s->sec_groupe)->select('groupe')->get()
                     as $grp)
                     <div class="panel panel-default" id="panel{{$grp->groupe1->idG}}">
                         <div class="panel-heading accordion-head">

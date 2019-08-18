@@ -46,6 +46,10 @@
     </li>
 @endsection
 
+@section('sidebar')
+@include('layouts.MenuEr.sidebar')
+@endsection 
+
 @section('content')
 <div class="row">
     <div id="liste" data-keyboard="false" data-backdrop="static" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
@@ -62,7 +66,7 @@
                                 <select name="seance" data-placeholder="Type..." class="chosen-select" tabindex="-1" required>
                                     <option value="">Séance</option>
                                     @foreach($seances as $seance)
-                                        <option value=" {{$seance->idSea}} "> {{$seance->type}} {{$seance->jour}} {{$seance->heure}} </option>
+                                        <option value=" {{$seance->idSea}} "> {{$seance->type}} {{$seance->jour}} {{$seance->heure}} "{{$seance->salle}}" </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -89,6 +93,8 @@
                                 </select>
                             </div>
                         </div>
+
+                        <input type="hidden" name="semestre" value="{{$idSem}}">
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-custon-four btn-primary" id="valider" type="submit">Valider</button>

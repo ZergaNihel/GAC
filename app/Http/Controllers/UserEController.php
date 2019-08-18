@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 use App\Etudiant;
 use App\Enseignant;
+use App\Semestre;
 
 class UserEController extends Controller
 {
@@ -19,14 +20,16 @@ class UserEController extends Controller
 
      public function details($id)
     {
+        $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    
+        $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
         $membreE = User::find($id);
         $etudiant = Etudiant::all();
-       // $roles = Role::all();
          $enseignant = Enseignant::all();
         
 
 
-        return view('membreE.details', compact('membreE','etudiant','enseignant'));
+        return view('membreE.details', compact('membreE','etudiant','enseignant','sem1','sem2'));
             
             
      }
@@ -39,11 +42,16 @@ class UserEController extends Controller
         $enseignant = Enseignant::all();
         
 
+        $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    
+        $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 
         return view('membreE.edite')->with([
             'membreE' => $membreE,
             'etudiant' => $etudiant,
-            'enseignant' => $enseignant
+            'enseignant' => $enseignant,
+            'sem1' => $sem1,
+            'sem2' => $sem2,
             
         ]);;
     
@@ -51,9 +59,8 @@ class UserEController extends Controller
 
     public function update(Request $request , $id)
     {
+
         $membreE = User::find($id);
-
-
         $etudiant = Etudiant::all();
         if($request->hasFile('img')){
 
@@ -64,13 +71,7 @@ class UserEController extends Controller
            
         }
 
-       // $enseignant = Enseignant::all();
-        
-            
-           /* foreach ($membre as $n)
-            	$nim=$n-nom*/
-        
-       
+
 
         $membreE->name = $request->input('name');
         $etudiant->prenom = $request->input('prenom');
@@ -88,10 +89,5 @@ class UserEController extends Controller
         return redirect('membreE/'.$id.'/edite');
 
     } 
-   /* public function mdp(){
-    	 auth()->user()->update([
-                	"mot_de_passe" => bcrypt(request('password')),
-
-                ]);
-    }*/
+  
 }

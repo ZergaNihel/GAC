@@ -11,6 +11,7 @@ use App\Examen;
 use App\Enseignant;
 use App\Correction;
 use App\Paquet_en;
+use App\Semestre;
 use Auth;
 use File;
 use Validator;
@@ -22,7 +23,7 @@ class CorrectionCopies extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {
         $paquets = null;
 
@@ -30,8 +31,10 @@ class CorrectionCopies extends Controller
                     ->join('semestres','modules.semestre','=','semestres.idSem')
                     ->where('semestres.active','=',1)
                     ->get(); 
+        $semestre = Semestre::find($id);
         return view('EnseignantR.correction.popup')->with(
             [
+                'semestre'=> $semestre,
                 'modules'=> $modules ,
                 'paquets'=> $paquets
             ] 
@@ -70,7 +73,7 @@ class CorrectionCopies extends Controller
     public function corriger(Request $request)
     {
         $i=0;
-        $p = $request->input('paquet');
+        $p = $request->input('paquets');
         $paquet=Paquet::find($p);
         $codes= DB::table('codes')
                   ->join('paquet_ens','codes.paq_code','=','paquet_ens.id_paq')
@@ -87,10 +90,13 @@ class CorrectionCopies extends Controller
             $i++;
         }
         
+        $semestre= Semestre::find($request->input('semestre')); 
+
         return view('EnseignantR.correction.corriger',
             [
                 'paquet' => $paquet ,
                 'codes'  => $codes, 
+                'semestre'=> $semestre,
             ] 
         );
     }
@@ -124,7 +130,7 @@ class CorrectionCopies extends Controller
         return response()->json($note);
     }
 
-    public function GstpaquetCtrl()
+    public function GstpaquetCtrl($id)
     {
         $exam=DB::table('examens')
                 ->join('modules','examens.module_Exam','=','modules.idMod')
@@ -134,9 +140,9 @@ class CorrectionCopies extends Controller
 
         $module=DB::table('modules')
                 ->join('semestres','modules.semestre','=','semestres.idSem')
-                ->where('semestres.active','=',1)
                 ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->first();
+                
         $correcteurs=DB::select("SELECT distinct * FROM enseignants WHERE idEns in(SELECT id_Ens FROM cours WHERE cours.id_module = $module->idMod) OR idEns in(SELECT id_Ens FROM td_tps WHERE td_tps.id_module = $module->idMod) ");
         
         $nompaq=DB::table('paquets')
@@ -148,8 +154,11 @@ class CorrectionCopies extends Controller
         ->groupby('idPaq','salle')
         ->get();
 
+        $semestre = Semestre::find($id);
+
         return view('EnseignantR.gestion_paquets.controle')->with(
             [
+                'semestre'=> $semestre,
                 'nompaq'=> $nompaq,
                 'exam'=> $exam,
                 'correcteurs'=> $correcteurs
@@ -174,7 +183,7 @@ class CorrectionCopies extends Controller
         return $examen;
     }
 
-    public function GstpaquetExm()
+    public function GstpaquetExm($id)
     {
         $paquets=DB::table('paquet_ens')
                 ->join('enseignants','enseignants.idEns','=','paquet_ens.id_Ens')
@@ -185,8 +194,12 @@ class CorrectionCopies extends Controller
                 ->where('examens.type','=','Examen')
                 ->select('paquets.*','enseignants.nom')
                 ->get();
+
+        $semestre = Semestre::find($id);
+
         return view('EnseignantR.gestion_paquets.examen')->with(
             [
+                'semestre'=> $semestre,
                 'paquets'=> $paquets
             ] 
         );

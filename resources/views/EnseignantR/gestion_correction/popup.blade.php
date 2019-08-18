@@ -64,6 +64,7 @@
                                 </select>
                             </div>
                         </div>
+                        <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-custon-four btn-primary" type="submit">Choisir</a>

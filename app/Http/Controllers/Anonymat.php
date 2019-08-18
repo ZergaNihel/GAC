@@ -131,6 +131,7 @@ class Anonymat extends Controller
             ->where('paq_code','=',$p[0]->idPaq)
             ->groupBy('paq_code')
             ->count();
+
         return ["paquet" => $paquet , "nbrCopies" => $nbr];
     }
 

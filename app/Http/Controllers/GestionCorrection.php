@@ -12,15 +12,20 @@ use App\Examen;
 use App\Enseignant;
 use App\Correction;
 use App\Paquet_en;
+use App\Semestre;
 use Auth;
 use File;
 use Validator;
 
 class GestionCorrection extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('EnseignantR.gestion_correction.popup');
+        $semestre = Semestre::find($id);
+        return view('EnseignantR.gestion_correction.popup')->with(
+            [
+                'semestre'=> $semestre
+            ]);
     }
 
     public function paquet(Request $request)
@@ -86,9 +91,12 @@ class GestionCorrection extends Controller
                 $notes2[$i]=null; $i++;
             }
         }
+
+        $semestre= Semestre::find($request->input('semestre')); 
                         
         return view('EnseignantR.gestion_correction.gerer')->with(
             [
+                'semestre'=> $semestre,
                 'paquet'=> $paquet ,
                 'codes' => $codes->pluck('code'),
                 'correcteurs'=> $correcteurs,

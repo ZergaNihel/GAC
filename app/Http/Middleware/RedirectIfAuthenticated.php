@@ -17,7 +17,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            
+        
+            return redirect('/');
         }
 
         return $next($request);
@@ -25,12 +27,16 @@ class RedirectIfAuthenticated
 
 
     protected function redirectTo()
-{ 
+{ //etudiant
     if(Auth::user()->role == '0'){
-    return '/justifications';
+    return '/absences_Etudiant';
      }
+     //ensignant
     else if(Auth::user()->role == '3'){
         return '/presence';
+    }
+      else if(Auth::user()->role == '1'){
+        return '/admin/parametre';
     }
 }
 

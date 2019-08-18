@@ -341,6 +341,10 @@
     </li>
 @endsection
 
+@section('sidebar')
+@include('layouts.MenuEr.sidebar')
+@endsection 
+
 @section('content')
     <!-- Static Table Start -->
     <div class="col-lg-12">
@@ -432,16 +436,16 @@
                                                         <option value="selected">Exporter les lignes selectionnées </option>
                                                     </select>
                                                 </div>
-                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                                <table id="table" data-toggle="table" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
                                                     data-cookie-id-table="saveId" data-show-export="true"  data-toolbar="#toolbar">
                                                     <thead>
                                                         <tr>
                                                             <th data-field="state" data-checkbox="true"></th>
                                                             <th data-field="id">No</th>
-                                                            <th data-field="Matricule" data-editable="true">Matricule</th>
-                                                            <th data-field="Nom_Prenom" data-editable="true">Nom_Prenom</th>
-                                                            <th data-field="Date" data-editable="true">Date de naissance</th>
-                                                            <th data-field="Etat" data-editable="true">Etat</th>
+                                                            <th data-field="Matricule">Matricule</th>
+                                                            <th data-field="Nom_Prenom">Nom_Prenom</th>
+                                                            <th data-field="Date">Date de naissance</th>
+                                                            <th data-field="Etat">Etat</th>
                                                             <th data-field="action">Action</th>
                                                         </tr>
                                                     </thead>
@@ -624,33 +628,36 @@
                                                             <th data-field="action">Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    {{-- <tbody>
                                                         @php $N=0 @endphp
-                                                        @foreach($exclus as $e)
-                                                        <tr id="rowExc{{$e[0]->idEtu}}">
-                                                            <td></td>
-                                                            <td>1</td>
-                                                            <td> {{$e[0]->matricule}} </td>
-                                                            <td>{{$e[0]->nom}} {{$e[0]->prenom}}</td>
-                                                            <td>{{$e[0]->date_naissance}}</td>
-                                                            <td class="datatable-ct">{{$e[0]->type}}</td>
-                                                            <td class="datatable-ct">{{$abs[$N++]}}</td>
-                                                            <td class="datatable-ct">
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                        <div class="button-ap-list responsive-btn">
-                                                                            <div class="button-style-three">
-                                                                                <form id="exclusform{{$e[0]->idEtu}}">
-                                                                                    <input type="hidden" name="module" value="{{$idmodule}}">
-                                                                                    <input type="hidden" id="etudiant" name="etudiant" value="{{$e[0]->idEtu}}">
-                                                                                    <button type="button" id="exclus{{$e[0]->idEtu}}" class="btn btn-custon-rounded-three btn-danger exc"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
-                                                                                </form>
+                                                        @php $No=1 @endphp
+                                                        @if($exclus)
+                                                            @foreach($exclus as $e)
+                                                            <tr id="rowExc{{$e[0]->idEtu}}">
+                                                                <td></td>
+                                                                <td>{{$No++}}</td>
+                                                                <td> {{$e[0]->matricule}} </td>
+                                                                <td>{{$e[0]->nom}} {{$e[0]->prenom}}</td>
+                                                                <td>{{$e[0]->date_naissance}}</td>
+                                                                <td class="datatable-ct">{{$e[0]->type}}</td>
+                                                                <td class="datatable-ct">{{$abs[$N++]}}</td>
+                                                                <td class="datatable-ct">
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="button-ap-list responsive-btn">
+                                                                                <div class="button-style-three">
+                                                                                    <form id="exclusform{{$e[0]->idEtu}}">
+                                                                                        <input type="hidden" name="module" value="{{$idmodule}}">
+                                                                                        <input type="hidden" id="etudiant" name="etudiant" value="{{$e[0]->idEtu}}">
+                                                                                        <button type="button" id="exclus{{$e[0]->idEtu}}" class="btn btn-custon-rounded-three btn-danger exc"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> Exclure</button>
+                                                                                    </form>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    </tbody> --}}
                                                 </table>
                                             </div>
                                         </div>
@@ -662,6 +669,14 @@
                 </div>
 
                 <div class="product-tab-list tab-pane fade" id="historique">
+                    <div class="row mg-tb-30">
+                        <div class="breadcome-heading">
+                            <form role="search" class="sr-input-func">
+                                <input type="text" placeholder="Search..." class="search-int form-control" style="position: absolute;">
+                                <a href="#"><i class="fa fa-search"></i></a>
+                            </form>
+                        </div>
+                    </div>
                     <div class="dashtwo-order-area mg-tb-30">
                         <div class="container-fluid">
                             <div class="row" id="hist">
@@ -673,7 +688,7 @@
                                                 <div class="skill">
                                                     <div class="progress progress-bt">
                                                         <div class="lead-content">
-                                                            <h3> <a href="{{url('historique/'.$historique->date.'/'.$id_td_tp)}}"> {{$historique->date}} </a> </h3>
+                                                            <h3> <a href="{{url('historique/'.$historique->date.'/'.$id_td_tp.'/'.$semestre->idSem)}}"> {{$historique->date}} </a> </h3>
                                                             <p> {{$absents[$j++]}} absent(s)</p>
                                                         </div>
                                                         <div class="progress-bar wow fadeInLeft" data-progress="{{$pourcentage[$i]}}%" style="width: {{$pourcentage[$i]}}%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>{{$pourcentage[$i++]}}%</span> </div>

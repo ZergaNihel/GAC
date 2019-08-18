@@ -7,13 +7,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
+use Validator;
 use Excel;
 use DB;
 use Illuminate\Support\Facades\Mail;
 use App\Enseignant;
 use App\User;
 use App\Semestre;
-
+use Auth;
 class EnseignantController extends Controller
 {
   public function __construct()
@@ -26,19 +27,32 @@ $rand = Str::random(8);
  } 
   
     function index(){
+      //$ens = Enseignant::find(47);
+     // dd($ens->ensUser1);
       $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+      if(Auth::user()->role == '1'){
     	$ens = Enseignant::all();
     	
-return view('Enseignants.index',compact('ens','sem1','sem2'));
+return view('Enseignants.index',compact('ens','sem1','sem2'));}
+else{
+  return view('erreur_500',compact('sem1','sem2'));
+}
     }
   function storeEns(Request $request){
      $tab[]=null; 
-
-     $this->validate($request, [
-      'ens'  => 'required|mimes:xls,xlsx'
-     ]);
+    $messages = [
+    'required'    => 'le champs :attribute est obligatoire.',
+    'mimes'    => 'le champs :attribute doit être compatible avec le format xlsx . ',
+];
+   $validator = Validator::make($request->all(), [
+            'ens' => 'required|mimes:xlsx '
+        ],$messages);
+ 
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
    
     $path = $request->file('ens')->getRealPath();
     $data = Excel::load($path)->get();
@@ -57,7 +71,7 @@ return view('Enseignants.index',compact('ens','sem1','sem2'));
        $insert_data[] = array(
         'email'   => $tab[2],
         'password'   => Hash::make($pwd),
-        'role'  => 1,
+        'role'  => 3,
         'id_Ens'  => $ens->idEns
        );
        $email =  $tab[2];
@@ -79,13 +93,25 @@ Mail::send('emails.contact', $data, function($message) use ($email) {
      return Redirect::to('Enseignants/index');
   }
 function store(Request $request){
-
+     $messages = [
+    'required'    => 'le champs :attribute est obligatoire.',
+    'alpha'    => 'le champs :attribute doit contenir que les lettre . ',
+    'min'    => 'le champs :attribute doit contenir au moins 4 lettres ',
+    'unique'    => 'l\'email existe déjà ',
+];
+   $validator = Validator::make($request->all(), [
+            'nom' => 'required|alpha|min:3',
+            'prenom' => 'required|alpha|min:3',
+            'email' => 'required|email|unique:users',
+            'pwd' => 'required'
+        ],$messages);
+ 
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
     $ens = Enseignant::create(['nom'=>$request->nom , 'prenom'=>$request->prenom ,]);
-    $user = User::create(['role' => 1,
-            'email' => $request->email,
-            'id_Ens' => $ens->idEns,
-            'password' => Hash::make($request->pwd),
-        ]);
+    //dd($ens->idEns);
+    $user = User::create(['role' => 3,'email' => $request->email,'password' => Hash::make($request->pwd),'id_Ens' => $ens->idEns,]);
 $email = $request->email;
 $data = array('name'=>$request->nom,'prenom'=>$request->prenom , 'email' => $request->email,'password' => $request->pwd);
 Mail::send('emails.contact', $data, function($message) use ($email) {

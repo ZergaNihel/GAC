@@ -132,34 +132,44 @@
             </div>
         </div>
 
-
-        <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-close-area modal-close-df">
-                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                    </div>
-                    <div class="modal-body">
-                        <div class="modal-login-form-inner">
-
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="basic-login-inner modal-basic-inner">
-                                        <h3>Nouveau Groupe</h3>
-                                        <p>Register User can get sign in from here</p>
-                                        @if($message = Session::get('success'))
-                                        <div class="alert alert-success alert-block">
-                                            <button type="button" class="close" data-dismiss="alert">×</button>
-                                            <strong>{{ $message }}</strong>
-                                        </div>
-                                        @endif
-                                        <form method="post" enctype="multipart/form-data" action="{{ url('groupes') }}">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="idsemestre" value="{{$semestre->idSem}}">
-                                            <div class="form-group-inner">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                        <label class="login2">Section</label>
+  <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-close-area modal-close-df">
+                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="modal-login-form-inner">
+                                            
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                       <div class="basic-login-inner modal-basic-inner">
+                                                                            <h3>Nouveau Groupe</h3>
+                            <p>Register User can get sign in from here</p>
+                             @if($message = Session::get('success'))
+   <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+           <strong>{{ $message }}</strong>
+   </div>
+   @endif
+      <form method="post" enctype="multipart/form-data" action="{{ url('groupes') }}">
+    {{ csrf_field() }}
+    <input type="hidden" name="idsemestre" value="{{$semestre->idSem}}">
+                 <div class="form-group-inner">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <label class="login2">Section</label>
+                                                            </div>
+     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <div class="form-select-list"> <select class="form-control custom-select-value" name="section" placeholder="password" style="width: 80%;">
+               <option disabled >choisissez la section</option>
+                         @foreach($sections as $sec)                                
+  <option value="{{$sec->idSec}}">{{$sec->nomSec}}  </option>
+                         @endforeach
+                                                                        </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                         <div class="form-select-list"> <select
@@ -214,12 +224,44 @@
                                             </div>
                                             <div class="login-btn-inner">
 
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                        <div class="login-horizental">
-                                                            <button class="btn btn-sm btn-primary login-submit-cs"
-                                                                type="submit">Ajouter</button>
+            <!--  njgjbxkgnbjlxk  -->
+                <div class="row">
+       @if($message = Session::get('succ'))
+   <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+           <strong>{{ $message }}</strong>
+   </div>
+ 
+  
+   @endif
+                    <?php $var=1; ?>
+@foreach($section as $s)
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
+                            <div class="alert-title">
+                                <h2>{{$s->section->nomSec}}</h2>
+                              
+                            </div>
+                            <div class="panel-group edu-custon-design" id="accordion">
+                               
+                                @foreach(App\Groupe_etu::where('sem_groupe','=',$semestre->idSem)->where('sec_groupe','=',$s->sec_groupe)->select('groupe')->get() as $grp)
+                           <div class="panel panel-default" id="panel{{$grp->groupe1->idG}}">      
+                                    <div class="panel-heading accordion-head">
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}" > Groupe {{ $grp->groupe1->nomG }}  </a>
+  <a class="zoomInDown mg-t" href="#" data-ids1="{{$s->section->idSec}}" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#edit"><i class="fa fa-edit pull-right"> </i> </a>
+   
+<a href="{{url('groupe/detail/'.$grp->groupe1->idG.'/'.$semestre->idSem)}}"> <i class="fa fa-eye pull-right"> </i></a>
+
+<a  href="#" class="zoomInDown mg-t" data-toggle="modal" data-id="{{$grp->groupe1->idG}}" data-groupe="{{$grp->groupe1->nomG}}" data-section="{{$s->section->nomSec}}"   data-target="#delete" > <i class="fa fa-trash pull-right"> </i></a>
+            
+                                        </h4>
+                                    </div>
+                                    <div id="delete" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-close-area modal-close-df">
+                                                            <a class="close" data-dismiss="modal" href="#"  style="background: #d80027"><i class="fa fa-close"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>

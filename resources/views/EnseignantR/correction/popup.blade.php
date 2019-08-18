@@ -16,7 +16,7 @@
                     url:'/choix/module',
                     success:function(data){
 
-                        $.each($('select[name="paquet"] > option'), function () {
+                        $.each($('select[name="paquets"] > option'), function () {
                             this.remove();
                             });
                     
@@ -40,14 +40,14 @@
                     data:data,
                     url:'/choix/paquet',
                     success:function(data){
-                        $.each($('select[name="paquet"] > option'), function () {
+                        $.each($('select[name="paquets"] > option'), function () {
                             this.remove();
                             });
                     
                         for(j=0;j<data.length;j++)
                         {
-                            $('#paquet').append("<option id='op' class='op' value='"+data[j].idPaq+"'>"+data[j].salle+"</option>");
-                            $('#paquet').trigger("chosen:updated");
+                            $('#paquets').append("<option class='op' value='"+data[j].idPaq+"'>"+data[j].salle+"</option>");
+                            $('#paquets').trigger("chosen:updated");
                         }
                     }
             });
@@ -92,11 +92,14 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="advanced-form-area mg-b-15">
-                                <select name="paquet" id="paquet" data-placeholder="Paquet..." class="chosen-select ch" tabindex="-1" required>
+                                <select name="paquets" id="paquets" data-placeholder="Paquet..." class="chosen-select" tabindex="-1" required>
                                     <option value="" id="paq">Paquet</option>
                                 </select>
                             </div>
                         </div>
+
+                        <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-custon-four btn-primary" type="submit">Choisir</a>

@@ -1,6 +1,35 @@
 @extends('layouts.masterAnonym')
+@section('script1')
+<style>
+
+/* effect-shine */
+a.effect-shine:hover {
+  -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
+  -webkit-mask-size: 200%;
+  animation: shine 2s infinite;
+}
+
+@-webkit-keyframes shine {
+  from {
+    -webkit-mask-position: 150%;
+  }
+  
+  to {
+    -webkit-mask-position: -50%;
+  }
+}
+</style>
+
+@endsection
+
+@section('path')
+    <li>
+        <span class="bread-blod">Choix du semestre</span>
+    </li>
+@endsection
+
 @section('content')
-<div class="edu-accordion-area mg-b-15">
+{{-- <div class="edu-accordion-area mg-b-15">
     <div class="container-fluid">
 
         <div class="analytics-sparkle-area">
@@ -14,29 +43,14 @@
                                 <div class="row">
 
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                                        <h5 style="color: grey;text-align: center"> Aucun Semestre crée</h5>
+                                        <h5 style="color: grey;text-align: center"> Aucun Semestre créé</h5>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-
-
                     </div>
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
                 </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
                 @else
                 @foreach($sem1 as $s )
                 <div class="row">
@@ -131,5 +145,37 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+
+<div class="error-pagewrap ">
+    <div class="error-page-int">
+        <div class="text-center text-decoration">
+            <h2>Choisissez un semestre</h2> <br><br>
+        </div>
+        <div class="content-error">
+            <div class="hpanel">
+                <div class="panel-body poss-recover">
+                    @foreach($sem1 as $s )
+                    <div class="container-fluid" style="text-align:center;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                            <a class="effect-shine" style="background-color:white; color:black; "
+                                href="{{url('enseignant/groupes/'.$s->idSem)}}"><h4> {{$s->nomSem}} - {{$s->annee}}</h4></a>
+                        </div>
+                    </div>
+                    @endforeach
+                    <hr>
+                    @foreach($sem2 as $s )
+                    <div class="container-fluid" style="text-align:center;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                            <a class="effect-shine" style="background-color:white; color:black;"
+                                href="{{url('enseignant/groupes/'.$s->idSem)}}"><h4> {{$s->nomSem}} - {{$s->annee}}</h4></a>
+                        </div> 
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>   
 </div>
 @endsection

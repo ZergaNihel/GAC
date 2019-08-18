@@ -12,15 +12,33 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-/*Route::get('/', function () {
-    return view('auth/login');
-});*/
 Route::get('/', function () {
-    return view('auth/login');
+    return redirect('/login');
 });
 
- 
+
+
+ Route::get('error_500', 'SemestreController@index');
+ //------------------------Etuiants----------------------
+ Route::get('/dates/{id}/', 'EtudiantController@dates') ;
+ Route::get('/absences_Etudiant', 'EtudiantController@index') ;
+ Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
+ Route::post('/add_justif', 'EtudiantController@add_justif') ;
+ Route::post('/edit_justif', 'EtudiantController@modifier') ;
+ //------------------ MailBoxe ----------------------------
+Route::get('/boite_de_reception', 'MailBoxController@index') ;
+Route::get('/envoye', 'MailBoxController@envoye') ;
+Route::get('/brouillons', 'MailBoxController@brouillons') ;
+Route::get('/corbeille', 'MailBoxController@corbeille') ;
+
+Route::get('/delete_msg/{id}/{id_notif}', 'MailBoxController@delete') ;
+Route::post('/save_mail', 'MailBoxController@enregistrer') ;
+Route::get('/form_mail', 'MailBoxController@composer') ;
+Route::get('/emails/view/{id}/{id_notif}', 'MailBoxController@detail') ;
+Route::post('send_email', 'MailBoxController@send');
+Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload');
  //------------------ SemestreController ----------------------------
+
  Route::get('Semestres/dashboard/{id}','SemestreController@dash');
  Route::get('new_sem', 'SemestreController@new_sem');
  Route::post('addSem', 'SemestreController@store');
@@ -67,7 +85,7 @@ Route::get('presence/{id}','Presence@index');
 
 Route::post('presence/liste','Presence@lister');
 
-Route::get('justifications','Presence@justification');
+Route::get('justifications/{id}','Presence@justification');
 
 Route::get('justifications/accepter','Presence@accepterJ');
 
@@ -77,17 +95,17 @@ Route::get('present','Presence@present');
 
 Route::get('absent','Presence@absent');
 
-Route::get('exclus','Presence@exclus');
+Route::get('exclus/{id}','Presence@listeExclus');
 
 Route::get('exclure/etudiant','Presence@exclure');
 
-Route::get('historique/{d}/{m}/{y}/{id}','Presence@historique');
+Route::get('historique/{d}/{m}/{y}/{idh}/{id}','Presence@historique');
 
-Route::get('enseignant/groupes','Groupes@index');
+Route::get('enseignant/groupes/{id}','Groupes@index');
 
 Route::get('enseignant/statGroupe/{id}/','Groupes@statistique');
 
-Route::get('correction/choix', 'CorrectionCopies@index');
+Route::get('correction/choix/{id}', 'CorrectionCopies@index');
 
 Route::get('choix/module', 'CorrectionCopies@module');
 
@@ -97,7 +115,7 @@ Route::post('corriger', 'CorrectionCopies@corriger');
 
 Route::get('attribuer/note', 'CorrectionCopies@noter');
 
-Route::get('gestion/paquet/controle', 'CorrectionCopies@GstpaquetCtrl');
+Route::get('gestion/paquet/controle/{id}', 'CorrectionCopies@GstpaquetCtrl');
 
 Route::get('date/limite/controle', 'CorrectionCopies@datelimite');
 
@@ -105,11 +123,11 @@ Route::post('sujet/controle', 'CorrectionCopies@sujet');
 
 Route::post('corrige/controle', 'CorrectionCopies@corrige');
 
-Route::get('gestion/paquet/examen', 'CorrectionCopies@GstpaquetExm');
+Route::get('gestion/paquet/examen/{id}', 'CorrectionCopies@GstpaquetExm');
 
 Route::get('attribuer/correcteur', 'CorrectionCopies@correcteur');
 
-Route::get('gestion/correction/choix', 'GestionCorrection@index');
+Route::get('gestion/correction/choix/{id}', 'GestionCorrection@index');
 
 Route::get('gestion/choix/paquet', 'GestionCorrection@paquet');
 
@@ -133,10 +151,8 @@ Route::get('/supprimer/paquet','Anonymat@delete');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/Emplois_du_Temps', 'EmploiTemps@afficher');
-Route::get('/ess', 'EmploiTemps@afficheress');
+//Route::get('/home', 'HomeController@index')->name('home');
+/*Route::get('/', 'HomeController@index')->name('home');*/
 //------------------ Emploi_du_temps ----------------------------
 Route::get('/Emplois_du_Temps/{id}', 'EmploiTemps@afficher');
 Route::get('/Emplois_du_Temps_generale/{id}', 'EmploiTemps@generale');
@@ -148,3 +164,8 @@ Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');
 Route::post('popEmp', 'EmploiTemps@empTab');
 Route::post('DeleteSea', 'EmploiTemps@destroy');
+//--------------------------------------------------------------
+
+Route::get('ajax-crud-list', 'GroupController@index1');
+ Route::post('ajax-crud-list/store', 'GroupController@store');
+ Route::get('ajax-crud-list/delete/{id}', 'GroupController@destroy');

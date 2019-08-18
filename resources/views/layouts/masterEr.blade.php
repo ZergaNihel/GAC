@@ -144,8 +144,8 @@
      <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt="" style="width:100px;height:100px;" /></a>
-                <strong><a href="index.html"><img src="" alt="" /></a></strong>
+                <a href="{{url('enseignant/groupes/'.$semestre->idSem)}}"><img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt="" style="width:100px;height:100px;" /></a>
+                <strong><a href="{{url('enseignant/groupes/'.$semestre->idSem)}}"><img src="" alt="" /></a></strong>
             </div>
 
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -153,7 +153,7 @@
                     <ul class="metismenu" id="menu1">
                         <br> <br> <br>
                         <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-home icon-wrap"></span> <span class="mini-click-non">Dashboard</span></a>
+                            <a title="Landing Page" href="{{url('enseignant/groupes/'.$semestre->idSem)}}" aria-expanded="false"><span class="educate-icon educate-home icon-wrap"></span> <span class="mini-click-non">Dashboard</span></a>
                         </li>
 
                         <li>
@@ -162,10 +162,9 @@
                                 <span class="mini-click-non">Présence</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Liste du groupe" href="{{url('presence')}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
-                                <li><a title="Gestion des justificatifs" href="{{url('justifications')}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
-                                <li><a title="Liste des exclus" href="#"><span class="mini-sub-pro">Liste des exclus</span></a></li>
-                                <li><a title="Historique" href="#"><span class="mini-sub-pro">Historique</span></a></li>
+                                <li><a title="Liste du groupe" href="{{url('presence/'.$semestre->idSem)}}"><span class="mini-sub-pro">Liste du groupe</span></a></li>
+                                <li><a title="Gestion des justificatifs" href="{{url('justifications/'.$semestre->idSem)}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
+                                <li><a title="Liste des exclus" href="{{url('exclus/'.$semestre->idSem)}}"><span class="mini-sub-pro">Liste des exclus</span></a></li>
                             </ul>
                         </li>
 
@@ -174,30 +173,26 @@
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('correction/choix')}}" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="mini-click-non"> Correction</span></a>
+                            <a title="Correction" href="{{url('correction/choix/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="mini-click-non"> Correction</span></a>
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('gestion/correction/choix')}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
+                            <a title="Correction" href="{{url('gestion/correction/choix/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
                         </li>
 
                         <li>
-                            <a class="has-arrow" href="index.html">
+                            <a class="has-arrow" href="#">
                                     <span class="educate-icon educate-course icon-wrap"></span>
 								   <span class="mini-click-non">Gestion paquets</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Controle continu" href="{{url('gestion/paquet/controle')}}"><span class="mini-sub-pro">Controle continu</span></a></li>
-                                <li><a title="Examen" href="{{url('gestion/paquet/examen')}}"><span class="mini-sub-pro">Examen</span></a></li>
+                                <li><a title="Controle continu" href="{{url('gestion/paquet/controle/'.$semestre->idSem)}}"><span class="mini-sub-pro">Controle continu</span></a></li>
+                                <li><a title="Examen" href="{{url('gestion/paquet/examen/'.$semestre->idSem)}}"><span class="mini-sub-pro">Examen</span></a></li>
                             </ul>
                         </li>
 
                         <li>
-                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Emplois du temps</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Mon emplois du temps" href="all-students.html"><span class="mini-sub-pro">Mon emplois du temps</span></a></li>
-                                <li><a title="Emplois du temps du groupe" href="add-student.html"><span class="mini-sub-pro">Emplois du temps du groupe</span></a></li>
-                            </ul>
+                            <a href="{{url('Emplois_du_Temps_generale/'.$semestre->idSem)}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Emplois du temps</span></a>
                         </li>
 
                         <li>
@@ -285,6 +280,8 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                               
+                                                
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="message-img">
@@ -387,29 +384,27 @@
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
-                                                        </li>
+                                                       
                                                         <!--nihel-->
                                                       @if(Auth::user()->role == '0'|| Auth::user()->role == '1' || Auth::user()->role == '2')
-                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
+                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
                                                           </li>
                                                    @elseif(Auth::user()->role == '3')
-                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
+                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
                                                           </li>
 
                                                           @endif
-                                                        <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>User Billing</a>
-                                                        </li>
+                                                       
                                                     @if(Auth::user()->role == '0' || Auth::user()->role == '1' || Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
+                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
                                                         </li>
                                                     @elseif(Auth::user()->role == '3')
-                                                         <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
+                                                         <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
                                                         </li>
                                                     @endif
                                                     <!--fin nihel-->
                                                         <!--nihel 19/03/2019-->
-                                                        <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>log out </a>
+                                                        <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>Se déconnecter </a>
 
                                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                             @csrf
@@ -777,6 +772,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                 
                                             </ul>
                                         </div>
                                     </div>
@@ -797,30 +793,23 @@
                                         <li><a href="events.html">Dashboard</a></li>
                                         <li><a data-toggle="collapse" data-target="#Charts" href="#">Présence <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="{{url('presence')}}">Liste du groupe</a></li>
-                                                <li><a href="index-1.html">Gestion des justificatifs</a></li>
-                                                <li><a href="index-3.html">Liste des exclus</a></li>
-                                                <li><a href="analytics.html">Historique</a></li>
+                                                <li><a href="{{url('presence/'.$semestre->idSem)}}">Liste du groupe</a></li>
+                                                <li><a href="{{url('justifications/'.$semestre->idSem)}}">Gestion des justificatifs</a></li>
+                                                <li><a href="{{url('exclus/'.$semestre->idSem)}}">Liste des exclus</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="{{url('enseignant/groupes')}}">Groupes</a></li>
-                                        <li><a href="{{url('correction/choix')}}">Correction</a></li>
-                                        <li><a href="{{url('gestion/correction/choix')}}">Gestion notes</a></li>
+                                        <li><a href="{{url('correction/choix/'.$semestre->idSem)}}">Correction</a></li>
+                                        <li><a href="{{url('gestion/correction/choix/'.$semestre->idSem)}}">Gestion notes</a></li>
                                         <li><a data-toggle="collapse" data-target="#demopro" href="#">Gestion paquets <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demopro" class="collapse dropdown-header-top">
-                                                <li><a href="{{url('gestion/paquet/controle')}}">Controle continu</a>
+                                                <li><a href="{{url('gestion/paquet/controle/'.$semestre->idSem)}}">Controle continu</a>
                                                 </li>
-                                                <li><a href="add-student.html">Examen</a>
+                                                <li><a href="{{url('gestion/paquet/examen/'.$semestre->idSem)}}">Examen</a>
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Emplois du temps <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demopro" class="collapse dropdown-header-top">
-                                                <li><a href="all-students.html">Mon emplois du temps</a>
-                                                </li>
-                                                <li><a href="add-student.html">Emplois du temps du groupe</a>
-                                                </li>
-                                            </ul>
+                                        <li><a href="{{url('Emplois_du_Temps_generale/'.$semestre->idSem)}}">Emplois du temps <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         </li>
                                         <li><a data-toggle="collapse" data-target="#demomi" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demomi" class="collapse dropdown-header-top">
@@ -919,8 +908,8 @@
     <script src="{{asset('js/editable/xediable-active.js')}}"></script>
     <!-- Charts JS
     ============================================ -->
-    {{-- <script src="{{asset('js/charts/Chart.js')}}"></script>
-    <script src="{{asset('js/charts/rounded-chart.js')}}"></script> --}}
+    <script src="{{asset('js/charts/Chart.js')}}"></script>
+    <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
     <!-- tab JS
 		============================================ -->
     <script src="{{asset('js/tab.js')}}"></script>
