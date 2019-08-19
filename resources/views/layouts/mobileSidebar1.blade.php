@@ -30,7 +30,7 @@
                                         </li>
                                         <li><a data-toggle="collapse" data-target="#democrou" href="#">Modules <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         </li>
-                                    <li><a href="events.html">Historique</a></li>
+                                    <li><a href="{{url('Semestres/historique')}}">Historique</a></li>
                                    
                                         <li><a data-toggle="collapse" data-target="#demo" href="#">Boite de réception<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="demo" class="collapse dropdown-header-top">

@@ -6,6 +6,38 @@
        
 
   $(document).ready(function(){
+ $('#formGrp').submit(function(e){
+    e.preventDefault();
+    alert("hh");    
+      var fd = new FormData($(this)[0]);
+   
+$.ajax({
+  url:  $(this).attr('action'),
+  type: "POST",
+  data: fd,
+  cache : false ,     
+  processData: false,  // indique à jQuery de ne pas traiter les données
+  contentType: false ,                 
+success: function(data) {
+    alert(data.idG+"nn"+data.idSem);
+window.location.replace("groupe/detail/"+data.idG+"/"+data.idSem);
+},
+error: function (dataErr) {
+
+$('.alert-block').css("display","");
+ var response = JSON.parse(dataErr.responseText);
+       // alert(dataErr.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('.alert-block').html(errorString);
+          }
+});
+       });
        $(document).on('click','#deleteBtn',function(){
        // alert("hhh");
         $.ajax({
@@ -13,9 +45,9 @@ type: "POST",
 data: $('#deleteForm').serialize(),                             // to submit fields at once
 url: $('#deleteForm').attr('action'),                        // use the form's action url
 success: function(data) {
-    $("#delete").modal("hide");
- //alert(data.success);
+ //;
  $("#panel"+data.id+"").remove();
+ $("#delete").modal("hide");
 }
 });
        });
@@ -48,6 +80,7 @@ $("#delete").on('show.bs.modal', function(event) {
      var m = $(this)
    // m.find('#editGrp').val(a);
     m.find("#idGrpDel").val(b);
+     m.find("b").text(a);
     //alert("groupe = "+m.find("#idGrpDel").val(b));
     //m.find('#prepend-big-btn').val(c);
 });
@@ -144,14 +177,14 @@ $.ajax({
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
                                                                             <h3>Nouveau Groupe</h3>
-                            <p>Register User can get sign in from here</p>
-                             @if($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
+                            <p>Ajouter un nouveau groupe</p>
+                           
+   <div class="alert alert-danger alert-block" style="display: none" >
     <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
+           <strong ></strong>
    </div>
-   @endif
-      <form method="post" enctype="multipart/form-data" action="{{ url('groupes') }}">
+   
+      <form method="post" enctype="multipart/form-data" action="{{ url('groupes') }}" id="formGrp">
     {{ csrf_field() }}
     <input type="hidden" name="idsemestre" value="{{$semestre->idSem}}">
                  <div class="form-group-inner">
@@ -160,7 +193,7 @@ $.ajax({
                                                                 <label class="login2">Section</label>
                                                             </div>
      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="form-select-list"> <select class="form-control custom-select-value" name="section" placeholder="password" style="width: 80%;">
+        <div class="form-select-list"> <select class="form-control custom-select-value" name="section" placeholder="password" style="width: 80%;" id="nameSec">
                <option disabled >choisissez la section</option>
                          @foreach($sections as $sec)                                
   <option value="{{$sec->idSec}}">{{$sec->nomSec}}  </option>
@@ -178,7 +211,7 @@ $.ajax({
      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
          <div class="form-group">
                   
-      <input name="groupe" type="text" placeholder="Nom de Groupe" class="form-control" id="" style="width: 80%;"> </div>
+      <input name="groupe" type="text" placeholder="Nom de Groupe" class="form-control" id="nameGrp" style="width: 80%;"> </div>
   
                                                             </div>
                                                         </div>
@@ -208,7 +241,7 @@ $.ajax({
            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Ajouter</button>
+         <button class="btn btn-sm btn-primary login-submit-cs" type="submit" id="addGrp">Ajouter</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -266,7 +299,7 @@ $.ajax({
                                                             <div class="modal-login-form-inner">
                                             <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
                                         <h2>Suppression !</h2>
-                                        <p>Voulez-Vous vraiment supprimer le Groupe : <b>{{$grp->groupe1->nomG}}</b></p>
+                     <p>Voulez-Vous vraiment supprimer le Groupe : <b></b></p>
                                          </div>
                                                         </div>
                                        <div class="modal-footer danger-md">

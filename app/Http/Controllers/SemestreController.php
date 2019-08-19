@@ -142,4 +142,42 @@ class SemestreController extends Controller
 //dd($abs);
    return view('Semestres.dashboard',compact('semestre','nouveaux','rep','endettes','ens','exclus','abs','sem1','sem2'));
    }
+   function archiver ($id){
+    $sem = Semestre::find($id);
+    $sem->active = 0;
+    $sem->save();
+    $mods = Module::where('semestre' , $id)->get();
+        foreach ($mods as $m ) {
+        $m->semestre = null;
+        $m->save();
+        }
+    return response()->json(['success' =>'sucess']);
+   }
+   function historique (){
+  $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+  $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+ $sem = Semestre::where('active','=',0)->get();
+   return view('Semestres.historique',compact('sem1','sem2','sem'));
+   }
+  function histoDet ($id){
+  $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+  $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+  $groupe = Groupe_etu::where('sem_groupe',$id)->get();
+  $g = Groupe_etu::where('sem_groupe',$id)->select('groupe')->first();
+  
+  $mods = TDTP::where('id_groupe',$g->groupe)
+                ->select('id_module')
+                ->distinct('id_module')->get();
+
+  
+  //dd($mods);
+   return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods'));
+   }
+  function GrpDet ($id){
+  $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+  $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+  $etus = Etudiant::where('idG',$id)->get();
+   return view('Semestres.detGrp',compact('sem1','sem2','etus'));
+   }
+   
 }

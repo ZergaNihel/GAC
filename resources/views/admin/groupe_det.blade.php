@@ -39,12 +39,13 @@ $('.modal-basic-inner h3').html("Nouveau Etudiant");
           $("select option:selected").removeAttr('selected');
           $("select").trigger('chosen:updated');
           $("#module").css("display","none");
+          $('#error').css("display","none");
           $('#zoomInDown1').modal('show');
  });
      //-------------------------------------editButton----------------------------
        $('body').on('click', '.edit', function () {
       var product_id = $(this).attr("id");
-      
+      $('#error').css("display","none");
       $.get("{{ url('edit_Student') }}" +'/' + product_id , function (data) {
           $('.modal-basic-inner h3').html("Modifier les informations");
           $('.modal-basic-inner p').html("Vous pouvez modifier les informations concernant chaque étudiant");

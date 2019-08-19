@@ -78,6 +78,8 @@ foreach ($exams as $e ) {
 	}
     public function index(Request $request){
          if(Auth::user()->role == '1'){
+            $s1=0;
+            $s2=0;
     	$ens = Enseignant::all();
     	$modules= Module::paginate(16);
     	$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();

@@ -49,7 +49,12 @@ Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload
  Route::get('statdash/{id}', 'SemestreController@graphe1');
  Route::post('addSem', 'SemestreController@store');
  Route::get('Semestres/index', 'SemestreController@index');
+ Route::get('Semestres/historique', 'SemestreController@historique');
+ Route::get('Semestres/historique/{id}', 'SemestreController@histoDet');
+ Route::get('Semestres/historique/Groupes/{id}', 'SemestreController@GrpDet');
+  Route::get('archiver/{id}', 'SemestreController@archiver');
  Route::get('admin/parametre', 'ParametresController@index');
+
  Route::post('param', 'ParametresController@store');
  Route::post('EditParam', 'ParametresController@edit');
 //------------------ EnseignantController ----------------------------

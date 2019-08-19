@@ -29,7 +29,7 @@
                                                  @foreach($sem1 as $s)
                                                 <li><a href="{{url('Semestres/dashboard/'.$s->idSem)}}">Semestre 1</a></li>
                            @endforeach
-                          @foreach($sem1 as $s)
+                          @foreach($sem2 as $s)
                                                 <li><a href="{{url('Semestres/dashboard/'.$s->idSem)}}">Semestre 2</a></li>
                                                @endforeach 
                                             </ul>
@@ -50,7 +50,7 @@
                        
                         </li>
                     <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Historique</span></a>
+                            <a title="Landing Page" href="{{url('Semestres/historique')}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Historique</span></a>
                         </li>
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Boite de réception</span></a>

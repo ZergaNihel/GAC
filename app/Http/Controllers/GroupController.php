@@ -182,11 +182,15 @@ if($etud->matricule == $request->matricule){
     {
 
       $tab[]=null; 
-      $semestre=Semestre::find($request->idsemestre);
-
-     $this->validate($request, [
-      'select_file'  => 'required|mimes:xls,xlsx'
-     ]);
+    /*  $semestre=Semestre::find($request->idsemestre);
+   $validator1 = Validator::make($request, [
+            'section' => 'required',
+            'groupe' => 'required',
+            'select_file' => 'required',]);
+ 
+        if ($validator1->fails()) {
+       return response()->json(['errors'=> $validator1->getMessageBag()->toArray()],422);
+        }*/
    
     $groupe = $request->groupe;
   
@@ -220,10 +224,32 @@ if($etud->matricule == $request->matricule){
 
       if(!empty($insert_data))
       {
-       DB::table('etudiants')->insert($insert_data);
+        //dd(count($insert_data));
+        for($i=0;$i<count($insert_data);$i++){
+        $messages = [
+    'required'    => 'Vous devez remplisser tous les champs.',
+    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
+    'unique'=>"Le matricule doit être unique dans le fichier excel dans la ligne ".$i,
+    "numeric"=>"Le matricule doit contenir que les chiffres",
+];
+   $validator = Validator::make($insert_data[$i], [
+            'nom' => 'required|alpha_spaces',
+            'prenom' => 'required|alpha_spaces',
+            'matricule' => 'required|numeric|unique:etudiants',
+            'date_naissance'  => 'required ',
+             'type'  => 'required ',
+        ],$messages);
+ 
+        if ($validator->fails()) {
+           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
+       // dd($insert_data[0]);
+
+  DB::table('etudiants')->insert($insert_data[$i]);
+}
       }
      }
-     return Redirect::to('groupe/detail/'.$k->idG.'/'.$semestre->idSem);
+     return response()->json(['idSem'=> $request->idsemestre,'idG'=>$k->idG]);
     }
       function statistique ($id){
       	//dd($id);
@@ -240,7 +266,7 @@ if($etud->matricule == $request->matricule){
         $mat = Groupe::find($id);
         //dd($mat);
         $mat->delete();
-        	return  response()->json(['success' => 'deleting ith success','id'=>$id]);
+        	return  response()->json(['success' => 'deleting wordwrap(str)ith success','id'=>$id]);
 
     }
 

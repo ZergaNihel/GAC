@@ -308,8 +308,10 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
           <div class="row">
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                    <div >
-                                                                                <label>
-                <input type="radio" value="{{$s1}}"  id="s1" name="semestre"> <i></i> Semestre 1</label>
+                          @foreach ($sem1 as $key ) 
+                                                                 <label>
+                <input type="radio" value="{{$key->idSem}}"  id="s1" name="semestre"> <i></i> Semestre 1</label>
+                @endforeach
                                                                             </div>
                                                                         </div>
 
@@ -317,8 +319,10 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                                        <div class="row">
                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div >
-                                                                                <label>
-         <input type="radio" value="{{$s2}}"   id="s2" name="semestre"> <i></i> Semestre 2</label>
+                     @foreach ($sem2 as $key ) 
+            <label>
+         <input type="radio" value="{{$key->idSem}}"   id="s2" name="semestre"> <i></i> Semestre 2</label>
+              @endforeach
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -366,9 +370,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
              <div class="login-horizental">
   <button data-dismiss="modal" href="#" class="btn btn-sm btn-primary login-submit-cs" type="button" >Annuler</button> </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                                                             </div>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -378,7 +380,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="asset-inner" id="asset-inner">
+                    <div class="asset-inner" id="asset-inner">
                      @include('modules.pagination')
                  </div>
                                           <div id="EditModule" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
@@ -463,8 +465,10 @@ document.getElementById('enseignant1').style.display = "";
           <div class="row">
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                    <div >
-                                                                                <label>
-                <input type="radio" value="{{$s1}}"  onchange="fct2();" id="s1" name="semestre1"> <i></i> Semestre 1</label>
+@foreach ($sem1 as $key ) 
+                                                                    <label>
+                <input type="radio" value="{{$key->idSem}}"  onchange="fct2();" id="s1" name="semestre1"> <i></i> Semestre 1</label>
+                     @endforeach
                                                                             </div>
                                                                         </div>
 
@@ -472,8 +476,10 @@ document.getElementById('enseignant1').style.display = "";
                                                                        <div class="row">
                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div >
-                                                                                <label>
-         <input type="radio" value="{{$s2}}"  onchange="fct2();" id="s2" name="semestre1"> <i></i> Semestre 2</label>
+                    @foreach ($sem2 as $key )
+                                                                       <label>
+         <input type="radio" value="{{$key->idSem}}"  onchange="fct2();" id="s2" name="semestre1"> <i></i> Semestre 2</label>
+              @endforeach
                                                                             </div>
                                                                         </div>
                                                                     </div>

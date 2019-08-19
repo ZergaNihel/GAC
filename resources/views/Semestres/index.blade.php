@@ -20,7 +20,22 @@
     }
   }
 });
-
+     // -----------------------------------archiver---------------------------
+     $(document).on('click' , '.archive' , function(){
+      var a = $(this).attr('id');
+      alert(a);
+     $.ajax({
+  type: "get",
+  url: "{{url('archiver')}}/"+a ,
+  success: function(data){
+  alert(data.success);
+   $("#pa"+a).css("display","none");
+   $('.err').css("display","");
+   $('.err').html('<strong> semestre archivé (voir <a href="{{url("Semestres/historique")}}"> l\'historique</a> )</strong> ');
+   //$('#semestre').html('<br><br><br><br><br>');
+  }
+});
+});
   });
 </script>
 @endsection
@@ -60,7 +75,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                               <div class="login-btn-inner pull-right">
                                <div class="login-horizental">
-      <button class="btn btn-sm btn-primary login-submit-cs" href="#" data-toggle="modal" data-target="#zoomInDown1"  type="button" id="new">Nouveau Semestre</button>
+      <button class="btn btn-sm btn-primary login-submit-cs" href="#" data-toggle="modal" data-target="#zoomInDown1" type="button" id="new">Nouveau Semestre</button>
                                </div>
                            </div>
    </div>  </div>
@@ -80,7 +95,7 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Année Universitaire</h3>
+                        <h3>Année Universitaire</h3>
                             <p> Nouvelle Année Universitaire</p>
                             <br>
                <div class="alert alert-danger alert-block" style="display: none;" id="error">
@@ -140,6 +155,10 @@
 
                 <div class="analytics-sparkle-area">
             <div class="container-fluid" id="semestre">
+              <div class="alert alert-success alert-block err" style="display:none;" >
+    <button type="button" class="close" data-dismiss="alert">×</button>
+        
+   </div>
   @if($sem1->isEmpty() and $sem2->isEmpty())
         <div class="row">
           <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
@@ -174,7 +193,8 @@
         <br>
         @else      
  @foreach($sem1 as $s )
-                <div class="row">
+  
+                <div class="row" id="pa{{$s->idSem}}">
                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
                      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                         <div class="analytics-sparkle-line reso-mg-b-30">
@@ -200,7 +220,7 @@
                                 </div>  <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3 "> 
                                     <a class="btn btn-success  widget-btn-1 btn-sm pull-right" href="{{url('Semestres/dashboard/'.$s->idSem)}}">Explorer</a></div>
                                     <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3 "> 
-                                    <button class="btn btn-success  widget-btn-1 btn-sm pull-left">Archiver</button></div></div>  </h2>
+                                    <button class="btn btn-success  widget-btn-1 btn-sm pull-left archive" id="{{$s->idSem}}">Archiver</button></div></div>  </h2>
                              
                             </div>
                         </div>
@@ -212,7 +232,7 @@
                 <br>
 @endforeach
  @foreach($sem2 as $s )
-                <div class="row">
+                <div class="row" id="pa{{$s->idSem}}">
                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
                      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                         <div class="analytics-sparkle-line reso-mg-b-30">
@@ -238,7 +258,7 @@
                                 </div>  <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3 "> 
                                     <a class="btn btn-info widget-btn-2 btn-sm pull-right" href="{{url('Semestres/dashboard/'.$s->idSem)}}">Explorer</a></div>
                                     <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3 "> 
-                                    <button class="btn btn-info widget-btn-2 btn-sm pull-left">Archiver</button></div></div>  </h2>
+                                    <button class="btn btn-info widget-btn-2 btn-sm pull-left archive" id="{{$s->idSem}}">Archiver</button></div></div>  </h2>
                              
                             </div>
                         </div>
@@ -254,6 +274,33 @@
               </div>
             </div>
         </div>
+           <div id="archiver" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-close-area modal-close-df">
+                                                            <a class="close" data-dismiss="modal" href="#"  style="background: #d80027"><i class="fa fa-close"></i></a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="modal-login-form-inner">
+                                            <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
+                                        <h2>Suppression !</h2>
+                     <p>Voulez-Vous vraiment archiver ce semestre : <b></b></p>
+                                         </div>
+                                                        </div>
+                                       <div class="modal-footer danger-md">
+     <form method="post"  action="{{ url('DeleteGroupes') }}" id="deleteForm">
+    {{ csrf_field() }}
+
+    <input type="hidden" name="idGrpDel" id="idGrpDel">
+      
+      <a data-dismiss="modal" href="#"  style="background: #d80027">Annuler</a>
+      <a href="#" id="ArchiveBtn" style="background: #d80027">archiver</a>
+    </form>
+                                        
+                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
         @endsection
 
         

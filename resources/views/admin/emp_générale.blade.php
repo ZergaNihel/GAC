@@ -1055,12 +1055,12 @@ if(data.pop1[i].heure === "8h30" && data.pop1[i].jour === "lundi"){
        @if(Auth::user()->role == 1)
      @section('sidebar')
   
-     @include('layouts.sidebarAdmin1')
+     @include('layouts.sidebarAdmin2')
 
      @endsection
     @section('mobileSidebar')
   
-     @include('layouts.mobileSidebar1')
+     @include('layouts.mobileSidebar2')
 
      @endsection
      @endif
