@@ -4,6 +4,39 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function(){
+ $('#formEns').submit(function(e){
+    e.preventDefault();
+   // alert("hh");    
+      var fd = new FormData($(this)[0]);
+   
+$.ajax({
+  url:  $(this).attr('action'),
+  type: "POST",
+  data: fd,
+  cache : false ,     
+  processData: false,  // indique à jQuery de ne pas traiter les données
+  contentType: false ,                 
+success: function(data) {
+    //alert(data.idG+"nn"+data.idSem);
+window.location.reload();
+},
+error: function (dataErr) {
+
+$('#error1').css("display","");
+ var response = JSON.parse(dataErr.responseText);
+       // alert(dataErr.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error1').html(errorString);
+          }
+});
+       });
+
 
     $(document).on('click','#pwd',function(){
      $.ajax({
@@ -41,6 +74,38 @@ success: function(data) {
  $("#panel"+data.id+"").remove();
 }
 });
+       });
+//add btn
+$(document).on('click','#ModBtn',function(e){
+       // alert("hhh");
+e.preventDefault();
+$(this).html('création..');
+    
+ $.ajax({
+          data: $("#formMod").serialize(),                             
+          url:  $("#formMod").attr('action'),
+          type: "POST",
+         
+      success: function (data) {
+      $('#zoomInDown1').modal("hide");
+     window.location.reload();
+    },
+      error: function (dataErr) {
+   $('#ModBtn').html('Ajouter');
+   $('#error').css("display","");
+var response = JSON.parse(dataErr.responseText);
+       // alert(dataErr.errors)
+var errorString = '<ul>';
+$.each( response.errors, function( key, value) {
+
+  errorString += '<li>' + value + '</li>';
+
+        });
+  errorString += '</ul>';
+        
+         $('#error').html(errorString);
+          }
+      });
        });
 
 });
@@ -107,24 +172,18 @@ success: function(data) {
                                                                 <div class="row">
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Nouveau Enseignant</h3>
+                                            <h3>Nouveau Enseignant</h3>
                             <p>Ajouter un nouveau enseignant</p>
                             <br>
-       @if ($errors->any())
+      
      <input type="hidden" id="errImport" value="1" >
-    <div class="alert-wrap1 shadow-inner wrap-alert-b">
-     <div class="alert alert-danger alert-mg-b" role="alert">
-      <ul >
-            @foreach ($errors->all() as $error)
-               
-     <li>  <strong>Erreur!</strong> {{ $error }}. </li> 
-        
-         @endforeach
-            </ul>
+   <div class="alert-wrap1 shadow-inner wrap-alert-b" >
+     <div class="alert alert-danger alert-mg-b" role="alert" id="error" style="display:none;">
+  
           </div>
           </div>
      
-@endif
+
          <form action="{{url('addEns')}}" method="post" id="formMod" >
                                   {{ csrf_field() }}
                          <div class="form-group-inner " id="divNom">
@@ -151,8 +210,8 @@ success: function(data) {
          <input type="text" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" placeholder="Prenom" name="prenom" id="prenom" value="{{ old('prenom') }}"/>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                 <div class="form-group-inner"> <div class="row">
+</div>
+                   <div class="form-group-inner"> <div class="row">
                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                        <label class="login2">Email</label>
                                                                                         </div>
@@ -160,8 +219,8 @@ success: function(data) {
          <input type="Email" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" placeholder="Email" name="email" id="email" value="{{ old('email') }}"/>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                 <div class="form-group-inner"> <div class="row">
+                                                 </div>
+                       <div class="form-group-inner"> <div class="row">
                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                        <label class="login2">Mot de passe</label>
                                                                                         </div>
@@ -179,7 +238,7 @@ success: function(data) {
            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="submit" id="ModBtn" >Ajouter</button>
+         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="ModBtn" >Ajouter</button>
                                                                              </div>
                                                                                         </div>
            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -204,21 +263,15 @@ success: function(data) {
                                                                             <h3>Nouveaux Enseignants</h3>
                             <p>Vous pouvez ajouter touts les enseignants par importer un fichier excel qui contient le nom , prenom et l'email de l'enseignant</p>
                             <br>
-   @if ($errors->any())
+  
      <input type="hidden" id="errImport" value="1" >
     <div class="alert-wrap1 shadow-inner wrap-alert-b">
-     <div class="alert alert-danger alert-mg-b" role="alert">
-      <ul >
-            @foreach ($errors->all() as $error)
-               
-     <li>  <strong>Erreur!</strong> {{ $error }}. </li> 
-        
-         @endforeach
-            </ul>
+     <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none">
+     
           </div>
           </div>
      
-@endif
+
          <form action="{{url('addEnsExcel')}}" method="post" id="formEns" enctype="multipart/form-data" >
                                   {{ csrf_field() }}
                        <div class="login-btn-inner">
@@ -310,18 +363,13 @@ success: function(data) {
                             <div class="panel-footer contact-footer">
                                         <div class="professor-stds-int">
                                     <div class="professor-stds">
-                                        <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
+                                        <div class="contact-stat"> <strong>{{$e->nom}} {{$e->prenom}}</strong></div>
                                     </div>
-                                    <div class="professor-stds">
-                                        <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                    </div>
-                                    <div class="professor-stds">
-                                        <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
-                                    </div>
+                                 
                                 </div>
                                
                             </div>
-                            <br>
+                            
                         </div>
                     </div>
 

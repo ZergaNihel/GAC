@@ -30,7 +30,8 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#">
+                                                            <a class="close" data-dismiss="modal" 
+                                                            href="#">
                                                                 <i class="fa fa-close"></i>
                                                             </a>
                                                         </div>

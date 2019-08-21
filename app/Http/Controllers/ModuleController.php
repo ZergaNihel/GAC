@@ -32,7 +32,7 @@ class ModuleController extends Controller
          $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
         $pdf = Examen::find($id);
-         $module = Module::find($pdf->module_Exam);
+    $module = Module::find($pdf->module_Exam);
         return view('modules.pdf' ,compact('sem1','sem2','pdf','sc','module'));
      }
 	public function edit(Request $request){

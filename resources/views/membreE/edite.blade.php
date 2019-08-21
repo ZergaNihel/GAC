@@ -1,4 +1,19 @@
-@extends('layouts.masterEr')
+@if(Auth::user()->role == 1)
+@extends('layouts.header')
+@section('sidebar')
+  
+     @include('layouts.sidebarAdmin1')
+
+     @endsection
+    @section('mobileSidebar')
+  
+     @include('layouts.mobileSidebar1')
+
+     @endsection
+
+
+@endif
+ 
 @section('content')
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">

@@ -167,11 +167,18 @@ class SemestreController extends Controller
   
   $mods = TDTP::where('id_groupe',$g->groupe)
                 ->select('id_module')
-                ->distinct('id_module')->get();
-
+                ->distinct('id_module')
+                ->get('id_module')->toArray();
+$modules = Module::whereIn('idMod',$mods)->get();
+$semestre = Semestre::find($id);
+    $sec = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
+                           ->join('sections','sec_groupe','idSec')
+                           ->select('idSec','nomSec')
+                           ->distinct('idSec')
+                           ->get();
   
   //dd($mods);
-   return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods'));
+   return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','modules','id','semestre','sec'));
    }
   function GrpDet ($id){
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
