@@ -56,7 +56,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-close-area modal-close-df">
-                    <a class="close" href="{{asset('Semestres/dashboard/'.$idSem)}}"><i class="fa fa-close"></i></a>
+                    <a class="close" href="{{asset('enseignant/groupes/'.$idSem)}}"><i class="fa fa-close"></i></a>
                 </div>
                 <form method="POST" action={{url('presence/liste')}} id="popup">
                     {{ csrf_field() }}

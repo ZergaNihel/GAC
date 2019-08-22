@@ -73,7 +73,7 @@
 
 @section('path')
     <li>
-        <span class="bread-blod">Groupe</span>
+        <span class="bread-blod">Gestion des notes</span>
     </li>
 @endsection
 
@@ -193,7 +193,7 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <span>
                                                         <br>
-                                                        <b>Paquet:</b> S101</span>
+                                                        <b>Paquet:</b> {{$paquet->salle}}</span>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <span>
@@ -246,7 +246,7 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <span>
                                                         <br>
-                                                        <b>Paquet:</b> S101</span>
+                                                        <b>Paquet:</b> {{$paquet->salle}}</span>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <span>
@@ -279,33 +279,33 @@
                                                 </select>
                                             </form>
                                         </div>
+                                        <div class="col-lg-2"></div>
                                         <div class="col-lg-6">
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="modal-area-button">
-                                                <a class="Warning Warning-color" href="#" data-toggle="modal" data-target="#Valider">Valider</a>
-                                            </div>
-                                            <div id="Valider" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h3>Voulez-vous vraiment valider les notes?</h3>
-                                                            <p>(Vous ne pouvez plus les modifier aprés la validation)</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a data-dismiss="modal" href="#">Annuler</a>
-                                                            <a href="#">Valider</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <form action="/decoder/paquet" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                <input type="hidden" name="paquet" value="{{$paquet->idPaq}}">
+                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right" title="Valider"> valider </button>
+                                            </form>
                                         </div>
                                     </div>
                                     
-
+                                    <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-close-area modal-close-df">
+                                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <i class="educate-icon educate-checked modal-check-pro"></i>
+                                                    <h2>Awesome!</h2>
+                                                    <p>The Modal plugin is a dialog box/popup window that is displayed on top of the current page</p>
+                                                </div>
+                                                    <a data-dismiss="modal" href="#">Cancel</a>
+                                                    <a href="#">Process</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="static-table-list">
                                             <table  class="table">
                                                 <thead>

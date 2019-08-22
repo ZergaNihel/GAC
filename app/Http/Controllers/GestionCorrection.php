@@ -43,7 +43,19 @@ class GestionCorrection extends Controller
                     ->where('examens.type','=',$type)
                     ->select('paquets.*')
                     ->get();
-        return response()->json($paquets);
+        $i=0; $t=null;
+        foreach ($paquets as $p) {
+            $cpt=DB::table('paquet_ens')
+                    ->where('id_paq','=',$p->idPaq)
+                    ->where('valide','=',1)
+                    ->count();
+            if($cpt == 2)
+            {
+                $t[$i]=$p;
+                $i++;
+            }
+        }
+        return response()->json($t);
     }
 
     public function lister(Request $request)
@@ -59,8 +71,8 @@ class GestionCorrection extends Controller
         $codes=DB::table('codes')
                     ->where('codes.paq_code','=',$request->input('paquet'))
                     ->get();
-                   
-        $i=0;
+                  
+        $i=0; $notes1=null;$notes2=null;
         foreach($codes as $code)
         {
             $note1= DB::table('corrections')
@@ -68,7 +80,8 @@ class GestionCorrection extends Controller
                     ->where('paquet_ens.id_Ens','=',$correcteurs[0]->idEns)
                     ->where('code_etu','=',$code->idC)
                     ->first();
-            if($note1)
+                    
+            if($note1 )
             {
                 $notes1[$i]=$note1->note; $i++;
             }else{
@@ -256,5 +269,16 @@ class GestionCorrection extends Controller
                     ->where('codes.paq_code','=',$request->input('paquet'))
                     ->get();
         return $Ncodes;
+    }
+
+    public function decoder(Request $request)
+    {
+        $paquet=Paquet::find($request->input('paquet'));
+        $paquet->decode=1;
+        $paquet->save();
+        $semestre= Semestre::find($request->input('semestre')); 
+        // return view('EnseignantR.correction.popup',['semestre'=> $semestre,
+        // ]);
+       return redirect('enseignant/groupes/2');
     }
 }

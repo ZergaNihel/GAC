@@ -151,7 +151,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="header-top-wraper">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+                                    <div class="col-lg-2 mg-tb-15">
+                                    <a href="{{url('anonymat/paquets')}}"><img class="main-logo" src="{{asset('img/logo/logosn.png')}}" alt=""  height="40px" width="30px"/></a>
+                                    </div>           
+                                    <div class="col-lg-5 col-md-7 col-sm-6 col-xs-12">
                                         @if(Auth::user()->role == '1')
                                         @include('layouts.enTete')
                                         @endif

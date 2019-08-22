@@ -113,6 +113,8 @@ Route::get('choix/paquet', 'CorrectionCopies@paquet');
 
 Route::post('corriger', 'CorrectionCopies@corriger');
 
+Route::post('valider/correction', 'CorrectionCopies@valider');
+
 Route::get('attribuer/note', 'CorrectionCopies@noter');
 
 Route::get('gestion/paquet/controle/{id}', 'CorrectionCopies@GstpaquetCtrl');
@@ -138,6 +140,8 @@ Route::get('choix/ecart', 'GestionCorrection@ecart');
 Route::get('attribuer/note/finale', 'GestionCorrection@noter');
 
 Route::get('choix/formule', 'GestionCorrection@formule');
+
+Route::post('decoder/paquet', 'GestionCorrection@decoder');
 
 Route::get('anonymat/paquets','Anonymat@index');
 

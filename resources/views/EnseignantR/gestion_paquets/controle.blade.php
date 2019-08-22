@@ -100,10 +100,13 @@
             var cnt=0;
             $('#valider').attr('disabled',true);
             $("#correcteurs").chosen().change(function(){
-                cnt = cnt+1;
+                cnt = $("#correcteurs option:selected").length;
                 if(cnt==2)
                 {
                     $('#valider').attr('disabled',false);
+                }
+                else{
+                    $('#valider').attr('disabled',true); 
                 }
             });
         });

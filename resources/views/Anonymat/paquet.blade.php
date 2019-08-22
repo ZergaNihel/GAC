@@ -6,6 +6,12 @@
     </li>
 @endsection
 
+{{-- @section('logo')
+<div class="col-lg-2 mg-tb-15">
+    <a href="{{url('anonymat/paquets')}}"><img class="main-logo" src="{{asset('img/logo/logosn.png')}}" alt=""  height="40px" width="30px"/></a>
+</div> 
+@endsection --}}
+
 @section('content')
 <div class="static-table-area"  >
     <div class="container-fluid" style="width:1200px; left:150px;">

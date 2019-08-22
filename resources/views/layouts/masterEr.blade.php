@@ -153,7 +153,7 @@
                     <ul class="metismenu" id="menu1">
                         <br> <br> <br>
                         <li>
-                            <a title="Landing Page" href="{{url('enseignant/groupes/'.$semestre->idSem)}}" aria-expanded="false"><span class="educate-icon educate-home icon-wrap"></span> <span class="mini-click-non">Dashboard</span></a>
+                            <a title="Groupes" href="{{url('enseignant/groupes')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
                         </li>
 
                         <li>
@@ -166,10 +166,6 @@
                                 <li><a title="Gestion des justificatifs" href="{{url('justifications/'.$semestre->idSem)}}"><span class="mini-sub-pro">Gestion des justificatifs</span></a></li>
                                 <li><a title="Liste des exclus" href="{{url('exclus/'.$semestre->idSem)}}"><span class="mini-sub-pro">Liste des exclus</span></a></li>
                             </ul>
-                        </li>
-
-                        <li>
-                            <a title="Groupes" href="{{url('enseignant/groupes')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
                         </li>
 
                         <li>
@@ -790,7 +786,7 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                        <li><a href="events.html">Dashboard</a></li>
+                                            <li><a href="{{url('enseignant/groupes')}}">Groupes</a></li>
                                         <li><a data-toggle="collapse" data-target="#Charts" href="#">Présence <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
                                                 <li><a href="{{url('presence/'.$semestre->idSem)}}">Liste du groupe</a></li>
@@ -798,7 +794,6 @@
                                                 <li><a href="{{url('exclus/'.$semestre->idSem)}}">Liste des exclus</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{url('enseignant/groupes')}}">Groupes</a></li>
                                         <li><a href="{{url('correction/choix/'.$semestre->idSem)}}">Correction</a></li>
                                         <li><a href="{{url('gestion/correction/choix/'.$semestre->idSem)}}">Gestion notes</a></li>
                                         <li><a data-toggle="collapse" data-target="#demopro" href="#">Gestion paquets <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>

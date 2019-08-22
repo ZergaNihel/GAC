@@ -537,9 +537,9 @@ $.ajax({
         </div>
 
         @endif
-        <?php $var=1; ?>
+        
         @foreach($section as $s)
-
+        <?php $var=1; ?>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
                 <div class="alert-title">

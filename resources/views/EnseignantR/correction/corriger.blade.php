@@ -52,6 +52,16 @@
                                                 <br>
                                                 <h3>Paquet: {{$paquet->salle}}</h3>  </span>
                                         </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mg-t-30">
+                                            <form action="/valider/correction" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                <input type="hidden" name="auth" value="{{Auth::user()->enseignant->idEns}}">
+                                                <input type="hidden" name="paquetens" value="{{$paquet->idPaq}}">
+                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right" id="valider" title="Valider"> valider </button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <br>
                                     <br>
@@ -91,7 +101,7 @@
                                                 <td>{{$No++}}</td>
                                                 <td> {{$code->code}}</td>
                                                 <form id="formN{{$code->idC}}" >
-                                                    <td style="text-align:center;">
+                                                    <td class="pull-center">
                                                         <input type="hidden" id="code{{$code->idC}}" name="code" value="{{$code->idC}}">
                                                         <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',Auth::user()->enseignant->idEns)->get() as $c){{$c->note}}@endforeach" style="width:50px; text-align:center;"/>
                                                     </td>

@@ -45,11 +45,13 @@ class CorrectionCopies extends Controller
     {
         $type = $request->input('type');
         $modules = DB::table('modules')
-                    ->join('semestres','modules.semestre','=','semestres.idSem')
+                    //->join('semestres','modules.semestre','=','semestres.idSem')
                     ->join('examens','modules.idMod','=','examens.module_Exam')
-                    ->where('semestres.active','=',1)
-                    ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
+                    ->join('paquets', 'examens.idExam', '=', 'paquets.paq_Exam')
+                    ->join('paquet_ens', 'paquet_ens.id_paq', '=', 'paquets.idPaq')
+                    ->where('paquet_ens.id_Ens','=',Auth::user()->enseignant->idEns)
                     ->where('examens.type','=',$type)
+                    ->select('idMod','nom')
                     ->distinct()
                     ->get(); 
 
@@ -62,9 +64,11 @@ class CorrectionCopies extends Controller
         $type = $request->input('type');
         $paquets= DB::table('paquets')
                     ->join('examens','examens.idExam','=','paquets.paq_Exam')
-                    ->join('modules','examens.module_Exam','=','modules.idMod')
+                    ->join('paquet_ens','paquet_ens.id_paq','=','paquets.idPaq')
+                    ->where('paquet_ens.valide','=',0)
                     ->where('examens.module_Exam','=',$idmodule)
                     ->where('examens.type','=',$type)
+                    ->where('id_Ens','=',Auth::user()->enseignant->idEns)
                     ->select('paquets.*')
                     ->get();
         return response()->json($paquets);
@@ -111,6 +115,10 @@ class CorrectionCopies extends Controller
                 ->where('paquet_ens.id_Ens', '=',Auth::user()->enseignant->idEns)
                 ->select('corrections.id')
                 ->get();
+        $paq_ens=DB::table('paquet_ens')
+                ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                ->get();
+                
         if(count($id)>0)
         {
             $note=Correction::find($id[0]->id);
@@ -121,13 +129,30 @@ class CorrectionCopies extends Controller
         {
             $note= new Correction();
             $note->note=$n;
-            $note->correcteur=Auth::user()->enseignant->idEns;
+            $note->correcteur=$paq_ens[0]->id;
             $note->code_etu=$code;
             $note->save();
         }
             
         
         return response()->json($note);
+    }
+
+    public function valider(Request $request)
+    {
+        $paquet=$request->input('paquetens');
+        $auth=$request->input('auth');
+        $p=DB::table('paquet_ens')
+        ->where('id_Ens', '=', $auth)
+        ->where('id_paq', '=',$paquet)
+        ->first();
+        //return $p;
+        $paqens=Paquet_en::find($p->id);
+        $paqens->valide=1;
+        $paqens->save();
+        $semestre= Semestre::find($request->input('semestre')); 
+        return view('EnseignantR.correction.popup',['semestre'=> $semestre,
+        ]);
     }
 
     public function GstpaquetCtrl($id)
@@ -150,6 +175,7 @@ class CorrectionCopies extends Controller
         ->join('modules','examens.module_Exam','=','modules.idMod')
         ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
         ->where('examens.type','=','Controle')
+        ->where('decode','=',0)
         ->select('paquets.idPaq','paquets.salle')
         ->groupby('idPaq','salle')
         ->get();

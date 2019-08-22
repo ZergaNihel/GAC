@@ -53,7 +53,7 @@
         
             });
         
-            $(document).on("click",".btn-danger jst",function(){
+            $(document).on("click",".btn-danger ",function(){
              var btn_id = $(this).attr("id");
              var i=btn_id.substring(7,btn_id.length);
              var data = $('#editR'+i).serialize();
