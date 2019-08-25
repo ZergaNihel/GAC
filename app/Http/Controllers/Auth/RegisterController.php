@@ -4,14 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Etudiant;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Http\Controllers\Auth\Redirect;
-
+use \App\Http\Controllers\Auth\Redirect;
+use flash;
+use Notification;
+use Session;
+use App\Notifications\nouvelEtudiant;
 class RegisterController extends Controller
 {
     /*
@@ -37,7 +42,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/justifications';
+    protected $redirectTo = '/absences_Etudiant';
 
     /**
      * Create a new controller instance.
@@ -55,11 +60,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+     protected function validator(array $data)
+    { $matricule=$data['matricule'];
         return Validator::make($data, [
             //'name' => ['required', 'string', 'max:255'],
-            'matricule' => ['required', 'string', 'max:255','unique:users'],
+     'matricule' => ['required', 'string', 'max:255','unique:users',Rule::exists('etudiants')->where(function($query) use ($matricule){
+                $query->where('matricule',$matricule);
+            }),
+          ],
             'email' => ['required', 'string', 'email', 'max:255','unique:users' ],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             
@@ -114,8 +122,7 @@ class RegisterController extends Controller
                 ->where('matricule',$data['matricule'] )
                 ->count();
                 if($p>0){   */
-         
-        return User::create([
+         $user = User::create([
             //'name' => $data['name'],
 
            'matricule' => $data['matricule'],
@@ -124,6 +131,23 @@ class RegisterController extends Controller
             'id_Etu' => $id,
             'password' => Hash::make($data['password']),
         ]);
+         $details = [
+            'id_user' => $user->id,
+            'nom' => $user->etudiant->nom,
+            'prenom' => $user->etudiant->prenom,
+            'date_naissance' => $user->etudiant->date_naissance,
+            'matricule' => $user->etudiant->matricule,
+            'type' => $user->etudiant->type,
+            'email' => $user->email,
+        ];
+        $admins = User::where('role',1)->get();
+  foreach ($admins as $admin) {
+    
+     Notification::send($admin, new nouvelEtudiant($details));
+   }
+        
+
+        return $user;
     //}
   
     }

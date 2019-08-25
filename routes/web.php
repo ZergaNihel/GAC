@@ -28,7 +28,7 @@ Route::get('/bar', function () {
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
  Route::post('/add_justif', 'EtudiantController@add_justif') ;
  Route::post('/edit_justif', 'EtudiantController@modifier') ;
-
+Route::get('/CompteEtudiant/{id}/{id_notif}', 'EtudiantController@info') ;
  Route::get('/Etudiant/notes', 'EtudiantController@notes') ;
  //------------------ MailBoxe ----------------------------
 Route::get('/boite_de_reception', 'MailBoxController@index') ;

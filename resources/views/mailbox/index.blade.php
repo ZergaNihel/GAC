@@ -67,7 +67,7 @@
                                 <div class="table-responsive ib-tb">
                                     <table class="table table-hover table-mailbox">
                                         <tbody>
-                                       @foreach(Auth::user()->unreadNotifications as $notification)
+                                       @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->where('type','App\Notifications\MsgNotification') as $notification)
                                             <tr class="active unread">
                                                 <td class="">
                                                     <div class="checkbox">
@@ -105,7 +105,7 @@
                                                 <td class="text-right mail-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</td>
                                             </tr>
                                             @endforeach
-                                            @foreach(Auth::user()->readNotifications as $notification)
+                                            @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification') as $notification)
                                             <tr class="unread">
                                                 <td class="">
                                                     <div class="checkbox checkbox-single checkbox-success">
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                             <div class="panel-footer ib-ml-ft">
-                                <i class="fa fa-eye">  </i> {{ Auth::user()->unreadNotifications->count() }} unread
+                                <i class="fa fa-eye">  </i> {{ Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->where('type','App\Notifications\MsgNotification')->count() }} unread
                             </div>
                         </div>
                     </div>

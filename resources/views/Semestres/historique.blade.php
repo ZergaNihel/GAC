@@ -71,6 +71,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                            <div class="dashtwo-order-area mg-tb-30">
+                        <div class="container-fluid">
+                            <div class="row" id="hist">
+                            
+                                @foreach ($sem as $s)
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">
+                                            <div class="skill-content-3 analytics-edu analytics-edu2">
+                                                <div class="skill">
+                                                    <div class="progress progress-bt">
+                                                        <div class="lead-content">
+                                                            <h3> <a href="{{url('Semestres/historique/'.$s->idSem)}}"> {{$s->annee}} </a> </h3>
+                                                            <p> {{$s->nomSem}}</p>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
                  
