@@ -147,10 +147,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="header-top-wraper">
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+               <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
  <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-                                                    <i class="educate-icon educate-nav"></i>
+                <i class="educate-icon educate-nav"></i>
                                                 </button>
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@
                                       <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                      
                                                 <li class="nav-item dropdown">
-                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
+                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->count()>0)
                                                         <span class="indicator-ms"></span>
                                                     @endif
                                                 </a>
@@ -175,7 +175,7 @@
                                                         <ul class="message-menu">
 
                                            
-                        @foreach(Auth::user()->unreadNotifications as $notification)
+                        @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification') as $notification)
                                           <li style="background-color:#f5f5f5;">
                 <a 
             href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
@@ -207,7 +207,7 @@
                                                                 </a>
                                         </li>
                                         @endforeach
-                 @foreach(Auth::user()->readNotifications->take(1) as $notification)
+                 @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification')->take(1) as $notification)
                                           <li>
                 <a 
             href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
@@ -246,29 +246,47 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i>
+                                @if(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->count()>0)
+                                                        <span class="indicator-ms"></span>
+                                                    @endif</a>
                                                     <div role="menu" class="notification-author dropdown-menu animated zoomIn">
                                                         <div class="notification-single-top">
                                                             <h1>Notifications</h1>
                                                         </div>
-                                                        <ul class="notification-menu">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                      <ul class="notification-menu">
+      @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
+                                 <li style="background-color:#f5f5f5;">
+<a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
+                <div class="notification-icon">
+<i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
-                                                                    <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
+            <div class="notification-content">
+            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</span>
+               <h2>{{$notification->data['nom']}} {{$notification->data['prenom']}}</h2>
+            <p>L' étudiant (e) {{$notification->data['nom']}} {{$notification->data['prenom']}} a crée son compte .</p>
+            </div>
                                                                 </a>
                                                             </li>
-                                                    
+                                                    @endforeach
+                   @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
+                                 <li >
+<a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
+                <div class="notification-icon">
+<i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+            <div class="notification-content">
+            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</span>
+               <h2>{{$notification->data['nom']}} {{$notification->data['prenom']}}</h2>
+            <p>L'étudiant {{$notification->data['nom']}} {{$notification->data['prenom']}} a crée son compte .</p>
+            </div>
+                                                                </a>
+                                                            </li>
+                                                    @endforeach
                                                             
                                                         </ul>
                                                         <div class="notification-view">
-                                                            <a href="#">View All Notification</a>
+                                                          
                                                         </div>
                                                     </div>
                                                 </li>

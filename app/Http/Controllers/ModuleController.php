@@ -82,6 +82,7 @@ foreach ($exams as $e ) {
             $s2=0;
     	$ens = Enseignant::all();
     	$modules= Module::paginate(16);
+        //dd($modules);
     	$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
 		foreach ($sem1 as $key ) {
     	$s1 = $key->idSem;
@@ -94,7 +95,7 @@ foreach ($exams as $e ) {
        //dd($s2);
     if ($request->ajax()) {
         //dd("hh");
-            return view('modules.pagination', compact('sem','modules','ens','s1','s2' , 'sem1','sem2'));
+return view('modules.pagination', compact('sem','modules','ens','s1','s2' , 'sem1','sem2'));
         }
         return  view('modules.index', compact('sem','modules','ens','s1','s2','sem1','sem2'));}
         else{

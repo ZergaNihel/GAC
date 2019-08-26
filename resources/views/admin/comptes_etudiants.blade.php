@@ -52,8 +52,41 @@
                                          <th>matricule</th>
                                          <th>date de naissance</th>
                                          <th>type</th>
+                                         <th>Action</th>
                                     </tr>
-                      
+                                    @php $var=1; @endphp
+             @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)
+                      <tr style="background-color:#f5f5f5;">
+                          <td>{{$var}}</td>
+                          <td>{{$notification->data['nom']}}</td>
+                          <td>{{$notification->data['prenom']}}</td>
+                          <td>{{$notification->data['email']}}</td>
+                          <td>{{$notification->data['matricule']}}</td>
+                          <td>{{$notification->data['date_naissance']}}</td>
+                          <td>{{$notification->data['type']}}</td>
+                             <td>
+                                        
+  <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">  <button data-toggle="tooltip" title="Détails" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                        </td>
+                      </tr>
+                      @php $var++; @endphp
+                      @endforeach
+            @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)
+                      <tr >
+                          <td>{{$var}}</td>
+                          <td>{{$notification->data['nom']}}</td>
+                          <td>{{$notification->data['prenom']}}</td>
+                          <td>{{$notification->data['email']}}</td>
+                          <td>{{$notification->data['matricule']}}</td>
+                          <td>{{$notification->data['date_naissance']}}</td>
+                          <td>{{$notification->data['type']}}</td>
+                             <td>
+                                        
+  <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">  <button data-toggle="tooltip" title="Détails" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                        </td>
+                      </tr>
+                      @php $var++; @endphp
+                      @endforeach
                                 </table>
                             </div>
                       

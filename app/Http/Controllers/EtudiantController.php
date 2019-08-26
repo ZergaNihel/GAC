@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Semestre;
 use App\Absence;
 use App\Module;
+use App\User;
+use App\Etudiant;
+use App\Enseignant;
 use DB;
 use Auth;
 use Response;
@@ -29,6 +32,8 @@ else{
 }
 
     function index(){
+        $s1 = 0;
+        $s2 = 0;
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     foreach ($sem1 as $key) {
@@ -138,5 +143,19 @@ else{
 
     }
 
+function info ($id , $id_notif){
 
+Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->where('id', $id_notif)->markAsRead();
+ $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+  //$semestre =2;
+        $membre = User::find($id);
+        $etudiant = Etudiant::all();
+       // $roles = Role::all();
+         $enseignant = Enseignant::all();
+        
+
+
+return view('membre.admin_etu', compact('membre','etudiant','enseignant','sem1','sem2'));
+}
 }

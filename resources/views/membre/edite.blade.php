@@ -60,9 +60,10 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li><a href="#description">Activity</a></li>
-                                
-                                <li class="active"><a href="#INFORMATION">Update Details</a></li>
+                                <li class="active"><a href="#description">profil</a></li>
+                             
+                               <li><a href="#INFORMATION">Modifier le profil</a></li>
+                               
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade" id="description">

@@ -60,25 +60,24 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Activity</a></li>
-                                
-                                <li><a href="#INFORMATION">Update Details</a></li>
+                                <li class="active"><a href="#description">profil</a></li>
+                               
+                               <li><a href="#INFORMATION">Modifier le profil</a></li>
+                               
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div class="row">
-                                            @if(Auth::user()->role == '1' || Auth::user()->role == '2')
+       @if(Auth::user()->role == '1' || Auth::user()->role == '2')
                                              <!--debut de profil admine ou anonyma-->
                                                     <div class="col-md-3">
                                                         <strong>Nom</strong>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <p class="text-muted">
-                                                            {{$membre->name}}
-                                                        </p>
+           <p class="text-muted"> {{$membre->name}} </p>
                                                     </div>
                                                      <div class="col-md-3">
                                                         <strong>email</strong>
@@ -88,6 +87,7 @@
                                                             {{$membre->email}}
                                                         </p>
                                                     </div>
+
                                                      <!--fin de profil admine ou anonyma-->
                                                   @elseif(Auth::user()->role == '0')
                                                    
@@ -96,7 +96,7 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <p class="text-muted">
-                                                            {{$membre->etudiant->nom}}
+                                                    {{$membre->etudiant->nom}}
                                                         </p>
                                                     </div>
                                                      
@@ -105,7 +105,7 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <p class="text-muted">
-                                                           {{$membre->etudiant->prenom}}
+                                                     {{$membre->etudiant->prenom}}
                                                         </p>
                                                     </div>
                                                     <div class="col-md-3">
@@ -113,7 +113,15 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <p class="text-muted">
-                                                            {{$membre->etudiant->date_naissance}}
+                                                {{$membre->etudiant->date_naissance}}
+                                                        </p>
+                                                    </div>
+                                                        <div class="col-md-3">
+                                                        <strong>Matricule</strong>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <p class="text-muted">
+                                                {{$membre->etudiant->matricule}}
                                                         </p>
                                                     </div>
                                                    
