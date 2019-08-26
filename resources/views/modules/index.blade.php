@@ -69,20 +69,20 @@ var text;
        $(document).on('click','#ModBtn',function(){
         alert(""+$("#nom1").val()+""+$("#code1").val()+""+$("#type1").val()+""+$('input:radio[name=semestre]')[2].checked+""+$("select[name=enseignant]").val()+"");
 
-          if($("#nom1").val() === "" || $("#code1").val() === "" || $("#type1").val() =="" || ( $('input:radio[name=semestre]')[0].checked == false && $('input:radio[name=semestre]')[1].checked== false && $('input:radio[name=semestre]')[2].checked == false) ){
+          if($("#nom1").val() === "" || $("#code1").val() === "" || $("#type1").val() ==0 || ( $('input:radio[name=semestre]')[0].checked == false && $('input:radio[name=semestre]')[1].checked== false && $('input:radio[name=semestre]')[2].checked == false) ){
     alert("cc1");
       $('#error').css("display","");
     //$("#module > option").attr("selected",false);
     
-    }else if(($('input:radio[name=semestre]')[0].checked== true ||  $('input:radio[name=semestre]')[1].checked== true) && $("select[name=enseignant]") == ""){
+    }else if(($('input:radio[name=semestre]')[0].checked== true ||  $('input:radio[name=semestre]')[1].checked== true) && $("#enseignantN").val() == 0){
           $('#error').css("display","");
-          alert("cc2 = "+$("select[name=enseignant]").val());
+          alert("cc2 = "+$("#enseignantN").val());
     }else{
 
          $('#error').css('display' ,"none");
         $.ajax({
 type: "POST",
-data: $('#formMod').serialize(),                             // to submit fields at once
+data: $('#formMod').serialize(),                             // to submit fields at 
 url: $('#formMod').attr('action'),                        // use the form's action url
 success: function(data) {
     $("#zoomInDown1").modal("hide");
@@ -133,7 +133,14 @@ var s1 =$("#action"+data.mod.idMod+"").find("button");
        });
 
  $(document).on('click','#ModEditBtn',function(){
-        alert("hhh");
+ 
+  if($("#nom").val() === "" || $("#code").val() === "" || $("#type").val() ==0 || ( $('input:radio[name=semestre1]')[0].checked == false && $('input:radio[name=semestre1]')[1].checked== false && $('input:radio[name=semestre1]')[2].checked == false) ){
+   // alert("cc1");
+      $('#error').css("display","");
+    //$("#module > option").attr("selected",false);
+    
+    }else{
+      $('#error').css("display","none");
         $.ajax({
 type: "POST",
 data: $('#formEditMod').serialize(),                             // to submit fields at once
@@ -166,6 +173,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                        
 }
 });
+      }
 }); 
  $(document).on('click','.btn-danger',function(){
         var j = $(this).attr("id").substring(9);
@@ -220,9 +228,8 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                             </li>
                                         </ul>
                                         @endsection
-                                         @section('content')
-    <!-- End Left menu area -->
-    <!-- Start Welcome area -->
+        @section('content')
+         <!-- start index -->
    
         <div class="product-status mg-b-15">
             <div class="container-fluid">
@@ -234,19 +241,25 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                     <div class="add-product">
                                                 <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1">Nouveau Module</a>
                                             </div>
-                                            <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
-                                                <div class="modal-dialog">
+               
+
+                    <div class="asset-inner" id="asset-inner">
+                     @include('modules.pagination')
+                 </div>
+                               
+                  <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+                    <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                               <div class="modal-close-area modal-close-df">
+              <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="modal-login-form-inner">
                                             
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+       <div class="row">
+     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Nouveau Module</h3>
+                                      <h3>Nouveau Module</h3>
                             <p>Ajouter un nouveau module</p>
                             <br>
                <div class="alert alert-danger alert-block" style="display: none;" id="error">
@@ -263,8 +276,8 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                           <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                               <input type="text" class="form-control" placeholder="Nom de module"  name="nom" id="nom1" />
                                                                                         </div>
-                                                                                    </div>
-                                                                                </div>
+  </div>
+                                                                              </div>
          <div class="form-group-inner"> <div class="row">
                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                        <label class="login2">Code</label>
@@ -283,7 +296,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                <div class="chosen-select-single mg-b-20">
                                                
     <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="type" id="type1">
-        <option >Choisir un type ..</option>
+        <option value="0" >Choisir un type ..</option>
           <option value="CTT">(CTT)Cours/Tp/TD</option>
          <option value="CTd">(CTd)Cours/TD</option>
            <option value="Cour">Cour</option>
@@ -349,8 +362,8 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                           <div class="chosen-select-single mg-b-20">
                                                
-    <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="enseignant" id="enseignant">
-                    <option >Choisir un enseignant ..</option>                                           
+    <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="enseignant" id="enseignantN">
+                    <option  value="0">Choisir un enseignant ..</option>                                           
                @foreach($ens as $e)
                   <option value="{{$e->idEns}}">{{$e->idEns}}{{$e->nom}} {{$e->prenom}}</option>
                 @endforeach
@@ -380,166 +393,6 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                     </div>
                                                 </div>
                                             </div>
-                    <div class="asset-inner" id="asset-inner">
-                     @include('modules.pagination')
-                 </div>
-                                          <div id="EditModule" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="modal-login-form-inner">
-                                            
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                       <div class="basic-login-inner modal-basic-inner">
-                                                     <h3>Modifier le module</h3>
-                            <p>Modifier le module</p>
-                               <form action="{{url('EditModule')}}" method="post" id="formEditMod" >
-                                  {{ csrf_field() }}
-                                  <input type="hidden" name="idMod" id="idMod">
-                         <div class="form-group-inner">
-                  <div class="row">
-                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                          <label class="login2">Intitulé</label>
-                                                                                        </div>
-                          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                              <input type="text" class="form-control" placeholder="Nom de module"  name="nom" id="nom" />
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-         <div class="form-group-inner"> <div class="row">
-                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                       <label class="login2">Code</label>
-                                                                                        </div>
-               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                     <input type="text" class="form-control" placeholder="Code" name="code" id="code" />
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                          <div class="form-group-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                                <label class="login2">Type</label>
-                                                            </div>
-                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                     <div class="chosen-select-single mg-b-20">
-                                               
- <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="type" id="type" >
-                          <option value="CTT">(CTT)Cours/Tp/TD</option>
-                         <option value="CTd">(CTd)Cours/TD</option>
-                            <option value="Cour">Cour</option>
-                            <option value="TP">TP</option>
-                                                    </select>
-                                            </div>
-                 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                         <div class="login-btn-inner">
-  <div class="form-group-inner">
-                                                        <div class="row">
-                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                                <label class="login2">Semestre </label>
-                                                            </div>
-                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                                <div class="bt-df-checkbox pull-left">
-                                                                 
-                                                  <script type="text/javascript">
-    
-    function fct1(){
-    
-       
-document.getElementById('enseignant1').style.display = "none";
-        }
-         function fct2(){
-       
-document.getElementById('enseignant1').style.display = "";
-  }
-</script>                      
-                                                              
-                                                         
-                                                               
-          <div class="row">
-   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                   <div >
-@foreach ($sem1 as $key ) 
-                                                                    <label>
-                <input type="radio" value="{{$key->idSem}}"  onchange="fct2();" id="s1" name="semestre1"> <i></i> Semestre 1</label>
-                     @endforeach
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                       <div class="row">
-                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                            <div >
-                    @foreach ($sem2 as $key )
-                                                                       <label>
-         <input type="radio" value="{{$key->idSem}}"  onchange="fct2();" id="s2" name="semestre1"> <i></i> Semestre 2</label>
-              @endforeach
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                           <div class="row">
-                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                            <div >
-                                                                                <label>
-               <input type="radio" value="0" name="semestre1" onchange="fct1();" id="auc"> <i></i> Aucun </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                             
-                                                                
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                         
-                                                    </div>
-              <div class="form-group-inner" style="display: none;" id="enseignant1">
-                                                        <div class="row">
-         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <label class="login2">Enseignant Responsable</label></div>
-                                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-           <div class="chosen-select-single mg-b-20">
-                                               
-    <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="enseignant" id="enseignant12">
-                                                               
-               @foreach($ens as $e)
-                  <option value="{{$e->idEns}}">{{$e->nom}} {{$e->prenom}}</option>
-                @endforeach
-                                                                        </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                   <div class="row">
-           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-            <div class="login-horizental">
- <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="ModEditBtn">Modifier</button>
-
-</div>
-      </div>
-          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-             <div class="login-horizental">
-  <button data-dismiss="modal" href="#" class="btn btn-sm btn-primary login-submit-cs" type="button" >Annuler</button> </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                  
   
 
                         </div>
@@ -547,21 +400,11 @@ document.getElementById('enseignant1').style.display = "";
                 </div>
             </div>
         </div>
-             <div id="delete" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#"  style="background: #d80027"><i class="fa fa-close"></i></a>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="modal-login-form-inner">
-                                            <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
-                                        <h2>Suppression !</h2>
-                                        <p>Vous ne pouvez pas supprimer le module : <b></b><br> Vous devez d'abord le désactiver </p>
-                                         </div>
-                                                        </div>
-<div class="modal-footer danger-md"><a data-dismiss="modal" href="#"  style="background: #d80027">Annuler</a></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+
+
+   
+       
+
+      
 @endsection
