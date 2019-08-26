@@ -135,15 +135,6 @@
 <body>
 
     <div >
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logosn.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="header-advance-area">
             <div class="header-top-area-anonymat">
                 <div class="container-fluid">
@@ -152,12 +143,14 @@
                             <div class="header-top-wraper">
                                 <div class="row">
                                     <div class="col-lg-2 mg-tb-15">
+                                    @if(Auth::user()->role == '2')
                                     <a href="{{url('anonymat/paquets')}}"><img class="main-logo" src="{{asset('img/logo/logosn.png')}}" alt=""  height="40px" width="30px"/></a>
-                                    </div>           
+                                    @elseif(Auth::user()->role == '3')
+                                    <a href="{{url('semestre/choix')}}"><img class="main-logo" src="{{asset('img/logo/logosn.png')}}" alt=""  height="40px" width="30px"/></a>
+                                    @endif
+                                  </div>           
                                     <div class="col-lg-5 col-md-7 col-sm-6 col-xs-12">
-                                        @if(Auth::user()->role == '1')
-                                        @include('layouts.enTete')
-                                        @endif
+                                       
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
@@ -184,13 +177,14 @@
                                                                 <a
                                                                     href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
-                                                                        <img src="{{asset('img/contact/2.jpg')}}"
+                                                                        <img src="{{asset('img/profile/profil.png')}}"
                                                                             alt="">
                                                                     </div>
                                                                     <div class="message-content">
                                                                         <span
                                                                             class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
                                                                         </span>
+                                                                        <br>
                                                                         @if(
                                                                         App\User::find($notification->data['id_emt'])->role== 1 or App\User::find($notification->data['id_emt'])->role== 2 )
                                                                         <h2>{{ App\User::find($notification->data['id_emt'])->name}}
@@ -216,17 +210,19 @@
                                                             </li>
                                                             @endforeach
                                                             @foreach(Auth::user()->readNotifications->take(1) as $notification)
-                                                            <li>
+                                                            <div class="row">
+                                                              <li>
                                                                 <a
                                                                     href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
-                                                                        <img src="{{asset('img/contact/2.jpg')}}"
+                                                                        <img src="{{asset('img/profile/profil.png')}}"
                                                                             alt="">
                                                                     </div>
                                                                     <div class="message-content">
                                                                         <span
                                                                             class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
                                                                         </span>
+                                                                        <br>
                                                                         @if(
                                                                         App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role== 2 )
                                                                         <h2>{{ App\User::find($notification->data['id_emt'])->name}}
@@ -254,7 +250,9 @@
                                                                                 @endif
                                                                     </div>
                                                                 </a>
-                                                            </li>
+                                                              </li>
+                                                            </div>
+                                                            
                                                             @endforeach
 
                                                         </ul>
@@ -264,6 +262,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                @if(Auth::user()->role != '2')
                                                 <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle"><i
                                                             class="educate-icon educate-bell"
@@ -297,6 +296,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                @endif
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle">

@@ -6,16 +6,16 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">  
 <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
 <script >
 
 $(document).ready(function(){
-
+ $("#birthday").val("");
+ grp = $('#groupe').val();
      $('#laravel_datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('ajax-crud-list') }}",
+        ajax: "{{ url('groupe/index1') }}/"+grp,
         columns:[
             { data: "idEtu" , name: "idEtu" },
             { data: "nom" ,  name: "nom" },
@@ -23,13 +23,181 @@ $(document).ready(function(){
             { data: "matricule" ,  name: "matricule"},
             { data: "date_naissance" ,  name: "date_naissance" },
             { data: "type" ,  name: "type" },
+            { data: "action" ,  name: "action" },
             
         ]
      });
-       
+     
+     //------------------------------------nouveau---------------------------------
+ $('body').on('click', '.new', function () {
+$('.modal-basic-inner h3').html("Nouveau Etudiant");
+          $('.modal-basic-inner p').html("Ajouter un nouveau étudiant");
+          $('#newStud').css("display","");
+          $('#updStud').css("display","none");
+          $('#formEtud').trigger("reset");
+          $("#birthday").val("");
+          $("select option:selected").removeAttr('selected');
+          $("select").trigger('chosen:updated');
+          $("#module").css("display","none");
+          $('#error').css("display","none");
+          $('#zoomInDown1').modal('show');
+ });
+     //-------------------------------------editButton----------------------------
+       $('body').on('click', '.edit', function () {
+      var product_id = $(this).attr("id");
+      $('#error').css("display","none");
+      $.get("{{ url('edit_Student') }}" +'/' + product_id , function (data) {
+          $('.modal-basic-inner h3').html("Modifier les informations");
+          $('.modal-basic-inner p').html("Vous pouvez modifier les informations concernant chaque étudiant");
+          $('#newStud').css("display","none");
+          $('#updStud').css("display","");
+          $('#zoomInDown1').modal('show');
+          $("#id_stud").val(data.etu.idEtu);
+          $('#nom').val(data.etu.nom);
+          $('#prenom').val(data.etu.prenom);
+          $('#matricule').val(data.etu.matricule);
+          $('#birthday').val(data.etu.date_naissance);
+     
+    if(data.etu.type === "Répétitif(ve)" || data.etu.type === "Endétté(e)"){
+      if(data.etu.type === "Répétitif(ve)") {
+        $('input:radio[name=type]')[1].checked = true;
+      }
+       if(data.etu.type === "Endétté(e)") {
+        $('input:radio[name=type]')[2].checked = true;
+      }
+      //
+    //  alert(data.mods);
+      $("#module").css('display','');
+    var  m_array = new Array();
+      $.each(data.mods, function (index, value) {
+        m_array.push(value.module_end);
+    });
+ //$(".chosen-select").chosen(); 
+$(".chosen-select").val(m_array).trigger("chosen:updated");
+     
+}else{
+      $('input:radio[name=type]')[0].checked = true;
+       $("#module").css('display','none');
+    }
+          
+      })
+   });
 
+//----------------------------------------------------newStudent----------------------       
+$('#newStud').click(function (e) {
+        e.preventDefault();
+        $(this).html('création..');
+    
+        $.ajax({
+          data: $("#formEtud").serialize(),                             
+          url:  $("#formEtud").attr('action'),
+          type: "POST",
+          success: function (data) {
+     
+              $('#formEtud').trigger("reset");
+              $('#zoomInDown1').modal("hide");
+              $('#newStud').html('Ajouter');
+               $("#birthday").val("");
+           $("select option:selected").removeAttr('selected');
+           $("select").trigger('chosen:updated');
+          $("#module").css("display","none");
+              $('#laravel_datatable').DataTable().ajax.reload();
 
-$(document).on('click','#newStud',function(){
+              //table.draw();
+         
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#newStud').html('Ajouter');
+              $('#error').css("display","");
+            
+             
+        var response = JSON.parse(data.responseText);
+        alert(response.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error').html(errorString);
+          }
+      });
+    });
+//----------------------------------------------------update------------------------
+$('#updStud').click(function (e) {
+       // e.preventDefault();
+        $(this).html('Modifier..');
+    
+        $.ajax({
+          data: $("#formEtud").serialize(),                             
+          url:  "{{url('update_student')}}",
+          type: "POST",
+          success: function (data) {
+     
+              $('#formEtud').trigger("reset");
+              $('#zoomInDown1').modal("hide");
+              $('#updStud').html('Modifier');
+              $("#birthday").val("");
+           $("select option:selected").removeAttr('selected');
+           $("select").trigger('chosen:updated');
+          $("#module").css("display","none");
+              $('#laravel_datatable').DataTable().ajax.reload();
+ },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#updStud').html('Modifier');
+              $('#error').css("display","");
+            
+             
+        var response = JSON.parse(data.responseText);
+        alert(response.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error').html(errorString);
+          }
+      });
+    });
+//---------------------------------delete------------------------------
+$("#delete").on('show.bs.modal', function(event) {
+    var a = $(event.relatedTarget).data('nom');
+     var c = $(event.relatedTarget).data('prenom');
+    var b = $(event.relatedTarget).data('id');
+     var m = $(this)
+    m.find("b").text(a+" "+c);
+    m.find(".deleteBtn").attr("id",b);
+
+    
+});
+//---------------------------------- deleteBtn -------------------------------
+         $('body').on('click', '.deleteBtn', function () {
+     $(this).html('suppression..');
+        var product_id = $(this).attr("id");
+        //confirm("Are You sure want to delete !");
+    
+        $.ajax({
+            type: "get",
+            url: "{{ url('supprime_etudiant') }}/"+product_id,
+            success: function (data) {
+              //alert("hii"+data.success);
+                $('#laravel_datatable').DataTable().ajax.reload();
+                $('#delete').modal("hide");
+                //table.draw();
+                
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+
+/*$(document).on('click','#newStud',function(){
     alert("hii");
     if($("#nom").val() === "" || $("#prenom").val() === "" || $("#matricule").val() === "" ||  $("#birthday").val() === "" || ( !$("#n").is(':checked') && !$("#r").is(':checked') &&  !$("#e").is(':checked')) ){
 alert("cc1");
@@ -66,7 +234,7 @@ ligne = "<tr><td>"+ $("#var").val()+"</td><td>"+data.etud.nom+"</td><td>"+data.e
 }
   
 });}
-        });
+        });*/
     });
 </script>
 @endsection
@@ -88,11 +256,12 @@ ligne = "<tr><td>"+ $("#var").val()+"</td><td>"+data.etud.nom+"</td><td>"+data.e
         <ul class="breadcome-menu">
                                             <li><a href="#">Groupes</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">liste des groupes</span>
+                                            <li><span class="bread-blod">liste des groupes/{{$grp->nomG}}</span>
                                             </li>
                                         </ul>
                                         @endsection
                                          @section('content')
+
         <div class="data-table-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -100,22 +269,19 @@ ligne = "<tr><td>"+ $("#var").val()+"</td><td>"+data.etud.nom+"</td><td>"+data.e
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
-                                    <h1>Projects <span class="table-project-n">Data</span> Table</h1>
+                                    <h1>Groupe :  <span class="table-project-n">{{$grp->nomG}} - </span>  @foreach ($sec as $s)
+      <span class="table-project-n">{{$s->section->nomSec}}</span>
+                                     @endforeach</h1>
+                                   
                                 </div>
                             </div>
                             <div class="sparkline13-graph">
                                 <div class="datatable-dashv1-list custom-datatable-overright">
-                                    <div id="toolbar">
-                                        <select class="form-control dt-tb">
-                                            <option value="">Export Basic</option>
-                                            <option value="all">Export All</option>
-                                            <option value="selected">Export Selected</option>
-                                        </select>
-                                    </div>
+                                  
                                     <div class="add-product">
-                                                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1"><i class="fa fa-plus"> </i> Nouveau étudiant</a>
+                                                <a class="zoomInDown mg-t new"  data-toggle="modal" ><i class="fa fa-plus"> </i> Nouveau étudiant</a>
                                      </div>
-                                            <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+        <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-close-area modal-close-df">
@@ -128,18 +294,19 @@ ligne = "<tr><td>"+ $("#var").val()+"</td><td>"+data.etud.nom+"</td><td>"+data.e
                                                                 <div class="row">
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Nouveau Etudiant</h3>
+                                                  <h3>Nouveau Etudiant</h3>
                             <p>Ajouter un nouveau étudiant</p><br>
                                        <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="error" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> 
                             </div>
                             <br>
                            
                           </div>
 
-                               <form action="{{url('NouveauEtudiant')}}"  method="post" id="formEtud">
+                       <form action="{{url('NouveauEtudiant')}}"  method="post" id="formEtud">
                                 {!! csrf_field() !!}
+                      <input type="hidden" name="id_stud" id="id_stud" value="{{0}}">
                          <div class="form-group-inner">
                   <div class="row">
                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -218,7 +385,7 @@ document.getElementById('module').style.display = "";
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                    <div >
                                                                                 <label>
-                <input type="radio" value="Nouveau(elle)"  onchange="fct1();" id="n" name="type"> <i></i> Nouveau(elle)</label>
+                <input type="radio" value="Nouveau(elle)"  onchange="fct1();" id="type" name="type"> <i></i> Nouveau(elle)</label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -226,7 +393,7 @@ document.getElementById('module').style.display = "";
                                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div >
                                                                                 <label>
-         <input type="radio" value="Répétitif(ve)"  onchange="fct2();" id="r" name="type"> <i></i> Répétitif(ve)</label>
+         <input type="radio" value="Répétitif(ve)"  onchange="fct2();" id="type" name="type"> <i></i> Répétitif(ve)</label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -234,7 +401,7 @@ document.getElementById('module').style.display = "";
                                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div >
                                                                                 <label>
-               <input type="radio" value="Endétté(e)" name="type" onchange="fct2();" id="e"> <i></i> Endétté(e)</label>
+               <input type="radio" value="Endétté(e)" name="type" onchange="fct2();" id="type"> <i></i> Endétté(e)</label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -247,11 +414,11 @@ document.getElementById('module').style.display = "";
                                                     </div>
 
 
-<input type="hidden" name="groupe" value="18">
+<input type="hidden" name="groupe" id="groupe" value="{{$id}}">
 
 
 
-                                   <div class="form-group-inner" style="display: none;" id="module">
+                  <div class="form-group-inner" style="display: none;" id="module">
                                     <div class="row">
                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                        <label class="login2">Modules</label>
@@ -259,7 +426,7 @@ document.getElementById('module').style.display = "";
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                            <div class="chosen-select-single">
                                                
-                                                <select data-placeholder="Module..." class="chosen-select" multiple="multiple" name="modules[]" id="module">
+                                                <select data-placeholder="Module..." class="chosen-select" multiple="multiple" name="modules[]" id="module1">
                                                        
                                             @foreach($modules as $mod)
                                       <option value="{{$mod->idMod}}">{{$mod->nom}}</option>
@@ -279,7 +446,8 @@ document.getElementById('module').style.display = "";
            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="button"id="newStud">Ajouter</button>
+ <button class="btn btn-sm btn-primary login-submit-cs" type="button"id="newStud">Ajouter</button>
+<button class="btn btn-sm btn-primary login-submit-cs" type="button"id="updStud" style="display:none;">Modifier</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -293,43 +461,26 @@ document.getElementById('module').style.display = "";
                                                     </div>
                                                 </div>
                                             </div>
-                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true"    data-resizable="true" data-cookie="true"
-                                   data-show-pagination-switch="true"
+                                    <table id="laravel_datatable" data-toggle="table"   data-resizable="true" data-cookie="true"
+                                   
                                         data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                         <thead>
                                             <tr>
-                                               
-                                                <th data-field="id">ID</th>
-                                                <th data-field="name" data-editable="true">Nom</th>
+                                                
+                                                <th data-field="idEtu">ID</th>
+                                                <th data-field="nom" data-editable="true">Nom</th>
                                                 <th data-field="prenom" data-editable="true">Prénom</th>
-                                                <th data-field="date" data-editable="true">date de naissance</th>
-                                                <th data-field="matricule">Matricule</th>
-                                                <th data-field="task" data-editable="true">Type</th>
-                                                <th data-field="email" data-editable="true">Email</th>
+                                                 <th data-field="matricule">Matricule</th>
+                                                <th data-field="date_naissance" data-editable="true">Date de Naissance</th>
+                                               
+                                                <th data-field="type" data-editable="true">Type</th>
+                                                <th data-field="action" data-editable="true">Action</th>
                                                
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                             <?php $var=1; ?>
-                                          @foreach($etudiants as $etu)  
-                                            <tr>
-                                          
-                                                <td>{{$var}}</td>
-                                                <td>{{$etu->nom}}</td>
-                                                <td>{{$etu->prenom}}</td>
-                                                <td>{{$etu->date_naissance}}</td>
-                                                <td >{{$etu->matricule}} </td>
-                                                <td>{{$etu->type}}</td>
-                                           
-                                                <td >non enregistré</td>
-                                            </tr>
-                                            <?php $var++; ?>
-                                            @endforeach
-                                        
                               
-                                        </tbody>
                                     </table>
-                                    <input type="hidden" id="var" value="{{$var}}">
+                                   
 
 
 
@@ -338,19 +489,7 @@ document.getElementById('module').style.display = "";
 
     
 
- 
-<table class="table table-bordered table-striped" id="laravel_datatable">
-   <thead>
-      <tr>
-         <th>ID</th>
-         <th>Nom</th>
-         <th>Prenom</th>
-         <th>matricule</th>
-         <th>date de naissance</th>
-         <th>Type</th>
-      </tr>
-   </thead>
-</table>
+
 
  
 
@@ -362,5 +501,28 @@ document.getElementById('module').style.display = "";
             </div>
         </div>
 
+ <div id="delete" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-close-area modal-close-df">
+                                                            <a class="close" data-dismiss="modal" href="#"  style="background: #d80027"><i class="fa fa-close"></i></a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="modal-login-form-inner">
+                                            <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
+                                        <h2>Suppression !</h2>
+                                        <p>Voulez-Vous vraiment supprimer l'étudiant : <b></b></p>
+                                         </div>
+                                                        </div>
+                                       <div class="modal-footer danger-md">
+      <a data-dismiss="modal" href="#"  style="background: #d80027">Annuler</a>
+      <a href="#" class="deleteBtn" id="" style="background: #d80027">supprimer</a>
+   
+                                        
+                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
  @endsection

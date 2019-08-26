@@ -46,13 +46,55 @@
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="">
-                                    <div class="row container-fluid">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                            <span>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="pull-center">
+                                            <span >
                                                 <br>
-                                                <h3>Paquet: {{$paquet->salle}}</h3>  </span>
+                                                <h3>Paquet: {{$paquet->salle}}</h3>  
+                                            </span>
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> </div>
+                                    </div>
+                                    <div class="row container-fluid">
+                                        
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 mg-t-30">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <h5 class="pull-left">Date Limite: <b title="Date limite">{{$examen[0]->delais}}</b> </h5>    
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 button-style-three">
+                                                        <button type="button" class="btn btn-custon-rounded-three btn-default pull-left" data-toggle="modal" data-target="#PrimaryModalalertS">Sujet</button>
+                                                    <button type="button" class="btn btn-custon-rounded-three btn-default pull-right" data-toggle="modal" data-target="#PrimaryModalalertC">Corrigé Type</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="PrimaryModalalertS" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-close-area modal-close-df">
+                                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                                            <a class="media" href="{{asset('pdf/'.$examen[0]->sujet)}}"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="PrimaryModalalertC" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-close-area modal-close-df">
+                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                                                <a class="media" href="{{asset('pdf/'.$examen[0]->corrige_type)}}"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mg-t-30">
                                             <form action="/valider/correction" method="post">
                                                 {{ csrf_field() }}
@@ -103,7 +145,7 @@
                                                 <form id="formN{{$code->idC}}" >
                                                     <td class="pull-center">
                                                         <input type="hidden" id="code{{$code->idC}}" name="code" value="{{$code->idC}}">
-                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',Auth::user()->enseignant->idEns)->get() as $c){{$c->note}}@endforeach" style="width:50px; text-align:center;"/>
+                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',$paq_ens[0]->correcteur)->get() as $c){{$c->note}}@endforeach" style="width:50px; text-align:center;"/>
                                                     </td>
                                                </form>
                                             </tr>

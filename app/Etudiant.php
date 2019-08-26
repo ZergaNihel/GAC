@@ -14,13 +14,23 @@ class Etudiant extends Model
 		return $this->hasMany(User::class);
     }
     
+
+	
+     public function user_mail()
+	{
+		return $this->hasOne(User::class);
+	}
+
+
+   
     public function groupe()
     {
         return $this->belongsTo('App\groupe','idG','idEtu');
     }
     //
 
-    public function user_mail(){
+   /* public function user_mail(){
         return $this->hasMany('App\User', 'id_Etu', 'idEtu');
-    }
+    }*/
+
 }

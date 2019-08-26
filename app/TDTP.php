@@ -11,8 +11,8 @@ class TDTP extends Model
     protected $primaryKey = 'id';
 
 
-    public function module()
+    public function modules()
     {
-        return $this->belongsTo('App\Module','idMod','id_module');
+        return $this->belongsTo('App\Module','id_module','idMod');
     }
 }

@@ -130,11 +130,11 @@ class Presence extends Controller
             {
                 $exclus[$j]=DB::table('etudiants')
                             ->where('idEtu','=',$e->id_Etu)
-                            ->whereNotIn('idEtu',$etuExclus)
                             ->distinct()
                             ->get();
                 $abs[$j]=$nb[$i];
                 $j++;
+                
             }
             if($nb[$i]==3)
             {
@@ -149,7 +149,8 @@ class Presence extends Controller
                             ->where('idEtu','=',$e->id_Etu)
                             ->get();
                     $abs[$j]=$nb[$i];
-                    $j++;   
+                    $j++; 
+                     
                 }else{
                     $justifA=DB::table('absences')
                             ->where('id_Etu','=',$e->id_Etu)
@@ -169,7 +170,7 @@ class Presence extends Controller
                                 ->where('idEtu','=',$e->id_Etu)
                                 ->get();
                         $abs[$j]=$nb[$i];
-                        $j++;    
+                        $j++;   
                     }
                 }
             }
@@ -251,10 +252,11 @@ class Presence extends Controller
                             ->where('etat','=',0)
                             ->select('date')
                             ->count();
-            $pourcentage[$i]=($p[$i]*100)/$nbrEtu;
-                            $i++;
+            $pp=($p[$i]*100)/$nbrEtu;
+            $pourcentage[$i] = number_format($pp, 2, '.', '');
+            $i++;
         }
-
+       
         $id_td_tp=DB::table('td_tps')
                         ->where('td_tps.id_seance','=', $idseance)
                         ->where('td_tps.id_module','=', $idmodule)
@@ -263,7 +265,17 @@ class Presence extends Controller
                         ->first();
 
         $semestre= Semestre::find($request->input('semestre')); 
-
+        $u=0;
+       foreach ($exclus as $e ) {
+           $t[$u]=$e[0]->idEtu;$u++;
+       }
+       $tabExc= Exclu::all()->pluck('Etu_exc');
+       $exc=DB::table('etudiants')
+                ->whereIn('idEtu',$t)
+                ->whereNotIn('idEtu',$tabExc)
+                ->distinct()
+                ->get();
+       
         return view('EnseignantR.presence')->with( 
             [
             'seance'=> $seance ,
@@ -277,7 +289,7 @@ class Presence extends Controller
             'NbEtu' => $NbEtu,
             'nomgroupe' => $nomgroupe,
             'justifications' => $justifiations,
-            'exclus' => $exclus, 
+            'exclus' => $exc, 
             'abs' => $abs,
             'historiques' => $historiques,
             'absents' => $p,
@@ -423,12 +435,13 @@ class Presence extends Controller
     public function justification($id)
     {
         $auth=Auth::user()->enseignant->idEns;
-        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat 
+        $justif=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat_just 
                                     ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance 
                             FROM absences A,etudiants E 
                             WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=$auth) 
-                            and A.justification IS NOT NULL and A.etat_just=2 and A.id_Etu=E.idEtu");
+                            and A.justification IS NOT NULL and A.id_Etu=E.idEtu");
         $semestre = Semestre::find($id);
+        
         return view('EnseignantR.justifications',
             [
                 'justifications'=> $justif, 

@@ -16,11 +16,6 @@ use App\Etudiant;
 class Groupes extends Controller
 {
     function index($id){
-		
-		// $semestres = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-		// foreach ($semestres as $key ) {
-    	// $semestre = $key->idSem;
-        // }
    
 		$section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
         

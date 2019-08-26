@@ -14,6 +14,7 @@ use App\Groupe_etu;
 use App\Module;
 use App\Etudiant;
 use App\Endette;
+use App\User;
 use Session;
 //use Datatables;
 use Illuminate\Support\Facades\Validator;
@@ -40,18 +41,18 @@ class GroupController extends Controller
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 		$etudiants = Etudiant::where('idG','=',$id)->get();
 	  $semestre = Semestre::find($idSem);
-    
+    $grp = Groupe::find($id);
     //dd($semestre);
 		$modules = Module::where('semestre','=',$idSem)->get();
-		//dd($modules);
+    $sec = Groupe_etu::where('groupe',$id)->get();		//dd($modules);
 	
-		 return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre'));
+		 return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre','id','grp','sec'));
 	}
 function edit(Request $request){
 
 	  $this->validate($request, [
       'groupe' => 'required|string',
-           'section' => 'required'
+      'section' => 'required'
      ]);
         
 	$idG = $request->idGrp;
@@ -67,11 +68,41 @@ function edit(Request $request){
     return back()->with('succ', 'le groupe a été bien modifié .');        
 }
 
+   public function editStud($id)
+    {
+        $etu = Etudiant::find($id);
+$mods = 0;
+      if($etu->type === "Répétitif(ve)" || $etu->type === "Endétté(e)"){
+     $mods = Endette::where("Etu_end",$id)->select('module_end')->get();
+    
+     }
+        return response()->json(['etu' =>$etu ,'mods' =>$mods] );
+    }
+
 	function new_student(Request $request)
-    {   $type = $request->type;
+    {  
+   $messages = [
+    'required'    => 'Vous devez remplisser tous les champs.',
+    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
+    'unique'=>"Le matricule doit être unique",
+    "numeric"=>"Le matricule doit contenir que les chiffres",
+];
+   $validator = Validator::make($request->all(), [
+            'nom' => 'required|alpha_spaces',
+            'prenom' => 'required|alpha_spaces',
+            'matricule' => 'required|numeric|unique:etudiants',
+            'birthday'  => 'required ',
+             'type'  => 'required ',
+        ],$messages);
+ 
+        if ($validator->fails()) {
+             return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
+
+     $type = $request->type;
  
     	//dd($request->type);
-      $etud = Etudiant::create(["matricule"=>$request->matricule,"nom"=>$request->nom,"prenom"=>$request->prenom,"type"=>$request->type,"date_naissance"=>$request->birthday,"idG"=>$request->groupe,]);
+      $etud = Etudiant::Create(["matricule"=>$request->matricule,"nom"=>$request->nom,"prenom"=>$request->prenom,"type"=>$request->type,"date_naissance"=>$request->birthday,"idG"=>$request->groupe,]);
       //dd();
     if($type === "Répétitif(ve)" || $type === "Endétté(e)"){
     	$modules = $request->input('modules');
@@ -84,9 +115,66 @@ function edit(Request $request){
     	 }
     	}
 
-
-    	//dd($etud);
     	return  response()->json(['etud' => $etud]);
+
+    }
+      function update_student(Request $request)
+    {  
+      $id = $request->id_stud;
+     $etud = Etudiant::find($id);
+     $rules = [
+            'nom' => 'required|alpha_spaces ',
+            'prenom' => 'required|alpha_spaces ',
+            'matricule' => 'required|numeric|unique:etudiants',
+            'birthday'  => 'required ',
+             'type'  => 'required ',
+        ];
+        $rulesM = [
+            'nom' => 'required|alpha_spaces ',
+            'prenom' => 'required|alpha_spaces ',
+            'matricule' => 'required|numeric',
+            'birthday'  => 'required ',
+             'type'  => 'required ',
+        ];
+   $messages = [
+    'required'    => 'Vous devez remplisser tous les champs.',
+    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
+    'unique'=>"Le matricule doit être unique",
+    "numeric"=>"Le matricule doit contenir que les chiffres",
+];
+if($etud->matricule == $request->matricule){
+   $validator = Validator::make($request->all(),$rulesM,$messages);} 
+     else{
+   $validator = Validator::make($request->all(),$rules,$messages);}
+ 
+        if ($validator->fails()) {
+             return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
+    
+     $etud->matricule = $request->matricule;
+     $etud->nom = $request->nom;
+     $etud->prenom = $request->prenom;
+     $etud->type = $request->type;
+     $etud->date_naissance = $request->birthday;
+      $etud->save();
+      //dd();
+    if($request->type === "Répétitif(ve)" || $request->type === "Endétté(e)"){ 
+      $mods = Endette::where("Etu_end",$id)->get();
+      foreach ($mods as $key) {
+        $key->delete();
+      }
+
+      $modules = $request->input('modules');
+      //dd($modules);
+    foreach ($modules as $key) {
+      $cour = new Endette();
+      $cour->Etu_end= $etud->idEtu;
+      $cour->module_end = $key;
+      $cour->save();
+       }
+      }
+
+      return  response()->json(['sucess' => "hello"]);
 
     }
    
@@ -94,11 +182,15 @@ function edit(Request $request){
     {
 
       $tab[]=null; 
-      $semestre=Semestre::find($request->idsemestre);
-
-     $this->validate($request, [
-      'select_file'  => 'required|mimes:xls,xlsx'
-     ]);
+    /*  $semestre=Semestre::find($request->idsemestre);
+   $validator1 = Validator::make($request, [
+            'section' => 'required',
+            'groupe' => 'required',
+            'select_file' => 'required',]);
+ 
+        if ($validator1->fails()) {
+       return response()->json(['errors'=> $validator1->getMessageBag()->toArray()],422);
+        }*/
    
     $groupe = $request->groupe;
   
@@ -132,10 +224,32 @@ function edit(Request $request){
 
       if(!empty($insert_data))
       {
-       DB::table('etudiants')->insert($insert_data);
+        //dd(count($insert_data));
+        for($i=0;$i<count($insert_data);$i++){
+        $messages = [
+    'required'    => 'Vous devez remplisser tous les champs.',
+    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
+    'unique'=>"Le matricule doit être unique dans le fichier excel dans la ligne ".$i,
+    "numeric"=>"Le matricule doit contenir que les chiffres",
+];
+   $validator = Validator::make($insert_data[$i], [
+            'nom' => 'required|alpha_spaces',
+            'prenom' => 'required|alpha_spaces',
+            'matricule' => 'required|numeric|unique:etudiants',
+            'date_naissance'  => 'required ',
+             'type'  => 'required ',
+        ],$messages);
+ 
+        if ($validator->fails()) {
+           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
+       // dd($insert_data[0]);
+
+  DB::table('etudiants')->insert($insert_data[$i]);
+}
       }
      }
-     return Redirect::to('groupe/detail/'.$k->idG.'/'.$semestre->idSem);
+     return response()->json(['idSem'=> $request->idsemestre,'idG'=>$k->idG]);
     }
       function statistique ($id){
       	//dd($id);
@@ -152,17 +266,41 @@ function edit(Request $request){
         $mat = Groupe::find($id);
         //dd($mat);
         $mat->delete();
-        	return  response()->json(['success' => 'deleting with success','id'=>$id]);
+        	return  response()->json(['success' => 'deleting wordwrap(str)ith success','id'=>$id]);
 
     }
 
 
 
-    public function index1(Request $request)
+    public function index1($id)
 {
  
-  $students = Etudiant::select('idEtu','nom','prenom','matricule','date_naissance','type','created_at')->where('idG','=',18);
-     return Datatables::of($students)->make(true);
+  $students = Etudiant::select('idEtu','nom','prenom','matricule','date_naissance','type')
+                        ->where('idG','=',$id)
+                        ->get();
+     return Datatables::of($students) ->addColumn('action', function($data){
+                        $button = '<button type="button" name="edit" id="'.$data->idEtu.'" class="edit btn btn-primary btn-sm edit"><i class="fa fa-pencil"></i></button>';
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button class="edit btn btn-danger btn-sm edit" data-toggle="modal" data-id="'.$data->idEtu.'" data-nom="'.$data->nom.'" data-prenom="'.$data->prenom.'"   data-target="#delete" > <i class="fa fa-trash "></i></button>';
+                      $button .= '&nbsp;&nbsp;';
+                      $user = User::where('id_Etu',$data->idEtu)->get();
+                      foreach ($user as $u) {
+                             $button .='<a  href="{{url(\'membre/'.$u->id.'/details\')}}"  ><button type="button" class="edit btn btn-info btn-sm "><i class="fa fa-eye"></i></button></a >';
+                      }
+                 
+                      
+
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->smart(true)
+                    ->make(true);
 }
+  public function destroy($id)
+    {
+        Etudiant::find($id)->delete();
+     
+        return response()->json(['success'=>'Student deleted successfully.']);
+    }
 
 }

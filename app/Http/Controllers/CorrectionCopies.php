@@ -88,11 +88,23 @@ class CorrectionCopies extends Controller
         foreach($codes as $c)
         {
             $note[$i]=DB::table('corrections')
+                    ->join('paquet_ens','corrections.correcteur','=','paquet_ens.id')
                     ->where('code_etu','=',$c->idC)
-                    ->where('correcteur','=',Auth::user()->enseignant->idEns)
+                    ->where('id_Ens','=',Auth::user()->enseignant->idEns)
                     ->get();
             $i++;
         }
+
+        $examen=DB::table('paquets')
+                ->join('examens','examens.idExam','=','paquets.paq_Exam')
+                ->where('paquets.idPaq','=',$p)
+                ->get();
+
+        $paq_ens=DB::table('paquet_ens')
+                    ->join('corrections','corrections.correcteur','=','paquet_ens.id')
+                    ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                    ->where('id_paq','=',$p)
+                    ->get();
         
         $semestre= Semestre::find($request->input('semestre')); 
 
@@ -101,6 +113,8 @@ class CorrectionCopies extends Controller
                 'paquet' => $paquet ,
                 'codes'  => $codes, 
                 'semestre'=> $semestre,
+                'examen' => $examen,
+                'paq_ens' => $paq_ens,
             ] 
         );
     }

@@ -10,12 +10,13 @@
       //  });
       $(document).on("click",".btn-success",function(){
         var btn_id = $(this).attr("id");
-        var i=btn_id.substring(7,8);
+        var i=btn_id.substring(7,btn_id.length);
         var data = $('#editA'+i).serialize();
+        alert(i);
         $.ajax({
                 type:'get',
                 data:data,
-                url:'justifications/accepter',
+                url:'/justifications/accepter',
                 success:function(data){
                    // window.location.reload();
                      $('#row'+i).remove();
@@ -24,9 +25,12 @@
 
        });
 
+       
+    </script>
+    {{-- <script> 
        $(document).on("click",".btn-danger",function(){
         var btn_id = $(this).attr("id");
-        var i=btn_id.substring(7,8);
+        var i=btn_id.substring(7,btn_id.length);
         var data = $('#editR'+i).serialize();
         $.ajax({
                 type:'get',
@@ -38,7 +42,7 @@
         });
 
        });
-    </script>
+    </script> --}}
 @endsection 
 
 @section('path')

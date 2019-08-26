@@ -25,19 +25,16 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
+    'App\\Http\\Controllers\\CompteEtudiant' => $baseDir . '/app/Http/Controllers/CompteEtudiant.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
-
-    'App\\Http\\Controllers\\Correction' => $baseDir . '/app/Http/Controllers/Correction.php',
-    'App\\Http\\Controllers\\Groupe' => $baseDir . '/app/Http/Controllers/Groupe.php',
-    'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
-    'App\\Http\\Controllers\\Presence' => $baseDir . '/app/Http/Controllers/Presence.php',
-
-
+    'App\\Http\\Controllers\\CorrectionCopies' => $baseDir . '/app/Http/Controllers/CorrectionCopies.php',
     'App\\Http\\Controllers\\EmploiTemps' => $baseDir . '/app/Http/Controllers/EmploiTemps.php',
     'App\\Http\\Controllers\\EnseignantController' => $baseDir . '/app/Http/Controllers/EnseignantController.php',
     'App\\Http\\Controllers\\EtudiantController' => $baseDir . '/app/Http/Controllers/EtudiantController.php',
+    'App\\Http\\Controllers\\GestionCorrection' => $baseDir . '/app/Http/Controllers/GestionCorrection.php',
     'App\\Http\\Controllers\\GroupController' => $baseDir . '/app/Http/Controllers/GroupController.php',
     'App\\Http\\Controllers\\Groupe' => $baseDir . '/app/Http/Controllers/Groupe.php',
+    'App\\Http\\Controllers\\Groupes' => $baseDir . '/app/Http/Controllers/Groupes.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\MailBoxController' => $baseDir . '/app/Http/Controllers/MailBoxController.php',
     'App\\Http\\Controllers\\ModuleController' => $baseDir . '/app/Http/Controllers/ModuleController.php',
@@ -1715,8 +1712,6 @@ return array(
     'Maatwebsite\\Excel\\Readers\\LaravelExcelReader' => $vendorDir . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/LaravelExcelReader.php',
     'Maatwebsite\\Excel\\Writers\\CellWriter' => $vendorDir . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/CellWriter.php',
     'Maatwebsite\\Excel\\Writers\\LaravelExcelWriter' => $vendorDir . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/LaravelExcelWriter.php',
-
-    
     'Matrix\\Builder' => $vendorDir . '/markbaker/matrix/classes/src/Builder.php',
     'Matrix\\Exception' => $vendorDir . '/markbaker/matrix/classes/src/Exception.php',
     'Matrix\\Functions' => $vendorDir . '/markbaker/matrix/classes/src/Functions.php',
@@ -1727,8 +1722,6 @@ return array(
     'Matrix\\Operators\\Multiplication' => $vendorDir . '/markbaker/matrix/classes/src/Operators/Multiplication.php',
     'Matrix\\Operators\\Operator' => $vendorDir . '/markbaker/matrix/classes/src/Operators/Operator.php',
     'Matrix\\Operators\\Subtraction' => $vendorDir . '/markbaker/matrix/classes/src/Operators/Subtraction.php',
-
-
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\Legacy\\TestListenerForV5' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/Legacy/TestListenerForV5.php',
     'Mockery\\Adapter\\Phpunit\\Legacy\\TestListenerForV6' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/Legacy/TestListenerForV6.php',

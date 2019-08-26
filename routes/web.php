@@ -16,15 +16,20 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-
+Route::get('/bar', function () {
+    return view('barview');
+});
 
  Route::get('error_500', 'SemestreController@index');
- //------------------------Etuiants----------------------
+
+ //------------------------Etudiants----------------------
  Route::get('/dates/{id}/', 'EtudiantController@dates') ;
  Route::get('/absences_Etudiant', 'EtudiantController@index') ;
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
  Route::post('/add_justif', 'EtudiantController@add_justif') ;
  Route::post('/edit_justif', 'EtudiantController@modifier') ;
+
+ Route::get('/Etudiant/notes', 'EtudiantController@notes') ;
  //------------------ MailBoxe ----------------------------
 Route::get('/boite_de_reception', 'MailBoxController@index') ;
 Route::get('/envoye', 'MailBoxController@envoye') ;
@@ -41,9 +46,15 @@ Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload
 
  Route::get('Semestres/dashboard/{id}','SemestreController@dash');
  Route::get('new_sem', 'SemestreController@new_sem');
+ Route::get('statdash/{id}', 'SemestreController@graphe1');
  Route::post('addSem', 'SemestreController@store');
  Route::get('Semestres/index', 'SemestreController@index');
+ Route::get('Semestres/historique', 'SemestreController@historique');
+ Route::get('Semestres/historique/{id}', 'SemestreController@histoDet');
+ Route::get('Semestres/historique/Groupes/{id}', 'SemestreController@GrpDet');
+  Route::get('archiver/{id}', 'SemestreController@archiver');
  Route::get('admin/parametre', 'ParametresController@index');
+
  Route::post('param', 'ParametresController@store');
  Route::post('EditParam', 'ParametresController@edit');
 //------------------ EnseignantController ----------------------------
@@ -58,17 +69,21 @@ Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload
  Route::post('addModule', 'ModuleController@store');
  Route::post('EditModule', 'ModuleController@edit');
  Route::get('modules/details/{id}','ModuleController@details');
- Route::get('modules/pdf', function () {
-     return view('modules.pdf');
- });
+ Route::get('modules/pdf/{id}/{sc}', 'ModuleController@details_pdf');
+ 
  //------------------ GroupController ----------------------------
 Route::get('statGroupe/{id}/','GroupController@statistique');
 Route::post('EditGroupes','GroupController@edit');
 Route::post('DeleteGroupes','GroupController@delete');
  Route::get('groupe/detail/{id}/{idSem}','GroupController@groupe');
+ Route::get('groupe/index1/{id}','GroupController@index1');
+  Route::get('supprime_etudiant/{id}','GroupController@destroy');
  Route::post('NouveauEtudiant','GroupController@new_student');
 Route::get('liste_groupes/{id}', 'GroupController@index');
+Route::get('edit_Student/{id}', 'GroupController@editStud');
 Route::post('groupes', 'GroupController@import');
+Route::post('update_student', 'GroupController@update_student');
+
 //------------------UserController ----------------------------
 Route::get('membre/{id}/details','UserController@details');
 Route::get('membre/{id}/edite','UserController@edit');
@@ -87,9 +102,9 @@ Route::post('presence/liste','Presence@lister');
 
 Route::get('justifications/{id}','Presence@justification');
 
-Route::get('justifications/accepter','Presence@accepterJ');
+Route::post('justifications/accepter','Presence@accepterJ');
 
-Route::get('justifications/refuser','Presence@refuserJ');
+Route::post('justifications/refuser','Presence@refuserJ');
 
 Route::get('present','Presence@present');
 
@@ -143,6 +158,10 @@ Route::get('choix/formule', 'GestionCorrection@formule');
 
 Route::post('decoder/paquet', 'GestionCorrection@decoder');
 
+Route::get('notes/{id}', 'Deliberation@index');
+
+Route::get('notes/{id}/{p}', 'Deliberation@detail');
+
 Route::get('anonymat/paquets','Anonymat@index');
 
 Route::get('anonymat/paquets/liste','Anonymat@lister');
@@ -168,8 +187,11 @@ Route::post('empTD', 'EmploiTemps@storeTD');
 Route::post('empMod', 'EmploiTemps@empMod');
 Route::post('popEmp', 'EmploiTemps@empTab');
 Route::post('DeleteSea', 'EmploiTemps@destroy');
+//------------------------CompteEtudiant----------------------
+Route::get('/comptes_etudiants','CompteEtudiant@index');
+
 //--------------------------------------------------------------
 
-Route::get('ajax-crud-list', 'GroupController@index1');
+/*Route::get('ajax-crud-list', 'GroupController@index1');
  Route::post('ajax-crud-list/store', 'GroupController@store');
- Route::get('ajax-crud-list/delete/{id}', 'GroupController@destroy');
+ Route::get('ajax-crud-list/delete/{id}', 'GroupController@destroy');*/

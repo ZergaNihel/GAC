@@ -15,22 +15,30 @@
                         <li class="active">
                       
 
-                                 <a aria-expanded="false" href="{{ url('Semestres/index') }}" ><span class="educate-icon fa fa-calendar icon-wrap"></span>   <span class="mini-click-non">Absences </span></a>
+                                 <a aria-expanded="false" href="{{ url('/absences_Etudiant') }}" ><span class="fa fa-calendar "></span>   <span class="mini-click-non">Absences </span></a>
                             
                  
                         </li>
                      
                         <li>
-                            <a   aria-expanded="false" href="{{url('modules/index')}}" ><span class="educate-icon educate-library icon-wrap"></span>   <span class="mini-click-non">Notes</span></a>
+                            <a   aria-expanded="false" href="{{url('/Etudiant/notes')}}" ><span class="educate-icon educate-library icon-wrap"></span>   <span class="mini-click-non">Notes</span></a>
                            
                         </li>
                         <li>
-                            <a aria-expanded="false" href="{{url('Enseignants/index')}}" ><span class="educate-icon educate-event icon-wrap"></span> <span class="mini-click-non">Emploi du temps</span></a>
+                            <a class="has-arrow" aria-expanded="false" href="" ><span class="educate-icon educate-event icon-wrap"></span> <span class="mini-click-non">Emploi du temps</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                @foreach($sem1 as $s1)
+                                <li><a title="Inbox" href="{{url('/Emplois_du_Temps_generale/'.$s1->idSem)}}"><span class="mini-sub-pro">E.T (semestre 1)</span></a></li>
+                                @endforeach
+                                @foreach($sem2 as $s2)
+                                <li><a title="Compose Mail" href="{{url('/Emplois_du_Temps_generale/'.$s2->idSem)}}"><span class="mini-sub-pro">E.T (semestre 2)</span></a></li>
+                                @endforeach
+                            </ul>
                        
                         </li>
                   
                         <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Boite de réception</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Boite de réception</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Inbox" href="{{url('/boite_de_reception')}}"><span class="mini-sub-pro">E-mails</span></a></li>
                                 

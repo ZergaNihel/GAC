@@ -1,7 +1,7 @@
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
+     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
     @yield('meta')
@@ -16,6 +16,7 @@
     <!-- Bootstrap CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/c3/c3.min.css')}}">
     <!-- Bootstrap CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.transitions.css')}}">
-    <!-- summernote CSS
+     <!-- summernote CSS
         ============================================ -->
     <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
     <!-- animate CSS
@@ -52,13 +53,13 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu-vertical.css')}}">
-
+   
     <!-- x-editor CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
 
 
-    <link rel="stylesheet" href="{{asset('css/tabs.css')}}">
+     <link rel="stylesheet" href="{{asset('css/tabs.css')}}">
     <!-- responsive CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
@@ -88,9 +89,9 @@
 
     <!-- touchspin CSS
     ============================================ -->
-
+   
     <link rel="stylesheet" href="{{asset('css/form/themesaller-forms.css')}}">
-
+    
     <!-- select2 CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/select2/select2.min.css')}}">
@@ -117,30 +118,29 @@
     <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
     <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
-
-    <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
-    @yield('js')
+ 
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
+@yield('js') 
 </head>
-
 <body>
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Start Left menu area -->
-    @yield('sidebar')
-
-    <div class="all-content-wrapper">
+ @yield('sidebar')   
+     
+<div class="all-content-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <br>
                     <div class="logo-pro">
-                        <br><br>
+                       <br><br>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="header-advance-area">
+             <div class="header-advance-area">
             <div class="header-top-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -149,129 +149,105 @@
                                 <div class="row">
                                     <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
-                                            <button type="button" id="sidebarCollapse"
-                                                class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-                                                <i class="educate-icon educate-nav"></i>
-                                            </button>
+ <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                                    <i class="educate-icon educate-nav"></i>
+                                                </button>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                        @if(Auth::user()->role == '1')
-                                        @include('layouts.enTete')
-                                        @endif
+                                   @if(Auth::user()->role == '1')
+                                   @include('layouts.enTete')
+                                   @endif
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
-                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
-
+                                      <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                     
                                                 <li class="nav-item dropdown">
-                                                    <a href="#" data-toggle="dropdown" role="button"
-                                                        aria-expanded="false" class="nav-link dropdown-toggle"><i
-                                                            class="educate-icon educate-message edu-chat-pro"
-                                                            aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
+                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-message edu-chat-pro" aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
                                                         <span class="indicator-ms"></span>
-                                                        @endif
-                                                    </a>
-                                                    <div role="menu"
-                                                        class="author-message-top dropdown-menu animated zoomIn">
+                                                    @endif
+                                                </a>
+                                                    <div role="menu" class="author-message-top dropdown-menu animated zoomIn">
                                                         <div class="message-single-top">
                                                             <h1>Message</h1>
                                                         </div>
                                                         <ul class="message-menu">
 
-
-                                                            @foreach(Auth::user()->unreadNotifications as $notification)
-                                                            <li style="background-color:#f5f5f5;">
-                                                                <a
-                                                                    href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                                    <div class="message-img">
-                                                                        <img src="{{asset('img/contact/2.jpg')}}"
-                                                                            alt="">
+                                           
+                        @foreach(Auth::user()->unreadNotifications as $notification)
+                                          <li style="background-color:#f5f5f5;">
+                <a 
+            href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                  <div class="message-img">
+                                   <img src="{{asset('img/contact/2.jpg')}}" alt="">
                                                                     </div>
-                                                                    <div class="message-content">
-                                                                        <span
-                                                                            class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
-                                                                        </span>
-                                                                        @if(
-                                                                        App\User::find($notification->data['id_emt'])->role== 1 or App\User::find($notification->data['id_emt'])->role== 2 )
-                                                                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
-                                                                            @endif
-                                                                            @if(
-                                                                            App\User::find($notification->data['id_emt'])->role== 0 )
-                                                                            <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
-                                                                                @endif
-                                                                                @if(
-                                                                                App\User::find($notification->data['id_emt'])->role== 3)
-                                                                                <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
-                                                                                    @endif
-                                                                                     <span class="label label-danger">
-                                                                                        Nouveau</span></h2>
-                                                                                @if($notification->data['sujet'])
-                                                                                <p>{{ $notification->data['sujet'] }}
-                                                                                </p>
-                                                                                @else
-                                                                                <p>Aucun Sujet</p>
-                                                                                @endif
+                                <div class="message-content">
+   <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
+   </span>
+   @if( App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role == 2 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 0 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 3)
+                        <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+   @endif
+
+
+                     
+                          <span class="label label-danger"> Nouveau</span></h2>
+                                    @if($notification->data['sujet'])
+                                     <p>{{ $notification->data['sujet'] }}</p>
+                                     @else
+                                      <p>Aucun Sujet</p>
+                                     @endif
                                                                     </div>
                                                                 </a>
-                                                            </li>
-                                                            @endforeach
-                                                            @foreach(Auth::user()->readNotifications->take(1) as $notification)
-                                                            <li>
-                                                                <a
-                                                                    href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                                    <div class="message-img">
-                                                                        <img src="{{asset('img/contact/2.jpg')}}"
-                                                                            alt="">
+                                        </li>
+                                        @endforeach
+                 @foreach(Auth::user()->readNotifications->take(1) as $notification)
+                                          <li>
+                <a 
+            href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                  <div class="message-img">
+                                   <img src="{{asset('img/contact/2.jpg')}}" alt="">
                                                                     </div>
-                                                                    <div class="message-content">
-                                                                        <span
-                                                                            class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
-                                                                        </span>
-                                                                        @if(
-                                                                        App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role== 2 )
-                                                                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
-                                                                            @endif
-                                                                            @if(
-                                                                            App\User::find($notification->data['id_emt'])->role
-                                                                            == 0 )
-                                                                            <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
-                                                                                @endif
-                                                                                @if(
-                                                                                App\User::find($notification->data['id_emt'])->role
-                                                                                == 3)
-                                                                                <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
-                                                                                    @endif
+                                <div class="message-content">
+   <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
+   </span>
+                     @if( App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role == 2 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 0 )
+                        <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
+   @endif
+   @if( App\User::find($notification->data['id_emt'])->role == 3)
+                        <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+   @endif
 
 
-
-                                                                                    <span class="label label-danger">
-                                                                                        Nouveau</span></h2>
-                                                                                @if($notification->data['sujet'])
-                                                                                <p>{{ $notification->data['sujet'] }}
-                                                                                </p>
-                                                                                @else
-                                                                                <p>Aucun Sujet</p>
-                                                                                @endif
+                     
+                          <span class="label label-danger"> Nouveau</span></h2>
+                                    @if($notification->data['sujet'])
+                                     <p>{{ $notification->data['sujet'] }}</p>
+                                     @else
+                                      <p>Aucun Sujet</p>
+                                     @endif
                                                                     </div>
                                                                 </a>
-                                                            </li>
-                                                            @endforeach
-
+                                        </li>
+                                        @endforeach
+                                      
                                                         </ul>
                                                         <div class="message-view">
-                                                            <a href="{{url('/boite_de_reception')}}">View All
-                                                                Messages</a>
+                                                            <a href="{{url('/boite_de_reception')}}">View All Messages</a>
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
-                                                        aria-expanded="false" class="nav-link dropdown-toggle"><i
-                                                            class="educate-icon educate-bell"
-                                                            aria-hidden="true"></i><span
-                                                            class="indicator-nt"></span></a>
-                                                    <div role="menu"
-                                                        class="notification-author dropdown-menu animated zoomIn">
+                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                                    <div role="menu" class="notification-author dropdown-menu animated zoomIn">
                                                         <div class="notification-single-top">
                                                             <h1>Notifications</h1>
                                                         </div>
@@ -279,19 +255,17 @@
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="notification-icon">
-                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
-                                                                            aria-hidden="true"></i>
+                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
                                                                     <div class="notification-content">
                                                                         <span class="notification-date">16 Sept</span>
                                                                         <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.
-                                                                        </p>
+                                                                        <p>Please done this project as soon possible.</p>
                                                                     </div>
                                                                 </a>
                                                             </li>
-
-
+                                                    
+                                                            
                                                         </ul>
                                                         <div class="notification-view">
                                                             <a href="#">View All Notification</a>
@@ -299,77 +273,60 @@
                                                     </div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="#" data-toggle="dropdown" role="button"
-                                                        aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img src="{{ asset(Auth::user()->photo) }} " alt="" />
-                                                        <span class="admin-name">
-                                                            @if(Auth::user()->role == '0')
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                            <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                            <span class="admin-name">
+                                                      @if(Auth::user()->role == '0')
 
-                                                            {{Auth::user()->etudiant->nom}}
-                                                            {{Auth::user()->etudiant->prenom}}
-                                                            @elseif(Auth::user()->role == '3')
+                                                                {{Auth::user()->etudiant->nom}} 
+                                                                {{Auth::user()->etudiant->prenom}}
+                                                                @elseif(Auth::user()->role == '3')
 
-                                                            {{Auth::user()->enseignant->nom}}
-                                                            {{Auth::user()->enseignant->prenom}}
-
-                                                            @else
-
-                                                            {{Auth::user()->name}}
-
-                                                            @endif
-                                                        </span>
-                                                        <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-                                                    </a>
-                                                    <ul role="menu"
-                                                        class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-
+                                                                {{Auth::user()->enseignant->nom}} 
+                                                                {{Auth::user()->enseignant->prenom}}
+                                                              
+                                                              @else
+                                                                  
+                                                                     {{Auth::user()->name}}
+                                                                  
+                                                                  @endif
+                                                            </span>
+                                                            <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+                                                        </a>
+                                                       <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                       
                                                         <!--nihel-->
-                                                        @if(Auth::user()->role == '0'|| Auth::user()->role == '1' ||
-                                                        Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profile</a>
-                                                        </li>
-                                                        @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profile</a>
-                                                        </li>
+                                                      @if(Auth::user()->role == '0'|| Auth::user()->role == '1' || Auth::user()->role == '2')
+                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
+                                                          </li>
+                                                   @elseif(Auth::user()->role == '3')
+                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
+                                                          </li>
 
-                                                        @endif
-
-                                                        @if(Auth::user()->role == '0' || Auth::user()->role == '1' ||
-                                                        Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Modifier
-                                                                mon compte</a>
+                                                          @endif
+                                                       
+                                                    @if(Auth::user()->role == '0' || Auth::user()->role == '1' || Auth::user()->role == '2')
+                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
                                                         </li>
-                                                        @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Modifier
-                                                                mon compte</a>
+                                                    @elseif(Auth::user()->role == '3')
+                                                         <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
                                                         </li>
-                                                        @endif
-                                                        <!--fin nihel-->
+                                                    @endif
+                                                    <!--fin nihel-->
                                                         <!--nihel 19/03/2019-->
-                                                        <li> <a href="{{ route('logout') }}"
-                                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span
-                                                                    class="edu-icon edu-locked author-log-ic"></span>Se
-                                                                déconnecter</a>
+                                                        <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>Se déconnecter</a>
 
-                                                            <form id="logout-form" action="{{ route('logout') }}"
-                                                                method="POST" style="display: none;">
-                                                                @csrf
-                                                            </form>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
                                                         </li>
                                                         <!--fin nihel-->
                                                     </ul>
                                                 </li>
-                                                <li class="nav-item nav-setting-open"><a
-                                                        href="{{url('admin/parametre') }}" aria-expanded="false"
-                                                        class="nav-link dropdown-toggle"><i
-                                                            class="educate-icon educate-settings"></i></a>
-                                                </li>
+                                                @if(Auth::user()->role == '1')
+                                        <li class="nav-item nav-setting-open"><a href="{{url('admin/parametre') }}"   aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-settings"></i></a>
+                                          </li>
+                                          @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -379,7 +336,7 @@
                     </div>
                 </div>
             </div>
-            @yield('mobileSidebar')
+         @yield('mobileSidebar')
             <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -387,18 +344,12 @@
                             <div class="breadcome-list">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                                        @yield('search')
-                                    </div>
+                           @yield('search')
+                                   </div>
                                 </div>
                             </div>
                         </div>
@@ -408,24 +359,23 @@
         </div>
 
 
-        @yield('content')
-        <div class="footer-copyright-area">
+@yield('content')
+     <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="footer-copy-right">
-                            <p>Copyright © 2018. All rights reserved. Template by <a
-                                    href="https://colorlib.com/wp/templates/">Colorlib</a></p>
+                            <p>GAC © 2019.tous les droits résèrvés. </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- icheck JS
+      
+     <!-- icheck JS
         ============================================ -->
-    <script src="{{asset('js/vendor/jquery-1.12.4.min.js')}}"></script>
+     <script src="{{asset('js/vendor/jquery-1.12.4.min.js')}}"></script>
     <!-- bootstrap JS
     ============================================ -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -487,7 +437,7 @@
     <!-- main JS
     ============================================ -->
     <script src="{{asset('js/main.js')}}"></script>
-
+    
     <!-- select2 JS
     ============================================ -->
     <script src="{{asset('js/select2/select2.full.min.js')}}"></script>
@@ -530,21 +480,18 @@
     <script src="{{asset('js/sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('js/sparkline/jquery.charts-sparkline.js')}}"></script>
     <script src="{{asset('js/sparkline/sparkline-active.js')}}"></script>
-
+   
     <!-- Charts JS
     ============================================ -->
     <script src="{{asset('js/charts/Chart.js')}}"></script>
     <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
-    <!-- pdf JS
-    ============================================ -->
-    <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
-    <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
-    <!-- counterup JS
+@yield('pdf')
+<!-- counterup JS
         ============================================ -->
     <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('js/counterup/waypoints.min.js')}}"></script>
     <script src="{{asset('js/counterup/counterup-active.js')}}"></script>
-    <!-- summernote JS
+     <!-- summernote JS
         ============================================ -->
     <script src="{{asset('js/summernote/summernote.min.js')}}"></script>
     <script src="{{asset('js/summernote/summernote-active.js')}}"></script>
@@ -559,6 +506,11 @@
     <!-- dropzone JS
         ============================================ -->
     <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
+     <!-- c3 JS
+        ============================================ -->
+    <script src="{{asset('js/c3-charts/d3.min.js')}}"></script>
+    <script src="{{asset('js/c3-charts/c3.min.js')}}"></script>
+    <script src="{{asset('js/c3-charts/c3-active.js')}}"></script>
 </body>
 
 

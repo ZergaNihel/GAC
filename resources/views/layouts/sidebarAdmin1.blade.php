@@ -29,7 +29,7 @@
                                                  @foreach($sem1 as $s)
                                                 <li><a href="{{url('Semestres/dashboard/'.$s->idSem)}}">Semestre 1</a></li>
                            @endforeach
-                          @foreach($sem1 as $s)
+                          @foreach($sem2 as $s)
                                                 <li><a href="{{url('Semestres/dashboard/'.$s->idSem)}}">Semestre 2</a></li>
                                                @endforeach 
                                             </ul>
@@ -45,12 +45,15 @@
                             <a aria-expanded="false" href="{{url('Enseignants/index')}}" ><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Enseignants</span></a>
                        
                         </li>
-                     
+                       <li>
+                            <a aria-expanded="false" href="{{url('/comptes_etudiants')}}" ><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Comptes Etudiants</span></a>
+                       
+                        </li>
                     <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Historique</span></a>
+                            <a title="Landing Page" href="{{url('Semestres/historique')}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Historique</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Boite de réception</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-message icon-wrap"></span> <span class="mini-click-non">Boite de réception</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Inbox" href="{{url('/boite_de_reception')}}"><span class="mini-sub-pro">E-mails</span></a></li>
                                 

@@ -67,7 +67,7 @@ $.ajax({
 
 @section('path')
     <li>
-        <span class="bread-blod">Groupe</span>
+        <span class="bread-blod">Groupes</span>
     </li>
 @endsection
 
@@ -322,7 +322,8 @@ $.ajax({
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-close-area modal-close-df">
-                                                            <a class="close" data-dismiss="modal" href="#">
+                                                            <a class="close" data-dismiss="modal" 
+                                                            href="#">
                                                                 <i class="fa fa-close"></i>
                                                             </a>
                                                         </div>
@@ -537,9 +538,9 @@ $.ajax({
         </div>
 
         @endif
-        
-        @foreach($section as $s)
         <?php $var=1; ?>
+        @foreach($section as $s)
+        <?php $v=1; ?>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
                 <div class="alert-title">
@@ -556,7 +557,7 @@ $.ajax({
                                 <a data-toggle="collapse" data-parent="#accordion"href="#collapse{{$var}}"> Groupe {{$grp->groupe1->nomG}} </a>
                             </h4>
                         </div>
-                        <?php if($var == 1){ ?>
+                        <?php if($v== 1){ ?>
                         <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse in">
                             <?php }else{ ?>
                             <div id="collapse{{$var}}" class="panel-collapse panel-ic collapse">
@@ -580,6 +581,7 @@ $.ajax({
 
                         </div>
                         <?php $var++; ?>
+                        <?php $v++; ?>
 
                         @endforeach
                     </div>

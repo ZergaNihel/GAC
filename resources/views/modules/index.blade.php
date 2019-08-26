@@ -4,30 +4,7 @@
 @section('js')
 <script >
 
-     $(window).on('hashchange', function() {
-        if (window.location.hash) {
-            var page = window.location.hash.replace('#', '');
-            if (page == Number.NaN || page <= 0) {
-                return false;
-            }else{
-                getData(page);
-            }
-        }
-    });
-      function getData(page){
-        $.ajax(
-        {
-            url: '?page=' + page,
-            type: "get",
-            datatype: "html"
-        }).done(function(data){
-            $("#asset-inner").empty().html(data);
-            location.hash = page;
-        }).fail(function(jqXHR, ajaxOptions, thrownError){
-              alert('No response from server');
-        });
 
-    }
  $(document).ready(function(){
 //alert("hii");
 var text;
@@ -38,22 +15,7 @@ var text;
         var s2 = $("#s2").val();
 
 
-$(document).on('click', '.pagination a',function(event)
-        {
-            event.preventDefault();
   
-            $('li').removeClass('active');
-            $(this).parent('li').addClass('active');
-  
-            var myurl = $(this).attr('href');
-            var page=$(this).attr('href').split('page=')[1];
-  
-            getData(page);
-        });
-
-
-
-
         $(document).on('change','input:radio[name=semestre]',function(){
         if($(this).val() == s1 || $(this).val()== s2){
         $("#enseignant").css('display','');
@@ -61,7 +23,7 @@ $(document).on('click', '.pagination a',function(event)
         $("#enseignant").css('display','none');
         }
         });
-     
+   
 
      $("#EditModule").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('id');
@@ -159,7 +121,7 @@ success: function(data) {
 
     
 
-    $('table').append('<tr id="'+data.mod.idMod+'"><td id="var'+data.mod.idMod+'">'+k+'</td><td id="nom'+data.mod.idMod+'">'+data.mod.nom+'</td><td id="code'+data.mod.idMod+'">'+data.mod.code+'</td><td id="type'+data.mod.idMod+'">'+data.mod.type+'</td><td id="active'+data.mod.idMod+'">'+text+'</td><td id="semestre'+data.mod.idMod+'">'+text1+'</td><td id="action'+data.mod.idMod+'"><a data-toggle="tooltip" href="{!! asset("modules/details/'+data.mod.idMod+'")!!}" title="Détails" class="btn btn-default" ><i class="fa fa-book" aria-hidden="true"></i></a><a id="edita" data-toggle="modal"  href="#" title="Modifier" class="btn btn-default" data-target="#EditModule" data-nom="'+data.mod.nom+'" data-code="'+data.mod.code+'" data-type="'+data.mod.type+'" data-semestre="'+data.mod.semestre+'" data-responsable="'+data.mod.ens_responsable+'" data-id="'+data.mod.idMod+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a><button data-toggle="tooltip" title="supprimer" class="btn btn-danger" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td></tr>');
+    $('table').append('<tr id="'+data.mod.idMod+'"><td id="nom'+data.mod.idMod+'">'+data.mod.nom+'</td><td id="code'+data.mod.idMod+'">'+data.mod.code+'</td><td id="type'+data.mod.idMod+'">'+data.mod.type+'</td><td id="active'+data.mod.idMod+'">'+text+'</td><td id="semestre'+data.mod.idMod+'">'+text1+'</td><td id="action'+data.mod.idMod+'"><a data-toggle="tooltip" href="{!! asset("modules/details/'+data.mod.idMod+'")!!}" title="Détails" class="btn btn-default" ><i class="fa fa-book" aria-hidden="true"></i></a><a id="edita" data-toggle="modal"  href="#" title="Modifier" class="btn btn-default" data-target="#EditModule" data-nom="'+data.mod.nom+'" data-code="'+data.mod.code+'" data-type="'+data.mod.type+'" data-semestre="'+data.mod.semestre+'" data-responsable="'+data.mod.ens_responsable+'" data-id="'+data.mod.idMod+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a><button data-toggle="tooltip" title="supprimer" class="btn btn-danger" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td></tr>');
     $("#var").val(k++);
 
 var s1 =$("#action"+data.mod.idMod+"").find("button");
@@ -170,7 +132,7 @@ var s1 =$("#action"+data.mod.idMod+"").find("button");
     }
        });
 
-    $(document).on('click','#ModEditBtn',function(){
+ $(document).on('click','#ModEditBtn',function(){
         alert("hhh");
         $.ajax({
 type: "POST",
@@ -204,7 +166,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                        
 }
 });
-});
+}); 
  $(document).on('click','.btn-danger',function(){
         var j = $(this).attr("id").substring(9);
        //alert(j);
@@ -323,10 +285,9 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
     <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="type" id="type1">
         <option >Choisir un type ..</option>
           <option value="CTT">(CTT)Cours/Tp/TD</option>
-                                                                            <option value="CTp">(CTp)Cours/Tp</option>
-                                                                            <option value="CTd">(CTd)Cours/TD</option>
-                                                   <option value="Cour">Cour</option>
-                                                 <option value="TP">TP</option>
+         <option value="CTd">(CTd)Cours/TD</option>
+           <option value="Cour">Cour</option>
+             <option value="TP">TP</option>
                                                     </select>
                                             </div>
                                                             </div>
@@ -347,8 +308,10 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
           <div class="row">
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                    <div >
-                                                                                <label>
-                <input type="radio" value="{{$s1}}"  id="s1" name="semestre"> <i></i> Semestre 1</label>
+                          @foreach ($sem1 as $key ) 
+                                                                 <label>
+                <input type="radio" value="{{$key->idSem}}"  id="s1" name="semestre"> <i></i> Semestre 1</label>
+                @endforeach
                                                                             </div>
                                                                         </div>
 
@@ -356,8 +319,10 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                                        <div class="row">
                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div >
-                                                                                <label>
-         <input type="radio" value="{{$s2}}"   id="s2" name="semestre"> <i></i> Semestre 2</label>
+                     @foreach ($sem2 as $key ) 
+            <label>
+         <input type="radio" value="{{$key->idSem}}"   id="s2" name="semestre"> <i></i> Semestre 2</label>
+              @endforeach
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -405,9 +370,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
              <div class="login-horizental">
   <button data-dismiss="modal" href="#" class="btn btn-sm btn-primary login-submit-cs" type="button" >Annuler</button> </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                                                             </div>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -417,7 +380,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="asset-inner" id="asset-inner">
+                    <div class="asset-inner" id="asset-inner">
                      @include('modules.pagination')
                  </div>
                                           <div id="EditModule" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
@@ -464,10 +427,9 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                      <div class="chosen-select-single mg-b-20">
                                                
-    <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="type" id="type" >
+ <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="type" id="type" >
                           <option value="CTT">(CTT)Cours/Tp/TD</option>
-                          <option value="CTp">(CTp)Cours/Tp</option>
-                           <option value="CTd">(CTd)Cours/TD</option>
+                         <option value="CTd">(CTd)Cours/TD</option>
                             <option value="Cour">Cour</option>
                             <option value="TP">TP</option>
                                                     </select>
@@ -503,8 +465,10 @@ document.getElementById('enseignant1').style.display = "";
           <div class="row">
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                    <div >
-                                                                                <label>
-                <input type="radio" value="{{$s1}}"  onchange="fct2();" id="s1" name="semestre1"> <i></i> Semestre 1</label>
+@foreach ($sem1 as $key ) 
+                                                                    <label>
+                <input type="radio" value="{{$key->idSem}}"  onchange="fct2();" id="s1" name="semestre1"> <i></i> Semestre 1</label>
+                     @endforeach
                                                                             </div>
                                                                         </div>
 
@@ -512,8 +476,10 @@ document.getElementById('enseignant1').style.display = "";
                                                                        <div class="row">
                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <div >
-                                                                                <label>
-         <input type="radio" value="{{$s2}}"  onchange="fct2();" id="s2" name="semestre1"> <i></i> Semestre 2</label>
+                    @foreach ($sem2 as $key )
+                                                                       <label>
+         <input type="radio" value="{{$key->idSem}}"  onchange="fct2();" id="s2" name="semestre1"> <i></i> Semestre 2</label>
+              @endforeach
                                                                             </div>
                                                                         </div>
                                                                     </div>

@@ -38,6 +38,9 @@ class LoginController extends Controller
        else if(Auth::user()->role == '3'){
           return '/semestre/choix';
        }
+       else if(Auth::user()->role == '2'){
+        return '/anonymat/paquets';
+     }
 
      }
 //fin nihel

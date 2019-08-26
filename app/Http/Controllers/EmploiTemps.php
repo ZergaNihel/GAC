@@ -13,6 +13,7 @@ use App\Cour;
 use App\TDTP;
 use App\Semestre;
 use App\Groupe_etu;
+use Auth;
 class EmploiTemps extends Controller
 
 {
@@ -119,15 +120,17 @@ return response()->json(['sec' => $sec,'pop' => $pop ,'pop1' => $pop1]);
                            ->select('idSec','nomSec')
                            ->distinct('idSec')
                            ->get();
-   
+        if(Auth::user()->role == 1)
         return view('admin.emp_générale',compact('semestre','sem1','sem2','sec'));
+        elseif(Auth::user()->role == 3)
+        return view('EnseignantR.emp_générale',compact('semestre','sem1','sem2','sec'));
     }
   function afficher ($id){
     $cour = Seance::where('type','=','Cour')->get();
     $td = Seance::where('type','=','td')->get();
     $tp = Seance::where('type','=','tp')->get();
-    $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+  $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+  $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     $semestre = Semestre::find($id);
     	$sec = Groupe_etu::where('sem_groupe','=',$semestre->idSem)
                            ->join('sections','sec_groupe','idSec')
