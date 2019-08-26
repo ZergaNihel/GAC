@@ -239,7 +239,7 @@
                                                     <a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle"><i
                                                             class="educate-icon educate-message edu-chat-pro"
-                                                            aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->count()>0)
+                                                            aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->count()>0)
                                                         <span class="indicator-ms"></span>
                                                         @endif
                                                     </a>
@@ -251,7 +251,7 @@
                                                         <ul class="message-menu">
 
 
-                                                            @foreach(Auth::user()->unreadNotifications as $notification)
+                                                            @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification') as $notification)
                                                             <li style="background-color:#f5f5f5;">
                                                                 <a
                                                                     href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
@@ -295,7 +295,7 @@
                                                                 </a>
                                                             </li>
                                                             @endforeach
-                                                            @foreach(Auth::user()->readNotifications->take(1) as
+                                                            @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification')->take(1) as
                                                             $notification)
                                                             <li>
                                                                 <a
@@ -359,6 +359,7 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                                         <ul class="notification-menu">
+                                                               @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="notification-icon">
@@ -366,19 +367,32 @@
                                                                             aria-hidden="true"></i>
                                                                     </div>
                                                                     <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.
+                                                                        <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                                        <h2>Nouveau paquet</h2>
+                                                                        <p>Vous avez réçu le paquet $notification->data['nomPaq']) - $notification->data['type'])- $notification->data['module']) à corriger
                                                                         </p>
                                                                     </div>
                                                                 </a>
                                                             </li>
-
-
+                                                        @endforeach
+                                                        @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
+                                                        <li>
+                                                            <a href="#">
+                                                                <div class="notification-icon">
+                                                                    <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
+                                                                        aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="notification-content">
+                                                                    <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                                    <h2>Nouveau paquet</h2>
+                                                                    <p>Vous avez réçu le paquet $notification->data['nomPaq']) - $notification->data['type'])- $notification->data['module']) à corriger
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
                                                         </ul>
-                                                        <div class="notification-view">
-                                                            <a href="#">View All Notification</a>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </li>
                                                 <li class="nav-item">
