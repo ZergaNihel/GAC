@@ -359,6 +359,22 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                                 <ul class="notification-menu">
+                       @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>validation des paquets</h2>
+                            <p>Les enseignants (es) <b> {{$notification->data['corr1Nom']}} {{$notification->data['corr1Prenom']}} et
+                            {{$notification->data['corr2Nom']}} {{$notification->data['corr2Prenom']}}</b> ont validés le paquet </b>{{$notification->data['nomPaq']}}-{{$notification->data['type']}}</b> 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
     @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications') as $notification)
                                                             <li>
                     <a href="#">

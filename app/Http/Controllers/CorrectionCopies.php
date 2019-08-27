@@ -167,13 +167,24 @@ class CorrectionCopies extends Controller
         $paqens=Paquet_en::find($p->id);
         $paqens->valide=1;
         $paqens->save();
-        /*$details = [
-            'corr1' => $this->details['corr1'],
-            'corr2' => $this->details['corr2'],
-            'nomPaq' => $this->details['nomPaq'],
-            'type' => $this->details['type'],
+        $nbr = Paquet_en::where('id_paq',$paquet)->where('valide',1)->count();
+        if($nbr>=2){
+            $paq = Paquet::find($paquet);
+            $ens = Paquet_en::where('id_paq',$paquet)->where('valide',1)->get();
+            $details = [
+            'corr1Nom' => $ens[0]->enseignant->nom,
+            'corr1Prenom' => $ens[0]->enseignant->prenom,
+            'corr2Nom' => $ens[1]->enseignant->nom,
+            'corr2Prenom' => $ens[1]->enseignant->nom,
+            'nomPaq' => $paq->salle ,
+            'type' => $paq->exam->type,
         ];
-        Notification::send($user, new ValidePaquetNotifications($details));*/
+        $mod =  $paq->exam->module_Exam;
+        $m = Module::find($mod)->ens_responsable;
+        $user = User::where('id_Ens',$m)->get();
+        Notification::send($user, new ValidePaquetNotifications($details));
+        }
+    
         $semestre= Semestre::find($request->input('semestre')); 
         return view('EnseignantR.correction.popup',['semestre'=> $semestre,
         ]);
