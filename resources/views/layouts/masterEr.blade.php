@@ -359,6 +359,7 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                                 <ul class="notification-menu">
+             
                        @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications') as $notification)
                                                             <li>
                     <a href="#">

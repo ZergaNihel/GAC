@@ -260,7 +260,22 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                              <ul class="notification-menu">
-                                                @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
+                                              @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Justification Accepté</h2>
+                            <p>L' enseignant (e) <b> {{$notification->data['nomEns']}} {{$notification->data['prenomEns']}} </b> a accepté votre justification 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+             @endforeach
+                                                @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
                                  <li style="background-color:#f5f5f5;">
                    <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
 

@@ -303,12 +303,18 @@ class CorrectionCopies extends Controller
                 ->select('examens.type as type','modules.nom')
                 ->get();
         
-            $details = [
+           
+            $details1 = [
                 'id_paq' => $p->idPaq,
                 'nomPaq' => $p->salle,
                 'module' => $ex[0]->nom,
                 'type' => $ex[0]->type,
             ];
+            $c0=User::where('id_Ens',$correc[0]->idEns)
+                ->OrWhere('id_Ens',$correc[1]->idEns)
+                ->get();
+            
+            Notification::send($c0, new CorrecteursNotifications($details1));
            
             
             $paquet=Paquet::find($request->input('paquets'));
@@ -343,11 +349,7 @@ class CorrectionCopies extends Controller
             $c0=User::where('id_Ens',$correc[0]->idEns)
                 ->OrWhere('id_Ens',$correc[1]->idEns)
                 ->get();
-            /*$c1=DB::table('users')
-                ->where('id_Ens',$correc[1]->idEns)
-                ->get();*/
-               // $c0[0]->notify(new CorrecteursNotifications($details));
-               /* $c0[0]->notify(new CorrecteursNotifications($details));*/
+           
             Notification::send($c0, new CorrecteursNotifications($details1));
             //Notification::send($c1[0], new CorrecteursNotifications($details));
 

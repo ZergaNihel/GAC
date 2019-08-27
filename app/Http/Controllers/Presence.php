@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\support\Facades\DB;
-
 use App\Module;
+use App\User;
 use App\Seance;
 use App\Groupe;
 use App\Absence;
@@ -15,7 +16,8 @@ use App\Exclu;
 use App\TDTP;
 use App\Semestre;
 use Auth;
-
+use Notification;
+use App\Notifications\AcceptNotifications;
 class Presence extends Controller
 {
     public function __construct()
@@ -419,6 +421,15 @@ class Presence extends Controller
         $justification = Absence::find($request->input('idjustification'));
         $justification->etat_just=1;
         $justification->save();
+        $m = Module::find($justification->tdtp->id_module);
+        $details = [
+            'id_mod' => $justification->tdtp->id_module,
+            'module' => $m->nom,
+            'nomEns' => Auth::user()->enseignant->nom,
+            'prenomEns' => Auth::user()->enseignant->prenom,
+        ];
+        $user = User::where('id_Etu',$justification->id_Etu)->get();
+        Notification::send($user, new AcceptNotifications($details));
         return response()->json($justification);
         
     }
