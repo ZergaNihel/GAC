@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Notifications\DatabaseNotification;
 use App\Semestre;
 use App\Absence;
 use App\Module;
@@ -13,6 +14,8 @@ use App\Enseignant;
 use DB;
 use Auth;
 use Response;
+use Notification;
+use App\Notifications\JustificationAlertNotifications;
 class EtudiantController extends Controller
 {
 	 public function __construct()
@@ -83,16 +86,17 @@ else{
         $abs->justification = $logo;
         $abs->etat_just = 2;
         $abs->save();
-       /* $e=Etudiant::find($abs->id_Etu)
+        $e=Etudiant::find($abs->id_Etu);
 $details = [
         'nomE' => $e->nom,
         'prenomE' => $e->prenom,
         'groupe' => $e->groupe->nomG,
         ];
-        $admins = TDTP::where('role',1)->get();
-  
+$ens = $abs->tdtp->id_Ens;
+//dd($ens);
+$user = User::where('id_Ens',$ens)->get();
     
-     Notification::send($admin, new nouvelEtudiant($details));*/
+     Notification::send($user, new JustificationAlertNotifications($details));
    
         $abs1 = Absence::where('idAbs','=',$request->idAbs)
                         ->join('td_tps','absences.id_td_tp','td_tps.id')

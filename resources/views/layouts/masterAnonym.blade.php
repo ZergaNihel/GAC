@@ -126,7 +126,7 @@
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <!-- modals CSS
     ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
+    <link rel="stylesheet" href="{{asset('css/modals.css')}}">
 
     @yield('script1')
         
@@ -273,6 +273,22 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                              <ul class="notification-menu">
+                    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                       <h2>Justification</h2>
+                            <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté son(sa) justification
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+
                                                 @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
                                                             <li>
                                                                 <a href="#">
@@ -304,6 +320,7 @@
                                                                 </div>
                                                             </a>
                                                         </li>
+
                                                     @endforeach
                         
 

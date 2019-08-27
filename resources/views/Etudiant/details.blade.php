@@ -211,8 +211,8 @@ alert(data.img);
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                                                                     >
                        <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Ajouter une justification</h3>
-                            <p>Register User can get sign in from here</p>
+                         <h3>Ajouter une justification</h3>
+                 <p>Vous pouvez ajouter votre justification</p>
                              @if($message = Session::get('success'))
    <div class="alert alert-success alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>

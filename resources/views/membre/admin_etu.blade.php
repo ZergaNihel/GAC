@@ -99,7 +99,26 @@
                                                         </p>
                                                     </div>
                                                    
-                                                     
+                                                          <div class="col-md-3">
+                                                        <strong>Type</strong>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <p class="text-muted">
+                                               <b> {{$membre->etudiant->type}}</b>
+                                                        </p>
+                                                    </div>
+                                                    @if($membre->etudiant->type == 'Endétté(e)' or $membre->etudiant->type == 'Répétitif(ve)' )
+                                                              <div class="col-md-3">
+                                                        <strong>Modules</strong>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <p class="text-muted">
+@foreach(App\Endette::where('Etu_end',$membre->id_Etu)->join('modules','module_end','idMod')->get() as $m)
+<b>{{$m->nom}} </b>
+        @endforeach
+                                                        </p>
+                                                    </div>
+                                                    @endif   
                                                      
                                                     <div class="col-md-3">
                                                         <strong>email</strong>

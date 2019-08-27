@@ -17,7 +17,7 @@ use File;
 use Validator;
 use Notification;
 use App\Notifications\CorrecteursNotifications;
-
+use App\Notifications\ValidePaquetNotifications;
 
 class CorrectionCopies extends Controller
 {
@@ -167,6 +167,13 @@ class CorrectionCopies extends Controller
         $paqens=Paquet_en::find($p->id);
         $paqens->valide=1;
         $paqens->save();
+        /*$details = [
+            'corr1' => $this->details['corr1'],
+            'corr2' => $this->details['corr2'],
+            'nomPaq' => $this->details['nomPaq'],
+            'type' => $this->details['type'],
+        ];
+        Notification::send($user, new ValidePaquetNotifications($details));*/
         $semestre= Semestre::find($request->input('semestre')); 
         return view('EnseignantR.correction.popup',['semestre'=> $semestre,
         ]);
