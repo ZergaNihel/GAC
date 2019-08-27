@@ -108,6 +108,10 @@
     <!-- responsive CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    <!-- calendar CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.print.min.css')}}">
     <!-- modernizr JS
     ============================================ -->
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
@@ -118,7 +122,10 @@
     <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
     <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
- 
+    <!-- datapicker CSS
+		============================================ -->
+        <link rel="stylesheet" href="{{asset('css/datapicker/datepicker3.css')}}">
+        
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 @yield('js') 
 </head>

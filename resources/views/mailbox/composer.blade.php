@@ -111,7 +111,7 @@ success: function(data) {
                     <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
                     <div class="chosen-select-single mg-b-20">
                 <select name="email" class="chosen-select" tabindex="-1"  >
-                     <option value="" disabled selected>Select your option</option>
+                     <option value="" disabled selected>Envoyer à</option>
                                   @foreach($users as $u)
                                   @if($u->etudiant != null)
                                   <option value="{{$u->id}}">{{$u->etudiant->nom}} {{$u->etudiant->prenom}}</option>
@@ -127,9 +127,9 @@ success: function(data) {
                 </div>
                                       
                                         <div class="form-group">
-                                            <label class="col-lg-1 control-label text-left">Subject:</label>
+                                            <label class="col-lg-1 control-label text-left">Sujet:</label>
                                             <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
-                                <input type="text" class="form-control input-sm" placeholder="Subject" name="sujet">
+                                <input type="text" class="form-control input-sm" placeholder="Sujet" name="sujet">
                                             </div>
                                         </div>
                                    
@@ -162,7 +162,7 @@ success: function(data) {
                                                                <label class="icon-right" for="prepend-big-btn">
                                                                         <i class="fa fa-download"></i>
                                                                     </label>
-                                                                <input type="text" id="prepend-big-btn" placeholder="no file selected" >
+                                                                <input type="text" id="prepend-big-btn" placeholder="Aucun fichier selectionné" >
                                                             </div>
                                                         </div>  
                            </div>
@@ -171,7 +171,7 @@ success: function(data) {
         </div>
   <br>
                                <div class="panel-footer">
-                                 <button class="btn btn-primary ft-compse" type="submit">Send email</button>
+                                 <button class="btn btn-primary ft-compse" type="submit">Envoyer</button>
                                   </form>
                                 <div class="pull-right">
                                     <div class="btn-group active-hook">

@@ -126,7 +126,15 @@
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <!-- modals CSS
     ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/modals.cs')}}s">
+    <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <!-- summernote CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
+    <!-- dropzone CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
+    <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
 
     @yield('script1')
         
@@ -519,6 +527,13 @@
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
+    <!-- summernote JS
+    ============================================ -->
+    <script src="{{asset('js/summernote/summernote.min.js')}}"></script>
+    <script src="{{asset('js/summernote/summernote-active.js')}}"></script>
+    <!-- dropzone JS
+    ============================================ -->
+    <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
 
     @yield('script2')
       
