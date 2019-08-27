@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Notifications\DatabaseNotification;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\support\Facades\DB;
-use App\Notifications\CorrecteursNotifications;
-
 use App\Paquet;
+use App\User;
 use App\Examen;
 use App\Enseignant;
 use App\Correction;
@@ -18,6 +16,7 @@ use Auth;
 use File;
 use Validator;
 use Notification;
+use App\Notifications\CorrecteursNotifications;
 
 
 class CorrectionCopies extends Controller
@@ -292,16 +291,7 @@ class CorrectionCopies extends Controller
                 'module' => $ex[0]->nom,
                 'type' => $ex[0]->type,
             ];
-            $c0=DB::table('users')
-                ->join('enseignants','enseignants.idEns','=','users.id_Ens')
-                ->first();
-            $c1=DB::table('users')
-                ->join('enseignants','enseignants.idEns','=','users.id_Ens')
-                ->first();
-                return $c0;
-            
-            Notification::send($c0, new CorrecteursNotifications($details));
-            Notification::send($c1, new CorrecteursNotifications($details));
+           
             
             $paquet=Paquet::find($request->input('paquets'));
             return ["paquet" => $paquet , "correcteur" => $correc];
@@ -326,22 +316,22 @@ class CorrectionCopies extends Controller
                 ->select('examens.type as type','modules.nom')
                 ->get();
         
-            $details = [
+            $details1 = [
                 'id_paq' => $p->idPaq,
                 'nomPaq' => $p->salle,
                 'module' => $ex[0]->nom,
                 'type' => $ex[0]->type,
             ];
-            $c0=DB::table('users')
-                ->where('id_Ens',$correc[0]->idEns)
+            $c0=User::where('id_Ens',$correc[0]->idEns)
+                ->OrWhere('id_Ens',$correc[1]->idEns)
                 ->get();
-            $c1=DB::table('users')
+            /*$c1=DB::table('users')
                 ->where('id_Ens',$correc[1]->idEns)
-                ->get();
+                ->get();*/
                // $c0[0]->notify(new CorrecteursNotifications($details));
                /* $c0[0]->notify(new CorrecteursNotifications($details));*/
-            Notification::send($c0[0], new CorrecteursNotifications($details));
-            Notification::send($c1[0], new CorrecteursNotifications($details));
+            Notification::send($c0, new CorrecteursNotifications($details1));
+            //Notification::send($c1[0], new CorrecteursNotifications($details));
 
             $paquet=Paquet::find($request->input('paquets'));
 

@@ -367,15 +367,15 @@
                                                                             aria-hidden="true"></i>
                                                                     </div>
                                                                     <div class="notification-content">
-                                                                        <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                                        <h2>Nouveau paquet</h2>
-                                                                        <p>Vous avez réçu le paquet $notification->data['nomPaq']) - $notification->data['type'])- $notification->data['module']) à corriger
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                       <h2>Nouveau paquet</h2>
+                            <p>Vous avez réçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
                                                                         </p>
                                                                     </div>
                                                                 </a>
                                                             </li>
                                                         @endforeach
-                                                        @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
+                                                        @foreach( Auth::user()->readNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
                                                         <li>
                                                             <a href="#">
                                                                 <div class="notification-icon">
@@ -385,7 +385,7 @@
                                                                 <div class="notification-content">
                                                                     <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                                     <h2>Nouveau paquet</h2>
-                                                                    <p>Vous avez réçu le paquet $notification->data['nomPaq']) - $notification->data['type'])- $notification->data['module']) à corriger
+                                                                    <p>Vous avez réçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
                                                                     </p>
                                                                 </div>
                                                             </a>
@@ -604,9 +604,7 @@
     <!-- main JS
 		============================================ -->
     <script src="{{asset('js/main.js')}}"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="{{asset('js/tawk-chat.js')}}"></script>
+   
     <!-- select2 JS
 		============================================ -->
     <script src="{{asset('js/select2/select2.full.min.js')}}"></script>

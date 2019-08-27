@@ -83,6 +83,17 @@ else{
         $abs->justification = $logo;
         $abs->etat_just = 2;
         $abs->save();
+       /* $e=Etudiant::find($abs->id_Etu)
+$details = [
+        'nomE' => $e->nom,
+        'prenomE' => $e->prenom,
+        'groupe' => $e->groupe->nomG,
+        ];
+        $admins = TDTP::where('role',1)->get();
+  
+    
+     Notification::send($admin, new nouvelEtudiant($details));*/
+   
         $abs1 = Absence::where('idAbs','=',$request->idAbs)
                         ->join('td_tps','absences.id_td_tp','td_tps.id')
                         ->join('seances','td_tps.id_seance','seances.idSea')

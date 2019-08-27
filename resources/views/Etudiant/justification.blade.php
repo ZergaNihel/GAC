@@ -69,7 +69,7 @@
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="stats-title pull-left">
-        <a href="{{url('/absences_Etudiant/details/'.$m->idMod)}}"><h4>{{$m->nom}} ( {{$m->code}} )</h4> </a>
+        <a href="{{url('/absences_Etudiant/details/'.$m->idMod)}}"><h4>{{$m->nom}} </h4> </a>
                                 </div>
                                 <div class="stats-icon pull-right">
                                     <a href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$m->idMod}}">  <i class="educate-icon educate-data-table"></i> </a>
@@ -119,7 +119,7 @@
                         <div class="hpanel widget-int-shape responsive-mg-b-30">
                             <div class="panel-body">
                                 <div class="stats-title pull-left">
-                                    <h4>{{$m->nom}} ( {{$m->code}} )</h4>
+                                    <h4>{{$m->nom}}</h4>
                                 </div>
                                 <div class="stats-icon pull-right">
                                     <a href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$m->idMod}}">>  <i class="educate-icon educate-data-table"></i> </a>
@@ -209,7 +209,7 @@
          <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Ajouter</button>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
+                                                                             </div>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
