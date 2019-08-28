@@ -260,6 +260,51 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                              <ul class="notification-menu">
+@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\NotificationBeforeExclus') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Exclus!</h2>
+                            <p> Vous avez 4 abcences !! vous risquez d'être exclus de module <b> {{$notification->data['module']}} </b> 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ExclusNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>EXCLUS!</h2>
+                            <p> Vous êtes exclus de module <b> {{$notification->data['module']}} </b> 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+ @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\RefuseNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Justification Réfusé</h2>
+                            <p>L' enseignant (e) <b> {{$notification->data['nomEns']}} {{$notification->data['prenomEns']}} </b> a réfusé votre justification 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
                                               @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications') as $notification)
                                                             <li>
                     <a href="#">
@@ -274,7 +319,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-             @endforeach
+                                   @endforeach
                                                 @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
                                  <li style="background-color:#f5f5f5;">
                    <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">

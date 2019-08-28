@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ExclusNotifications extends Notification
+class ValideNotes extends Notification
 {
     use Queueable;
 
@@ -28,7 +28,7 @@ class ExclusNotifications extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-   public function via($notifiable)
+    public function via($notifiable)
     {
         return ['database'];
     }
@@ -43,7 +43,10 @@ class ExclusNotifications extends Notification
     public function toDatabase($notifiable)
     {
         return [
-           'module' => $this->details['module'], 
+            'id_mod' => $this->details['id_mod'],
+            'module' => $this->details['module'],
+            'nomEns' => $this->details['nomEns'],
+            'prenomEns' => $this->details['prenomEns'],
         ];
     }
 }

@@ -18,6 +18,10 @@ use App\Semestre;
 use Auth;
 use Notification;
 use App\Notifications\AcceptNotifications;
+use App\Notifications\RefuseNotifications;
+use App\Notifications\ExclusNotifications;
+use App\Notifications\NotificationBeforeExclus;
+
 class Presence extends Controller
 {
     public function __construct()
@@ -407,7 +411,27 @@ class Presence extends Controller
             $present->date=$request->input('datep');
         }
         $present->save();
+          
+$nbEx = Absence::where('etat',0)
+                 ->where('id_Etu',$request->input('etudiant'))
+                 ->join('td_tps','id_td_tp','id')
+                 ->join('seances','id_seance','idSea')
+                 ->where('id_module',$module)
+                 ->where('id_groupe',$groupe)
+                 ->where('seances.type','td')
+                 ->count();
+                // return $nbEx;
+if($nbEx == 4){
+    $m = Module::find($module);
+        $details = [
+            'id_mod' => $module,
+            'module' => $m->nom,
+        ];
+        $user = User::where('id_Etu',$request->input('etudiant'))->get();
+        Notification::send($user, new NotificationBeforeExclus($details));
+        
 
+}
         $nbr = DB::table('absences')
                 ->where('date','=',$request->input('datep'))
                 ->where('id_td_tp','=',$a)
@@ -439,6 +463,15 @@ class Presence extends Controller
         $justification = Absence::find($request->input('idjustification'));
         $justification->etat_just=0;
         $justification->save();
+        $m = Module::find($justification->tdtp->id_module);
+        $details = [
+            'id_mod' => $justification->tdtp->id_module,
+            'module' => $m->nom,
+            'nomEns' => Auth::user()->enseignant->nom,
+            'prenomEns' => Auth::user()->enseignant->prenom,
+        ];
+        $user = User::where('id_Etu',$justification->id_Etu)->get();
+        Notification::send($user, new RefuseNotifications($details));
         return response()->json($justification);
         
     }
@@ -591,7 +624,11 @@ class Presence extends Controller
         $exclus->Etu_exc=$request->input('etudiant');
         $exclus->module_exc=$request->input('module');
         $exclus->save();
-
+        $m = Module::find($request->input('module'));
+        $details = [ 'module' => $m->nom, ];
+        $user = User::where('id_Etu',$request->input('etudiant'))->get();
+        Notification::send($user, new ExclusNotifications($details));
+         
         return response()->json($exclus);
 
     }

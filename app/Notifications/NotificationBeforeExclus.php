@@ -7,11 +7,11 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ExclusNotifications extends Notification
+class NotificationBeforeExclus extends Notification
 {
     use Queueable;
 
-   private $details;
+  private $details;
     /**
      * Create a new notification instance.
      *
@@ -19,7 +19,7 @@ class ExclusNotifications extends Notification
      */
     public function __construct($details)
     {
-         $this->details = $details;
+        $this->details = $details;
     }
 
     /**
@@ -28,11 +28,18 @@ class ExclusNotifications extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-   public function via($notifiable)
+    public function via($notifiable)
     {
         return ['database'];
     }
 
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+   
 
     /**
      * Get the array representation of the notification.
@@ -43,7 +50,8 @@ class ExclusNotifications extends Notification
     public function toDatabase($notifiable)
     {
         return [
-           'module' => $this->details['module'], 
+            'id_mod' => $this->details['id_mod'],
+            'module' => $this->details['module'],
         ];
     }
 }

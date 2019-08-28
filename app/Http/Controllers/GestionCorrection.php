@@ -277,6 +277,7 @@ class GestionCorrection extends Controller
         $paquet->decode=1;
         $paquet->save();
         $semestre= Semestre::find($request->input('semestre')); 
+        
         // return view('EnseignantR.correction.popup',['semestre'=> $semestre,
         // ]);
        return redirect('enseignant/groupes/2');
