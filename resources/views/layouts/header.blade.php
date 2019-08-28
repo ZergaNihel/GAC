@@ -260,6 +260,20 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                              <ul class="notification-menu">
+    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                              <h2>Notes</h2>
+                      <p> Vous avez récus votre note de module <b>{{$notification->data['module']}}</b> </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
 @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\NotificationBeforeExclus') as $notification)
                                                             <li>
                     <a href="#">
@@ -268,9 +282,8 @@
                                                                     </div>
                                     <div class="notification-content">
                             <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                        <h2>Exclus!</h2>
-                            <p> Vous avez 4 abcences !! vous risquez d'être exclus de module <b> {{$notification->data['module']}} </b> 
-                                                                        </p>
+                                        <h2>{{$notification->data['module']}}</h2>
+                      <p> Vous avez 4 abcences !! vous risquez d'être exclus </p>
                                                                     </div>
                                                                 </a>
                                                             </li>

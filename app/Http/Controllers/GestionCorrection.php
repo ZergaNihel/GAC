@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\support\Facades\DB;
-
+use Illuminate\Notifications\DatabaseNotification;
 use App\Code;
 use App\Paquet;
 use App\Examen;
@@ -13,10 +13,13 @@ use App\Enseignant;
 use App\Correction;
 use App\Paquet_en;
 use App\Semestre;
+use App\Etudiant;
+use App\User;
 use Auth;
 use File;
 use Validator;
-
+use Notification;
+use App\Notifications\ValideNotes;
 class GestionCorrection extends Controller
 {
     public function index($id)
@@ -277,9 +280,21 @@ class GestionCorrection extends Controller
         $paquet->decode=1;
         $paquet->save();
         $semestre= Semestre::find($request->input('semestre')); 
-        
-        // return view('EnseignantR.correction.popup',['semestre'=> $semestre,
-        // ]);
+        $paq = Code::where('paq_code',$request->input('paquet'))->get();
+        $type = $paquet->exam->type;
+        $m = Module::find($paquet->exam->module_Exam);
+        foreach ($paq as $p) {
+              $details = [
+            'id_mod' => $paquet->exam->module_Exam,
+            'module' => $m->nom,
+            'note' => $p->notefinale,
+            'typeExam' => $type,
+        ];
+        $etu = Etudiant::where('matricule',$p->etu_code)->first();
+        $user = User::where('id_Etu',$etu->idEtu)->get();
+        Notification::send($user, new ValideNotes($details));
+        }
+      
        return redirect('enseignant/groupes/2');
     }
 }

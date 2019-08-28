@@ -45,8 +45,8 @@ class ValideNotes extends Notification
         return [
             'id_mod' => $this->details['id_mod'],
             'module' => $this->details['module'],
-            'nomEns' => $this->details['nomEns'],
-            'prenomEns' => $this->details['prenomEns'],
+            'note' => $this->details['note'],
+            'typeExam' => $this->details['typeExam'],
         ];
     }
 }
