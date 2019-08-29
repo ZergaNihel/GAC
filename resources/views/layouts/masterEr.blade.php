@@ -299,7 +299,7 @@
                                                             $notification)
                                                             <li>
                                                                 <a
-                                                                    href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                                        href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
                                                                         <img src="{{asset('img/profile/profil.png')}}"
                                                                             alt="">
@@ -331,9 +331,9 @@
 
                                                                                     <span class="label label-danger">
                                                                                         Nouveau</span></h2>
-                                                                                @if($notification->data['sujet'])
-                                                                                <p>{{ $notification->data['sujet'] }}
-                                                                                </p>
+                         @if($notification->data['sujet'])
+                                 <p>{{ $notification->data['sujet'] }}
+                                                             </p>
                                                                                 @else
                                                                                 <p>Aucun Sujet</p>
                                                                                 @endif

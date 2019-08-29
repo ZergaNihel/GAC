@@ -8,9 +8,8 @@
 
     var a = $(event.relatedTarget).data('jus');
     alert(a);
-    var m = $(this)
-     m.find('img').attr('src',a);
-    
+   $('.pdf-single-pro a').attr('href',a);
+    alert($('.pdf-single-pro a').attr('href'));
 });
     $("#edit").on('show.bs.modal', function(event) {
 
@@ -344,8 +343,22 @@ alert(data.img);
                                             </div> 
 
                    <!-- ------------------------voir-------------------------->
+       <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-close-area modal-close-df">
+                                                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                            </div>
+                                            <div class="modal-body" id="modalbody">
+                                                <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                      <a class="media" href="" id="media"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+            </div> 
                     
-              <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+              <div id="voir1" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header header-color-modal bg-color-1">

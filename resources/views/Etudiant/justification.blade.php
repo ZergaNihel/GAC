@@ -142,6 +142,7 @@
                  
      </div>
      </div>
+ 
   <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
