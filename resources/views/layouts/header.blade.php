@@ -40,7 +40,7 @@
     <!-- main CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-    <!-- educate icon CSS
+     <!-- educate icon CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/educate-custon-icon.css')}}">
     <!-- morrisjs CSS
@@ -253,53 +253,75 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i>
-                                @if(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->count()>0)
-                                                        <span class="indicator-ms"></span>
-                                                    @endif</a>
-                                                    <div role="menu" class="notification-author dropdown-menu animated zoomIn">
+                                                <!-----------------new----------->
+                                                         <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
+                                                        aria-expanded="false" class="nav-link dropdown-toggle"><i
+                                                            class="educate-icon educate-bell"
+                                                            aria-hidden="true"></i>
+                                     @if(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->count()>0)
+                                                            <span
+                                                            class="indicator-nt"></span> @endif</a>
+                                                    <div role="menu"
+                                                        class="notification-author dropdown-menu animated zoomIn">
                                                         <div class="notification-single-top">
                                                             <h1>Notifications</h1>
                                                         </div>
-                                                      <ul class="notification-menu">
-      @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
+                                             <ul class="notification-menu">
+                                                @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
                                  <li style="background-color:#f5f5f5;">
-<a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
-                <div class="notification-icon">
-<i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                   <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
+
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
-            <div class="notification-content">
-            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</span>
-               <h2>{{$notification->data['nom']}} {{$notification->data['prenom']}}</h2>
-            <p>L' étudiant (e) {{$notification->data['nom']}} {{$notification->data['prenom']}} a crée son compte .</p>
-            </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                      <h2>{{$notification->data['nom']}} {{$notification->data['prenom']}}</h2>
+            <p>L' étudiant (e) {{$notification->data['nom']}} {{$notification->data['prenom']}} a crée un nouveau compte .</p>
+                                                                    </div>
                                                                 </a>
                                                             </li>
-                                                    @endforeach
-                   @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
-                                 <li >
-<a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
-                <div class="notification-icon">
-<i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
-                                                                    </div>
-            <div class="notification-content">
-            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</span>
-               <h2>{{$notification->data['nom']}} {{$notification->data['prenom']}}</h2>
-            <p>L'étudiant {{$notification->data['nom']}} {{$notification->data['prenom']}} a crée son compte .</p>
-            </div>
-                                                                </a>
-                                                            </li>
-                                                    @endforeach
+                                                            <hr>
                                                             
+                                                        @endforeach
+
+                                           
+                  
+ @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant')->take(2) as $notification)                            
+                                 <li >
+                   <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
+
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                      <h2>{{$notification->data['nom']}} {{$notification->data['prenom']}}</h2>
+            <p>L' étudiant (e) {{$notification->data['nom']}} {{$notification->data['prenom']}} a crée son compte .</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <hr>
+                                                        @endforeach
+                                           
+                        
+
+
                                                         </ul>
-                                                        <div class="notification-view">
-                                                          
-                                                        </div>
+                                                     
                                                     </div>
                                                 </li>
+                                                <!----------------old-----!-->
+                         
+                                                            
+                                                
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                            @if (Auth::user()->photo)
                                                             <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                            @else 
+                                                                <img src="{{ asset('img/profile/profil.png') }} " alt="" />
+                                                            @endif
                                                             <span class="admin-name">
                                                       @if(Auth::user()->role == '0')
 
@@ -322,10 +344,10 @@
                                                        
                                                         <!--nihel-->
                                                       @if(Auth::user()->role == '0'|| Auth::user()->role == '1' || Auth::user()->role == '2')
-                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
+                                                          <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profil</a>
                                                           </li>
                                                    @elseif(Auth::user()->role == '3')
-                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profile</a>
+                                                    <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span class="edu-icon edu-user-rounded author-log-ic"></span>Mon Profil</a>
                                                           </li>
 
                                                           @endif
@@ -390,7 +412,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="footer-copy-right">
-                            <p>GAC © 2019.tous les droits résèrvés. </p>
+                            <p>Copyrigh © 2019 GAC.tous droits réservés. </p>
                         </div>
                     </div>
                 </div>

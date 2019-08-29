@@ -132,9 +132,7 @@ class Presence extends Controller
                             ->where('idEtu','=',$e->id_Etu)
                             ->distinct()
                             ->get();
-                $abs[$j]=$nb[$i];
                 $j++;
-                
             }
             if($nb[$i]==3)
             {
@@ -147,10 +145,8 @@ class Presence extends Controller
                 {
                     $exclus[$j]=DB::table('etudiants')
                             ->where('idEtu','=',$e->id_Etu)
-                            ->get();
-                    $abs[$j]=$nb[$i];
-                    $j++; 
-                     
+                            ->get(); 
+                    $j++;
                 }else{
                     $justifA=DB::table('absences')
                             ->where('id_Etu','=',$e->id_Etu)
@@ -168,9 +164,8 @@ class Presence extends Controller
                     {
                         $exclus[$j]=DB::table('etudiants')
                                 ->where('idEtu','=',$e->id_Etu)
-                                ->get();
-                        $abs[$j]=$nb[$i];
-                        $j++;   
+                                ->get(); 
+                        $j++;
                     }
                 }
             }
@@ -191,9 +186,8 @@ class Presence extends Controller
                 {
                     $exclus[$j]=DB::table('etudiants')
                             ->where('idEtu','=',$e->id_Etu)
-                            ->get();
-                    $abs[$j]=$nb[$i];
-                    $j++;    
+                            ->get();   
+                    $j++; 
                 }
             }
             $i++;
@@ -275,7 +269,14 @@ class Presence extends Controller
                 ->whereNotIn('idEtu',$tabExc)
                 ->distinct()
                 ->get();
-       
+                $i=0;
+        foreach ($exc as $c ) {
+            $abs[$i]=DB::table('absences')
+                    ->where('id_Etu',$c->idEtu)
+                    ->where('etat',0)
+                    ->count(); 
+            $i++;
+        }
         return view('EnseignantR.presence')->with( 
             [
             'seance'=> $seance ,

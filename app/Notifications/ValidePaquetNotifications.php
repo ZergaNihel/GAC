@@ -50,8 +50,10 @@ class ValidePaquetNotifications extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'corr1' => $this->details['corr1'],
-            'corr2' => $this->details['corr2'],
+            'corr1Nom' => $this->details['corr1Nom'],
+            'corr1Prenom' => $this->details['corr1Prenom'],
+            'corr2Nom' => $this->details['corr2Nom'],
+            'corr2Prenom' => $this->details['corr2Prenom'],
             'nomPaq' => $this->details['nomPaq'],
             'type' => $this->details['type'],
         ];

@@ -10,8 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 class CorrecteursNotifications extends Notification
 {
     use Queueable;
-
-     private $details;
+ private $details;
     /**
      * Create a new notification instance.
      *
@@ -19,7 +18,7 @@ class CorrecteursNotifications extends Notification
      */
     public function __construct($details)
     {
-        $this->details = $details;
+         $this->details = $details;
     }
 
     /**
@@ -33,13 +32,6 @@ class CorrecteursNotifications extends Notification
         return ['database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-   
 
     /**
      * Get the array representation of the notification.

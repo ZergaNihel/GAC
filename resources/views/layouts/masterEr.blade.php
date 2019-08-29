@@ -153,7 +153,7 @@
                     <ul class="metismenu" id="menu1">
                         <br> <br> <br>
                         <li>
-                            <a title="Groupes" href="{{url('enseignant/groupes')}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
+                            <a title="Groupes" href="{{url('enseignant/groupes'.$semestre->idSem)}}" aria-expanded="false"><span class="educate-icon educate-student icon-wrap" aria-hidden="true"></span> <span class="mini-click-non"> Groupes</span></a>
                         </li>
 
                         <li>
@@ -256,8 +256,7 @@
                                                                 <a
                                                                     href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
-                                                                        <img src="{{asset('img/profile/profil.png')}}"
-                                                                            alt="">
+                                                                        <img src="{{asset('img/profile/profil.png')}}" alt="">
                                                                     </div>
                                                                     <div class="message-content">
                                                                         <span
@@ -358,24 +357,55 @@
                                                         <div class="notification-single-top">
                                                             <h1>Notifications</h1>
                                                         </div>
-                                                        <ul class="notification-menu">
-                                                               @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
+                                                <ul class="notification-menu">
+                       @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications') as $notification)
                                                             <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
-                                                                            aria-hidden="true"></i>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
                                                                     <div class="notification-content">
-                                                                        <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                                        <h2>Nouveau paquet</h2>
-                                                                        <p>Vous avez réçu le paquet $notification->data['nomPaq']) - $notification->data['type'])- $notification->data['module']) à corriger
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>validation des paquets</h2>
+                            <p>Les enseignants (es) <b> {{$notification->data['corr1Nom']}} {{$notification->data['corr1Prenom']}} et
+                            {{$notification->data['corr2Nom']}} {{$notification->data['corr2Prenom']}}</b> ont validés le paquet </b>{{$notification->data['nomPaq']}}-{{$notification->data['type']}}</b> 
                                                                         </p>
                                                                     </div>
                                                                 </a>
                                                             </li>
                                                         @endforeach
-                                                        @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
+    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                       <h2>Justification</h2>
+                            <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté son(sa) justification
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                 @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                               <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                       <h2>Nouveau paquet</h2>
+                            <p>Vous avez réçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                        @foreach( Auth::user()->readNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
                                                         <li>
                                                             <a href="#">
                                                                 <div class="notification-icon">
@@ -385,7 +415,7 @@
                                                                 <div class="notification-content">
                                                                     <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                                     <h2>Nouveau paquet</h2>
-                                                                    <p>Vous avez réçu le paquet $notification->data['nomPaq']) - $notification->data['type'])- $notification->data['module']) à corriger
+                                                                    <p>Vous avez réçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
                                                                     </p>
                                                                 </div>
                                                             </a>
@@ -398,7 +428,12 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                        @if (Auth::user()->photo)
+                                                            <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                        @else 
+                                                            <img src="{{ asset('img/profile/profil.png') }} " alt="" />
+                                                        @endif
+                                                        
                                                         <span class="admin-name">
                                                             @if(Auth::user()->role == '0')
 
@@ -423,29 +458,16 @@
                                                         <!--nihel-->
                                                         @if(Auth::user()->role == '0'|| Auth::user()->role == '1' ||
                                                         Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span
+                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/details/')}}"><span
                                                                     class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profile</a>
+                                                                Profil</a>
                                                         </li>
                                                         @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span
+                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/details/'.$semestre->idSem)}}"><span
                                                                     class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profile</a>
+                                                                Profil</a>
                                                         </li>
 
-                                                        @endif
-
-                                                        @if(Auth::user()->role == '0' || Auth::user()->role == '1' ||
-                                                        Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Modifier
-                                                                mon compte</a>
-                                                        </li>
-                                                        @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Modifier
-                                                                mon compte</a>
-                                                        </li>
                                                         @endif
                                                         <!--fin nihel-->
                                                         <!--nihel 19/03/2019-->
@@ -486,7 +508,7 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                            <li><a href="{{url('enseignant/groupes')}}">Groupes</a></li>
+                                            <li><a href="{{url('enseignant/groupes'.$semestre->idSem)}}">Groupes</a></li>
                                         <li><a data-toggle="collapse" data-target="#Charts" href="#">Présence <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
                                                 <li><a href="{{url('presence/'.$semestre->idSem)}}">Liste du groupe</a></li>
@@ -604,9 +626,7 @@
     <!-- main JS
 		============================================ -->
     <script src="{{asset('js/main.js')}}"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="{{asset('js/tawk-chat.js')}}"></script>
+   
     <!-- select2 JS
 		============================================ -->
     <script src="{{asset('js/select2/select2.full.min.js')}}"></script>

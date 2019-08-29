@@ -40,7 +40,7 @@ $.ajax({
     var piechart = new Chart(ctx, {
         type: 'pie',
         data: {
-        labels: ["Endétté", "Répétitifs", "Nouveau"],
+        labels: ["Endetté", "Répétitif", "Nouveau"],
             datasets: [{
                 label: 'pie Chart',
                 backgroundColor: [

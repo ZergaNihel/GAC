@@ -1,6 +1,6 @@
      <div class="header-top-menu tabl-d-n">
                                             <ul class="nav navbar-nav mai-top-nav">
-  <li class="nav-item"><a href="{{url('Semestres/index')}}" class="nav-link">Acceuil</a>
+  <li class="nav-item"><a href="{{url('Semestres/index')}}" class="nav-link">Accueil</a>
                                                 </li>
                                                 <li class="nav-item"><a href="{{url('modules/index')}}" class="nav-link">Modules</a>
                                                 </li>

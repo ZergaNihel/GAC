@@ -25,7 +25,7 @@ class Etudiant extends Model
    
     public function groupe()
     {
-        return $this->belongsTo('App\groupe','idG','idEtu');
+        return $this->belongsTo('App\groupe','idG','idG');
     }
     //
 

@@ -51,10 +51,9 @@ class JustificationAlertNotifications extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'corr1' => $this->details['corr1'],
-            'corr2' => $this->details['corr2'],
-            'nomPaq' => $this->details['nomPaq'],
-            'type' => $this->details['type'],
+            'nomE' => $this->details['nomE'],
+            'prenomE' => $this->details['prenomE'],
+             'groupe' => $this->details['groupe'],
         ];
     }
 }

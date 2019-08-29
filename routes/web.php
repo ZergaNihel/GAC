@@ -88,8 +88,7 @@ Route::post('update_student', 'GroupController@update_student');
 Route::get('membre/{id}/details','UserController@details');
 Route::get('membre/{id}/edite','UserController@edit');
 Route::put('membre/{id}','UserController@update');
-Route::get('membreE/{id}/details','UserEController@details');
-Route::get('membreE/{id}/edite','UserEController@edit');
+Route::get('membreE/{id}/details/{idS}','UserEController@details');
 Route::put('membreE/{id}','UserEController@update');
 
 //------------------ Presence ----------------------------
