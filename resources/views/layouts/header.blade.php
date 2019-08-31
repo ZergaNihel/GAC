@@ -485,7 +485,7 @@
 
 
 @yield('content')
-     <div class="footer-copyright-area">
+     <div class="footer-copyright-area" style=" position: fixed; bottom: 0; width:100%;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -636,6 +636,10 @@
     <script src="{{asset('js/c3-charts/d3.min.js')}}"></script>
     <script src="{{asset('js/c3-charts/c3.min.js')}}"></script>
     <script src="{{asset('js/c3-charts/c3-active.js')}}"></script>
+     <!-- pdf JS
+    ============================================ -->
+    <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
+    <script src="{{asset('js/pdf/pdf-active-1.js')}}"></script>
 </body>
 
 

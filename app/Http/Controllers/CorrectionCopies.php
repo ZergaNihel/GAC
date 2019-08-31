@@ -81,7 +81,7 @@ class CorrectionCopies extends Controller
     public function corriger(Request $request)
     {
         $i=0;
-        $p = $request->input('paquets'); return $p;
+        $p = $request->input('paquets');
         $paquet=Paquet::find($p);
         $codes= DB::table('codes')
                   ->join('paquet_ens','codes.paq_code','=','paquet_ens.id_paq')
@@ -105,11 +105,10 @@ class CorrectionCopies extends Controller
                 ->get();
 
         $paq_ens=DB::table('paquet_ens')
-                    //->join('corrections','corrections.correcteur','=','paquet_ens.id')
+                    ->join('corrections','corrections.correcteur','=','paquet_ens.id')
                     ->where('id_Ens','=',Auth::user()->enseignant->idEns)
                     ->where('id_paq','=',$p)
                     ->get();
-                    return $paq_ens;
         
         $semestre= Semestre::find($request->input('semestre')); 
 
@@ -128,14 +127,16 @@ class CorrectionCopies extends Controller
     {
         $code=$request->input('code');
         $n=$request->input('note');
-        $id=DB::table('corrections')
-                ->join('paquet_ens','corrections.correcteur','=','paquet_ens.id')
-                ->where('code_etu', '=', $code)
-                ->where('paquet_ens.id_Ens', '=',Auth::user()->enseignant->idEns)
-                ->select('corrections.id')
-                ->get();
+        
         $paq_ens=DB::table('paquet_ens')
                 ->where('id_Ens','=',Auth::user()->enseignant->idEns)
+                ->where('id_paq','=',$request->input('paq'))
+                ->get();
+                
+        $id=DB::table('corrections')
+                ->where('code_etu', '=', $code)
+                ->where('correcteur', '=',$paq_ens[0]->id)
+                ->select('corrections.id')
                 ->get();
                 
         if(count($id)>0)

@@ -43,7 +43,7 @@ if(data.abs[i].etat_just == 1){
          if(data.abs[i].etat_just == 0){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
-$("#1").after('<tr><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#voir" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'</td></tr>');
+$("#1").after('<tr><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a href="#" title="Voir" class="btn btn-default" data-toggle="modal" data-target="#detail'+data.abs[i].idAbs+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'</td></tr>');
 }
 
 }
@@ -112,7 +112,7 @@ alert(data.img);
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Absences</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">liste des abcences</span>
+                                            <li><span class="bread-blod">liste des absences</span>
                                             </li>
                                         </ul>
                                         @endsection
@@ -124,7 +124,7 @@ alert(data.img);
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
-                            <h2>Absences de module : {{$mod->nom}} </h2>
+                            <h2>Absences du module : {{$mod->nom}} </h2>
                          
                         </div>
                            <div class="add-product pull-right">
@@ -164,23 +164,38 @@ alert(data.img);
                                         <td >{{$a->jour}} {{$a->heure}} {{$a->salle}}</td>
                                         <td >{{$a->type}}</td>
                       <td>  @if($a->etat_just == 1)
-                        <button class="pd-setting">Accepté</button> 
+                        <span class="pd-setting">Acceptée</span> 
                             @endif
                             @if($a->etat_just == 2)
-                            <button class="ps-setting">En attente</button>
+                            <span class="ps-setting">En attente</span>
                              @endif
                             @if($a->etat_just == 0)
-                            <button class="ds-setting">Réfusé</button>
+                            <span class="ds-setting">Refusée</span>
                              @endif
 
                     </td>
                                         <td >
-                                            <a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#voir" data-jus="{{ $a->justification}}" id="a{{$a->idAbs}}"><i class="fa fa-book" aria-hidden="true" ></i> </a>
+                                            <a  href="#" title="Voir" class="btn btn-default" data-toggle="modal" data-target="#detail{{$a->idAbs}}" id="a{{$a->idAbs}}"><i class="fa fa-book" aria-hidden="true" ></i> </a>
 
                                            @if($a->etat_just == 2)
                                             <a  data-toggle="modal"  href="#" title="Modifier" class="btn btn-default" data-target="#edit" data-id="{{$a->idAbs}}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
                                             @endif
                                         </td>
+
+                                        <div id="detail{{$a->idAbs}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-close-area modal-close-df">
+                                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                    </div>
+                                                    <div class="modal-body" id="modalbody">
+                                                        <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                                            <a class="media" href="{{asset('uploads/justifications/'.$a->justification)}}"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
                                   </tr>
                                     
 @endforeach
@@ -345,7 +360,7 @@ alert(data.img);
 
                    <!-- ------------------------voir-------------------------->
                     
-              <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                        <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header header-color-modal bg-color-1">

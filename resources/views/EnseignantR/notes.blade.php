@@ -31,6 +31,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="white-box res-mg-t-30 table-mg-t-pro-n">
                             <h2 class="box-title">Controle</h2>
+                            
                             <ul class="country-state">
                                     <?php $j=0; $i=0; $var=1; $l='up'; ?>
                                 @foreach ($controle as $c)
@@ -47,7 +48,7 @@
                                          <small> {{$nbEtuCC[$i++]}} étudiant(s)</small>
                                         <div class="pull-right">{{$tauxCC[$j]}}% de réussite<i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
                                         <div class="progress progress-bt">
-                                            <div class="progress-bar progress-bar-{{$x}} ctn-vs-{{$var++}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$tauxCC[$j]}}%;"> <span>{{$tauxCC[$j++]}} % de réussite</span></div>
+                                            <div class="progress-bar progress-bar-{{$x}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$tauxCC[$j]}}%;"> <span>{{$tauxCC[$j++]}} % de réussite</span></div>
                                         </div>
                                     </li>
                                 @endforeach
