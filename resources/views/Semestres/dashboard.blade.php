@@ -132,7 +132,7 @@ var myChart = new Chart(ctx, {
                             </div>
                
                             <br>
-                  <canvas id="chart"></canvas>
+                            <canvas id="chart"></canvas>
                         </div>
                         
                        
@@ -142,7 +142,7 @@ var myChart = new Chart(ctx, {
                
                     
                         <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
-                            <h3 class="box-title">Etudiants Endéttés</h3>
+                            <h3 class="box-title">Etudiants Endettés</h3>
                             <ul class="list-inline two-part-sp">
                                 <li>
                                     <div id="sparklinedash3"></div>

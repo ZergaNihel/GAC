@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                             <div class="panel-footer ib-ml-ft">
-                                <i class="fa fa-eye">  </i> {{ Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->where('type','App\Notifications\MsgNotification')->count() }} unread
+                                <i class="fa fa-eye">  </i> {{ Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->count() }} unread
                             </div>
                         </div>
                     </div>

@@ -81,7 +81,7 @@ class CorrectionCopies extends Controller
     public function corriger(Request $request)
     {
         $i=0;
-        $p = $request->input('paquets');
+        $p = $request->input('paquets'); return $p;
         $paquet=Paquet::find($p);
         $codes= DB::table('codes')
                   ->join('paquet_ens','codes.paq_code','=','paquet_ens.id_paq')
@@ -105,10 +105,11 @@ class CorrectionCopies extends Controller
                 ->get();
 
         $paq_ens=DB::table('paquet_ens')
-                    ->join('corrections','corrections.correcteur','=','paquet_ens.id')
+                    //->join('corrections','corrections.correcteur','=','paquet_ens.id')
                     ->where('id_Ens','=',Auth::user()->enseignant->idEns)
                     ->where('id_paq','=',$p)
                     ->get();
+                    return $paq_ens;
         
         $semestre= Semestre::find($request->input('semestre')); 
 
@@ -200,7 +201,7 @@ class CorrectionCopies extends Controller
                 ->first();
 
         $module=DB::table('modules')
-                ->join('semestres','modules.semestre','=','semestres.idSem')
+                ->where('semestre',$id)
                 ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->first();
                 
@@ -230,13 +231,14 @@ class CorrectionCopies extends Controller
 
     public function datelimite(Request $request)
     {
+        $semestre= Semestre::find($request->input('semestre')); 
+        $type= $request->input('type'); 
         $module=DB::table('modules')
-                ->join('semestres','modules.semestre','=','semestres.idSem')
-                ->where('semestres.active','=',1)
+                ->where('semestre','=',$semestre->idSem)
                 ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
-                ->first();
+                ->first(); 
         $ex=DB::table('examens')
-                ->where('type','=','Controle')
+                ->where('type','=',$type)
                 ->where('module_Exam','=',$module->idMod)
                 ->first();
         $examen=Examen::find($ex->idExam);
@@ -247,24 +249,38 @@ class CorrectionCopies extends Controller
 
     public function GstpaquetExm($id)
     {
-        $paquets=DB::table('paquet_ens')
-                ->join('enseignants','enseignants.idEns','=','paquet_ens.id_Ens')
-                ->join('paquets','paquets.idPaq','=','paquet_ens.id_paq')
-                ->join('examens','examens.idExam','=','paquets.paq_Exam')
-                ->join('modules','examens.module_Exam','=','modules.idMod')
-                ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
-                ->where('examens.type','=','Examen')
-                ->select('paquets.*','enseignants.nom')
-                ->get();
+        $exam=DB::table('examens')
+        ->join('modules','examens.module_Exam','=','modules.idMod')
+        ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
+        ->where('examens.type','=','Examen')
+        ->first();
+
+        $module=DB::table('modules')
+                ->where('semestre',$id)
+                ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
+                ->first();
+                
+        $correcteurs=DB::select("SELECT distinct * FROM enseignants WHERE idEns in(SELECT id_Ens FROM cours WHERE cours.id_module = $module->idMod) OR idEns in(SELECT id_Ens FROM td_tps WHERE td_tps.id_module = $module->idMod) ");
+
+        $nompaq=DB::table('paquets')
+        ->join('examens','examens.idExam','=','paquets.paq_Exam')
+        ->join('modules','examens.module_Exam','=','modules.idMod')
+        ->where('modules.ens_responsable','=',Auth::user()->enseignant->idEns)
+        ->where('examens.type','=','Examen')
+        ->where('decode','=',0)
+        ->select('paquets.idPaq','paquets.salle')
+        ->groupby('idPaq','salle')
+        ->get();
 
         $semestre = Semestre::find($id);
 
         return view('EnseignantR.gestion_paquets.examen')->with(
             [
                 'semestre'=> $semestre,
-                'paquets'=> $paquets
-            ] 
-        );
+                'nompaq'=> $nompaq,
+                'exam'=> $exam,
+                'correcteurs'=> $correcteurs
+            ] );
     }
 
     public function correcteur(Request $request)
@@ -304,12 +320,18 @@ class CorrectionCopies extends Controller
                 ->select('examens.type as type','modules.nom')
                 ->get();
         
-            $details = [
+           
+            $details1 = [
                 'id_paq' => $p->idPaq,
                 'nomPaq' => $p->salle,
                 'module' => $ex[0]->nom,
                 'type' => $ex[0]->type,
             ];
+            $c0=User::where('id_Ens',$correc[0]->idEns)
+                ->OrWhere('id_Ens',$correc[1]->idEns)
+                ->get();
+            
+            Notification::send($c0, new CorrecteursNotifications($details1));
            
             
             $paquet=Paquet::find($request->input('paquets'));
@@ -344,11 +366,7 @@ class CorrectionCopies extends Controller
             $c0=User::where('id_Ens',$correc[0]->idEns)
                 ->OrWhere('id_Ens',$correc[1]->idEns)
                 ->get();
-            /*$c1=DB::table('users')
-                ->where('id_Ens',$correc[1]->idEns)
-                ->get();*/
-               // $c0[0]->notify(new CorrecteursNotifications($details));
-               /* $c0[0]->notify(new CorrecteursNotifications($details));*/
+           
             Notification::send($c0, new CorrecteursNotifications($details1));
             //Notification::send($c1[0], new CorrecteursNotifications($details));
 
@@ -364,7 +382,8 @@ class CorrectionCopies extends Controller
         $validator = Validator::make($request->all(), [
             'file' => 'required',
           ]);
-    
+          $semestre= Semestre::find($request->input('semestre')); 
+          $type= $request->input('type');
     
           if ($validator->passes()) {
     
@@ -376,12 +395,11 @@ class CorrectionCopies extends Controller
 
 
             $module=DB::table('modules')
-                ->join('semestres','modules.semestre','=','semestres.idSem')
-                ->where('semestres.active','=',1)
+                ->where('semestre','=',$semestre->idSem)
                 ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->first();
             $ex=DB::table('examens')
-                    ->where('type','=','Controle')
+                    ->where('type','=',$type)
                     ->where('module_Exam','=',$module->idMod)
                     ->first();
             $examen=Examen::find($ex->idExam);
@@ -399,7 +417,8 @@ class CorrectionCopies extends Controller
         $validator = Validator::make($request->all(), [
             'file' => 'required',
           ]);
-    
+          $semestre= Semestre::find($request->input('semestre')); 
+          $type= $request->input('type');
     
           if ($validator->passes()) {
     
@@ -411,12 +430,11 @@ class CorrectionCopies extends Controller
 
 
             $module=DB::table('modules')
-                ->join('semestres','modules.semestre','=','semestres.idSem')
-                ->where('semestres.active','=',1)
+                ->where('semestre','=',$semestre->idSem)
                 ->where('ens_responsable','=',Auth::user()->enseignant->idEns)
                 ->first();
             $ex=DB::table('examens')
-                    ->where('type','=','Controle')
+                    ->where('type','=',$type)
                     ->where('module_Exam','=',$module->idMod)
                     ->first();
             $examen=Examen::find($ex->idExam);

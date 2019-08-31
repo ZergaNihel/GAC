@@ -1,76 +1,79 @@
-<html class="no-js" lang="en">
-
 <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@yield('title')</title>
-    @yield('meta')
+    <title>GAC</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
-    ============================================ -->
+		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/favicon.ico')}}">
     <!-- Google Fonts
-    ============================================ -->
+		============================================ -->
     <link href="{{asset('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900')}}" rel="stylesheet">
     <!-- Bootstrap CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/c3/c3.min.css')}}">
     <!-- Bootstrap CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
     <!-- owl.carousel CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.transitions.css')}}">
-     <!-- summernote CSS
-        ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
     <!-- animate CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <!-- normalize CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
     <!-- meanmenu icon CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/meanmenu.min.css')}}">
     <!-- main CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-     <!-- educate icon CSS
-    ============================================ -->
+    <!-- educate icon CSS
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/educate-custon-icon.css')}}">
     <!-- morrisjs CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/morrisjs/morris.css')}}">
     <!-- mCustomScrollbar CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/scrollbar/jquery.mCustomScrollbar.min.css')}}">
     <!-- metisMenu CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/metisMenu/metisMenu-vertical.css')}}">
-   
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.print.min.css')}}">
     <!-- x-editor CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
-
-
-     <link rel="stylesheet" href="{{asset('css/tabs.css')}}">
+    <link rel="stylesheet" href="{{asset('css/editor/datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('css/editor/bootstrap-editable.css')}}">
+    <link rel="stylesheet" href="{{asset('css/editor/x-editor-style.css')}}">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-table.css')}}">
+    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-editable.css')}}">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('style.css')}}">
     <!-- responsive CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     <!-- modernizr JS
-    ============================================ -->
+		============================================ -->
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <!-- select2 CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/select2/select2.min.css')}}">
     <!-- chosen CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/chosen/bootstrap-chosen.css')}}">
 
     <!-- ionRangeSlider CSS
@@ -88,45 +91,47 @@
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
     <!-- touchspin CSS
-    ============================================ -->
-   
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('css/touchspin/jquery.bootstrap-touchspin.min.css')}}">
+    <!-- datapicker CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('css/datapicker/datepicker3.css')}}">
+    <!-- forms CSS
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/form/themesaller-forms.css')}}">
-    
+    <!-- colorpicker CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('css/colorpicker/colorpicker.css')}}">
     <!-- select2 CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/select2/select2.min.css')}}">
     <!-- chosen CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/chosen/bootstrap-chosen.css')}}">
     <!-- ionRangeSlider CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/ionRangeSlider/ion.rangeSlider.css')}}">
     <link rel="stylesheet" href="{{asset('css/ionRangeSlider/ion.rangeSlider.skinFlat.css')}}">
     <!-- style CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('style.css')}}">
     <!-- responsive CSS
-    ============================================ -->
+		============================================ -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    <!-- calendar CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/calendar/fullcalendar.print.min.css')}}">
     <!-- modernizr JS
-    ============================================ -->
+		============================================ -->
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <!-- modals CSS
     ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <!-- summernote CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
     <!-- dropzone CSS
-        ============================================ -->
+    ============================================ -->
     <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
     <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
-    <!-- datapicker CSS
-		============================================ -->
-        <link rel="stylesheet" href="{{asset('css/datapicker/datepicker3.css')}}">
-        
-<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 @yield('js') 
 </head>
 <body>
@@ -187,7 +192,11 @@
                 <a 
             href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                   <div class="message-img">
-                                   <img src="{{asset('img/contact/2.jpg')}}" alt="">
+                                      @if( App\User::find($notification->data['id_emt'])->photo)
+                                      <img src="{{asset(App\User::find($notification->data['id_emt'])->photo)}}" alt="">
+                                    @else
+                                      <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                    @endif
                                                                     </div>
                                 <div class="message-content">
    <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
@@ -219,7 +228,11 @@
                 <a 
             href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                   <div class="message-img">
-                                   <img src="{{asset('img/contact/2.jpg')}}" alt="">
+                                      @if( App\User::find($notification->data['id_emt'])->photo)
+                                      <img src="{{asset(App\User::find($notification->data['id_emt'])->photo)}}" alt="">
+                                    @else
+                                      <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                    @endif
                                                                     </div>
                                 <div class="message-content">
    <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
@@ -267,7 +280,80 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                              <ul class="notification-menu">
-                                                @foreach(Auth::user()->readNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
+    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                              <h2>Notes</h2>
+                      <p> Vous avez récus votre note de module <b>{{$notification->data['module']}}</b> </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\NotificationBeforeExclus') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>{{$notification->data['module']}}</h2>
+                      <p> Vous avez 4 abcences !! vous risquez d'être exclus </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ExclusNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>EXCLUS!</h2>
+                            <p> Vous êtes exclus de module <b> {{$notification->data['module']}} </b> 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+ @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\RefuseNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Justification Réfusé</h2>
+                            <p>L' enseignant (e) <b> {{$notification->data['nomEns']}} {{$notification->data['prenomEns']}} </b> a réfusé votre justification 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+                                              @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications') as $notification)
+                                                            <li>
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Justification Accepté</h2>
+                            <p>L' enseignant (e) <b> {{$notification->data['nomEns']}} {{$notification->data['prenomEns']}} </b> a accepté votre justification 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+                                                @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
                                  <li style="background-color:#f5f5f5;">
                    <a href="{{url('/CompteEtudiant/'.$notification->data['id_user'].'/'.$notification->id) }}">
 
@@ -351,14 +437,6 @@
                                                           </li>
 
                                                           @endif
-                                                       
-                                                    @if(Auth::user()->role == '0' || Auth::user()->role == '1' || Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
-                                                        </li>
-                                                    @elseif(Auth::user()->role == '3')
-                                                         <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span class="edu-icon edu-settings author-log-ic"></span>Modifier mon compte</a>
-                                                        </li>
-                                                    @endif
                                                     <!--fin nihel-->
                                                         <!--nihel 19/03/2019-->
                                                         <li> <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>Se déconnecter</a>

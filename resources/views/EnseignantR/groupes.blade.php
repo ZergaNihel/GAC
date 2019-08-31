@@ -47,7 +47,7 @@ $.ajax({
                     
                     '#65b12d',
                     '#D80027',
-                    '#ffde0a'
+                    '#296B9C'
                 ],
                 data: [data.endette,data.repetitif, data.nouveau]
             }]
@@ -554,7 +554,7 @@ $.ajax({
                     <div class="panel panel-default" id="panel{{$grp->groupe1->idG}}">
                         <div class="panel-heading accordion-head">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion"href="#collapse{{$var}}"> Groupe {{$grp->groupe1->nomG}} </a>
+                                <a data-toggle="collapse" data-parent="#accordion"href="#collapse{{$var}}" style="color:white;"> Groupe {{$grp->groupe1->nomG}} </a>
                             </h4>
                         </div>
                         <?php if($v== 1){ ?>

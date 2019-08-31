@@ -144,6 +144,8 @@
                                         <div class="sparkline14-hd">
                                             <div class="main-sparkline14-hd">
                                                 <form id="dateform">
+                                                    <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                    <input type="hidden" name="type" value="Controle">
                                                     <div class="form-group data-custon-pick" id="data_2">
                                                         <div class="input-group date"> 
                                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -273,6 +275,8 @@
                                                                             </div>
                                                                         </div>
                                                                 </div>
+                                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                                <input type="hidden" name="type" value="Controle">
                                                                 <div class="modal-footer">
                                                                     <button class=" btn btn-custon-four btn-primary" data-dismiss="modal">Quitter</button>
                                                                     <button class=" btn btn-custon-four btn-primary" type="submit">Valider</button>
@@ -330,6 +334,8 @@
                                                                             </div>
                                                                         </div>
                                                                 </div>
+                                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                                <input type="hidden" name="type" value="Controle">
                                                                 <div class="modal-footer">
                                                                     <button class=" btn btn-custon-four btn-primary" data-dismiss="modal">Quitter</button>
                                                                     <button class=" btn btn-custon-four btn-primary" type="submit">Valider</button>

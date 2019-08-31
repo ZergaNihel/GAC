@@ -72,7 +72,7 @@
              });
         
             });
-         </script>
+</script>
 @endsection 
 
 @section('path')

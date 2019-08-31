@@ -148,7 +148,7 @@ a.effect-shine:hover {
 </div> --}}
 
 
-<div class="error-pagewrap ">
+<div class="error-pagewrap " >
     <div class="error-page-int">
         <div class="text-center text-decoration">
             <h2>Choisissez un semestre</h2> <br><br>

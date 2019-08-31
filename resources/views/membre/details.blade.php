@@ -284,19 +284,6 @@
                                                     </div>
 
 
-
-                                                    <div class="file-upload-inner ts-forms">
-                                                        <div class="form-group">
-
-                                                            <div class="col-md-9 inputGroupContainer">
-                                                                <div style="width: 70%">
-                                                                    <input name="img" type="file">
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                                 <div class="col-lg-6">
 

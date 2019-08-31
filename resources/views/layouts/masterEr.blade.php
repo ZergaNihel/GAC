@@ -256,7 +256,11 @@
                                                                 <a
                                                                     href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
-                                                                        <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                                                         @if( App\User::find($notification->data['id_emt'])->photo)
+                                                                            <img src="{{asset(App\User::find($notification->data['id_emt'])->photo)}}" alt="">
+                                                                          @else
+                                                                            <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                                                          @endif
                                                                     </div>
                                                                     <div class="message-content">
                                                                         <span
@@ -297,11 +301,13 @@
                                                             @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification')->take(1) as
                                                             $notification)
                                                             <li>
-                                                                <a
-                                                                    href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                                                <a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
-                                                                        <img src="{{asset('img/profile/profil.png')}}"
-                                                                            alt="">
+                                                                        @if( App\User::find($notification->data['id_emt'])->photo)
+                                                                            <img src="{{asset(App\User::find($notification->data['id_emt'])->photo)}}" alt="">
+                                                                        @else
+                                                                            <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                                                        @endif
                                                                     </div>
                                                                     <div class="message-content">
                                                                         <span
@@ -358,6 +364,7 @@
                                                             <h1>Notifications</h1>
                                                         </div>
                                                 <ul class="notification-menu">
+             
                        @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications') as $notification)
                                                             <li>
                     <a href="#">
@@ -383,7 +390,7 @@
                                                                     <div class="notification-content">
                             <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                        <h2>Justification</h2>
-                            <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté son(sa) justification
+                            <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté une justification
                                                                         </p>
                                                                     </div>
                                                                 </a>
@@ -561,6 +568,19 @@
         </div>
         @yield('content')
     </div>
+    <footer>
+        <div class="footer-copyright-area" style=" position: fixed; bottom: 0; width:100%; height:45px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-copy-right">
+                            <p>Copyrigh © 2019 GAC.tous droits réservés. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- jquery
 		============================================ -->

@@ -285,12 +285,12 @@
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                                 <input type="hidden" name="paquet" value="{{$paquet->idPaq}}">
-                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right" title="Valider" data-toggle='modal' data-target='#PrimaryModalalert'> valider </button>
+                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right" title="Valider"> valider </button>
                                             </form>
                                         </div>
                                     </div>
                                     
-                                    <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                    {{-- <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-close-area modal-close-df">
@@ -310,7 +310,7 @@
                                                     </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="static-table-list">
                                             <table  class="table">
                                                 <thead>
