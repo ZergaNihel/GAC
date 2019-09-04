@@ -584,6 +584,11 @@
         ============================================ -->
     <script src="{{asset('js/knob/jquery.knob.js')}}"></script>
     <script src="{{asset('js/knob/knob-active.js')}}"></script>
+    <!-- counterup JS
+    ============================================ -->
+    <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('js/counterup/waypoints.min.js')}}"></script>
+    <script src="{{asset('js/counterup/counterup-active.js')}}"></script>
     <!-- morrisjs JS
     ============================================ -->
     <script src="{{asset('js/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -594,6 +599,7 @@
     ============================================ -->
     <script src="{{asset('js/charts/Chart.js')}}"></script>
     <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
+  
 @yield('pdf')
 <!-- counterup JS
         ============================================ -->

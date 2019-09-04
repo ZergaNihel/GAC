@@ -105,22 +105,31 @@ class SemestreController extends Controller
     }
     public function dash ($id){
    $semestre = Semestre::find($id);
-   
+   $total = Groupe_etu::where('sem_groupe','=',$id)
+               ->join('groupes','groupe','idG')
+               ->join('etudiants','groupes.idG','etudiants.idG')
+               ->count();
+
+
    $nouveaux = Groupe_etu::where('sem_groupe','=',$id)
-               ->join('etudiants','groupe','idG')
+               ->join('groupes','groupe','idG')
+               ->join('etudiants','groupes.idG','etudiants.idG')
                ->where('type','=','Nouveau(elle)')
                ->count();
+   $nouveaux_prc = ($nouveaux * 100)/$total;
+             // dd($nouveaux_prc);
         // dd($nouveaux);
    $rep = Groupe_etu::where('sem_groupe','=',$id)
                ->join('etudiants','groupe','idG')
                ->where('type','=','Répétitif(ve)')
                ->count();
+  $rep_prc = ($rep*100)/$total;
    $endettes= Groupe_etu::where('sem_groupe','=',$id)
                ->join('etudiants','groupe','idG')
                ->where('type','=','Endetté(e)')
                ->select('id_Ens')
                ->count();
-   
+   $endettes_prc = ($endettes*100)/$total;
    $ens1 = Cour::join('groupe_etus','id_section','sec_groupe')
                  ->where('groupe_etus.sem_groupe','=',$id)
                  ->select('cours.id_Ens')
@@ -144,6 +153,7 @@ class SemestreController extends Controller
                  ->where('modules.semestre','=',$id)
                  ->select('exclus.Etu_exc')
                  ->count('exclus.Etu_exc');
+    $exclus_prc = ($exclus*100)/$total;
  //dd($ens2);
    $abs = Absence::join('td_tps','id_td_tp','id')
                  ->join('groupe_etus','td_tps.id_groupe','groupe_etus.groupe')
@@ -155,7 +165,7 @@ class SemestreController extends Controller
    	
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 //dd($abs);
-   return view('Semestres.dashboard',compact('semestre','nouveaux','rep','endettes','ens','exclus','abs','sem1','sem2'));
+   return view('Semestres.dashboard',compact('semestre','nouveaux','rep','endettes','exclus','abs','sem1','sem2','nouveaux_prc','rep_prc','endettes_prc','exclus_prc'));
    }
    function archiver ($id){
     $sem = Semestre::find($id);
