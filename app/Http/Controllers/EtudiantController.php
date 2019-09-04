@@ -9,12 +9,14 @@ use App\Semestre;
 use App\Absence;
 use App\Module;
 use App\User;
+use App\Exclu;
 use App\Etudiant;
 use App\Enseignant;
 use DB;
 use Auth;
 use Response;
 use Notification;
+use Validator;
 use App\Notifications\JustificationAlertNotifications;
 class EtudiantController extends Controller
 {
@@ -37,6 +39,7 @@ else{
     function index(){
         $s1 = 0;
         $s2 = 0;
+//dd(Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$m->idMod)->count());
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     foreach ($sem1 as $key) {
@@ -74,6 +77,18 @@ else{
  
     }
     function add_justif(Request $request){
+                $messages = [
+    'required'    => 'Le champs :attribute est obligatoire.',
+    'mimes'    => 'la justification doit être compatible avec le format pdf ',
+];
+   $validator = Validator::make($request->all(), [
+            'select_file' => 'required|mimes:pdf',
+            'date' => 'required',
+        ],$messages);
+ 
+        if ($validator->fails()) {
+           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
         //dd($request->idMod);
     	$abs = Absence::find($request->idAbs);
     	 if($request->hasFile('select_file')){
@@ -110,7 +125,8 @@ $user = User::where('id_Ens',$ens)->get();
     }
 
  function dates($id){
-   $dates =  Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->where('justification','=',null)
+   $dates =  Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)
+                      ->whereNull('justification')
                       ->join('td_tps','absences.id_td_tp','td_tps.id')
                       ->where('td_tps.id_module','=',$id)
                       ->select('idAbs','date')
@@ -156,6 +172,10 @@ else{
         $abs->save();
         return response()->json(["success"=>"success","img"=>$logo,"id"=>$request->idAbs,]);
 
+    }
+    function readNotif($id){
+Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes')->where('id', $id)->markAsRead();
+return response()->json(["success"=>"success"]);   
     }
 
 function info ($id , $id_notif){

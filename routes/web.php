@@ -23,6 +23,7 @@ Route::get('/bar', function () {
  Route::get('error_500', 'SemestreController@index');
 
  //------------------------Etudiants----------------------
+ Route::get('/readNotif/{id}/', 'EtudiantController@readNotif') ;
  Route::get('/dates/{id}/', 'EtudiantController@dates') ;
  Route::get('/absences_Etudiant', 'EtudiantController@index') ;
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;

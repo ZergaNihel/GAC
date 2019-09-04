@@ -43,9 +43,29 @@ if(data.abs[i].etat_just == 1){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
 $("#1").after('<tr><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#voir" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'</td></tr>');
+$("#bjus").text(data.abs[i].date);
 }
+$("#alertSuc1").css("display","");  
 
-}
+   $("html, body").animate({
+        scrollTop: 0
+    },10);
+
+},
+error: function (dataErr) {
+
+$('#error1').css("display","");
+ var response = JSON.parse(dataErr.responseText);
+       alert(dataErr.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error1').html(errorString);
+          }
 });
 
        });
@@ -124,11 +144,16 @@ alert(data.img);
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
                             <h2>Absences de module : {{$mod->nom}} </h2>
-                         
+    @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()>0)
+                             <div class="m-t-xl widget-cl-1">
+                         <h1 class="text-danger">EXCLUS !!</h1></div>
+                         @endif
                         </div>
+     @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()== 0)
                            <div class="add-product pull-right">
  <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="   {{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification</a>
                                             </div>
+                                            @endif
                                           
                     </div>
                 </div>
@@ -136,6 +161,15 @@ alert(data.img);
                   
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
+                                 <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc1" style="display: none">
+                               <div class="alert alert-success alert-success-style1 alert-st-bg alert-st-bg11" style="">
+                                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-sc-cl" aria-hidden="true">&times;</span>
+                  </button>
+                               
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification ajouté!</strong> Vous avez ajouter la justification de la date <b id="bjus"></b>.</p>
+                            </div>
+                          </div>
                         <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc" style="display: none">
                                <div class="alert alert-success alert-success-style1 alert-st-bg alert-st-bg11" style="">
                                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
@@ -183,19 +217,27 @@ alert(data.img);
                                   </tr>
                                     
 @endforeach
-                               
+                           
                           
                                 
                            
                             
                                 </table>
                             </div>
-                     
+                        @if($absences->count()==0)
+                        <br> <br>
+ <br>    <h3 style="text-align: center;color: #8d9498;">Aucune justification a été ajouté</h3>
+ <br> <br><br><br><br>
+    @endif 
                         </div>
                       </div>
                     </div>
  </div>
                     </div>
+                    <br>
+                    <br>
+                    
+                     
 
                     <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
@@ -212,12 +254,11 @@ alert(data.img);
                        <div class="basic-login-inner modal-basic-inner">
                          <h3>Ajouter une justification</h3>
                  <p>Vous pouvez ajouter votre justification</p>
-                             @if($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
-   @endif
+                             <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none">
+     
+          </div>
+          </div>
 <form method="post" enctype="multipart/form-data" action="{{ url('add_justif') }}" id="addForm">
     {{ csrf_field() }}
     <input type="hidden" name="idMod" id="module">

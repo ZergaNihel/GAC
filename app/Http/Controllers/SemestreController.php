@@ -44,53 +44,68 @@ class SemestreController extends Controller
     $sem2 = Semestre::create(['nomSem'=>'Semestre 2' ,'annee'=>$request->anne ,'active'=>1 ,]);
      return Redirect::to('Semestres/index');
     }
-        public function graphe1 ($id){
+    public function graphe1 ($id){
       
-    $mod = Module::where("semestre",$id)->select('nom','idMod')->get();
+    $mod = Module::where("semestre",$id)->select('nom','idMod')->count();
      
     $m = array();
     $m_id = array();
     $m_a = array();
     $m_p = array();
+    $m_m = array();
     $i=0;
-    foreach ($mod as $key ) {
-      $m[$i]=$key->nom;
-      $i++;
-    }
-     $i=0;
-    foreach ($mod as $key ) {
-      $m_id[$i]=$key->idMod;
-      $i++;
-    }
+   
+    //return $m_id;
     $abs = Absence::where('etat',0)->where('etat_just',2)->orWhere('etat_just',0)
                      ->join('td_tps','id_td_tp','id')
-                     ->whereIn('id_module',$m_id)
-                     ->select('id_module', DB::raw('count(*) as total'))
-                 ->groupBy('id_module')
-                 ->get();
-      $pre = Absence::where('etat',1)
+                     ->join('modules','id_module','idMod')
+                     ->where('semestre',$id)
+                     ->select('modules.nom', DB::raw('count(*) as total'))
+                     ->groupBy('modules.nom')
+                     ->get();
+
+                // return $abs;
+  $pre = Absence::where('etat',1)
                      ->join('td_tps','id_td_tp','id')
-                     ->whereIn('id_module',$m_id)
-                     ->select('id_module', DB::raw('count(*) as total'))
-                 ->groupBy('id_module')
-                 ->get();
+                     ->join('modules','id_module','idMod')
+                     ->where('semestre',$id)
+                     ->select('modules.nom', DB::raw('count(*) as total'))
+                     ->groupBy('modules.nom')
+                     ->get();
+                     // return $pre->count();
     $i=0;
   foreach ($abs as $key ) {
       $m_a[$i]=$key->total;
+      
       $i++;
     }
         $i=0;
+       // return $pre;
   foreach ($pre as $key ) {
       $m_p[$i]=$key->total;
+      $m_m[$i]=$key->nom;
       $i++;
     }
+    if($pre->count()>$abs->count()){
+            $i=0;
+  foreach ($pre as $key ) {
+      $m_m[$i]=$key->nom;
+      $i++;
+    }}else{
+    $i=0;
+  foreach ($abs as $key ) {
+      $m_m[$i]=$key->nom;
+      $i++;
+    }
+    }
+   // $mod_reste = Module::where('semestre',$id)->where('idMod',)
+    //if()
 
-     return response()->json(['modules'=>$m,'abs'=> $m_a,'pre'=> $m_p,]);
+     return response()->json(['modules'=>$m_m,'abs'=> $m_a,'pre'=> $m_p,]);
     }
     public function dash ($id){
-   	$semestre = Semestre::find($id);
+   $semestre = Semestre::find($id);
    
-   	
    $nouveaux = Groupe_etu::where('sem_groupe','=',$id)
                ->join('etudiants','groupe','idG')
                ->where('type','=','Nouveau(elle)')
