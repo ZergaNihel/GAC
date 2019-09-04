@@ -78,16 +78,14 @@
                       ->join('td_tps','Absences.id_td_tp','td_tps.id')
                       ->where('td_tps.id_module','=',$m->idMod)
                       ->count()<= 0 and App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$m->idMod)->count()==0)
-                       <div class="stats-icon pull-right" >
-   <a href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$m->idMod}}" style="color:#65b12d;">  <i class="educate-icon educate-data-table"></i> </a>
-                                </div>
+                      
                            
                                 <div class="m-t-xl widget-cl-1">
-                       <h1 class="text-warning">
+                       <h1 style="color:#65b12d;">
                        
 {{App\Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->where('justification','=',null)->join('td_tps','Absences.id_td_tp','td_tps.id')->where('td_tps.id_module','=',$m->idMod)->count()}} Absences non justifiés</h1>
  </div>@endif
-                   @if(App\Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->where('justification','=',null)->join('td_tps','Absences.id_td_tp','td_tps.id')->where('td_tps.id_module','=',$m->idMod)->count()<=1 and App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$m->idMod)->count()==0)
+                   @if(App\Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->where('justification','=',null)->join('td_tps','Absences.id_td_tp','td_tps.id')->where('td_tps.id_module','=',$m->idMod)->count()==1 and App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$m->idMod)->count()==0)
                     <div class="stats-icon pull-right" >
    <a href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$m->idMod}}" style="color:#006DF0;">  <i class="educate-icon educate-data-table"></i> </a>
                                 </div>
