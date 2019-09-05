@@ -12,6 +12,7 @@ use App\Groupe;
 use App\Groupe_etu;
 use App\Module;
 use App\Etudiant;
+use Auth;
 
 class Groupes extends Controller
 {

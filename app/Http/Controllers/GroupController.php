@@ -16,6 +16,7 @@ use App\Etudiant;
 use App\Endette;
 use App\User;
 use Session;
+use Auth;
 //use Datatables;
 use Illuminate\Support\Facades\Validator;
 class GroupController extends Controller

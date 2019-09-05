@@ -2200,7 +2200,7 @@
 <ul class="breadcome-menu">
     <li><a href="#">Semestre</a> <span class="bread-slash">/</span>
     </li>
-    <li><span class="bread-blod">{{$semestre->nomSem}}/ Emploi du Temps Générale</span>
+    <li><span class="bread-blod">{{$semestre->nomSem}}/ Emplois du Temps Général</span>
     </li>
 </ul>
 @endsection
@@ -2252,7 +2252,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <div class="product-status-wrap drp-lst">
-                    <h4>Emploi du temps</h4>
+                    <h4>Emplois du temps</h4>
                     <br>
                     <div class="row ">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -2530,7 +2530,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="review-content-section">
                             <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span>
-                            <h2 style="color:#006DF0 ;">Cour</h2>
+                            <h2 style="color:#006DF0 ;">Cours</h2>
                             <br>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">

@@ -7,8 +7,7 @@
 
   $(document).ready(function(){
  $('#formGrp').submit(function(e){
-    e.preventDefault();
-    alert("hh");    
+    e.preventDefault();   
       var fd = new FormData($(this)[0]);
    
 $.ajax({
@@ -19,7 +18,6 @@ $.ajax({
   processData: false,  // indique à jQuery de ne pas traiter les données
   contentType: false ,                 
 success: function(data) {
-    alert(data.idG+"nn"+data.idSem);
 window.location.replace("groupe/detail/"+data.idG+"/"+data.idSem);
 },
 error: function (dataErr) {
@@ -76,7 +74,7 @@ success: function(data) {
 $("#delete").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('groupe');
     var b = $(event.relatedTarget).data('id');
-    alert(b);
+    
      var m = $(this)
    // m.find('#editGrp').val(a);
     m.find("#idGrpDel").val(b);
@@ -160,7 +158,7 @@ $.ajax({
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
-                            <h2>Groupe étudiants par section</h2>
+                            <h2>Groupe d'étudiants par section</h2>
                          
                         </div>
                            <div class="add-product pull-right">
@@ -433,9 +431,6 @@ $.ajax({
                                           <input type="hidden" id="groupe_id" class="groupe" name="group[]" value="{{$grp->groupe}}">
                                             <div class="charts-area mg-b-15">
                                                     <div class="charts-single-pro responsive-mg-b-30">
-                                                        <div class="alert-title">
-                                                            <h2>Statistiques groupe</h2>
-                                                        </div>
                                                         <div id="pie-chart">
                                                             <canvas id="piechart{{$grp->groupe1->idG}}"></canvas>
                                                         </div>

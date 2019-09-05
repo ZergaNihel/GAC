@@ -13,6 +13,7 @@ use App\Exclu;
 use App\Absence;
 use App\Module;
 use DB;
+use Auth;
 use Illuminate\Support\Facades\Redirect;
 class SemestreController extends Controller
 {

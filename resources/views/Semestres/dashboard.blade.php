@@ -72,7 +72,7 @@ var myChart = new Chart(ctx, {
                                 </div>
                                 <div class="income-range">
                                     <p>{{ $semestre->nomSem }}</p>
-                                    <span class="income-percentange bg-green"><span class="counter">{{$nouveaux_prc}}</span>% <i class="fa fa-bolt"></i>
+                                    <span class="income-percentange bg-green"><span class="counter">{{$nouveaux_prc}}</span>% <i class="fa fa-level-up"></i>
                                     </span>
                                 </div>
                                 <div class="clear"></div>
@@ -165,7 +165,7 @@ var myChart = new Chart(ctx, {
                             <br>
                             <canvas id="chart"></canvas>
                         </div>
-                        
+                        <br> <br>
                        
               
                 </div>
@@ -192,12 +192,12 @@ var myChart = new Chart(ctx, {
       {
         label: 'présence',
         data: data.pre,
-       backgroundColor: '#C8E6C9',
+       backgroundColor: '#65b12d',
       },
       {
         label: 'absence',
         data: data.abs,
-        backgroundColor: '#FFCDD2',
+        backgroundColor: '#D80027',
 
       }]
     

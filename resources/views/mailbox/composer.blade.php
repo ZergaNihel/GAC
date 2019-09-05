@@ -180,8 +180,8 @@
                         </div>
                     </div>
                     <br>
-                    <div class="panel-footer container">
-                        <button class="btn btn-primary ft-compse pull-right" type="submit">Envoyer</button>
+                    <div class="panel-footer container" style="width:100%">
+                        <button class="btn btn-primary ft-compse pull-right"type="submit">Envoyer</button>
                         </form>
                         <div class="pull-left">
                             <div class="btn-group active-hook">

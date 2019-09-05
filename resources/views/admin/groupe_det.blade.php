@@ -138,7 +138,7 @@
 
 
                     var response = JSON.parse(data.responseText);
-                    alert(response.errors)
+                   
                     var errorString = '<ul>';
                     $.each(response.errors, function (key, value) {
 
@@ -177,7 +177,7 @@
 
 
                     var response = JSON.parse(data.responseText);
-                    alert(response.errors)
+                  
                     var errorString = '<ul>';
                     $.each(response.errors, function (key, value) {
 

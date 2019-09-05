@@ -87,7 +87,7 @@ class UserEController extends Controller
           
         $membreE->save();
 
-        return redirect('membreE/'.$id.'/edite');
+        return redirect('membreE/'.$id.'/details/'.$request->input('semestre'));
 
     } 
   

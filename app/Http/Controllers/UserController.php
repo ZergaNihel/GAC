@@ -96,6 +96,7 @@ $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get()
     
 
         return redirect('membre/'.$id.'/edite');
+        
 }
      
    /* public function mdp(){

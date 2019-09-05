@@ -230,7 +230,7 @@ Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudian
        // $roles = Role::all();
          $enseignant = Enseignant::all();
         
-         if(Auth::user()->role == '0'){
+         if(Auth::user()->role == '1'){
             
             return view('membre.admin_etu', compact('membre','etudiant','enseignant','sem1','sem2'));
         }

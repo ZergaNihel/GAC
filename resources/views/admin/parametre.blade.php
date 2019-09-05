@@ -194,7 +194,7 @@ $("#parametre").modal("show");
                         <div class="profile-info-inner">
                             <div class="profile-img">
                               @foreach($param as $p)
-                                <img src="{{asset($p->logo)}}" alt=/>
+                              <img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt=""  />
                                 @endforeach
                             </div>
                             <div class="profile-details-hr">

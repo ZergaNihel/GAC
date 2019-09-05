@@ -35,10 +35,6 @@
                      
               
                      
-                    <li>
-                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Délibération</span></a>
-                        </li>
-                     
                 
                  
              

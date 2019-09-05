@@ -167,7 +167,7 @@
                         <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
                             <div class="alert-title">
                                 <h2>Sujets</h2>
-                                <p>Vous trouvez ici les sujets d'examens et contrôles pour chaque année</p>
+                                <p>Vous trouvrez ici les sujets d'examens et contrôles pour chaque année</p>
                             </div>
                            
                             <div class="panel-group edu-custon-design" id="accordion">

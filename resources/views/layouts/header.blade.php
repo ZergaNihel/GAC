@@ -303,11 +303,7 @@
                                                                                 <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
                                                                                     @endif
 
-
-
-                                                                                    <span
-                                                                                        class="label label-danger pull-right">
-                                                                                        Nouveau</span></h2>
+                                                                                </h2>
                                                                                 @if($notification->data['sujet'])
                                                                                 <p>{{ $notification->data['sujet'] }}
                                                                                 </p>
@@ -686,8 +682,8 @@
 
 
         @yield('content')
-        <div class="footer-copyright-area" @if(Auth::user()->role == '0')style=" position: fixed; bottom: 0;
-            width:100%;"@endif>
+        <div class="footer-copyright-area" style=" position: fixed; bottom: 0;
+            width:100%;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -819,11 +815,6 @@
     <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
 
     @yield('pdf')
-    <!-- counterup JS
-        ============================================ -->
-    <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
-    <script src="{{asset('js/counterup/waypoints.min.js')}}"></script>
-    <script src="{{asset('js/counterup/counterup-active.js')}}"></script>
     <!-- summernote JS
         ============================================ -->
     <script src="{{asset('js/summernote/summernote.min.js')}}"></script>

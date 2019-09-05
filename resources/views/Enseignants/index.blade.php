@@ -442,7 +442,6 @@
                             @if($e->ensUser1 != null)
                             <a href="{{url('membreE/'.$e->ensUser1->id.'/details')}}"><i class="fa fa-eye"> </i></a>
 
-                            <a href="{{url('membreE/'.$e->ensUser1->id.'/edite')}}"><i class="fa fa-edit"></i></a>
                             @endif
                             <a href="#" data-toggle="modal" data-id="{{$e->idEns}}" data-nom="{{$e->nom}}"
                                 data-prenom="{{$e->prenom}}" data-target="#delete"><i class="fa fa-trash"></i></a>

@@ -1316,7 +1316,7 @@ $("#popnew").css('display','none');
 
 ajax_recaller = function(forms){
     var id = forms[called].attr("id").substring(6);
-    alert(id);
+    
 $.ajax({
 type: "POST",
 data: forms[called].serialize(),                             // to submit fields at once
