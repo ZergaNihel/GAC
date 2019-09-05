@@ -37,7 +37,7 @@ $rand = Str::random(8);
     	
 return view('Enseignants.index',compact('ens','sem1','sem2'));}
 else{
-  return view('erreur_500',compact('sem1','sem2'));
+  return view('EnseignantR.Erreur403',compact('sem1','sem2'));
 }
     }
   function storeEns(Request $request){
