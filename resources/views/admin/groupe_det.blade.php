@@ -47,7 +47,12 @@
             ]
         });
 
-        //------------------------------------nouveau---------------------------------
+        //
+         $('body').on('click', '.vue', function () {
+        var a = $(this).attr("id");
+        window.location.replace("/CompteEtudiant/"+a+"/0");
+         });
+         //------------------------------------nouveau---------------------------------
         $('body').on('click', '.new', function () {
             $('.modal-basic-inner h3').html("Nouveau Etudiant");
             $('.modal-basic-inner p').html("Ajouter un nouveau étudiant");

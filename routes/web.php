@@ -24,6 +24,7 @@ Route::get('/bar', function () {
 
  //------------------------Etudiants----------------------
  Route::get('/readNotif/{id}/', 'EtudiantController@readNotif') ;
+ Route::get('/readAllNotif/', 'EtudiantController@readAllNotif') ;
  Route::get('/dates/{id}/', 'EtudiantController@dates') ;
  Route::get('/absences_Etudiant', 'EtudiantController@index') ;
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
