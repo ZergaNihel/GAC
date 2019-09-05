@@ -1,4 +1,4 @@
-@extends('layouts.masterEr')
+@extends('layouts.masterAnonym')
 
 @section('path')
     <li>
@@ -12,7 +12,7 @@
 			<div class="content-error">
 				<h1>Erreur de Serveur<span class="counter"> 403</span></h1>
 				<p>Désolé ! Vous n'avez pas l'accés à cette page </p>
-				
+				<a href="{{url('semestre/choix')}}">Retour</a>
 			</div>
 
 		</div>   

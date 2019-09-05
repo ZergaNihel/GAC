@@ -338,9 +338,9 @@
 
                                                                                     <span class="label label-danger pull-right">
                                                                                         Nouveau</span></h2>
-                                                                                @if($notification->data['sujet'])
-                                                                                <p>{{ $notification->data['sujet'] }}
-                                                                                </p>
+                         @if($notification->data['sujet'])
+                                 <p>{{ $notification->data['sujet'] }}
+                                                             </p>
                                                                                 @else
                                                                                 <p>Aucun Sujet</p>
                                                                                 @endif

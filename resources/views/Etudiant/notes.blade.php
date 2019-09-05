@@ -2,26 +2,35 @@
 
 @section('title','Notes')
 @section('js')
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script >
     $(document).ready(function(){
        $("#zoomInDown1").on('show.bs.modal', function(event) {
 
-    var a = $(event.relatedTarget).data('id');
+    var a = $(event.relatedTarget).data('note');
+    var b = $(event.relatedTarget).data('type');
+    var c = $(event.relatedTarget).data('module');
+    var n = $(event.relatedTarget).data('id');
     var m = $(this)
-     m.find('#module').val(a);
-     m.find('#idAbs option').remove();
-   $.ajax({
+    m.find('h3').text(c+" - "+b);
+    m.find('#b1').text(a);
+    m.find('h3').css('color','#006DF0');
+    m.find('h4').css('color','#006DF0');
+       $.ajax({
   type: "get",
-  url: "{{url('dates')}}/"+a+"/" ,
+  url: "{{url('readNotif')}}/"+n+"/" ,
   success: function(data){
-    m.find('#idAbs').append('<option >Choisir une date</option>');
-    for(var i =0;i<data.dates.length;i++){
-     m.find('#idAbs').append('<option value="'+data.dates[i].idAbs+'">'+data.dates[i].date+'</option>');
-    }
-  }
+  $('#new').css('display','none');
+    $('#unlock').removeClass();
+    $('#unlock').addClass("fa fa-unlock");
+ }
 });
-
+   
+   //$('#Tmod').css('color','black');
+  
+   
+    
+     
 });
      });
 </script>
@@ -42,99 +51,110 @@
     
                                         @section('search')
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Abcences</a> <span class="bread-slash">/</span>
+                                            <li><a href="#">Notes</a> <span class="bread-slash">  </span>
                                             </li>
-                                            <li><span class="bread-blod">liste des abcences</span>
-                                            </li>
+                                           
                                         </ul>
                                         @endsection
      @section('content')
-       <div class="row">
-       	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"> </div>
-       	<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-       		          <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      
+     <div class="container-fluid">
+       		<div class="row">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
                                <div class="row">
-                   <h2>Semestre 1 </h2>
+                   <h2>Notes </h2>
                                  </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-               <div class="widgets-programs-area">
+       </div>
+      </div>
+
+       
+
+     </div>
+  
+                 <div class="income-order-visit-user-area">
             <div class="container-fluid">
                 <div class="row">
-                	
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="stats-title pull-left">
-        <a href="{{url('')}}"><h4>module </h4> </a>
-                                </div>
-                                <div class="stats-icon pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#zoomInDown1" data-id=""> <i class="fa fa-lock"></i> 
+@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes') as $notification)
+
+                                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="income-dashone-total reso-mg-b-30">
+                            <div class="income-dashone-pro">
+                                <div class="income-rate-total">
+                                    <div class="price-edu-rate">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+      <h3 id="Tmod" style="color:#006DF0;"><span>{{$notification->data['module']}} </span></h3></div>
+                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
+                                           <div class="stats-icon ">
+<a  href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$notification->id}}" data-note="{{$notification->data['note']}}" data-type="{{$notification->data['typeExam']}}" data-module="{{$notification->data['module']}}" style="color:#006DF0;"> <i id="unlock" class="fa fa-lock"></i> 
                       <span class="indicator-ms"></span>
                                     </a>
 
                                 </div>
-                                <div class="m-t-xl widget-cl-1">
-                                    <h1 class="text-success"></h1>
-                                  
                                 </div>
+                                    </div>
+                                
+                                </div>
+                                <br>
+                                <div class="income-range">
+                                  <br>
+                                    <p><b>{{$notification->data['typeExam']}}</b></p>
+                                    <span id="new" class="income-percentange bg-green">Nouvel <i class="fa fa-bolt"></i>
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
                             </div>
                         </div>
-                        <br>
                     </div>
-      
-  
-                        
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
-            <br>
-           <br>
-           <br>
-           <br>
-           <br>
-                </div>
-            </div>
-        </div>
-                </div>
-       	</div>
-     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-          <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="tab-content-details mg-b-30">
-                               <div class="row">
-                   <h2>Semestre 2 </h2>
-                                 </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="hpanel widget-int-shape responsive-mg-b-30">
-                            <div class="panel-body">
-                                <div class="stats-title pull-left">
-        <a href="{{url('')}}"><h4>module </h4> </a>
+                    @endforeach
+                     @foreach( Auth::user()->readNotifications->where('type','App\Notifications\ValideNotes') as $notification)
+                                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="income-dashone-total reso-mg-b-30">
+                            <div class="income-dashone-pro">
+                                <div class="income-rate-total">
+                                    <div class="price-edu-rate">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+      <h3 ><span>{{$notification->data['module']}} </span></h3></div>
+                               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
+                                           <div class="stats-icon ">
+<a  href="#" data-toggle="modal" data-target="#zoomInDown1" data-note="{{$notification->data['note']}}" data-type="{{$notification->data['typeExam']}}" data-module="{{$notification->data['module']}}" style="color:#006DF0;"> <i id="unlock" class="fa fa-unlock"></i> 
+                      <span class="indicator-ms"></span>
+                                    </a>
+
                                 </div>
-                                <div class="stats-icon pull-right">
-                                    <a href="#" data-toggle="modal" data-target="#zoomInDown1" data-id=""> <i class="fa fa-unlock"></i> </a>
                                 </div>
-                                <div class="m-t-xl widget-cl-1">
-                                    <h1 class="text-success"></h1>
-                                  
+                                    </div>
+                                
                                 </div>
+                                <br>
+                                <div class="income-range">
+                                  <br>
+                                    <p><b>{{$notification->data['typeExam']}}</b></p>
+                                   
+                                </div>
+                                <div class="clear"></div>
                             </div>
                         </div>
-                        <br>
                     </div>
-                   
-                 
-     </div>
-     </div>
+                    @endforeach
+                       </div>
+                        </div>
+                    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
   <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -147,26 +167,11 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
-                                                                            <h3>Ajouter une justification</h3>
-                            <p>Register User can get sign in from here</p>
-                             @if($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
-   @endif
-     
-                                                                             <div class="login-btn-inner">
-                                                                                    
-                   <div class="row">
-           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Ajouter</button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                            <h3></h3>
+                            <br>
+  <p>Vous avez eu  : <h4 id="b1"></h4>  </p>
+                            
+                   
                                                                         </div>
                                                                     </div>
                                                                 </div>

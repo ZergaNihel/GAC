@@ -134,6 +134,8 @@
     <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
     <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @yield('js')
 </head>
 
@@ -697,6 +699,11 @@
         ============================================ -->
     <script src="{{asset('js/knob/jquery.knob.js')}}"></script>
     <script src="{{asset('js/knob/knob-active.js')}}"></script>
+    <!-- counterup JS
+    ============================================ -->
+    <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('js/counterup/waypoints.min.js')}}"></script>
+    <script src="{{asset('js/counterup/counterup-active.js')}}"></script>
     <!-- morrisjs JS
     ============================================ -->
     <script src="{{asset('js/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -707,8 +714,9 @@
     ============================================ -->
     <script src="{{asset('js/charts/Chart.js')}}"></script>
     <script src="{{asset('js/charts/rounded-chart.js')}}"></script>
-    @yield('pdf')
-    <!-- counterup JS
+  
+@yield('pdf')
+<!-- counterup JS
         ============================================ -->
     <script src="{{asset('js/counterup/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('js/counterup/waypoints.min.js')}}"></script>

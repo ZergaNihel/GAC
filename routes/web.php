@@ -23,11 +23,13 @@ Route::get('/bar', function () {
  Route::get('error_500', 'SemestreController@index');
 
  //------------------------Etudiants----------------------
+ Route::get('/readNotif/{id}/', 'EtudiantController@readNotif') ;
  Route::get('/dates/{id}/', 'EtudiantController@dates') ;
  Route::get('/absences_Etudiant', 'EtudiantController@index') ;
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
  Route::post('/add_justif', 'EtudiantController@add_justif') ;
  Route::post('/edit_justif', 'EtudiantController@modifier') ;
+ Route::post('/Deletejust', 'EtudiantController@Deletejust') ;
 Route::get('/CompteEtudiant/{id}/{id_notif}', 'EtudiantController@info') ;
  Route::get('/Etudiant/notes', 'EtudiantController@notes') ;
  //------------------ MailBoxe ----------------------------

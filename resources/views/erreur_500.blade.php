@@ -1,24 +1,12 @@
-@extends('layouts.header')
-@section('title','ERROR 500')
-
-     @section('sidebar')
-  
-     @include('layouts.sidebarAdmin1')
-
-     @endsection
-    @section('mobileSidebar')
-  
-     @include('layouts.mobileSidebar1')
-
-     @endsection
+@extends('layouts.masterAnonym')
 
     
-                                        @section('search')
-                                        <ul class="breadcome-menu" >
-                                            <li><a href="#">Erreur 403</a> 
-                                            </li>
-                                        </ul>
-                                        @endsection
+@section('path')
+<ul class="breadcome-menu" >
+    <li><a href="#">Erreur 403</a> 
+    </li>
+</ul>
+@endsection
 @section('content')
 <div class="error-pagewrap">
 		<div class="error-page-int">

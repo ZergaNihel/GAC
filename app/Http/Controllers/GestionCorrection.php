@@ -9,6 +9,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use App\Code;
 use App\Paquet;
 use App\Examen;
+use App\Module;
 use App\Enseignant;
 use App\Correction;
 use App\Paquet_en;

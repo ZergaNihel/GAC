@@ -9,12 +9,14 @@ use App\Semestre;
 use App\Absence;
 use App\Module;
 use App\User;
+use App\Exclu;
 use App\Etudiant;
 use App\Enseignant;
 use DB;
 use Auth;
 use Response;
 use Notification;
+use Validator;
 use App\Notifications\JustificationAlertNotifications;
 class EtudiantController extends Controller
 {
@@ -37,6 +39,7 @@ else{
     function index(){
         $s1 = 0;
         $s2 = 0;
+//dd(Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$m->idMod)->count());
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     foreach ($sem1 as $key) {
@@ -74,14 +77,31 @@ else{
  
     }
     function add_justif(Request $request){
+        $attributes = [
+    'select_file' => 'justification',
+    'idAbs' => 'dates',
+];
+                $messages = [
+    'required'    => 'Le champs :attribute est obligatoire.',
+    'mimes'    => 'la justification doit être compatible avec le format pdf ',
+];
+
+   $validator = Validator::make($request->all(), [
+            'select_file' => 'required|mimes:pdf',
+            'idAbs' => 'required',
+        ],$messages,$attributes);
+ 
+        if ($validator->fails()) {
+           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
         //dd($request->idMod);
-    	$abs = Absence::find($request->idAbs);
+    $abs = Absence::find($request->idAbs);
     	 if($request->hasFile('select_file')){
 
             $file = $request->file('select_file');
             $file_name = time().'.'.$file->getClientOriginalExtension();
             $file->move(public_path('/uploads/justifications'),$file_name);
-	 	     $logo = '/uploads/justifications/'.$file_name;
+	 	    $logo = '/uploads/justifications/'.$file_name;
     }
         $abs->justification = $logo;
         $abs->etat_just = 2;
@@ -103,21 +123,33 @@ $user = User::where('id_Ens',$ens)->get();
                         ->join('seances','td_tps.id_seance','seances.idSea')
                         ->select('absences.*','seances.*')
                         ->get();
+$num =  Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)
+                      ->whereNull('justification')
+                      ->join('td_tps','absences.id_td_tp','td_tps.id')
+                      ->where('td_tps.id_module','=',$abs->tdtp->id_module)
+                      ->select('idAbs','date')
+                      ->count(); 
        if($request->ajax()){
-       return response()->json(["abs"=>$abs1]);
+       return response()->json(["abs"=>$abs1,"num"=>$num]);
        }else{
         return redirect('/absences_Etudiant/details/'.$request->idMod); }
     }
 
  function dates($id){
-   $dates =  Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->where('justification','=',null)
+   $dates =  Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)
+                      ->whereNull('justification')
                       ->join('td_tps','absences.id_td_tp','td_tps.id')
                       ->where('td_tps.id_module','=',$id)
                       ->select('idAbs','date')
                       ->get();
         return response()->json(["dates"=>$dates]);
                   }
-
+function Deletejust(Request $request){
+    $abs = Absence::find($request->trashJus);
+    $abs->justification = null;
+    $abs->save();
+return response()->json(["abs"=>$abs]);
+}
     function details($id){
 
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
@@ -142,6 +174,17 @@ else{
 
     }
     function modifier(Request $request){
+         $attributes = ['select_file1' => 'justification',];
+         $messages = [
+    'required'    => 'Le champs :attribute est obligatoire.',
+    'mimes'    => 'la justification doit être compatible avec le format pdf ',];
+
+   $validator = Validator::make($request->all(), [
+            'select_file1' => 'required|mimes:pdf',],$messages,$attributes);
+ 
+        if ($validator->fails()) {
+           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
     	$abs = Absence::find($request->idAbs);
         $logo = "0";
     	 if($request->hasFile('select_file1')){
@@ -156,6 +199,10 @@ else{
         $abs->save();
         return response()->json(["success"=>"success","img"=>$logo,"id"=>$request->idAbs,]);
 
+    }
+    function readNotif($id){
+Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes')->where('id', $id)->markAsRead();
+return response()->json(["success"=>"success"]);   
     }
 
 function info ($id , $id_notif){
