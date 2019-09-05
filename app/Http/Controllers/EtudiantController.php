@@ -207,6 +207,11 @@ Auth::user()->unreadNotifications->where('type','App\Notifications\RefuseNotific
 Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications')->markAsRead();
 
 
+
+Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications')->markAsRead();
+Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications')->markAsRead();
+Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications')->markAsRead();
+
 return response()->json(["success"=>"success"]);   
     }
     function readNotif($id){
