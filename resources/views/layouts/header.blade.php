@@ -269,7 +269,7 @@ $(".indicator-nt").css('display','none');
                                                             class="indicator-nt"></span> @endif</a>
                                                     <div role="menu"
                                                         class="notification-author dropdown-menu animated zoomIn">
-                                                        <div class="notification-single-top">
+                                    <div class="notification-single-top">
                                                             <h1>Notifications</h1>
                                                         </div>
                                              <ul class="notification-menu">

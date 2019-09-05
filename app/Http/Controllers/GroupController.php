@@ -285,7 +285,7 @@ if($etud->matricule == $request->matricule){
                       $button .= '&nbsp;&nbsp;';
                       $user = User::where('id_Etu',$data->idEtu)->get();
                       foreach ($user as $u) {
-   $button .='<a  href="{{url(\'/CompteEtudiant/'.$u->id.'/0\')}}"  ><button type="button" class="edit btn btn-info btn-sm "><i class="fa fa-eye"></i></button></a >';
+   $button .='<a  href="#"  id="'.$u->id.'" class="vue"><button type="button" class="edit btn btn-info btn-sm "><i class="fa fa-eye"></i></button></a >';
                       }
                  
                       
