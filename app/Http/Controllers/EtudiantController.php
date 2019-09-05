@@ -200,6 +200,15 @@ else{
         return response()->json(["success"=>"success","img"=>$logo,"id"=>$request->idAbs,]);
 
     }
+    function readAllNotif(){
+Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->markAsRead();
+Auth::user()->unreadNotifications->where('type','App\Notifications\ExclusNotifications')->markAsRead();
+Auth::user()->unreadNotifications->where('type','App\Notifications\RefuseNotifications')->markAsRead();
+Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications')->markAsRead();
+
+
+return response()->json(["success"=>"success"]);   
+    }
     function readNotif($id){
 Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes')->where('id', $id)->markAsRead();
 return response()->json(["success"=>"success"]);   

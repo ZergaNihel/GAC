@@ -121,6 +121,19 @@
  
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 @yield('js') 
+<script>
+  $(document).ready(function(){
+$(document).on('click','#bell',function(){
+    $.ajax({
+  type: "get",
+  url: "{{url('readAllNotif')}}/" ,
+  success: function(data){
+$(".indicator-nt").css('display','none');
+  }
+  });
+  });
+  });
+</script>
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -247,12 +260,12 @@
                                                     </div>
                                                 </li>
                                                 <!-----------------new----------->
-                                                         <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
+                                                         <li class="nav-item"><a id="bell" href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle"><i
                                                             class="educate-icon educate-bell"
                                                             aria-hidden="true"></i>
-                                     @if(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->count()>0)
-                                                            <span
+    @if(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant')->count()>0 or Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes')->count()>0  or Auth::user()->unreadNotifications->where('type','App\Notifications\ExclusNotifications')->count()>0 or Auth::user()->unreadNotifications->where('type','App\Notifications\RefuseNotifications')->count()>0 or Auth::user()->unreadNotifications->Where('type','App\Notifications\AcceptNotifications')->count()>0)
+                                                            <span  
                                                             class="indicator-nt"></span> @endif</a>
                                                     <div role="menu"
                                                         class="notification-author dropdown-menu animated zoomIn">
@@ -261,8 +274,8 @@
                                                         </div>
                                              <ul class="notification-menu">
     @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValideNotes') as $notification)
-                                                            <li>
-                    <a href="#">
+             <li style="background-color:#f5f5f5;">
+                    <a href="{{url('/Etudiant/notes')}}">
               <div class="notification-icon">
                  <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
@@ -273,23 +286,11 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                             <hr>
                                    @endforeach
-@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\NotificationBeforeExclus') as $notification)
-                                                            <li>
-                    <a href="#">
-              <div class="notification-icon">
-                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
-                                                                    </div>
-                                    <div class="notification-content">
-                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                        <h2>{{$notification->data['module']}}</h2>
-                      <p> Vous avez 4 abcences !! vous risquez d'être exclus </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                   @endforeach
+
     @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ExclusNotifications') as $notification)
-                                                            <li>
+                        <li style="background-color:#f5f5f5;">
                     <a href="#">
               <div class="notification-icon">
                  <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
@@ -302,10 +303,11 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                             <hr>
                                    @endforeach
  @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\RefuseNotifications') as $notification)
-                                                            <li>
-                    <a href="#">
+                         <li style="background-color:#f5f5f5;">
+                    <a href="{{url('/absences_Etudiant/details/'.$notification->data['id_mod'])}}">
               <div class="notification-icon">
                  <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
@@ -317,10 +319,11 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                             <hr>
                                    @endforeach
-                                              @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications') as $notification)
-                                                            <li>
-                    <a href="#">
+                @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\AcceptNotifications') as $notification)
+                       <li style="background-color:#f5f5f5;">
+              <a href="{{url('/absences_Etudiant/details/'.$notification->data['id_mod'])}}">
               <div class="notification-icon">
                  <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
                                                                     </div>
@@ -332,6 +335,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                             <hr>
                                    @endforeach
                                                 @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudiant') as $notification)                            
                                  <li style="background-color:#f5f5f5;">
@@ -350,6 +354,22 @@
                                                             <hr>
                                                             
                                                         @endforeach
+                                                        @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ExclusNotifications') as $notification)
+                        <li >
+                    <a href="#">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>EXCLUS!</h2>
+                            <p> Vous êtes exclus de module <b> {{$notification->data['module']}} </b> 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                             <hr>
+                                   @endforeach
 
                                            
                   
@@ -370,7 +390,52 @@
                                                             <hr>
                                                         @endforeach
                                            
-                        
+                            @foreach( Auth::user()->readNotifications->where('type','App\Notifications\ValideNotes')->take(1) as $notification)
+                                                            <li>
+                    <a href="{{url('/Etudiant/notes')}}">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                              <h2>Notes</h2>
+                      <p> Vous avez récus votre note de module <b>{{$notification->data['module']}}</b> </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                   @endforeach
+                                   @foreach( Auth::user()->readNotifications->where('type','App\Notifications\RefuseNotifications') as $notification)
+                         <li >
+                    <a href="{{url('/absences_Etudiant/details/'.$notification->data['id_mod'])}}">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Justification Réfusé</h2>
+                            <p>L' enseignant (e) <b> {{$notification->data['nomEns']}} {{$notification->data['prenomEns']}} </b> a réfusé votre justification 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                             <hr>
+                                   @endforeach
+                @foreach( Auth::user()->readNotifications->where('type','App\Notifications\AcceptNotifications') as $notification)
+                       <li>
+              <a href="{{url('/absences_Etudiant/details/'.$notification->data['id_mod'])}}">
+              <div class="notification-icon">
+                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                        <h2>Justification Accepté</h2>
+                            <p>L' enseignant (e) <b> {{$notification->data['nomEns']}} {{$notification->data['prenomEns']}} </b> a accepté votre justification 
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                             <hr>
+                                   @endforeach
 
 
                                                         </ul>

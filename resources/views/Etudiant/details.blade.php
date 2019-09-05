@@ -288,7 +288,7 @@ $('#error2').css("display","");
                             </div>
                         @if($absences->count()==0)
                         <br> <br>
- <br>    <h3 style="text-align: center;color: #8d9498;">Aucune justification a été ajouté</h3>
+ <br>    <h3 style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
  <br> <br><br><br><br>
     @endif 
                         </div>
