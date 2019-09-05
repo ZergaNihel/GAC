@@ -179,7 +179,6 @@ var myChart = new Chart(ctx, {
 <script >
     $(document).ready(function(){ 
         var semestre = $("#curr_sem").val();
-        alert(semestre);
         $.ajax({
   type: "get",
   url: "{{url('statdash')}}/"+semestre+"/" ,

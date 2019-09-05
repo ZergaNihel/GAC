@@ -26,7 +26,14 @@ class SemestreController extends Controller
   
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     //dd($sem2);
-   return view('Semestres.index',compact('sem1','sem2'));
+         if(Auth::user()->role == '1')
+        {
+          return view('Semestres.index',compact('sem1','sem2'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
    }
    public function new_sem(){
    	$sem = Semestre::where('active','=',1)->count();
@@ -165,8 +172,15 @@ class SemestreController extends Controller
    	
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 //dd($abs);
-   return view('Semestres.dashboard',compact('semestre','nouveaux','rep','endettes','exclus','abs','sem1','sem2','nouveaux_prc','rep_prc','endettes_prc','exclus_prc'));
-   }
+   if(Auth::user()->role == '1')
+        {
+          return view('Semestres.dashboard',compact('semestre','nouveaux','rep','endettes','exclus','abs','sem1','sem2','nouveaux_prc','rep_prc','endettes_prc','exclus_prc'));
+        }
+        else
+        {
+            return view('Erreur403');
+        } 
+  }
    function archiver ($id){
     $sem = Semestre::find($id);
     $sem->active = 0;
@@ -182,7 +196,14 @@ class SemestreController extends Controller
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
   $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
  $sem = Semestre::where('active','=',0)->get();
-   return view('Semestres.historique',compact('sem1','sem2','sem'));
+   if(Auth::user()->role == '1')
+    {
+      return view('Semestres.historique',compact('sem1','sem2','sem'));
+    }
+    else
+    {
+        return view('Erreur403');
+    }
    }
   function histoDet ($id){
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
@@ -203,13 +224,27 @@ $semestre = Semestre::find($id);
                            ->get();
   
   //dd($mods);
-   return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','modules','id','semestre','sec'));
+   if(Auth::user()->role == '1')
+    {
+      return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','modules','id','semestre','sec'));
+    }
+    else
+    {
+        return view('Erreur403');
+    }
    }
   function GrpDet ($id){
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
   $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   $etus = Etudiant::where('idG',$id)->get();
-   return view('Semestres.detGrp',compact('sem1','sem2','etus'));
+   if(Auth::user()->role == '1')
+    {
+      return view('Semestres.detGrp',compact('sem1','sem2','etus'));
+    }
+    else
+    {
+        return view('Erreur403');
+    }
    }
    
 }

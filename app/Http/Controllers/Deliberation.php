@@ -84,15 +84,23 @@ class Deliberation extends Controller
         
         $semestre= Semestre::find($id); 
 
-         return view('EnseignantR.notes')->with(
-             ['semestre' => $semestre,
-             'section' => $section,
-             'controle' => $controle,
-             'examen' => $examen,
-             'tauxEx' => $tauxEx,
-             'tauxCC' => $tauxCC,
-             'nbEtuCC' => $nbEtuCC,
-             'nbEtuEx' => $nbEtuEx]);
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.notes')->with(
+            ['semestre' => $semestre,
+            'section' => $section,
+            'controle' => $controle,
+            'examen' => $examen,
+            'tauxEx' => $tauxEx,
+            'tauxCC' => $tauxCC,
+            'nbEtuCC' => $nbEtuCC,
+            'nbEtuEx' => $nbEtuEx]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     function detail($id,$p){
@@ -106,9 +114,17 @@ class Deliberation extends Controller
 
         $paquet= Paquet::find($p);
 
-        return view('EnseignantR.notes_detail')->with(
+       
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.notes_detail')->with(
             ["etudiants" => $etudiants,
             'semestre' => $semestre,
-             'paquet' => $paquet]);
+                'paquet' => $paquet]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 }

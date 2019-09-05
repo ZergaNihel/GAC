@@ -16,7 +16,6 @@ use App\Paquet_en;
 use App\Semestre;
 use App\Etudiant;
 use App\User;
-use App\Module;
 use Auth;
 use File;
 use Validator;
@@ -32,10 +31,18 @@ class GestionCorrection extends Controller
     public function index($id)
     {
         $semestre = Semestre::find($id);
-        return view('EnseignantR.gestion_correction.popup')->with(
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.gestion_correction.popup')->with(
             [
                 'semestre'=> $semestre
             ]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function paquet(Request $request)

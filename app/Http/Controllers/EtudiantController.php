@@ -29,10 +29,10 @@ class EtudiantController extends Controller
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
         if(Auth::user()->role == '0'){
             
-   return view('Etudiant.notes',compact('sem1','sem2'));}
-else{
-  return view('erreur_500',compact('sem1','sem2'));
-}
+            return view('Etudiant.notes',compact('sem1','sem2'));}
+        else{
+            return view('Erreur403');
+        }
 
 }
 
@@ -72,7 +72,7 @@ else{
 
 return view('Etudiant.justification',compact('mod','sem1','sem2','mod2'));}
 else{
-  return view('erreur_500',compact('sem1','sem2'));
+    return view('Erreur403');
 }
  
     }
@@ -169,7 +169,7 @@ return response()->json(["abs"=>$abs]);
 $var = 1;
     return view('Etudiant.details',compact('mod','absences','sem1','sem2','var'));}
 else{
-  return view('erreur_500',compact('sem1','sem2'));
+  return view('Erreur403');
 }
 
     }
@@ -216,8 +216,13 @@ Auth::user()->unreadNotifications->where('type','App\Notifications\nouvelEtudian
        // $roles = Role::all();
          $enseignant = Enseignant::all();
         
+         if(Auth::user()->role == '0'){
+            
+            return view('membre.admin_etu', compact('membre','etudiant','enseignant','sem1','sem2'));
+        }
+        else{
+            return view('Erreur403');
+        }
 
-
-return view('membre.admin_etu', compact('membre','etudiant','enseignant','sem1','sem2'));
 }
 }

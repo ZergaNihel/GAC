@@ -33,7 +33,14 @@ class GroupController extends Controller
     $section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
     $sections = Section::all();
 
-		 return view('admin.groupes', compact('semestre','section','sections','sem1','sem2'));
+     if(Auth::user()->role == '1')
+      {
+        return view('admin.groupes', compact('semestre','section','sections','sem1','sem2'));
+      }
+      else
+      {
+          return view('Erreur403');
+      }
 	}
   
 	function groupe($id,$idSem){
@@ -46,7 +53,14 @@ class GroupController extends Controller
 		$modules = Module::where('semestre','=',$idSem)->get();
     $sec = Groupe_etu::where('groupe',$id)->get();		//dd($modules);
 	
-		 return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre','id','grp','sec'));
+     if(Auth::user()->role == '1')
+      {
+        return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre','id','grp','sec'));
+      }
+      else
+      {
+          return view('Erreur403');
+      }
 	}
 function edit(Request $request){
 

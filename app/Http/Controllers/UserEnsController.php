@@ -30,7 +30,14 @@ class UserEnsController extends Controller
          $semestre = Semestre::find($idS);
          $idSem= $idS;
 
-        return view('membreEns.details', compact('membreE','etudiant','enseignant','sem1','sem2','semestre','idSem'));
+        if(Auth::user()->role == '3')
+        {
+            return view('membreEns.details', compact('membreE','etudiant','enseignant','sem1','sem2','semestre','idSem'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
             
             
      }

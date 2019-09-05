@@ -36,13 +36,22 @@ class CorrectionCopies extends Controller
                     ->where('semestres.active','=',1)
                     ->get(); 
         $semestre = Semestre::find($id);
-        return view('EnseignantR.correction.popup')->with(
-            [
-                'semestre'=> $semestre,
-                'modules'=> $modules ,
-                'paquets'=> $paquets
-            ] 
-        );
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.correction.popup')->with(
+                [
+                    'semestre'=> $semestre,
+                    'modules'=> $modules ,
+                    'paquets'=> $paquets
+                ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
+        
     }
 
     public function module(Request $request)
@@ -220,14 +229,21 @@ class CorrectionCopies extends Controller
 
         $semestre = Semestre::find($id);
 
-        return view('EnseignantR.gestion_paquets.controle')->with(
-            [
-                'semestre'=> $semestre,
-                'nompaq'=> $nompaq,
-                'exam'=> $exam,
-                'correcteurs'=> $correcteurs
-            ] 
-        );
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.gestion_paquets.controle')->with(
+                [
+                    'semestre'=> $semestre,
+                    'nompaq'=> $nompaq,
+                    'exam'=> $exam,
+                    'correcteurs'=> $correcteurs
+                ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function datelimite(Request $request)
@@ -275,13 +291,20 @@ class CorrectionCopies extends Controller
 
         $semestre = Semestre::find($id);
 
-        return view('EnseignantR.gestion_paquets.examen')->with(
-            [
-                'semestre'=> $semestre,
-                'nompaq'=> $nompaq,
-                'exam'=> $exam,
-                'correcteurs'=> $correcteurs
-            ] );
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.gestion_paquets.examen')->with(
+                [
+                    'semestre'=> $semestre,
+                    'nompaq'=> $nompaq,
+                    'exam'=> $exam,
+                    'correcteurs'=> $correcteurs
+                ] );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function correcteur(Request $request)

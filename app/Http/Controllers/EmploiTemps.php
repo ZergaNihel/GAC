@@ -120,10 +120,14 @@ return response()->json(['sec' => $sec,'pop' => $pop ,'pop1' => $pop1]);
                            ->select('idSec','nomSec')
                            ->distinct('idSec')
                            ->get();
-        if(Auth::user()->role == 1)
+        if(Auth::user()->role == 1 || Auth::user()->role == 0)
         return view('admin.emp_générale',compact('semestre','sem1','sem2','sec'));
         elseif(Auth::user()->role == 3)
         return view('EnseignantR.emp_générale',compact('semestre','sem1','sem2','sec'));
+        else
+        {
+            return view('Erreur403');
+        }
     }
   function afficher ($id){
     $cour = Seance::where('type','=','Cour')->get();
@@ -156,7 +160,15 @@ return response()->json(['sec' => $sec,'pop' => $pop ,'pop1' => $pop1]);
                            //dd($groupes);
     	$mods = Module::where('semestre','=',$id)->get();
     	//$mod = Module::where('idMod',1)->limit(1)->get();
-    	return view('admin.emploi_du_temp',compact('semestre','sem1','sem2','pro','sec','nbr','seances','groupes','mods','seancesTD','seancesTP','cour','td','tp'));
+         if(Auth::user()->role == '1')
+        {
+            return view('admin.emploi_du_temp',compact('semestre','sem1','sem2','pro','sec','nbr','seances','groupes','mods','seancesTD','seancesTP','cour','td','tp'));
+
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     function afficheress (){

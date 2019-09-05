@@ -30,11 +30,19 @@ class Anonymat extends Controller
                 ->where('semestres.active','=',1)
                 ->get();
         $module="";
-        return view('Anonymat.paquets')->with(
-            ['modules'=> $modules,
-             'module' => $module
-             ] 
-        );
+        
+        if(Auth::user()->role == '2')
+        {
+            return view('Anonymat.paquets')->with(
+                ['modules'=> $modules,
+                'module' => $module
+                ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function lister(Request $request)
@@ -148,9 +156,18 @@ class Anonymat extends Controller
         ->where('paq_code','=',$paquet->idPaq)
         ->select('etudiants.*','codes.*')
         ->get();
-        return view('Anonymat.paquet')->with([
-            'etudiants' => $etudiants,
-        ]);
+        
+        if(Auth::user()->role == '2')
+        {
+            return view('Anonymat.paquet')->with([
+                'etudiants' => $etudiants,
+            ]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
+        
     }
 
     public function delete(Request $request)

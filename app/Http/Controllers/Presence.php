@@ -36,7 +36,14 @@ class Presence extends Controller
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 
    
-        return view('EnseignantR.semestre',compact('sem1','sem2'));
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.semestre',compact('sem1','sem2'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function index($id)
@@ -60,14 +67,21 @@ class Presence extends Controller
                     ->get();
         $semestre = Semestre::find($id);
   
-        return view('EnseignantR.popup')->with(
-            ['modules'=> $modules ,
-            'seances'=> $seances ,
-            'groupes'=> $groupes ,
-            'idSem'=> $id,
-            'semestre'=> $semestre,
-             ] 
-        );
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.popup')->with(
+                ['modules'=> $modules ,
+                'seances'=> $seances ,
+                'groupes'=> $groupes ,
+                'idSem'=> $id,
+                'semestre'=> $semestre,
+                 ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
     
     public function lister(Request $request)
@@ -317,15 +331,23 @@ class Presence extends Controller
 
         $semestre = Semestre::find($id);
 
-        return view('EnseignantR.historique',
-        [
-            'abs'=> $abs, 
-            'td_tp' => $td_tp,
-            'section' => $section,
-            'seance'=> $seance,
-            'semestre'=> $semestre,
-        ] 
-    );
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.historique',
+            [
+                'abs'=> $abs, 
+                'td_tp' => $td_tp,
+                'section' => $section,
+                'seance'=> $seance,
+                'semestre'=> $semestre,
+            ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     } 
 
     public function present(Request $request)
@@ -479,12 +501,19 @@ if($nbEx == 4){
                             and A.justification IS NOT NULL and A.id_Etu=E.idEtu");
         $semestre = Semestre::find($id);
         
-        return view('EnseignantR.justifications',
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.justifications',
             [
                 'justifications'=> $justif, 
                 'semestre'=> $semestre
-            ] 
-        );
+            ]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function exclus($id)
@@ -575,10 +604,18 @@ if($nbEx == 4){
             $i++;
         }
         $semestre = Semestre::find($id);
-        return view('EnseignantR.exclus',
-                    ["exclus" => $exclus , 
-                    "abs" => $abs,
-                    'semestre'=> $semestre]);
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.exclus',
+            ["exclus" => $exclus , 
+            "abs" => $abs,
+            'semestre'=> $semestre]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function listeExclus($id)
@@ -605,10 +642,18 @@ if($nbEx == 4){
         }
                     
         $semestre = Semestre::find($id);
-        return view('EnseignantR.exclus',
-                    ["exclus" => $exclus , 
-                    "nbabs" => $nbabs , 
-                    'semestre'=> $semestre]);
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.exclus',
+            ["exclus" => $exclus , 
+            "nbabs" => $nbabs , 
+            'semestre'=> $semestre]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function exclure(Request $request)

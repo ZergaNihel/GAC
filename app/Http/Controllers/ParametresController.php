@@ -27,7 +27,7 @@ class ParametresController extends Controller
     return view('admin.parametre',compact('sem1','sem2','param','paramCount'));
 }
 else{
-	return view('erreur_500',compact('sem1','sem2'));
+	return view('Erreur403',compact('sem1','sem2'));
 }
    }
    function store(Request $request){

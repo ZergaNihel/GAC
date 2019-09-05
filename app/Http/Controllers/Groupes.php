@@ -21,7 +21,14 @@ class Groupes extends Controller
         
         $semestre= Semestre::find($id); 
 
-		 return view('EnseignantR.groupes', compact('semestre','section','sections'));
+         if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.groupes', compact('semestre','section','sections'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
     
     function statistique ($id){
