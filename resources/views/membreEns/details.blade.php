@@ -1,29 +1,10 @@
-@extends('layouts.header')
-
-@section('title','paramètres')
-@section('js')
-
-@endsection
+@extends('layouts.masterEr')
 
 
-@section('sidebar')
-
-@include('layouts.sidebarAdmin1')
-
-@endsection
-@section('mobileSidebar')
-
-@include('layouts.mobileSidebar1')
-
-@endsection
-
-
-@section('search')
-<ul class="breadcome-menu">
-    <li><a href="#">Profil / {{$membreE->enseignant->nom}} /{{$membreE->enseignant->prenom}} </a>
-
-    </li>
-</ul>
+@section('path')
+<li>
+    <span class="bread-blod">Profil</span>
+</li>
 @endsection
 @section('content')
 <!-- Single pro tab review Start-->
@@ -107,25 +88,21 @@
                                             </div>
                                         </div>
 
-
-
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                            <form action=" {{url('membreE/'. $membreE->id) }} " method="post"
-                                 id="demo1-upload"
+                            <form action=" {{url('membreEns/'. $membreE->id) }} " method="post"
+                                class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload"
                                 enctype="multipart/form-data">
 
                                 <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
                                 <fieldset>
 
-
+                                    <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
@@ -171,20 +148,9 @@
                                                         </div>
 
 
-                                                        <div class="form-group">
+                                                            <input type="hidden" name="semestre" value="{{$idSem}}">
 
-
-                                                        </div>
-                                                        <div class="file-upload-inner ts-forms">
-                                                            <div class="form-group">
-
-                                                                <div class="col-md-9 inputGroupContainer">
-                                                                    <div style="width: 70%">
-                                                                        <input name="img" type="file">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
 
                                                     </div>
                                                     <div class="col-lg-6">
@@ -208,7 +174,7 @@
 
 
                                                             <input name="password"  type=" password"
-                                                                class="form-control" placeholder="Password">
+                                                                class="form-control" placeholder="Mot de passe">
                                                             @if($errors->has('password'))
                                                             <p class="help is-danger">{{ $errors->first('password') }}
                                                             </p>
@@ -219,7 +185,7 @@
 
                                                         <div class="form-group">
                                                             <input name="password_confirmation" type="password"
-                                                                class="form-control" placeholder="Confirm Password">
+                                                                class="form-control" placeholder="Confirmer le mot de passe">
                                                             @if($errors->has('password_confirmation'))
                                                             <p class="help is-danger">
                                                                 {{ $errors->first('password_confirmation') }}</p>
@@ -227,7 +193,16 @@
                                                         </div>
 
                                                         @endif
+                                                        <div class="file-upload-inner ts-forms mg-t-15">
+                                                            <div class="form-group">
 
+                                                                <div class="col-md-9 inputGroupContainer">
+                                                                    <div style="width: 70%">
+                                                                        <input name="img" type="file" title="photo de profil">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>

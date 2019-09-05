@@ -132,7 +132,7 @@ class CorrectionCopies extends Controller
                 ->where('id_Ens','=',Auth::user()->enseignant->idEns)
                 ->where('id_paq','=',$request->input('paq'))
                 ->get();
-                
+
         $id=DB::table('corrections')
                 ->where('code_etu', '=', $code)
                 ->where('correcteur', '=',$paq_ens[0]->id)
@@ -288,8 +288,8 @@ class CorrectionCopies extends Controller
     {
         $i=0;
         $correcteurs=$request->input('correcteurs'); 
-        $paquet=$request->input('paquets');
-        $p=Paquet::find($paquet);
+        $paquet=$request->input('paquets'); 
+        $p=Paquet::find($paquet); 
         $paq_ens=DB::table('paquet_ens')
         ->where('id_paq','=',$paquet)
         ->get();
@@ -321,7 +321,7 @@ class CorrectionCopies extends Controller
                 ->select('examens.type as type','modules.nom')
                 ->get();
         
-           
+            $p=Paquet::find($paquet); 
             $details1 = [
                 'id_paq' => $p->idPaq,
                 'nomPaq' => $p->salle,

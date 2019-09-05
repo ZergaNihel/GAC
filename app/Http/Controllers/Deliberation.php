@@ -18,6 +18,11 @@ use Auth;
 
 class Deliberation extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function index($id){
    
         $section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
@@ -94,7 +99,7 @@ class Deliberation extends Controller
         $etudiants= DB::table('codes')
                     ->join('etudiants', 'etudiants.matricule', '=', 'codes.etu_code')
                     ->join('groupes', 'etudiants.idG', '=', 'groupes.idG')
-                    ->where('codes.paq_code','=',25)
+                    ->where('codes.paq_code','=',$p)
                     ->get();
 //return $etudiants[0]->type;
         $semestre= Semestre::find($id); 

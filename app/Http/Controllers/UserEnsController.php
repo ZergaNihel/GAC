@@ -11,14 +11,14 @@ use App\Etudiant;
 use App\Enseignant;
 use App\Semestre;
 
-class UserEController extends Controller
+class UserEnsController extends Controller
 {
      public function __construct()
     {
         $this->middleware('auth');
     }
 
-     public function details($id)
+     public function details($id,$idS)
     {
         $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     
@@ -27,36 +27,13 @@ class UserEController extends Controller
         $etudiant = Etudiant::all();
          $enseignant = Enseignant::all();
         
+         $semestre = Semestre::find($idS);
+         $idSem= $idS;
 
-        return view('membreE.details', compact('membreE','etudiant','enseignant','sem1','sem2'));
+        return view('membreEns.details', compact('membreE','etudiant','enseignant','sem1','sem2','semestre','idSem'));
             
             
      }
-
-      public function edit($id)
-    {
-
-        $membreE = User::find($id);
-        $etudiant = Etudiant::all();
-        $enseignant = Enseignant::all();
-        
-        $semestre = Semestre::find($idS);
-
-        $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
-    
-        $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
-
-        return view('membreE.edite')->with([
-            'membreE' => $membreE,
-            'etudiant' => $etudiant,
-            'enseignant' => $enseignant,
-            'sem1' => $sem1,
-            'sem2' => $sem2,
-            'semestre'=> $semestre,
-            
-        ]);;
-    
-    }
 
     public function update(Request $request , $id)
     {
@@ -87,7 +64,7 @@ class UserEController extends Controller
           
         $membreE->save();
 
-        return redirect('membreE/'.$id.'/edite');
+        return redirect('membreE/'.$id.'/details/'.$request->input('semestre'));
 
     } 
   

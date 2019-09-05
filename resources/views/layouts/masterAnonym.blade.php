@@ -191,9 +191,10 @@
                                                                           <img src="{{asset('img/profile/profil.png')}}" alt="">
                                                                         @endif
                                                                     </div>
-                                                                    <div class="message-content">
+                                                                    <div class="message-content" style="width:300px">
                                                                         <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
                                                                         </span>
+                                                                        <br>
                                                                         @if(App\User::find($notification->data['id_emt'])->role==1 or App\User::find($notification->data['id_emt'])->role==2 )
                                                                           <h2>{{ App\User::find($notification->data['id_emt'])->name}} </h2>
                                                                         @endif
@@ -203,7 +204,7 @@
                                                                         @if(App\User::find($notification->data['id_emt'])->role==3)
                                                                           <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}</h2>
                                                                         @endif
-                                                                        <span class="label label-danger">Nouveau</span>
+                                                                        <span class="label label-danger pull-right">Nouveau</span>
                                                                         @if($notification->data['sujet'])
                                                                           <p>{{ $notification->data['sujet'] }}
                                                                           </p>
@@ -227,7 +228,7 @@
                                                                             <img src="{{asset('img/profile/profil.png')}}" alt="">
                                                                           @endif
                                                                         </div>
-                                                                        <div class="message-content">
+                                                                        <div class="message-content" style="width:300px">
                                                                             <span
                                                                                 class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
                                                                             </span>
@@ -253,7 +254,7 @@
 
 
                                                                                         <span
-                                                                                            class="label label-danger">
+                                                                                            class="label label-danger pull-right">
                                                                                             Nouveau</span></h2>
                                                                                     @if($notification->data['sujet'])
                                                                                     <p>{{ $notification->data['sujet'] }}
@@ -416,14 +417,8 @@
                                                         class="dropdown-header-top author-log dropdown-menu animated zoomIn">
 
                                                         <!--nihel-->
-                                                        @if(Auth::user()->role == '0'|| Auth::user()->role == '1' ||
-                                                        Auth::user()->role == '2')
+                                                        @if(Auth::user()->role == '0'|| Auth::user()->role == '1' )
                                                         <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profil</a>
-                                                        </li>
-                                                        @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span
                                                                     class="edu-icon edu-user-rounded author-log-ic"></span>Mon
                                                                 Profil</a>
                                                         </li>

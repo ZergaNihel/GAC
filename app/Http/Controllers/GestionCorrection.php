@@ -23,6 +23,11 @@ use Notification;
 use App\Notifications\ValideNotes;
 class GestionCorrection extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index($id)
     {
         $semestre = Semestre::find($id);
@@ -297,6 +302,6 @@ class GestionCorrection extends Controller
         Notification::send($user, new ValideNotes($details));
         }
       
-       return redirect('enseignant/groupes/2');
+       return redirect('notes/'.$request->input('semestre').'/'.$request->input('paquet'));
     }
 }

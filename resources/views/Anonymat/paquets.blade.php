@@ -157,7 +157,7 @@
 <style>
     .hover_img a { position:relative; }
     .hover_img a span { position:absolute; display:none; z-index:99; }
-    .hover_img a:hover span { display:block;   height:448px; width: 1200px;}
+    .hover_img a:hover span { display:block;   height:354; width: 1035;}
 </style>
 
 @endsection

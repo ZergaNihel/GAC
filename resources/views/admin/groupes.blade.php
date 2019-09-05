@@ -122,6 +122,13 @@ $.ajax({
  });
           });
     </script>
+
+<style>
+    .hover_img a { position:relative; }
+    .hover_img a span { position:absolute; display:none; z-index:99; }
+    .hover_img a:hover span { display:block;   height:448px !important; width: 1200px !important;}
+    .product-status-wrap img { width:500px !important;}
+</style>
 @endsection
 
     
@@ -218,10 +225,16 @@ $.ajax({
                                                     </div>
                                                             <div class="form-group-inner"  >
                                                         <div class="row">
+                                                            
                                                             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Liste d'étudiants</label>
+                                                                <label class="login2 pull-right pull-right-pro">Liste des étudiants</label>
                                                             </div>
-                                                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 mg-tb-15">
+                                                                <div class="hover_img">
+                                                                    <a href="#"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i><span><img src="{{asset('img/Etudiants.PNG')}}" alt="image" width="500px" height="300px" class="pull-left"/></span></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-8 col-md-11 col-sm-11 col-xs-11">
                                                                 <div class="file-upload-inner ts-forms">
                                                                     <div class="input prepend-small-btn">
                                                                        
@@ -233,6 +246,7 @@ $.ajax({
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            
                                                         </div>
                                                     </div>
                          <div class="login-btn-inner">
