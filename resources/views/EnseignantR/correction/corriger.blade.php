@@ -17,7 +17,7 @@
         var i=btn_id.substring(4,btn_id.length);
         $.ajax({
             type:'get',
-            data:'code=' + $('#code'+i).val() + '&note=' + $('#note'+i).val(),
+            data:'code=' + $('#code'+i).val() + '&note=' + $('#note'+i).val()  + '&paq=' + $('#paq').val(),
             url:'/attribuer/note',
             success:function(data){
             }
@@ -144,8 +144,9 @@
                                                 <td> {{$code->code}}</td>
                                                 <form id="formN{{$code->idC}}" >
                                                     <td class="pull-center">
+                                                        <input type="hidden" id="paq" name="paq" value="{{$paquet->idPaq}}">
                                                         <input type="hidden" id="code{{$code->idC}}" name="code" value="{{$code->idC}}">
-                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',$paq_ens[0]->correcteur)->get() as $c){{$c->note}}@endforeach" style="width:50px; text-align:center;"/>
+                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@if(count($paq_ens) != 0 ) @foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',$paq_ens[0]->correcteur)->get() as $c){{$c->note}}@endforeach @endif" style="width:50px; text-align:center;"/>
                                                     </td>
                                                </form>
                                             </tr>

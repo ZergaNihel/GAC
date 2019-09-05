@@ -4,14 +4,47 @@
 @section('js')
 <script >
    $(document).ready(function(){
-    $("#voir").on('show.bs.modal', function(event) {
 
-    var a = $(event.relatedTarget).data('jus');
+  $("#trash").on('show.bs.modal', function(event) {
+    var a = $(event.relatedTarget).data('date');
+    var b = $(event.relatedTarget).data('id');
+   alert(a);
+     var m = $(this)
+  m.find("#trashJus").val(b);
+ m.find("b").text(a);
+    
+});
+
+
+    $("#voir").on('show.bs.modal', function(event) {
+ var a = $(event.relatedTarget).data('jus');
     alert(a);
    $('.pdf-single-pro a').attr('href',a);
     alert($('.pdf-single-pro a').attr('href'));
 });
-    $("#edit").on('show.bs.modal', function(event) {
+
+
+ $(document).on("click","#deleteBtn",function(){
+ // alert("hii");
+   $.ajax({
+type: "post",
+data: $("#deleteForm").serialize(),
+url:  $("#deleteForm").attr('action'),              
+success: function(data) {
+  $("#trash").modal('hide');
+  $("#"+data.abs.idAbs+"").remove();
+  $("#sjus").text(data.abs.date);
+  $("#alertSuc2").css("display",""); 
+  $("#justification").css("display","");  
+  $("html, body").animate({
+        scrollTop: 0
+    },10);
+
+}
+});
+   });
+
+ $("#edit").on('show.bs.modal', function(event) {
 
     var a = $(event.relatedTarget).data('id');
     //alert(a);
@@ -19,7 +52,7 @@
      m.find('#idAbs').val(a);
     
 });
-     $(document).on("click","#addBtn",function(){
+ $(document).on("click","#addBtn",function(){
    var form = $("#addForm");
   var data = new FormData(form[0]);
         $.ajax({
@@ -32,6 +65,9 @@ success: function(data) {
 alert(data.abs.length);
 var t;
 var t1=" ";
+if(data.num <= 0){
+$("#justification").css("display","none");
+}
 for(var i =0;i<data.abs.length;i++){
 if(data.abs[i].etat_just == 1){
     t='<button class="pd-setting">Accepté</button>'; }
@@ -42,10 +78,30 @@ if(data.abs[i].etat_just == 1){
          if(data.abs[i].etat_just == 0){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
-$("#1").after('<tr><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#voir" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'</td></tr>');
+$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#detail'+data.abs[i].idAbs+'" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a   data-toggle="modal"  href="#" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
+$("#bjus").text(data.abs[i].date);
 }
+$("#alertSuc1").css("display","");  
 
-}
+   $("html, body").animate({
+        scrollTop: 0
+    },10);
+
+},
+error: function (dataErr) {
+
+$('#error1').css("display","");
+ var response = JSON.parse(dataErr.responseText);
+       //alert(dataErr.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error1').html(errorString);
+          }
 });
 
        });
@@ -68,7 +124,21 @@ alert(data.img);
     },10);
    // alert($("#a"+data.id+"").attr('data-jus')) 
    $("#a"+data.id+"").data('jus',data.img);
-}
+},
+error: function (dataErr) {
+
+$('#error2').css("display","");
+ var response = JSON.parse(dataErr.responseText);
+       //alert(dataErr.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error2').html(errorString);
+  }
 });
 
        });
@@ -111,7 +181,7 @@ alert(data.img);
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Absences</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">liste des abcences</span>
+                                            <li><span class="bread-blod">liste des absences</span>
                                             </li>
                                         </ul>
                                         @endsection
@@ -123,12 +193,19 @@ alert(data.img);
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
-                            <h2>Absences de module : {{$mod->nom}} </h2>
-                         
+                            <h2>Absences du module : {{$mod->nom}} </h2>
+    @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()>0)
+                             <div class="m-t-xl widget-cl-1">
+                         <h1 class="text-danger">EXCLUS !!</h1></div>
+                         @endif
                         </div>
-                           <div class="add-product pull-right">
- <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="   {{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification</a>
+     @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()== 0) 
+     @if (App\Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->whereNull('justification')->join('td_tps','Absences.id_td_tp','td_tps.id')->where('td_tps.id_module','=',$mod->idMod)->count()> 0) 
+                           <div class="add-product pull-right" id="justification">
+ <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="   {{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification </a>
                                             </div>
+                                             @endif
+                                            @endif
                                           
                     </div>
                 </div>
@@ -136,15 +213,33 @@ alert(data.img);
                   
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
+                                 <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc1" style="display: none">
+                               <div class="alert alert-success alert-success-style1 alert-st-bg alert-st-bg11" style="">
+                                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-sc-cl" aria-hidden="true">&times;</span>
+                  </button>
+                               
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification ajouté!</strong> Vous avez ajouter la justification de la date <b id="bjus"></b>.</p>
+                            </div>
+                          </div>
                         <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc" style="display: none">
                                <div class="alert alert-success alert-success-style1 alert-st-bg alert-st-bg11" style="">
                                 <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
                   </button>
                                
-                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Modifié!</strong> la justification a été bien enregistrer (voir Détail).</p>
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification Modifié!</strong> la justification a été bien enregistrer (voir Détail).</p>
                             </div>
-                          </div>       
+                          </div>   
+                               <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc2" style="display: none">
+                               <div class="alert alert-danger alert-danger-style1 alert-st-bg alert-st-bg11" style="">
+                                <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                    <span class="icon-sc-cl" aria-hidden="true">&times;</span>
+                  </button>
+                               
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification supprimé!</strong> Vous avez supprimer la justification de la date <b id="sjus"></b>
+                            </div>
+                          </div>    
 
                           <div class="asset-inner table-responsive">
                                 <table>
@@ -157,45 +252,69 @@ alert(data.img);
                                        <th>Actions</th>
                                </tr>
 @foreach($absences as $a)
-                                     <tr>
+                                     <tr id="{{$a->idAbs}}">
                                         <th >{{ $var++}}</th>
                                         <td >{{$a->date}}</td>
                                         <td >{{$a->jour}} {{$a->heure}} {{$a->salle}}</td>
                                         <td >{{$a->type}}</td>
                       <td>  @if($a->etat_just == 1)
-                        <button class="pd-setting">Accepté</button> 
+                        <span class="pd-setting">Acceptée</span> 
                             @endif
                             @if($a->etat_just == 2)
-                            <button class="ps-setting">En attente</button>
+                            <span class="ps-setting">En attente</span>
                              @endif
                             @if($a->etat_just == 0)
-                            <button class="ds-setting">Réfusé</button>
+                            <span class="ds-setting">Refusée</span>
                              @endif
 
                     </td>
                                         <td >
-                                            <a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#voir" data-jus="{{ $a->justification}}" id="a{{$a->idAbs}}"><i class="fa fa-book" aria-hidden="true" ></i> </a>
+                                            <a  href="#" title="Voir" class="btn btn-default" data-toggle="modal" data-target="#detail{{$a->idAbs}}" id="a{{$a->idAbs}}"><i class="fa fa-book" aria-hidden="true" ></i> </a>
 
                                            @if($a->etat_just == 2)
                                             <a  data-toggle="modal"  href="#" title="Modifier" class="btn btn-default" data-target="#edit" data-id="{{$a->idAbs}}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
+                                            <a   data-toggle="modal"  href="#" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="{{$a->idAbs}}" data-date="{{$a->date}}" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a>
                                             @endif
                                         </td>
+
+                                        <div id="detail{{$a->idAbs}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-close-area modal-close-df">
+                                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                    </div>
+                                                    <div class="modal-body" id="modalbody">
+                                                        <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                                            <a class="media" href="{{asset('uploads/justifications/'.$a->justification)}}"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
                                   </tr>
                                     
 @endforeach
-                               
+                           
                           
                                 
                            
                             
                                 </table>
                             </div>
-                     
+                        @if($absences->count()==0)
+                        <br> <br>
+ <br>    <h3 style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
+ <br> <br><br><br><br>
+    @endif 
                         </div>
                       </div>
                     </div>
  </div>
                     </div>
+                    <br>
+                    <br>
+                    
+                     
 
                     <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
@@ -212,12 +331,11 @@ alert(data.img);
                        <div class="basic-login-inner modal-basic-inner">
                          <h3>Ajouter une justification</h3>
                  <p>Vous pouvez ajouter votre justification</p>
-                             @if($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
-   @endif
+                             <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none">
+     
+          </div>
+          </div>
 <form method="post" enctype="multipart/form-data" action="{{ url('add_justif') }}" id="addForm">
     {{ csrf_field() }}
     <input type="hidden" name="idMod" id="module">
@@ -227,8 +345,8 @@ alert(data.img);
                                                                 <label class="login2">Absences (dates)</label>
                                                             </div>
      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="form-select-list"> <select class="form-control custom-select-value" name="idAbs" placeholder="password" style="width: 80%;" id="idAbs">
-               <option disabled >choisissez la section</option>
+        <div class="form-select-list"> <select class="form-control custom-select-value" name="idAbs"  style="width: 80%;" id="idAbs">
+               <option disabled >choisissez une date</option>
 
                      
                                                                         </select>
@@ -296,7 +414,11 @@ alert(data.img);
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
            <h3>modifier la justification</h3>
-
+                    <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert" id="error2" style="display: none">
+     
+          </div>
+          </div>
 <form method="post" enctype="multipart/form-data" action="{{ url('/edit_justif') }}" id="ff" >
     {{ csrf_field() }}
     <input type="hidden" name="idAbs" id="idAbs" >
@@ -358,7 +480,7 @@ alert(data.img);
                                     </div>
             </div> 
                     
-              <div id="voir1" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                        {{-- <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header header-color-modal bg-color-1">
@@ -376,6 +498,33 @@ alert(data.img);
                                     </div>
                                 </div>
                             </div>
-                        </div>                      
+                        </div>  --}}
+             <div id="trash" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
+             <div class="modal-dialog">
+             <div class="modal-content">
+                              <div class="modal-close-area modal-close-df">
+                                                            <a class="close" data-dismiss="modal" href="#"  style="background: #d80027"><i class="fa fa-close"></i></a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="modal-login-form-inner">
+                                            <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
+                                        <h2>Suppression !</h2>
+             <p>Voulez-Vous vraiment supprimer la justification de la date : <b></b></p>
+                                         </div>
+   </div>
+   <form method="post"  action="{{ url('Deletejust') }}" id="deleteForm">
+    {{ csrf_field() }}
+    <input type="hidden" name="trashJus" id="trashJus">
+       </form>
+                                       <div class="modal-footer danger-md">
+    
+      <a data-dismiss="modal" href="#"  style="background: #d80027">Annuler</a>
+      <a href="#" id="deleteBtn" style="background: #d80027">supprimer</a>
+   
+                                        
+                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>                     
 
      @endsection

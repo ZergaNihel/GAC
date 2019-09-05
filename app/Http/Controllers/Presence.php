@@ -36,7 +36,14 @@ class Presence extends Controller
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
 
    
-        return view('EnseignantR.semestre',compact('sem1','sem2'));
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.semestre',compact('sem1','sem2'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function index($id)
@@ -60,14 +67,21 @@ class Presence extends Controller
                     ->get();
         $semestre = Semestre::find($id);
   
-        return view('EnseignantR.popup')->with(
-            ['modules'=> $modules ,
-            'seances'=> $seances ,
-            'groupes'=> $groupes ,
-            'idSem'=> $id,
-            'semestre'=> $semestre,
-             ] 
-        );
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.popup')->with(
+                ['modules'=> $modules ,
+                'seances'=> $seances ,
+                'groupes'=> $groupes ,
+                'idSem'=> $id,
+                'semestre'=> $semestre,
+                 ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
     
     public function lister(Request $request)
@@ -89,20 +103,12 @@ class Presence extends Controller
         $nomgroupe = $groupe->nomG;
         
         //justifiation
-        $justifiations=DB::table('absences')
-        ->join('etudiants','absences.id_Etu', '=', 'etudiants.idEtu')
-        ->join('td_tps', 'absences.id_td_tp', '=', 'td_tps.id')
-        ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
-        ->join('groupe_etus','groupe_etus.groupe', '=', 'etudiants.idG')
-        ->where('td_tps.id_module','=', $idmodule)
-        ->where('td_tps.id_groupe','=', $idgroupe)
-        ->where('td_tps.id_ens','=', Auth::user()->enseignant->idEns)
-        ->where('seances.type','=', $seance->type)
-        ->where('absences.justification','<>','')
-        ->where('absences.etat_just','=',2)
-        ->where('groupe_etus.sem_groupe','=', $request->input('semestre'))
-        ->select('absences.*','etudiants.*')
-        ->get();
+        $auth=Auth::user()->enseignant->idEns;
+        $justifiations=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat_just 
+                                            ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance 
+                                    FROM absences A,etudiants E 
+                                    WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=$auth) 
+                                    and A.justification IS NOT NULL and A.id_Etu=E.idEtu");
 
         $etuExclus = DB::table('exclus')
                     ->pluck('Etu_exc');
@@ -138,9 +144,7 @@ class Presence extends Controller
                             ->where('idEtu','=',$e->id_Etu)
                             ->distinct()
                             ->get();
-                $abs[$j]=$nb[$i];
                 $j++;
-                
             }
             if($nb[$i]==3)
             {
@@ -153,10 +157,8 @@ class Presence extends Controller
                 {
                     $exclus[$j]=DB::table('etudiants')
                             ->where('idEtu','=',$e->id_Etu)
-                            ->get();
-                    $abs[$j]=$nb[$i];
-                    $j++; 
-                     
+                            ->get(); 
+                    $j++;
                 }else{
                     $justifA=DB::table('absences')
                             ->where('id_Etu','=',$e->id_Etu)
@@ -174,9 +176,8 @@ class Presence extends Controller
                     {
                         $exclus[$j]=DB::table('etudiants')
                                 ->where('idEtu','=',$e->id_Etu)
-                                ->get();
-                        $abs[$j]=$nb[$i];
-                        $j++;   
+                                ->get(); 
+                        $j++;
                     }
                 }
             }
@@ -197,9 +198,8 @@ class Presence extends Controller
                 {
                     $exclus[$j]=DB::table('etudiants')
                             ->where('idEtu','=',$e->id_Etu)
-                            ->get();
-                    $abs[$j]=$nb[$i];
-                    $j++;    
+                            ->get();   
+                    $j++; 
                 }
             }
             $i++;
@@ -281,7 +281,14 @@ class Presence extends Controller
                 ->whereNotIn('idEtu',$tabExc)
                 ->distinct()
                 ->get();
-       
+                $i=0;
+        foreach ($exc as $c ) {
+            $abs[$i]=DB::table('absences')
+                    ->where('id_Etu',$c->idEtu)
+                    ->where('etat',0)
+                    ->count(); 
+            $i++;
+        }
         return view('EnseignantR.presence')->with( 
             [
             'seance'=> $seance ,
@@ -324,15 +331,23 @@ class Presence extends Controller
 
         $semestre = Semestre::find($id);
 
-        return view('EnseignantR.historique',
-        [
-            'abs'=> $abs, 
-            'td_tp' => $td_tp,
-            'section' => $section,
-            'seance'=> $seance,
-            'semestre'=> $semestre,
-        ] 
-    );
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.historique',
+            [
+                'abs'=> $abs, 
+                'td_tp' => $td_tp,
+                'section' => $section,
+                'seance'=> $seance,
+                'semestre'=> $semestre,
+            ] 
+            );
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     } 
 
     public function present(Request $request)
@@ -486,12 +501,19 @@ if($nbEx == 4){
                             and A.justification IS NOT NULL and A.id_Etu=E.idEtu");
         $semestre = Semestre::find($id);
         
-        return view('EnseignantR.justifications',
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.justifications',
             [
                 'justifications'=> $justif, 
                 'semestre'=> $semestre
-            ] 
-        );
+            ]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function exclus($id)
@@ -582,10 +604,18 @@ if($nbEx == 4){
             $i++;
         }
         $semestre = Semestre::find($id);
-        return view('EnseignantR.exclus',
-                    ["exclus" => $exclus , 
-                    "abs" => $abs,
-                    'semestre'=> $semestre]);
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.exclus',
+            ["exclus" => $exclus , 
+            "abs" => $abs,
+            'semestre'=> $semestre]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function listeExclus($id)
@@ -612,10 +642,18 @@ if($nbEx == 4){
         }
                     
         $semestre = Semestre::find($id);
-        return view('EnseignantR.exclus',
-                    ["exclus" => $exclus , 
-                    "nbabs" => $nbabs , 
-                    'semestre'=> $semestre]);
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.exclus',
+            ["exclus" => $exclus , 
+            "nbabs" => $nbabs , 
+            'semestre'=> $semestre]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function exclure(Request $request)

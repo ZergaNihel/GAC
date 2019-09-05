@@ -8,16 +8,6 @@
             @include('layouts.composer')
             <div class="col-md-9 col-md-9 col-sm-9 col-xs-12">
                 <div class="hpanel">
-                    <div class="panel-heading hbuilt mailbox-hd">
-                        <div class="text-center p-xs font-normal">
-                            <div class="input-group">
-                                <input type="text" class="form-control input-sm"
-                                    placeholder="Search email in your inbox..."> <span
-                                    class="input-group-btn active-hook"> <button type="button"
-                                        class="btn btn-sm btn-default">Search
-                                    </button> </span></div>
-                        </div>
-                    </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-6 col-md-6 col-sm-6 col-xs-8">
@@ -33,7 +23,7 @@
                         <div class="table-responsive ib-tb">
                             <table class="table table-hover table-mailbox">
                                 <tbody>
-                                    @foreach(Auth::user()->unreadNotifications as $notification)
+                                    @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')  as $notification)
                                     <tr class="active unread">
                                         <td class="">
                                             <div class="checkbox">
@@ -75,7 +65,7 @@
                                             {{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</td>
                                     </tr>
                                     @endforeach
-                                    @foreach(Auth::user()->readNotifications as $notification)
+                                    @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification')  as $notification)
                                     <tr class="unread">
                                         <td class="">
                                             <div class="checkbox checkbox-single checkbox-success">
@@ -108,7 +98,7 @@
                         </div>
                     </div>
                     <div class="panel-footer ib-ml-ft">
-                        <i class="fa fa-eye"> </i> {{ Auth::user()->unreadNotifications->count() }} unread
+                        <i class="fa fa-eye"> </i> {{ Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification') ->count() }} unread
                     </div>
                 </div>
             </div>

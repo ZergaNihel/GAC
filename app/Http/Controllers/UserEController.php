@@ -28,7 +28,6 @@ class UserEController extends Controller
          $enseignant = Enseignant::all();
         
 
-
         return view('membreE.details', compact('membreE','etudiant','enseignant','sem1','sem2'));
             
             
@@ -41,6 +40,7 @@ class UserEController extends Controller
         $etudiant = Etudiant::all();
         $enseignant = Enseignant::all();
         
+        $semestre = Semestre::find($idS);
 
         $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     
@@ -52,6 +52,7 @@ class UserEController extends Controller
             'enseignant' => $enseignant,
             'sem1' => $sem1,
             'sem2' => $sem2,
+            'semestre'=> $semestre,
             
         ]);;
     

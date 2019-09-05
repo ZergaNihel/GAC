@@ -27,7 +27,7 @@ class MailBoxController extends Controller
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     
         
-        if(Auth::user()->role == 1)
+        if(Auth::user()->role == 1 || Auth::user()->role == 0)
             return view('mailbox.index',compact('sem1','sem2'));
         elseif(Auth::user()->role == 3 || Auth::user()->role == 2 )
             return view('EnseignantR.mailbox.index',compact('sem1','sem2'));
@@ -41,7 +41,7 @@ class MailBoxController extends Controller
     
         
         //return view('mailbox.emails',compact('sem1','sem2','emails','b'));
-        if(Auth::user()->role == 1)
+        if(Auth::user()->role == 1 || Auth::user()->role == 0)
             return view('mailbox.emails',compact('sem1','sem2','emails','b'));
         elseif(Auth::user()->role == 3 || Auth::user()->role == 2 )
             return view('EnseignantR.mailbox.emails',compact('sem1','sem2','emails','b'));
@@ -57,7 +57,7 @@ class MailBoxController extends Controller
 
      //return view('mailbox.emails',compact('sem1','sem2','emails','b'));
 
-     if(Auth::user()->role == 1)
+     if(Auth::user()->role == 1 || Auth::user()->role == 0)
             return view('mailbox.emails',compact('sem1','sem2','emails','b'));
         elseif(Auth::user()->role == 3 || Auth::user()->role == 2 )
             return view('EnseignantR.mailbox.emails',compact('sem1','sem2','emails','b'));
@@ -73,7 +73,7 @@ class MailBoxController extends Controller
     
     //return view('mailbox.emails',compact('sem1','sem2','emails','b'));
 
-        if(Auth::user()->role == 1)
+        if(Auth::user()->role == 1 || Auth::user()->role == 0)
             return view('mailbox.emails',compact('sem1','sem2','emails','b'));
         elseif(Auth::user()->role == 3 || Auth::user()->role == 2 )
             return view('EnseignantR.mailbox.emails',compact('sem1','sem2','emails','b'));
@@ -121,7 +121,7 @@ class MailBoxController extends Controller
         
             
             //return view('mailbox.composer',compact('sem1','sem2','users'));
-            if(Auth::user()->role == 1)
+            if(Auth::user()->role == 1 || Auth::user()->role == 0)
                 return view('mailbox.composer',compact('sem1','sem2','users'));
             elseif(Auth::user()->role == 3 || Auth::user()->role == 2 )
                 return view('EnseignantR.mailbox.composer',compact('sem1','sem2','users'));
@@ -187,7 +187,7 @@ class MailBoxController extends Controller
         
         //return view('mailbox.detail',compact('sem1','sem2','message','medias','nbr','id_notif'));
 
-        if(Auth::user()->role == 1)
+        if(Auth::user()->role == 1 || Auth::user()->role == 0)
             return view('mailbox.detail',compact('sem1','sem2','message','medias','nbr','id_notif'));
         elseif(Auth::user()->role == 3 || Auth::user()->role == 2 )
             return view('EnseignantR.mailbox.detail',compact('sem1','sem2','message','medias','nbr','id_notif'));

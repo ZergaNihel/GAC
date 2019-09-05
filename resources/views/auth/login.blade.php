@@ -39,7 +39,7 @@
                                 @endif
                             </div>
                             <div class="row">
-                                <div class=" col-lg-5 checkbox login-checkbox">
+                                <div class=" col-lg-5 checkbox login-checkbox container">
                                     <label>
                                         <input class="form-check-input i-checks" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Se souvenir de moi') }} 
                                     </label>
@@ -52,18 +52,15 @@
                                     @endif
                                 </div>    
                             </div>
-                            <button class="btn btn-default btn-block loginbtn" >Login</button>
-                            
-                            <a class="btn btn-default btn-block " href="{{ route('register') }}">Register</a>
-                            
+                            <button class="btn btn-default btn-block loginbtn" >Se connecter</button>
+                            <br>
+                            <div class="container">
+                                <p>Vous n'avez pas encore de compte ?<a  href="{{ route('register') }}" style="background-color:white; color:blue; ">Inscrivez-vous</a>   </p>
+                            </div>
                         </form>
                     </div>
                  </div>
              </div>
              </div>
-               
-            
-            
-         
     </div>
 @endsection

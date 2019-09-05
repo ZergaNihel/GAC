@@ -25,7 +25,14 @@ class ModuleController extends Controller
         $ex =Examen::where('module_Exam',$id)->get();
         //$corr = 
 
-		 return view('modules.details' ,compact('module','sem1','sem2','exams','ex'));
+         if(Auth::user()->role == '1')
+        {
+            return view('modules.details' ,compact('module','sem1','sem2','exams','ex'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
 	}
      public function details_pdf($id,$sc){
 
@@ -33,7 +40,14 @@ class ModuleController extends Controller
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
         $pdf = Examen::find($id);
     $module = Module::find($pdf->module_Exam);
-        return view('modules.pdf' ,compact('sem1','sem2','pdf','sc','module'));
+        if(Auth::user()->role == '1')
+        {
+            return view('modules.pdf' ,compact('sem1','sem2','pdf','sc','module'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
      }
 	public function edit(Request $request){
         

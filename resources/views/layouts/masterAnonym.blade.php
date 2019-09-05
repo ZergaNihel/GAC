@@ -127,9 +127,30 @@
     <!-- modals CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <!-- summernote CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
+    <!-- dropzone CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
+    <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <link rel="stylesheet" href="{{asset('css/form/all-type-forms.css')}}">
 
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
     @yield('script1')
-        
+       <script>
+  $(document).ready(function(){
+$(document).on('click','#bell',function(){
+    $.ajax({
+  type: "get",
+  url: "{{url('readAllNotif')}}/" ,
+  success: function(data){
+$(".indicator-nt").css('display','none');
+  }
+  });
+  });
+  });
+</script>     
 </head>
 
 <body>
@@ -160,7 +181,7 @@
                                                     <a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle"><i
                                                             class="educate-icon educate-message edu-chat-pro"
-                                         aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->count()>0)
+                                                            aria-hidden="true"></i>@if(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->count()>0)
                                                         <span class="indicator-ms"></span>
                                                         @endif
                                                     </a>
@@ -172,180 +193,203 @@
                                                         <ul class="message-menu">
 
 
-                                                            @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification') as $notification)
-                                                            <li style="background-color:#f5f5f5;">
-                                                                <a
-                                                                    href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                                            @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')
+                                                            as $notification)
+                                                            <li>
+                                                                <a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
                                                                     <div class="message-img">
-                                                                        <img src="{{asset('img/profile/profil.png')}}"
-                                                                            alt="">
+                                                                        @if( App\User::find($notification->data['id_emt'])->photo)
+                                                                          <img src="{{asset(App\User::find($notification->data['id_emt'])->photo)}}" alt="">
+                                                                        @else
+                                                                          <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                                                        @endif
                                                                     </div>
-                                                                    <div class="message-content">
-                                                                        <span
-                                                                            class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
+                                                                    <div class="message-content" style="width:300px">
+                                                                        <span class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
                                                                         </span>
                                                                         <br>
-                                                                        @if(
-                                                                        App\User::find($notification->data['id_emt'])->role== 1 or App\User::find($notification->data['id_emt'])->role== 2 )
-                                                                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
-                                                                            @endif
-                                                                            @if(
-                                                                            App\User::find($notification->data['id_emt'])->role== 0 )
-                                                                            <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
-                                                                                @endif
-                                                                                @if(
-                                                                                App\User::find($notification->data['id_emt'])->role== 3)
-                                                                                <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
-                                                                                    @endif
-                                                                                     <span class="label label-danger">
-                                                                                        Nouveau</span></h2>
-                                                                                @if($notification->data['sujet'])
-                                                                                <p>{{ $notification->data['sujet'] }}
-                                                                                </p>
-                                                                                @else
-                                                                                <p>Aucun Sujet</p>
-                                                                                @endif
+                                                                        @if(App\User::find($notification->data['id_emt'])->role==1 or App\User::find($notification->data['id_emt'])->role==2 )
+                                                                          <h2>{{ App\User::find($notification->data['id_emt'])->name}} </h2>
+                                                                        @endif
+                                                                        @if(App\User::find($notification->data['id_emt'])->role==0 )
+                                                                          <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}} </h2>
+                                                                        @endif
+                                                                        @if(App\User::find($notification->data['id_emt'])->role==3)
+                                                                          <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}</h2>
+                                                                        @endif
+                                                                        <span class="label label-danger pull-right">Nouveau</span>
+                                                                        @if($notification->data['sujet'])
+                                                                          <p>{{ $notification->data['sujet'] }}
+                                                                          </p>
+                                                                        @else
+                                                                          <p>Aucun Sujet</p>
+                                                                        @endif
                                                                     </div>
                                                                 </a>
                                                             </li>
                                                             @endforeach
-                                                            @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification')->take(1) as $notification)
+                                                            @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification')->take(1)
+                                                            as $notification)
                                                             <div class="row">
-                                                              <li>
-                                                                <a
-                                                                    href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                                    <div class="message-img">
-                                                                        <img src="{{asset('img/profile/profil.png')}}"
-                                                                            alt="">
-                                                                    </div>
-                                                                    <div class="message-content">
-                                                                        <span
-                                                                            class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
-                                                                        </span>
-                                                                        <br>
-                                                                        @if(
-                                                                        App\User::find($notification->data['id_emt'])->role == 1 or App\User::find($notification->data['id_emt'])->role== 2 )
-                                                                        <h2>{{ App\User::find($notification->data['id_emt'])->name}}
-                                                                            @endif
+                                                                <li>
+                                                                    <a
+                                                                        href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                                                        <div class="message-img">
+                                                                          @if( App\User::find($notification->data['id_emt'])->photo)
+                                                                            <img src="{{asset(App\User::find($notification->data['id_emt'])->photo)}}" alt="">
+                                                                          @else
+                                                                            <img src="{{asset('img/profile/profil.png')}}" alt="">
+                                                                          @endif
+                                                                        </div>
+                                                                        <div class="message-content" style="width:300px">
+                                                                            <span
+                                                                                class="message-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}
+                                                                            </span>
+                                                                            <br>
                                                                             @if(
                                                                             App\User::find($notification->data['id_emt'])->role
-                                                                            == 0 )
-                                                                            <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
+                                                                            == 1 or
+                                                                            App\User::find($notification->data['id_emt'])->role==
+                                                                            2 )
+                                                                            <h2>{{ App\User::find($notification->data['id_emt'])->name}}
                                                                                 @endif
                                                                                 @if(
                                                                                 App\User::find($notification->data['id_emt'])->role
-                                                                                == 3)
-                                                                                <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+                                                                                == 0 )
+                                                                                <h2>{{ App\User::find($notification->data['id_emt'])->etudiant->nom}}
                                                                                     @endif
+                                                                                    @if(
+                                                                                    App\User::find($notification->data['id_emt'])->role
+                                                                                    == 3)
+                                                                                    <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
+                                                                                        @endif
 
 
 
-                                                                                    <span class="label label-danger">
-                                                                                        Nouveau</span></h2>
-                                                                                @if($notification->data['sujet'])
-                                                                                <p>{{ $notification->data['sujet'] }}
-                                                                                </p>
-                                                                                @else
-                                                                                <p>Aucun Sujet</p>
-                                                                                @endif
-                                                                    </div>
-                                                                </a>
-                                                              </li>
+                                                                                        <span
+                                                                                            class="label label-danger pull-right">
+                                                                                            Nouveau</span></h2>
+                                                                                    @if($notification->data['sujet'])
+                                                                                    <p>{{ $notification->data['sujet'] }}
+                                                                                    </p>
+                                                                                    @else
+                                                                                    <p>Aucun Sujet</p>
+                                                                                    @endif
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
                                                             </div>
-                                                            
+
                                                             @endforeach
 
                                                         </ul>
                                                         <div class="message-view">
-                                                            <a href="{{url('/boite_de_reception')}}">Voir tous les messages</a>
+                                                            <a href="{{url('/boite_de_reception')}}">Voir tous les
+                                                                messages</a>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 @if(Auth::user()->role != '2')
-                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button"
-                                                        aria-expanded="false" class="nav-link dropdown-toggle"><i
-                                                            class="educate-icon educate-bell"
-                                                            aria-hidden="true"></i><span
-                                                            class="indicator-nt"></span></a>
-                                                    <div role="menu"
-                                                        class="notification-author dropdown-menu animated zoomIn">
-                                                        <div class="notification-single-top">
-                                                            <h1>Notifications</h1>
-                                                        </div>
-                                             <ul class="notification-menu">
-                                               
-            @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications') as $notification)
-                                                            <li>
-                    <a href="#">
-              <div class="notification-icon">
-                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                        <h2>validation des paquets</h2>
-                            <p>Les enseignants (es) <b> {{$notification->data['corr1Nom']}} {{$notification->data['corr1Prenom']}} et
-                            {{$notification->data['corr2Nom']}} {{$notification->data['corr2Prenom']}}</b> ont validés le paquet </b>{{$notification->data['nomPaq']}}-{{$notification->data['type']}}</b> 
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                    @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications') as $notification)
-                                                            <li>
-                    <a href="#">
-              <div class="notification-icon">
-                 <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                       <h2>Justification</h2>
-                            <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté son(sa) justification
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-
-                                                @foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
-                                                                            aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                            <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                       <h2>Nouveau paquet</h2>
-                            <p>Vous avez réçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                        @foreach( Auth::user()->readNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
-                                                        <li>
-                                                            <a href="#">
-                                                                <div class="notification-icon">
-                                                                    <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
-                                                                        aria-hidden="true"></i>
-                                                                </div>
-                                                                <div class="notification-content">
-                                                                    <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                                    <h2>Nouveau paquet</h2>
-                                                                    <p>Vous avez réçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-
-                                                    @endforeach
-                        
-
-
-                                                        </ul>
-                                                     
-                                                    </div>
-                                                </li>
+                                                <li class="nav-item"><a href="#" id="bell" data-toggle="dropdown" role="button"
+                                                  aria-expanded="false" class="nav-link dropdown-toggle"><i
+                                                      class="educate-icon educate-bell"
+                                                      aria-hidden="true"></i>
+@if(Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications')->count()>0 or Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications')->count()>0 or
+Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications')->count()>0  )
+                      <span class="indicator-nt"></span> @endif
+                  </a>
+                                              <div role="menu"
+                                                  class="notification-author dropdown-menu animated zoomIn">
+                                                  <div class="notification-single-top">
+                                                      <h1>Notifications</h1>
+                                                  </div>
+                                          <ul class="notification-menu">
+       
+@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\ValidePaquetNotifications') as $notification)
+                                  <li style="background-color:#f5f5f5;">
+              <a href="#">
+        <div class="notification-icon">
+           <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                              </div>
+                                                              <div class="notification-content">
+                      <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                  <h2>validation des paquets</h2>
+                      <p>Les enseignants (es) <b> {{$notification->data['corr1Nom']}} {{$notification->data['corr1Prenom']}} et
+                      {{$notification->data['corr2Nom']}} {{$notification->data['corr2Prenom']}}</b> ont validés le paquet </b>{{$notification->data['nomPaq']}}-{{$notification->data['type']}}</b> 
+                                                                  </p>
+                                                              </div>
+                                                          </a>
+                                                      </li>
+                                                      <hr>
+      @endforeach
+@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\JustificationAlertNotifications') as $notification)
+                                       <li style="background-color:#f5f5f5;">
+              <a href="#">
+        <div class="notification-icon">
+           <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                              </div>
+                                                              <div class="notification-content">
+                      <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                 <h2>Justification</h2>
+                      <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté son(sa) justification
+                                                                  </p>
+                                                              </div>
+                                                          </a>
+                                                      </li>
+                                                      <hr>
+@endforeach
+@foreach( Auth::user()->unreadNotifications->where('type','App\Notifications\CorrecteursNotifications') as $notification)
+                               <li style="background-color:#f5f5f5;">
+                                                          <a href="#">
+                                                              <div class="notification-icon">
+                         <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
+                                                                      aria-hidden="true"></i>
+                                                              </div>
+                                                              <div class="notification-content">
+                      <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                 <h2>Nouveau paquet</h2>
+                      <p>Vous avez réçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
+                                                                  </p>
+                                                              </div>
+                                                          </a>
+                                                      </li>
+                                                      <hr>
+          @endforeach
+  @foreach( Auth::user()->readNotifications->where('type','App\Notifications\JustificationAlertNotifications')->take(2) as $notification)
+                                                      <li>
+              <a href="#">
+        <div class="notification-icon">
+           <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
+                                                              </div>
+                                                              <div class="notification-content">
+                      <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                 <h2>Justification</h2>
+                      <p>L'étudiant (e) <b> {{$notification->data['nomE']}} {{$notification->data['prenomE']}} -{{$notification->data['groupe']}}</b> a ajouté son(sa) justification
+                                                                  </p>
+                                                              </div>
+                                                          </a>
+                                                      </li>
+@endforeach
+                                                  @foreach( Auth::user()->readNotifications->where('type','App\Notifications\CorrecteursNotifications')->take(2) as $notification)
+                                                  <li>
+                                                      <a href="#">
+                                                          <div class="notification-icon">
+                                                              <i class="educate-icon educate-checked edu-checked-pro admin-check-pro"
+                                                                  aria-hidden="true"></i>
+                                                          </div>
+                                                          <div class="notification-content">
+                                                              <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
+                                                              <h2>Nouveau paquet</h2>
+                                                              <p>Vous avez réçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
+                                                              </p>
+                                                          </div>
+                                                      </a>
+                                                  </li>
+                                              @endforeach
+                                                  </ul>
+                                                 
+                                              </div>
+                                          </li>
                                                 @endif
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button"
@@ -373,31 +417,12 @@
                                                         class="dropdown-header-top author-log dropdown-menu animated zoomIn">
 
                                                         <!--nihel-->
-                                                        @if(Auth::user()->role == '0'|| Auth::user()->role == '1' ||
-                                                        Auth::user()->role == '2')
+                                                        @if(Auth::user()->role == '0'|| Auth::user()->role == '1' )
                                                         <li><a href="{{ url('membre/'.Auth::user()->id.'/details')}}"><span
                                                                     class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profile</a>
-                                                        </li>
-                                                        @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/details')}}"><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>Mon
-                                                                Profile</a>
+                                                                Profil</a>
                                                         </li>
 
-                                                        @endif
-
-                                                        @if(Auth::user()->role == '0' || Auth::user()->role == '1' ||
-                                                        Auth::user()->role == '2')
-                                                        <li><a href="{{ url('membre/'.Auth::user()->id.'/edite')}}"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Modifier
-                                                                mon compte</a>
-                                                        </li>
-                                                        @elseif(Auth::user()->role == '3')
-                                                        <li><a href="{{ url('membreE/'.Auth::user()->id.'/edite')}}"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Modifier
-                                                                mon compte</a>
-                                                        </li>
                                                         @endif
                                                         <!--fin nihel-->
                                                         <!--nihel 19/03/2019-->
@@ -445,7 +470,21 @@
             </div>
         </div>
         @yield('content')
+       
     </div>
+    <footer>
+        <div class="footer-copyright-area" style=" position: fixed; bottom: 0; width:100%; height:45px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-copy-right">
+                            <p>Copyrigh © 2019 GAC.tous droits réservés. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </footer>
 
     <!-- jquery
 		============================================ -->
@@ -567,6 +606,13 @@
     ============================================ -->
     <script src="{{asset('js/pdf/jquery.media.js')}}"></script>
     <script src="{{asset('js/pdf/pdf-active.js')}}"></script>
+    <!-- summernote JS
+    ============================================ -->
+    <script src="{{asset('js/summernote/summernote.min.js')}}"></script>
+    <script src="{{asset('js/summernote/summernote-active.js')}}"></script>
+    <!-- dropzone JS
+    ============================================ -->
+    <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
 
     @yield('script2')
       

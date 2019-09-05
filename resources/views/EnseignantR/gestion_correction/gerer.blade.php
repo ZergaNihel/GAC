@@ -281,28 +281,52 @@
                                         </div>
                                         <div class="col-lg-2"></div>
                                         <div class="col-lg-6">
-                                            <form action="/decoder/paquet" method="post">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
-                                                <input type="hidden" name="paquet" value="{{$paquet->idPaq}}">
-                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right" title="Valider"> valider </button>
-                                            </form>
+                                                <button class="btn btn-primary mg-tb-10 pull-right" title="Valider" data-toggle="modal" data-target="#validerP"> valider </button>
+                                            
                                         </div>
                                     </div>
                                     
-                                    <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                    {{-- <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-close-area modal-close-df">
                                                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <i class="educate-icon educate-checked modal-check-pro"></i>
-                                                    <h2>Awesome!</h2>
-                                                    <p>The Modal plugin is a dialog box/popup window that is displayed on top of the current page</p>
+                                                    <h3>Validation!</h3>
+                                                    <h5>Voulais vous vraiment valider le paquet</h5><br>
+                                                    <p>(cette validation mène au décodage du paquet)</p>
                                                 </div>
                                                     <a data-dismiss="modal" href="#">Cancel</a>
-                                                    <a href="#">Process</a>
+                                                    <form action="/decoder/paquet" method="post">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                        <input type="hidden" name="paquet" value="{{$paquet->idPaq}}">
+                                                        <a type="submit" class="btn btn-primary mg-tb-10 pull-right" title="Valider"> valider </a>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+                                    <div id="validerP" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-close-area modal-close-df">
+                                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row modal-login-form-inner">
+                                                        <h3>Voulais vous vraiment valider le paquet ?</h3><br>
+                                                        <p>(cette validation mène au décodage du paquet)</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer danger-md">
+                                                    <form action="/decoder/paquet" method="post">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                        <input type="hidden" name="paquet" value="{{$paquet->idPaq}}">
+                                                        <button type="submit" class="btn btn-primary mg-tb-10 pull-right" title="Valider"> valider </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

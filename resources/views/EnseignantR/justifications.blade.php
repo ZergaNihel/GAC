@@ -49,7 +49,7 @@
                     success:function(data){
                         $('#accp').remove();
                         $('#ref').remove();
-                        $('#det'+i).append('<div class="col-lg-6 mg-t-15 pull-center"><h5 style="color:green;text-align:center">Acceptée</h5></div>')
+                        $('#det'+i).append('<div class="col-lg-3"></div><div class="col-lg-6 mg-t-15"><div class="pull-left"><h5 style="color:green;text-align:center">Acceptée</h5></div></div>')
                     }
             });
     
@@ -67,12 +67,12 @@
                      success:function(data){
                           $('#accp').remove();
                           $('#ref').remove();
-                          $('#det'+i).append('<div class="col-lg-6 mg-t-15 pull-center"><h5 style="color:red;text-align:center">Refusée</h5></div>')
+                          $('#det'+i).append('<div class="col-lg-3"></div><div class="col-lg-6 mg-t-15"><h5 class="pull-left" style="color:red;text-align:center">Refusée</h5></div>')
                      }
              });
         
             });
-         </script>
+</script>
 @endsection 
 
 @section('path')

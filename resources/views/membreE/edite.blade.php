@@ -22,7 +22,13 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
                             <div class="profile-img">
-                                <img class="profile-user-img img-responsive img-fluid" src="{{asset($membreE->photo)}}" alt="User profile picture" />
+                                @if($membreE->photo)
+                                <img class="profile-user-img img-responsive img-fluid" src="{{asset($membreE->photo)}}"
+                                    alt="User profile picture" />
+                                @else
+                                <img class="profile-user-img img-responsive img-fluid" src="{{asset('img/profile/profil.png')}}"
+                                    alt="User profile picture" />
+                                @endif
                             </div>
 
                             <div class="profile-details-hr">

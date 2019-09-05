@@ -9,6 +9,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use App\Code;
 use App\Paquet;
 use App\Examen;
+use App\Module;
 use App\Enseignant;
 use App\Correction;
 use App\Paquet_en;
@@ -22,13 +23,26 @@ use Notification;
 use App\Notifications\ValideNotes;
 class GestionCorrection extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index($id)
     {
         $semestre = Semestre::find($id);
-        return view('EnseignantR.gestion_correction.popup')->with(
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.gestion_correction.popup')->with(
             [
                 'semestre'=> $semestre
             ]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     public function paquet(Request $request)
@@ -44,6 +58,7 @@ class GestionCorrection extends Controller
                     ->join('modules','examens.module_Exam','=','modules.idMod')
                     ->where('examens.module_Exam','=',$idmodule[0]->idMod)
                     ->where('examens.type','=',$type)
+                    ->where('decode','!=',1)
                     ->select('paquets.*')
                     ->get();
         $i=0; $t=null;
@@ -295,6 +310,6 @@ class GestionCorrection extends Controller
         Notification::send($user, new ValideNotes($details));
         }
       
-       return redirect('enseignant/groupes/2');
+       return redirect('notes/'.$request->input('semestre').'/'.$request->input('paquet'));
     }
 }

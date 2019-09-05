@@ -23,11 +23,14 @@ Route::get('/bar', function () {
  Route::get('error_500', 'SemestreController@index');
 
  //------------------------Etudiants----------------------
+ Route::get('/readNotif/{id}/', 'EtudiantController@readNotif') ;
+ Route::get('/readAllNotif/', 'EtudiantController@readAllNotif') ;
  Route::get('/dates/{id}/', 'EtudiantController@dates') ;
  Route::get('/absences_Etudiant', 'EtudiantController@index') ;
  Route::get('/absences_Etudiant/details/{id}', 'EtudiantController@details') ;
  Route::post('/add_justif', 'EtudiantController@add_justif') ;
  Route::post('/edit_justif', 'EtudiantController@modifier') ;
+ Route::post('/Deletejust', 'EtudiantController@Deletejust') ;
 Route::get('/CompteEtudiant/{id}/{id_notif}', 'EtudiantController@info') ;
  Route::get('/Etudiant/notes', 'EtudiantController@notes') ;
  //------------------ MailBoxe ----------------------------
@@ -89,12 +92,16 @@ Route::get('membre/{id}/details','UserController@details');
 Route::get('membre/{id}/edite','UserController@edit');
 Route::put('membre/{id}','UserController@update');
 Route::get('membreE/{id}/details','UserEController@details');
-Route::get('membreE/{id}/edite','UserEController@edit');
+Route::get('membreE/{id}/edite','UserController@edit');
 Route::put('membreE/{id}','UserEController@update');
 
 //------------------ Presence ----------------------------
 
 Route::get('semestre/choix','Presence@semestre');
+
+Route::get('membreE/{id}/details/{idS}','UserEnsController@details');
+
+Route::put('membreEns/{id}','UserEnsController@update');
 
 Route::get('presence/{id}','Presence@index');
 

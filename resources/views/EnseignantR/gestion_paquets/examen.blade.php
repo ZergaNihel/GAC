@@ -56,18 +56,9 @@
                     contentType : false,
                     success:function(data){
                         var href='pdf/'+data.sujet;
-                        alert(href);
-                         $('#pdfviewer1').remove();
-                        // $('#pdfviewer').append(
-                        //     "<div class='pdf-viewer-area'>"+
-                        //         "<div class='row'>"+
-                        //             "<div class='pdf-single-pro'>"+
-                        //                 "<a class='media medi' href='#'>" +"</a>"+
-                        //             "</div>"+
-                        //         "</div>"+
-                        //     "</div>"
-                        // );
+                        var src='http://localhost:8000/pdf/'+data.sujet;
                         $('#lien').attr('href', href);
+                        $('#frame').attr('src',src);
                     }
                 });
                  }
@@ -92,8 +83,10 @@
                     processData: false,
                     contentType : false,
                     success:function(data){
-                        var href='pdf/'+data.sujet;
-                        $('#lien').attr('href', href);
+                        var href='pdf/'+data.corrige_type;
+                        var src='http://localhost:8000/pdf/'+data.corrige_type;
+                        $('#lienC').attr('href', href);
+                        $('#lienC iframe').attr('src',src);
                     }
                 });
                  }
@@ -107,10 +100,13 @@
             var cnt=0;
             $('#valider').attr('disabled',true);
             $("#correcteurs").chosen().change(function(){
-                cnt = cnt+1;
+                cnt = $("#correcteurs option:selected").length;
                 if(cnt==2)
                 {
                     $('#valider').attr('disabled',false);
+                }
+                else{
+                    $('#valider').attr('disabled',true); 
                 }
             });
         });
@@ -148,6 +144,8 @@
                                         <div class="sparkline14-hd">
                                             <div class="main-sparkline14-hd">
                                                 <form id="dateform">
+                                                    <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                    <input type="hidden" name="type" value="Examen">
                                                     <div class="form-group data-custon-pick" id="data_2">
                                                         <div class="input-group date"> 
                                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -277,6 +275,8 @@
                                                                             </div>
                                                                         </div>
                                                                 </div>
+                                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                                <input type="hidden" name="type" value="Examen">
                                                                 <div class="modal-footer">
                                                                     <button class=" btn btn-custon-four btn-primary" data-dismiss="modal">Quitter</button>
                                                                     <button class=" btn btn-custon-four btn-primary" type="submit">Valider</button>
@@ -294,7 +294,7 @@
                                             <div id="pdfviewer1" class="pdf-viewer-area">
                                                 <div class="row">
                                                     <div class="pdf-single-pro">
-                                                        <a class="media medi" id="lien" style="width:250px;" href="{{asset('pdf/'.$exam->sujet)}}"></a>
+                                                        <a class="media medi" id="lien" href="{{asset('pdf/'.$exam->sujet)}}"></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,6 +334,8 @@
                                                                             </div>
                                                                         </div>
                                                                 </div>
+                                                                <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+                                                                <input type="hidden" name="type" value="Examen">
                                                                 <div class="modal-footer">
                                                                     <button class=" btn btn-custon-four btn-primary" data-dismiss="modal">Quitter</button>
                                                                     <button class=" btn btn-custon-four btn-primary" type="submit">Valider</button>
@@ -347,11 +349,11 @@
                                     </div>
                                     <div id="collapse4" class="panel-collapse panel-ic collapse in">
                                         <div class="panel-body admin-panel-content animated flash">
-                                            @if($exam->corrige_type != "")
-                                            <div id="pdfviewer1" class="pdf-viewer-area">
+                                            @if($exam->corrige_type)
+                                            <div id="pdfviewer1C" class="pdf-viewer-area">
                                                 <div class="row">
                                                     <div class="pdf-single-pro">
-                                                        <a class="media medi" id="lien" style="width:250px;" href="{{asset('pdf/'.$exam->corrige_type)}}"></a>
+                                                        <a class="media medi" id="lienC" style="width:250px;" href="{{asset('pdf/'.$exam->corrige_type)}}"></a>
                                                     </div>
                                                 </div>
                                             </div>

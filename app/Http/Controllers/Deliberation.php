@@ -18,6 +18,11 @@ use Auth;
 
 class Deliberation extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function index($id){
    
         $section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
@@ -79,31 +84,47 @@ class Deliberation extends Controller
         
         $semestre= Semestre::find($id); 
 
-         return view('EnseignantR.notes')->with(
-             ['semestre' => $semestre,
-             'section' => $section,
-             'controle' => $controle,
-             'examen' => $examen,
-             'tauxEx' => $tauxEx,
-             'tauxCC' => $tauxCC,
-             'nbEtuCC' => $nbEtuCC,
-             'nbEtuEx' => $nbEtuEx]);
+        
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.notes')->with(
+            ['semestre' => $semestre,
+            'section' => $section,
+            'controle' => $controle,
+            'examen' => $examen,
+            'tauxEx' => $tauxEx,
+            'tauxCC' => $tauxCC,
+            'nbEtuCC' => $nbEtuCC,
+            'nbEtuEx' => $nbEtuEx]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 
     function detail($id,$p){
         $etudiants= DB::table('codes')
                     ->join('etudiants', 'etudiants.matricule', '=', 'codes.etu_code')
                     ->join('groupes', 'etudiants.idG', '=', 'groupes.idG')
-                    ->where('codes.paq_code','=',25)
+                    ->where('codes.paq_code','=',$p)
                     ->get();
 //return $etudiants[0]->type;
         $semestre= Semestre::find($id); 
 
         $paquet= Paquet::find($p);
 
-        return view('EnseignantR.notes_detail')->with(
+       
+        if(Auth::user()->role == '3')
+        {
+            return view('EnseignantR.notes_detail')->with(
             ["etudiants" => $etudiants,
             'semestre' => $semestre,
-             'paquet' => $paquet]);
+                'paquet' => $paquet]);
+        }
+        else
+        {
+            return view('Erreur403');
+        }
     }
 }
