@@ -282,7 +282,7 @@
             var td_tp=$('#id_td_tp').val();
             var abs=0;
             var NbEtu=$('#NbEtu').val();
-
+            var sem=$('#idS').val();
             $('.pd-setting-ed').each(function() {
                                         if( $(this).css("background-color")=="rgb(0, 128, 0)" ) 
                                         {
@@ -292,7 +292,8 @@
                                             abs++;
                                         }
                                     });
-            var pourcentage = (abs*100)/NbEtu;
+            var pourc = (abs*100)/NbEtu;
+            var pourcentage = pourc.toFixed(2);
             $('#hist').append(
                 '<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">'+
                     '<div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">'+
@@ -300,10 +301,10 @@
                             '<div class="skill">'+
                                 '<div class="progress progress-bt">'+
                                     '<div class="lead-content">'+
-                                        '<h3> <a href="{!! asset("historique/'+d+'/'+td_tp+'") !!}"> '+ d +' </a> </h3>'+
+                                        '<h3> <a href="{!! asset("historique/'+d+'/'+td_tp+'/'+sem+'") !!}"> '+ d +' </a> </h3>'+
                                         '<p> '+abs+' absent(s)</p>'+
                                     '</div>'+
-                                    '<div class="progress-bar wow fadeInLeft" data-progress="'+pourcentage+'%" style="width: '+pourcentage+'%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>'+pourcentage+'%</span> </div>'+
+                                    '<div class="progress-bar wow fadeInLeft" data-progress="'+pourcentage+'%" style="width: '+pourcentage+'%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span style="left:35px;">'+pourcentage+'%</span> </div>'+
                                 '</div>'+
                             '</div>'+
                         '</div>'+
@@ -349,6 +350,7 @@
 
 @section('content')
     <!-- Static Table Start -->
+<input type="hidden" id="idS" value="{{$semestre->idSem}}">
     <div class="col-lg-12">
         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
             <ul id="myTabedu1" class="tab-review-design">

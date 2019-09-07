@@ -96,17 +96,36 @@
                                                 </div>
                                             </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mg-t-30">
+                                            <button class="btn btn-primary mg-tb-10 pull-right" title="Valider" data-toggle="modal" data-target="#validerP"> valider </button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+
+                            <div id="validerP" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-close-area modal-close-df">
+                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row modal-login-form-inner">
+                                                <h3>Voulais vous vraiment valider le paquet ?</h3><br>
+                                                <p>(Vous n'aurez plus accés au paquet)</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer danger-md">
                                             <form action="/valider/correction" method="post">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
                                                 <input type="hidden" name="auth" value="{{Auth::user()->enseignant->idEns}}">
                                                 <input type="hidden" name="paquetens" value="{{$paquet->idPaq}}">
-                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right" id="valider" title="Valider"> valider </button>
+                                                <button type="submit" class="btn btn-primary mg-tb-10 pull-right"> valider </button>
                                             </form>
                                         </div>
                                     </div>
-                                    <br>
-                                    <br>
                                 </div>
                             </div>
 
@@ -146,7 +165,7 @@
                                                     <td class="pull-center">
                                                         <input type="hidden" id="paq" name="paq" value="{{$paquet->idPaq}}">
                                                         <input type="hidden" id="code{{$code->idC}}" name="code" value="{{$code->idC}}">
-                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@if(count($paq_ens) != 0 ) @foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',$paq_ens[0]->correcteur)->get() as $c){{$c->note}}@endforeach @endif" style="width:50px; text-align:center;"/>
+                                                        <input class="txt w3-input" type="text" name="note" id="note{{$code->idC}}" value="@if(count($paq_ens) != 0 ) @foreach(App\Correction::where('code_etu','=',$code->idC)->where('correcteur','=',$paq_ens[0]->correcteur)->get() as $c){{number_format($c->note, 2, '.', '')}}@endforeach @endif" style="width:70px; text-align:center;"/>
                                                     </td>
                                                </form>
                                             </tr>
