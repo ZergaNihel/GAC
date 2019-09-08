@@ -101,7 +101,7 @@
                                 <div class="income-range">
                                   <br>
                                     <p><b>{{$notification->data['typeExam']}}</b></p>
-                                    <span id="new" class="income-percentange bg-green">Nouvel <i class="fa fa-bolt"></i>
+                                    <span id="new" class="income-percentange bg-green">Nouveau <i class="fa fa-bolt"></i>
                                     </span>
                                 </div>
                                 <div class="clear"></div>

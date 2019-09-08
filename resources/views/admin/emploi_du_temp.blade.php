@@ -515,11 +515,10 @@ var x1;
 var x2;
 var x3;
 var i;
-/*alert("L ="+pop.length);
-alert(""+pop[1].heure+""+pop[1].jour+""+pop[1].type);*/
+
 if(pop.length > 0){
   for( i =0;i<pop.length ;i++){
-//alert(i);
+
 
   if(pop[i].heure === "8h30" && pop[i].jour === "dimanche"){
 
@@ -809,7 +808,7 @@ x2 = '<div class="modal-area-button tpTable" id="poptp'+pop[i].id+'"><a class="I
         }
         if(pop1.length !=0){
             for( i =0;i<pop1.length ;i++){
-  // alert("pop1 = tptd");
+ 
   if(pop1[i].heure === "8h30" && pop1[i].jour === "dimanche"){
     x1 = '<div class="modal-area-button courTable" id="courtd'+pop1[i].id+'">'+
  '<a class="Primary mg-b-10" href="#" data-toggle="modal" data-target="#InformationCour" data-id="'+pop1[i].id+'" data-ensn="'+pop1[i].nom+'" data-ensp="'+pop1[i].prenom+'"  data-sec="'+pop1[i].nomSec+'" data-seaj="'+pop1[i].jour+'" data-seah="'+pop1[i].heure+'" data-seas="'+pop1[i].salle+'">'+pop1[i].nom +' -- '+pop1[i].nomSec+' </a>'+
@@ -1145,27 +1144,21 @@ l++;
 var tp=1;
    while(tp<=nbr)  {
         
-      //  alert("hii tp"+tp);
+
       var s = $("#sectionTP"+tp+"").attr("id");
          
            $(document).on("click","#ajouterTP"+tp+"",function(){
             var ktp = $(this).attr("id").substring(9);
-       //   alert(ktp);
+      
             i++;
             var text ='<form class="formTP" method="post" id="groupe'+i+'" action="{{ url("empTP") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input type="hidden" name="idmodule"  class="hiddenid" value="" ><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTP" id="ensTP'+i+'" class="chosen-select" tabindex="-1" >@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->nom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTP'+i+'" name="idgrpTP" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTP[]" id="seaTP'+i+'" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple"  >@foreach($seancesTP as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
-               // alert("k="+l+" i ="+i);
-           
+               
             
 $("#sectionTP"+ktp+"").append(text);
 $(".chosen-select").chosen();
-//$(".chosen-select").trigger('chosen:updated');
-//alert(idmodule);
+
 $('input[name="idmodule"]').val(idmodule);
-//alert($('input[name="idmodule"]').val());
-            /* var b=$("input[type='number']").attr("id");
-            alert(b);*/
-         
-//}
+
         } );
 tp++;
 }
@@ -1179,11 +1172,11 @@ tp++;
            $(document).on("click",".btn-danger",function(){
            
             var btn_id = $(this).attr("id");
-            //alert("id = "+btn_id+ " fielset = "+$("#groupe2").attr("id"));
+         
             $("#groupe"+btn_id+"").remove();
 
             $("#saute"+btn_id+"").remove();
-             //alert(btn_id);
+            
              i--;
             
              });
@@ -1194,7 +1187,7 @@ tp++;
 
 
 $(document).on('click','#subMod',function(){
-  //alert($("select[name='moduleCh']").val());
+
   if($("select[name='moduleCh']").val() === null){
     $("#alertreq").css('display','');
   }else{
@@ -1226,17 +1219,17 @@ idmodule = mo1;
     $("#tabEmpTemps").css('display','');
     $("#empForm").css('display','none');
     $("#popnew").css('display','');
-    //alert("L1= "+data.pop1.length);alert("L2="+data.pop.length);
+   
  $('.ch > option').remove();
  $('.sea > option').remove();
   if(mo3 ==="CTT"){
-    $('.ch').append('<option selected value="0">Select your option </option><option > Cour </option><option > TD </option><option > TP </option>');
+    $('.ch').append('<option selected value="0">Type de séance</option><option > Cour </option><option > TD </option><option > TP </option>');
     $('.ch').trigger("chosen:updated");
      $('#newGrpRow').css('display','none');
       $('#newSecRow').css('display','none');
   }
     if(mo3 ==="CTd"){
-$('.ch').append('<option selected value="0">Select your option </option><option> Cour </option><option > TD </option>');
+$('.ch').append('<option selected value="0">Type de séance </option><option> Cour </option><option > TD </option>');
     $('.ch').trigger("chosen:updated");
      $('#newGrpRow').css('display','none');
       $('#newSecRow').css('display','none');
@@ -1249,18 +1242,18 @@ $('.ch').append('<option selected value="0">Select your option </option><option>
     $('.ch').trigger("chosen:updated");
     $('#newGrpRow').css('display','none');
     $('#newSecRow').css('display','');
-    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\">Type de séance</option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
 
   }
 
     if(mo3 ==="TP"){
-        //alert("hi");
+      
      $('.ch').append('<option selected> TP </option>');
     $('.ch').trigger("chosen:updated");
     $('#newSecRow').css('display','none');
     $('#newGrpRow').css('display','');
-    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\">Type de séance</option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
   }
 emploi_du_temps(data.pop,data.pop1);
@@ -1270,7 +1263,7 @@ $("#empForm").css('display','');
 $("#tabEmpTemps").css('display','none');
 $("#popnew").css('display','none');
   if(mo3 === 'Cour'){
-   // alert("lala");
+  
      $('.c').css('display','');
     $('.ttd').css('display','none');
     $('.ttp').css('display','none');
@@ -1306,7 +1299,7 @@ $("#popnew").css('display','none');
    if(mo3 === 'CTT'){
     tp1=2;
   }
- //alert("hii"+data.mo1+""+data.mo2+""+data.mo3);
+ 
 }
 }
 });
@@ -1349,7 +1342,7 @@ $(".chosen-select").trigger('chosen:updated');
 
 
 $(document).on('click','#popTab',function(){
-  //alert("hohaha");
+ 
 $.ajax({
 type: "POST",
 data: $('#popEmp').serialize(),                             // to submit fields at once
@@ -1376,7 +1369,7 @@ $("#InformationproModalalert").modal("hide");
 
 
  $(document).on('change','#selMod',function(){
-  //alert("hohaha");
+  
 $.ajax({
 type: "POST",
 data: $('#selectMod').serialize(),                             // to submit fields at once
@@ -1390,9 +1383,7 @@ var mo1;
     mo2 = data.module[j].nom;
     mo3 = data.module[j].type;
   }
-  /*alert( mo1);
-  alert( mo2);
-  alert( mo3);*/ 
+ 
   $('.ch > option').remove();
  $('.sea > option').remove();
   if(mo3 ==="CTT"){
@@ -1401,10 +1392,10 @@ var mo1;
   }
     if(mo3 ==="CTd"){
 $('.ch').append('<option selected value="0">Select your opyion </option><option > Cour </option><option > TD </option>');
-    $('.ch').trigger("chosen:updated");
+$('.ch').trigger("chosen:updated");
   }
  
-alert(mo3);
+
     if(mo3 ==="Cour"){
     
     $('.ch').append('<option selected> Cour </option>');
@@ -1417,7 +1408,7 @@ alert(mo3);
   }
 
     if(mo3 ==="TP"){
-        //alert("hi");
+       
      $('.ch').append('<option selected> TP </option>');
     $('.ch').trigger("chosen:updated");
     $('#newSecRow').css('display','none');
@@ -1448,7 +1439,7 @@ $("#empForm").css('display','');
 $("#tabEmpTemps").css('display','none');
 $("#popnew").css('display','none');
  if(mo3 === 'Cour'){
-   // alert("lala");
+   
     $('.c').css('display','');
     $('.c').addClass('active');
     $('.ttd').css('display','none');
@@ -1984,7 +1975,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         <i class="educate-icon educate-checked modal-check-pro"></i>
                                         <h2>Modules</h2>
                                         <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="moduleCh" class="chosen-select error" tabindex="-1" id="" >
-                                         <option value="" disabled selected>Select your option</option>
+                                         <option value="" disabled selected>Sélèctionner un module</option>
                                          @foreach($mods as $m)
                                  <option value="{{$m->idMod}}">{{$m->nom}} ({{$m->code}})</option> 
                                           @endforeach
@@ -2439,7 +2430,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
  </div>
 
                     </div>
-
+<br> <br>
                     <div id="InformationTP" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">

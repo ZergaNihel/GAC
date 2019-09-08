@@ -189,8 +189,15 @@ return response()->json(['sec' => $sec,'pop' => $pop ,'pop1' => $pop1]);
         $sem = $request->semestre;
      	$m = $request->input('moduleCh');
 $module= Module::where('idMod',$m)->limit(1)->get();
- $tab = TDTP::where('id_module',$m )->count();
- $tab1 = Cour::where('id_module',$m)->count();
+ $tab = TDTP::where('id_module',$m )
+              ->join('modules','id_module','idMod')
+              ->where('semestre',$sem)
+              ->count();
+ $tab1 = Cour::where('id_module',$m)
+ ->join('modules','id_module','idMod')
+ ->where('semestre',$sem)
+ ->count();
+ //return $tab+$tab1;
 $pop = DB::table('td_tps')
             ->join('enseignants', 'td_tps.id_Ens', '=', 'enseignants.idEns')
             ->join('modules', 'td_tps.id_module', '=', 'modules.idMod')

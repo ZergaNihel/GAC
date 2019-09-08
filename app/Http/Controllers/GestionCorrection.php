@@ -302,7 +302,7 @@ class GestionCorrection extends Controller
               $details = [
             'id_mod' => $paquet->exam->module_Exam,
             'module' => $m->nom,
-            'note' => $p->notefinale,
+            'note' => number_format($p->notefinale, 2, '.', ''),
             'typeExam' => $type,
         ];
         $etu = Etudiant::where('matricule',$p->etu_code)->first();

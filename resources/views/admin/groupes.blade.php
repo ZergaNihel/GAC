@@ -15,16 +15,18 @@ $.ajax({
   type: "POST",
   data: fd,
   cache : false ,     
-  processData: false,  // indique à jQuery de ne pas traiter les données
+  processData: false,  
   contentType: false ,                 
 success: function(data) {
-window.location.replace("groupe/detail/"+data.idG+"/"+data.idSem);
+  
+window.location = "groupe/detail/"+data.idG+"/"+data.idSem+"";
+
 },
 error: function (dataErr) {
-
+ 
 $('.alert-block').css("display","");
  var response = JSON.parse(dataErr.responseText);
-       // alert(dataErr.errors)
+    
         var errorString = '<ul>';
         $.each( response.errors, function( key, value) {
 
@@ -37,7 +39,7 @@ $('.alert-block').css("display","");
 });
        });
        $(document).on('click','#deleteBtn',function(){
-       // alert("hhh");
+      
         $.ajax({
 type: "POST",
 data: $('#deleteForm').serialize(),                             // to submit fields at once
@@ -54,6 +56,14 @@ success: function(data) {
      if( $("#EditError").val() == 1){
          $("#edit").modal("show");
         }
+ $("#zoomInDown1").on('show.bs.modal', function(event) {
+ 
+    var m = $(this)
+    m.find('.alert-block')css("display","none");
+    m.find('#nameGrp').val("");
+    m.find('#liste').val("");
+
+});
      $("#edit").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('groupe');
     var b = $(event.relatedTarget).data('id');
@@ -225,7 +235,7 @@ $.ajax({
                                                         <div class="row">
                                                             
                                                             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                                                <label class="login2 pull-right pull-right-pro">Liste des étudiants</label>
+                                                                <label class="login2 pull-right pull-right-pro">Liste d'étudiants</label>
                                                             </div>
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 mg-tb-15">
                                                                 <div class="hover_img">
@@ -238,7 +248,7 @@ $.ajax({
                                                                        
                                                                         <div class="file-button">
                                                                           <i class="fa fa-download"></i>
-                                                                            <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" >
+ <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" id ="liste" >
                                                                         </div>
                                                                         <input type="text" id="prepend-big-btn" placeholder="no file selected" style="width:80%">
                                                                     </div>
@@ -453,6 +463,7 @@ $.ajax({
             <!--    cvbcj -->
             </div>
         </div>
+        <br><br>
         @endsection    
         <!-- accordion End-->
         

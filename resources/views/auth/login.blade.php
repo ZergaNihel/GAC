@@ -52,7 +52,7 @@
                                     @endif
                                 </div>    
                             </div>
-                            <button class="btn btn-default btn-block loginbtn" >Se connecter</button>
+                            <button class="btn btn-default btn-block loginbtn" style="background-color:#006DF0;color:white;" >Se connecter</button>
                             <br>
                             <div class="container">
                                 <p>Vous n'avez pas encore de compte ?<a  href="{{ route('register') }}" style="background-color:white; color:blue; ">Inscrivez-vous</a>   </p>

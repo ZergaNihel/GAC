@@ -50,7 +50,7 @@
         //
          $('body').on('click', '.vue', function () {
         var a = $(this).attr("id");
-        window.location.replace("/CompteEtudiant/"+a+"/0");
+        window.location = "/CompteEtudiant/"+a+"/0";
          });
          //------------------------------------nouveau---------------------------------
         $('body').on('click', '.new', function () {
