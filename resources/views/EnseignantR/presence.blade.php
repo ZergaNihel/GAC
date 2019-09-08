@@ -604,7 +604,7 @@
                                                                     </div>
                                                                     <div class="modal-body" id="modalbody">
                                                                         <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
-                                                                            <a class="media" href="{{asset('uploads/justifications/'.$justification->justification)}}"></a>
+                                                                            <a class="media" href="{{asset($justification->justification)}}"></a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -722,4 +722,5 @@
             </div>
         </div>
     </div>
+    <br> <br>
 @endsection

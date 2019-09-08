@@ -356,7 +356,7 @@
                                                                         <span
                                                                             class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                                         <h2>Notes</h2>
-                                                                        <p> Vous avez récus votre note de module
+                                                                        <p> Vous avez reçus votre note de module
                                                                             <b>{{$notification->data['module']}}</b>
                                                                         </p>
                                                                     </div>
@@ -399,11 +399,11 @@
                                                                     <div class="notification-content">
                                                                         <span
                                                                             class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                                        <h2>Justification Réfusé</h2>
+                                                                        <h2>Justification Refusée</h2>
                                                                         <p>L' enseignant (e) <b>
                                                                                 {{$notification->data['nomEns']}}
                                                                                 {{$notification->data['prenomEns']}}
-                                                                            </b> a réfusé votre justification
+                                                                            </b> a refusé votre justification
                                                                         </p>
                                                                     </div>
                                                                 </a>
@@ -451,7 +451,7 @@
                                                                             {{$notification->data['prenom']}}</h2>
                                                                         <p>L' étudiant (e)
                                                                             {{$notification->data['nom']}}
-                                                                            {{$notification->data['prenom']}} a crée un
+                                                                            {{$notification->data['prenom']}} a créé un
                                                                             nouveau compte .</p>
                                                                     </div>
                                                                 </a>
@@ -500,7 +500,7 @@
                                                                             {{$notification->data['prenom']}}</h2>
                                                                         <p>L' étudiant (e)
                                                                             {{$notification->data['nom']}}
-                                                                            {{$notification->data['prenom']}} a crée son
+                                                                            {{$notification->data['prenom']}} a créé son
                                                                             compte .</p>
                                                                     </div>
                                                                 </a>
@@ -521,7 +521,7 @@
                                                                         <span
                                                                             class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                                         <h2>Notes</h2>
-                                                                        <p> Vous avez récus votre note de module
+                                                                        <p> Vous avez reçus votre note de module
                                                                             <b>{{$notification->data['module']}}</b>
                                                                         </p>
                                                                     </div>
@@ -541,11 +541,11 @@
                                                                     <div class="notification-content">
                                                                         <span
                                                                             class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
-                                                                        <h2>Justification Réfusé</h2>
+                                                                        <h2>Justification Refusée</h2>
                                                                         <p>L' enseignant (e) <b>
                                                                                 {{$notification->data['nomEns']}}
                                                                                 {{$notification->data['prenomEns']}}
-                                                                            </b> a réfusé votre justification
+                                                                            </b> a refusé votre justification
                                                                         </p>
                                                                     </div>
                                                                 </a>

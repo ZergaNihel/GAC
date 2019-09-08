@@ -346,7 +346,7 @@ Auth::user()->unreadNotifications->where('type','App\Notifications\Justification
                                                               <div class="notification-content">
                       <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                  <h2>Nouveau paquet</h2>
-                      <p>Vous avez réçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
+                      <p>Vous avez reçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
                                                                   </p>
                                                               </div>
                                                           </a>
@@ -378,7 +378,7 @@ Auth::user()->unreadNotifications->where('type','App\Notifications\Justification
                                                           <div class="notification-content">
                                                               <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                               <h2>Nouveau paquet</h2>
-                                                              <p>Vous avez réçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
+                                                              <p>Vous avez reçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
                                                               </p>
                                                           </div>
                                                       </a>

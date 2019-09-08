@@ -8,7 +8,7 @@
   $("#trash").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('date');
     var b = $(event.relatedTarget).data('id');
-   alert(a);
+  
      var m = $(this)
   m.find("#trashJus").val(b);
  m.find("b").text(a);
@@ -63,7 +63,7 @@ processData: false,
 contentType: false,                      // use the form's action url
 success: function(data) {
     $("#aucune").css("display","none");
-alert(data.abs.length);
+//alert(data.abs.length);
 var t;
 var t1=" ";
 if(data.num <= 0){
@@ -117,7 +117,7 @@ url: "{{url('/edit_justif')}}",
 processData: false,
 contentType: false,                      // use the form's action url
 success: function(data) {
-alert(data.img);
+//alert(data.img);
     $('#edit').modal('hide');
  $("#alertSuc").css("display","");  
    $("html, body").animate({
@@ -286,7 +286,7 @@ $('#error2').css("display","");
                                                     </div>
                                                     <div class="modal-body" id="modalbody">
                                                         <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
-                                                            <a class="media" href="{{asset('uploads/justifications/'.$a->justification)}}"></a>
+                                                            <a class="media" href="{{asset($a->justification)}}"></a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -98,7 +98,7 @@
                                 <option value="selected">Exporter les lignes selectionnées </option>
                             </select>
                         </div>
-                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true"  data-cookie="true"
                             data-cookie-id-table="saveId" data-show-export="true"  data-toolbar="#toolbar2">
                             <thead>
                                 <tr>
@@ -181,7 +181,7 @@
                                             </div>
                                             <div class="modal-body" id="modalbody">
                                                 <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
-                                                    <a class="media" href="{{asset('uploads/justifications/'.$justification->justification)}}"></a>
+                                                    <a class="media" href="{{asset($justification->justification)}}"></a>
                                                 </div>
                                             </div>
                                         </div>
