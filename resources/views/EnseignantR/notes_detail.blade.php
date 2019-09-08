@@ -63,7 +63,7 @@
                                                         <td>{{$etudiant->date_naissance}}</td>
                                                         <td>{{$etudiant->type}}</td>
                                                         <td>{{$etudiant->nomG}}</td>
-                                                        <td>{{$etudiant->notefinale}}</td>
+                                                        <td>{{number_format($etudiant->notefinale, 2, '.', '')}}</td>
                                                     </tr>   
                                                 @endforeach
                                             </tbody>

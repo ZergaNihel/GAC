@@ -164,8 +164,8 @@
                                                             <td></td>
                                                             <td>{{$i+1}}</td>
                                                             <td>{{$codes[$i]}}</td>
-                                                            <td>@if(count($notes1)>$i) {{$notes1[$i]}} @endif</td>
-                                                            <td>@if(count($notes2)>$i) {{$notes2[$i]}} @endif</td>
+                                                            <td>@if(count($notes1)>$i) {{number_format($notes1[$i], 2, '.', '')}} @endif</td>
+                                                            <td>@if(count($notes2)>$i) {{number_format($notes2[$i], 2, '.', '')}} @endif</td>
                                                         </tr>
                                                     @endfor
                                                 </tbody>
@@ -346,8 +346,8 @@
                                                         <tr>
                                                             <td>{{$i+1}}</td>
                                                             <td>{{$codes[$i]}}</td>
-                                                            <td>@if(count($notes1)>$i) {{$notes1[$i]}} @endif</td>
-                                                            <td>@if(count($notes2)>$i) {{$notes2[$i]}} @endif</td>
+                                                            <td>@if(count($notes1)>$i) {{number_format($notes1[$i], 2, '.', '')}} @endif</td>
+                                                            <td>@if(count($notes2)>$i) {{number_format($notes2[$i], 2, '.', '')}} @endif</td>
                                                             <td id="Nfinale{{$codes[$i]}}" class="Nfinale"> </td>
                                                         </tr>
                                                     @endfor   

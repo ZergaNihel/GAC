@@ -251,7 +251,7 @@ class GestionCorrection extends Controller
         $j=0;
         for($i=0;$i<count($codes);$i++)
         {
-            if($notes1[$i] && $notes2[$i] && abs( $notes1[$i]-$notes2[$i] ) <= $request->input('ecartFormule'))
+            if($notes1[$i] && $notes2[$i] && abs( $notes1[$i]-$notes2[$i] ) < $request->input('ecartFormule') )
             {
                 $notefinale=Code::find($codes[$i]->idC);
                 if($formule == 0)
