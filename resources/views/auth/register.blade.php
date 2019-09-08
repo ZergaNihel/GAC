@@ -9,7 +9,7 @@
     <div class="error-pagewrap">
         <div class="error-page-int">
             <div class="text-center custom-login">
-                <h3>Registration</h3>
+                <h3>Inscription</h3>
                 
             </div>
             <div class="content-error">
@@ -33,7 +33,7 @@
                                 </div>
                                
                                  <div class="form-group col-lg-6">
-                                    <label>Email Address</label>
+                                    <label>Adresse email</label>
                                      <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <label>Password</label>
+                                    <label>Mot de passe</label>
 
                             
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
@@ -57,7 +57,7 @@
                             
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label>Repeat Password</label>
+                                    <label>Confirmer mot de passe</label>
                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                                
@@ -68,7 +68,7 @@
                                 
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-success loginbtn"> {{ __('Register') }}</button>    
+                                <button type="submit" class="btn btn-success loginbtn"> {{ __('S\'inscrire') }}</button>    
                             </div>
                         </form>
                     </div>

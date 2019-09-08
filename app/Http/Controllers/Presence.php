@@ -642,7 +642,7 @@ if($nbEx == 4){
                     ->orderBy("modules.nom")
                     ->get(); 
 
-        $l=0;
+        $l=0; $nbabs=null;
         foreach ($exclus as $e) {
             $nbabs[$l]=Absence::where('id_Etu','=',$e->idEtu)->where('etat','=',0)->count();
             $l++;

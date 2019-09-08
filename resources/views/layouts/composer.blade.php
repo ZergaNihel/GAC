@@ -6,7 +6,7 @@
                                 <ul class="mailbox-list">
                                     <li>
                                         <a href="{{url('/boite_de_reception')}}">
-                                                <span class="pull-right">{{ Auth::user()->unreadNotifications->type('App\Notifications\MsgNotification')->count() }}</span>
+                                                <span class="pull-right">{{ Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->count() }}</span>
                                                 <i class="fa fa-envelope text-info"></i> Boite de réception
                                             </a>
                                     </li>
