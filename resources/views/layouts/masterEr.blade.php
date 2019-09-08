@@ -347,10 +347,7 @@ $(".indicator-nt").css('display','none');
                                                                                 <h2>{{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
                                                                                     @endif
 
-
-
-                                                                                    <span class="label label-danger pull-right">
-                                                                                        Nouveau</span></h2>
+                                                                              </h2>
                          @if($notification->data['sujet'])
                                  <p>{{ $notification->data['sujet'] }}
                                                              </p>
@@ -426,7 +423,7 @@ $(".indicator-nt").css('display','none');
                                                                     <div class="notification-content">
                             <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                        <h2>Nouveau paquet</h2>
-                            <p>Vous avez réçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
+                            <p>Vous avez reçu le paquet<b> {{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
                                                                         </p>
                                                                     </div>
                                                                 </a>
@@ -458,7 +455,7 @@ $(".indicator-nt").css('display','none');
                                                                 <div class="notification-content">
                                                                     <span class="notification-date">{{\Carbon\Carbon::parse($notification->created_at)->toFormattedDateString()}}</span>
                                                                     <h2>Nouveau paquet</h2>
-                                                                    <p>Vous avez réçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- $notification->data['module']}}</b>
+                                                                    <p>Vous avez reçu le paquet <b>{{$notification->data['nomPaq']}} - {{$notification->data['type']}}- {{$notification->data['module']}}</b>
                                                                     </p>
                                                                 </div>
                                                             </a>
@@ -613,7 +610,7 @@ $(".indicator-nt").css('display','none');
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="footer-copy-right">
-                            <p>Copyrigh © 2019 GAC.tous droits réservés. </p>
+                            <p>Copyright © 2019 GAC.tous droits réservés. </p>
                         </div>
                     </div>
                 </div>

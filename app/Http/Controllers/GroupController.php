@@ -195,18 +195,20 @@ if($etud->matricule == $request->matricule){
    
     function import(Request $request)
     {
-
-      $tab[]=null; 
-    /*  $semestre=Semestre::find($request->idsemestre);
-   $validator1 = Validator::make($request, [
-            'section' => 'required',
-            'groupe' => 'required',
-            'select_file' => 'required',]);
+      /*$attributs = [ 'select_file'  =>  "Liste d'étudiants", ];
+      $messages1 = [
+        'required'    => 'Vous devez remplisser le champ ":attribute" ',
+        'mimetypes' => 'le champs :attribute doit être compatible avec le type de format : :values.',
+    ];
+      $semestre=Semestre::find($request->idsemestre);
+      $validator1 = $request->validate(['section' => 'required','groupe' => 'required',
+      'select_file' => 'required|mimes:xlsx',$messages1,$attributs]);
+   
  
         if ($validator1->fails()) {
-       return response()->json(['errors'=> $validator1->getMessageBag()->toArray()],422);
-        }*/
-   
+       return response()->json(['errors'=> $validator1->getMessageBag()->toArray()],422);}*/
+
+   $tab[]=null; 
     $groupe = $request->groupe;
   
     $k = Groupe::create(['nomG'=> $groupe,]);	
@@ -242,7 +244,7 @@ if($etud->matricule == $request->matricule){
         //dd(count($insert_data));
         for($i=0;$i<count($insert_data);$i++){
         $messages = [
-    'required'    => 'Vous devez remplisser tous les champs.',
+    'required'    => 'Vous devez remplir tous les champs.',
     'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
     'unique'=>"Le matricule doit être unique dans le fichier excel dans la ligne ".$i,
     "numeric"=>"Le matricule doit contenir que les chiffres",

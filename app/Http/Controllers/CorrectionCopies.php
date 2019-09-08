@@ -323,6 +323,7 @@ class CorrectionCopies extends Controller
                 $tab[$i]=$correcteur;
                 $i++;
             }
+           // return $tab;
             $i=0;
             foreach($paq_ens as $p)
             {

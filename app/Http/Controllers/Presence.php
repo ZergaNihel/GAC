@@ -48,6 +48,8 @@ class Presence extends Controller
 
     public function index($id)
     {
+        if(Auth::user()->role == '3')
+        {
         $modules= DB::table('modules')
                     ->join('td_tps', 'td_tps.id_module', '=', 'modules.idMod')
                     ->where('id_Ens','=',Auth::user()->enseignant->idEns)
@@ -67,8 +69,7 @@ class Presence extends Controller
                     ->get();
         $semestre = Semestre::find($id);
   
-        if(Auth::user()->role == '3')
-        {
+        
             return view('EnseignantR.popup')->with(
                 ['modules'=> $modules ,
                 'seances'=> $seances ,
@@ -130,80 +131,83 @@ class Presence extends Controller
                     ->distinct()
                     ->get();
 
-        $exclus=null; $abs=null; $p=null; $pourcentage=null;
-
-        foreach($etu as $e)
+        $exclus=null; $abs=null; $p=null; $pourcentage=null; $exc=null;
+        if($etu)
         {
-            $nb[$i]=DB::table('absences')
-                    ->where('id_Etu','=',$e->id_Etu)
-                    ->where('etat','=',0)
-                    ->count();
-            if($nb[$i]>=5)
+            foreach($etu as $e)
             {
-                $exclus[$j]=DB::table('etudiants')
-                            ->where('idEtu','=',$e->id_Etu)
-                            ->distinct()
-                            ->get();
-                $j++;
-            }
-            if($nb[$i]==3)
-            {
-                $justif=DB::table('absences')
+                $nb[$i]=DB::table('absences')
                         ->where('id_Etu','=',$e->id_Etu)
                         ->where('etat','=',0)
-                        ->whereNull('justification')
                         ->count();
-                if($justif==3)
+                if($nb[$i]>=5)
                 {
                     $exclus[$j]=DB::table('etudiants')
-                            ->where('idEtu','=',$e->id_Etu)
-                            ->get(); 
+                                ->where('idEtu','=',$e->id_Etu)
+                                ->distinct()
+                                ->get();
                     $j++;
-                }else{
-                    $justifA=DB::table('absences')
+                }
+                if($nb[$i]==3)
+                {
+                    $justif=DB::table('absences')
                             ->where('id_Etu','=',$e->id_Etu)
-                            ->whereNotNull('justification')
-                            ->where('etat_just','=',1)
+                            ->where('etat','=',0)
+                            ->whereNull('justification')
                             ->count();
-
-                    $justifAtt=DB::table('absences')
-                    ->where('id_Etu','=',$e->id_Etu)
-                    ->whereNotNull('justification')
-                    ->where('etat_just','=',2)
-                    ->count();
-
-                    if($justifA<1 && $justifAtt<1)
+                    if($justif==3)
                     {
                         $exclus[$j]=DB::table('etudiants')
                                 ->where('idEtu','=',$e->id_Etu)
                                 ->get(); 
                         $j++;
-                    }
-                }
-            }
-            if($nb[$i]==4)
-            {
-                $justifA=DB::table('absences')
+                    }else{
+                        $justifA=DB::table('absences')
+                                ->where('id_Etu','=',$e->id_Etu)
+                                ->whereNotNull('justification')
+                                ->where('etat_just','=',1)
+                                ->count();
+    
+                        $justifAtt=DB::table('absences')
                         ->where('id_Etu','=',$e->id_Etu)
                         ->whereNotNull('justification')
-                        ->where('etat_just','=',1)
+                        ->where('etat_just','=',2)
                         ->count();
-                $justifAtt=DB::table('absences')
-                ->where('id_Etu','=',$e->id_Etu)
-                ->whereNotNull('justification')
-                ->where('etat_just','=',2)
-                ->count();
-
-                if($justifA<2 && $justifAtt<2)
-                {
-                    $exclus[$j]=DB::table('etudiants')
-                            ->where('idEtu','=',$e->id_Etu)
-                            ->get();   
-                    $j++; 
+    
+                        if($justifA<1 && $justifAtt<1)
+                        {
+                            $exclus[$j]=DB::table('etudiants')
+                                    ->where('idEtu','=',$e->id_Etu)
+                                    ->get(); 
+                            $j++;
+                        }
+                    }
                 }
+                if($nb[$i]==4)
+                {
+                    $justifA=DB::table('absences')
+                            ->where('id_Etu','=',$e->id_Etu)
+                            ->whereNotNull('justification')
+                            ->where('etat_just','=',1)
+                            ->count();
+                    $justifAtt=DB::table('absences')
+                    ->where('id_Etu','=',$e->id_Etu)
+                    ->whereNotNull('justification')
+                    ->where('etat_just','=',2)
+                    ->count();
+    
+                    if($justifA<2 && $justifAtt<2)
+                    {
+                        $exclus[$j]=DB::table('etudiants')
+                                ->where('idEtu','=',$e->id_Etu)
+                                ->get();   
+                        $j++; 
+                    }
+                }
+                $i++;
             }
-            $i++;
         }
+       
         //liste
 
         $etudiants = DB::table('etudiants')
@@ -272,6 +276,8 @@ class Presence extends Controller
 
         $semestre= Semestre::find($request->input('semestre')); 
         $u=0;
+        if($exclus)
+        {
        foreach ($exclus as $e ) {
            $t[$u]=$e[0]->idEtu;$u++;
        }
@@ -289,6 +295,7 @@ class Presence extends Controller
                     ->count(); 
             $i++;
         }
+    }
         return view('EnseignantR.presence')->with( 
             [
             'seance'=> $seance ,

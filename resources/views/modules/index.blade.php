@@ -2,7 +2,7 @@
 
 @section('title','Modules')
 @section('js')
-<script >
+<script type="text/javascript">
 
 
  $(document).ready(function(){
@@ -67,16 +67,16 @@ var text;
       //  alert("sem"+sem+"k"+k);
          //alert("s1"+s1+"s2"+s2);
        $(document).on('click','#ModBtn',function(){
-        alert(""+$("#nom1").val()+""+$("#code1").val()+""+$("#type1").val()+""+$('input:radio[name=semestre]')[2].checked+""+$("select[name=enseignant]").val()+"");
+      //  alert(""+$("#nom1").val()+""+$("#code1").val()+""+$("#type1").val()+""+$('input:radio[name=semestre]')[2].checked+""+$("select[name=enseignant]").val()+"");
 
           if($("#nom1").val() === "" || $("#code1").val() === "" || $("#type1").val() ==0 || ( $('input:radio[name=semestre]')[0].checked == false && $('input:radio[name=semestre]')[1].checked== false && $('input:radio[name=semestre]')[2].checked == false) ){
-    alert("cc1");
+    //alert("cc1");
       $('#error').css("display","");
     //$("#module > option").attr("selected",false);
     
     }else if(($('input:radio[name=semestre]')[0].checked== true ||  $('input:radio[name=semestre]')[1].checked== true) && $("#enseignantN").val() == 0){
           $('#error').css("display","");
-          alert("cc2 = "+$("#enseignantN").val());
+          //alert("cc2 = "+$("#enseignantN").val());
     }else{
 
          $('#error').css('display' ,"none");
@@ -99,12 +99,12 @@ success: function(data) {
     $("#code1").val("");
      $("#enseignant1").css('display','none');
 
-    alert(data.mod.semestre);
+  //  alert(data.mod.semestre);
     if(data.mod.semestre == null ){
      text = '<button class="ds-setting">Désactivé</button>';
      text1 = 'Aucun';
     }else{
-         alert(data.mod.semestre+" "+$("#s1").val());
+       //  alert(data.mod.semestre+" "+$("#s1").val());
         if(data.mod.semestre == $("#s1").val()){
            
              text1 = 'Semestre 1';
@@ -201,9 +201,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
 </script>
 
 @endsection 
-</head>
 
-<body>
     <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -365,7 +363,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
     <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="enseignant" id="enseignantN">
                     <option  value="0">Choisir un enseignant ..</option>                                           
                @foreach($ens as $e)
-                  <option value="{{$e->idEns}}">{{$e->idEns}}{{$e->nom}} {{$e->prenom}}</option>
+                  <option value="{{$e->idEns}}">{{$e->nom}} {{$e->prenom}}</option>
                 @endforeach
                                                                         </select>
                                                                 </div>

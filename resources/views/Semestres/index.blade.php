@@ -114,8 +114,8 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                <div class="chosen-select-single mg-b-20">
                                                
-    <select data-placeholder="Choisir un type" class="chosen-select" tabindex="-1" name="anne" id="anne" required>
-        <option >Choisir un type ..</option>
+    <select data-placeholder="Choisissez une date" class="chosen-select" tabindex="-1" name="anne" id="anne" required>
+        <option >Choisissez une date ...</option>
           <option value="2017/2018">2017/2018</option>
           <option value="2018/2019">2018/2019</option>
           <option value="2019/2020">2019/2020</option>
@@ -168,7 +168,7 @@
                                  <div class="row"> 
              
        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 "> 
-          <h5 style="color: grey;text-align: center">  Aucun Semestre crée</h5>
+          <h5 style="color: grey;text-align: center">  Aucun Semestre créé</h5>
                             </div>
                                 </div>
                         
@@ -301,6 +301,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br> <br>
         @endsection
 
         

@@ -61,50 +61,60 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <strong>Nom</strong>
+                                        <div class="row container" >
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>Nom</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->nom}}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->nom}}
-                                                </p>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>Prenom</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->prenom}}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <strong>Prenom</strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->prenom}}
-                                                </p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <strong>grade</strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->grade}}
-                                                </p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <strong>profil</strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->profil}}
-                                                </p>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>grade</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->grade}}
+                                                    </p>
+                                                </div>
 
-
-
-                                            <div class="col-md-3">
-                                                <strong>email</strong>
                                             </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->email}}
-                                                </p>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>profil</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->profil}}
+                                                    </p>
+                                                </div>
                                             </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>email</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->email}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
 
 
@@ -161,14 +171,12 @@
 
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" name="grade"
-                                                                data-mask id="datepicker"
                                                                 value="{{$membreE->enseignant->grade}}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="profil"
-                                                                data-mask id="datepicker"
-                                                                value="{{$membreE->enseignant->profil}}">
-                                                        </div>
+                                                            <textarea placeholder="Description" class="form-control" name="profil"
+                                                                value="{{$membreE->enseignant->profil}}" ></textarea>
+                                                        </div> 
 
 
                                                         <div class="form-group">

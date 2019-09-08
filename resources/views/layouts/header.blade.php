@@ -688,7 +688,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="footer-copy-right">
-                            <p>Copyrigh © 2019 GAC.tous droits réservés. </p>
+                            <p>Copyright © 2019 GAC.tous droits réservés. </p>
                         </div>
                     </div>
                 </div>

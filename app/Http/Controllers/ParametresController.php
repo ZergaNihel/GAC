@@ -46,7 +46,7 @@ else{
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-   
+  
    	$param = parametre::where('active','=',1)->get();
    	foreach ($param as $key ) {
    		$key->active = 0;
@@ -83,7 +83,7 @@ else{
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-
+      //  dd($request->all());
    	$param = parametre::find($request->id);
 //dd($param);
    	 	    if($request->hasFile('logo')){

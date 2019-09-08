@@ -18,9 +18,9 @@
 
     $("#voir").on('show.bs.modal', function(event) {
  var a = $(event.relatedTarget).data('jus');
-    alert(a);
+ 
    $('.pdf-single-pro a').attr('href',a);
-    alert($('.pdf-single-pro a').attr('href'));
+ 
 });
 
 
@@ -62,6 +62,7 @@ url: $("#addForm").attr('action'),
 processData: false,
 contentType: false,                      // use the form's action url
 success: function(data) {
+    $("#aucune").css("display","none");
 alert(data.abs.length);
 var t;
 var t1=" ";
@@ -219,7 +220,7 @@ $('#error2').css("display","");
                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
                   </button>
                                
-                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification ajouté!</strong> Vous avez ajouter la justification de la date <b id="bjus"></b>.</p>
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification ajoutée!</strong> Vous avez ajouté la justification de la date <b id="bjus"></b>.</p>
                             </div>
                           </div>
                         <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc" style="display: none">
@@ -228,7 +229,7 @@ $('#error2').css("display","");
                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
                   </button>
                                
-                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification Modifié!</strong> la justification a été bien enregistrer (voir Détail).</p>
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification Modifiée!</strong> la justification a été bien enregistré (voir Détail).</p>
                             </div>
                           </div>   
                                <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc2" style="display: none">
@@ -237,7 +238,7 @@ $('#error2').css("display","");
                     <span class="icon-sc-cl" aria-hidden="true">&times;</span>
                   </button>
                                
-                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification supprimé!</strong> Vous avez supprimer la justification de la date <b id="sjus"></b>
+                                <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification supprimée!</strong> Vous avez supprimé la justification de la date <b id="sjus"></b>
                             </div>
                           </div>    
 
@@ -303,7 +304,7 @@ $('#error2').css("display","");
                             </div>
                         @if($absences->count()==0)
                         <br> <br>
- <br>    <h3 style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
+ <br >    <h3 id="aucune" style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
  <br> <br><br><br><br>
     @endif 
                         </div>

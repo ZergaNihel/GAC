@@ -66,13 +66,21 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                     <ul id="myTabedu1" class="tab-review-design">
-                        <li class="active"><a href="#description">profil</a></li>
-
-                        <li><a href="#INFORMATION">Modifier le profil</a></li>
+                    @if ($errors->any())
+                        <li ><a href="#description">profil</a></li>
+                        <li class="active"><a href="#INFORMATION">Modifier le profil</a></li>
+                    @else 
+                    <li class="active"><a href="#description">profil</a></li>
+                     <li ><a href="#INFORMATION">Modifier le profil</a></li>
+                    @endif
 
                     </ul>
                     <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
-                        <div class="product-tab-list tab-pane fade active in" id="description">
+                    @if ($errors->any())
+                        <div class="product-tab-list tab-pane fade" id="description">
+                     @else
+                     <div class="product-tab-list tab-pane fade active in" id="description">
+                    @endif
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
@@ -152,10 +160,13 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                        @if ($errors->any())
+                     <div class="product-tab-list tab-pane fade active in" id="INFORMATION">
+                     @else
+                     <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                    @endif
                             <form action=" {{url('membre/'. $membre->id) }} " method="post"
-                                class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload"
+                                class="needsclick add-professors" id="demo1-upload"
                                 enctype="multipart/form-data">
 
                                 <input type="hidden" name="_method" value="PUT">
@@ -306,7 +317,7 @@
 
 
                                                         <input name="password" type="password" class="form-control"
-                                                            placeholder="Password">
+                                                            placeholder="Mot de passe">
                                                         @if($errors->has('password'))
                                                         <p class="help is-danger">{{ $errors->first('password') }}</p>
                                                         @endif
@@ -315,7 +326,7 @@
 
                                                     <div class="form-group">
                                                         <input name="password_confirmation" type="password"
-                                                            class="form-control" placeholder="Confirm Password">
+                                                            class="form-control" placeholder="Confirmer le mot de passe">
                                                         @if($errors->has('password_confirmation'))
                                                         <p class="help is-danger">
                                                             {{ $errors->first('password_confirmation') }}</p>

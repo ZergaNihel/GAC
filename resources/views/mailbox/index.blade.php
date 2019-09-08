@@ -67,7 +67,7 @@
                                 <div class="table-responsive ib-tb">
                                     <table class="table table-hover table-mailbox">
                                         <tbody>
-                                       @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification')->where('type','App\Notifications\MsgNotification') as $notification)
+                                       @foreach(Auth::user()->unreadNotifications->where('type','App\Notifications\MsgNotification') as $notification)
                                             <tr class="active unread">
                                                 <td class="">
                                                     <div class="checkbox">

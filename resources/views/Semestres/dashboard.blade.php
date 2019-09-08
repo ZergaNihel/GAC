@@ -64,10 +64,9 @@ var myChart = new Chart(ctx, {
                                 <div class="income-rate-total">
                                     <div class="price-edu-rate">
                                       
-    <h3>Nouveaux <span > </span><span class="counter" style="color: #006DF0;">{{$nouveaux}}   </span> </h3>
+                                      <h3>Nouveaux <span > </span><span class="counter" style="color: #006DF0;">{{$nouveaux}}   </span> </h3>
                                    </div>
                                      
-                                    
                                 
                                 </div>
                                 <div class="income-range">

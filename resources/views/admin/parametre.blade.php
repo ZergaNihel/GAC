@@ -194,7 +194,7 @@ $("#parametre").modal("show");
                         <div class="profile-info-inner">
                             <div class="profile-img">
                               @foreach($param as $p)
-                              <img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt=""  />
+                              <img class="main-logo" src="{{asset($p->logo)}}" alt=""  />
                                 @endforeach
                             </div>
                             <div class="profile-details-hr">
@@ -216,12 +216,20 @@ $("#parametre").modal("show");
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Paramètres</a></li>
-                            
-                                <li><a href="#INFORMATION">Modification</a></li>
+                            @if ($errors->any())
+                                <li ><a href="#description">Paramètres</a></li>
+                                <li class="active"><a href="#INFORMATION">Modification</a></li>
+                            @else
+                            <li class="active"><a href="#description">Paramètres</a></li>
+                            <li><a href="#INFORMATION">Modification</a></li>
+                            @endif
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+                            @if ($errors->any())
+                                <div class="product-tab-list tab-pane fade " id="description">
+                            @else
                                 <div class="product-tab-list tab-pane fade active in" id="description">
+                            @endif
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
@@ -295,8 +303,11 @@ $("#parametre").modal("show");
                                         </div>
                                     </div>
                                 </div>
-         
+                                @if ($errors->any())
+                                <div class="product-tab-list tab-pane fade active in" id="INFORMATION">
+                                @else
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                                @endif
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
@@ -404,10 +415,10 @@ $("#parametre").modal("show");
                                     <i class="fa fa-download"></i>
                                   </label>
                                                                 <div class="file-button">
-                                                                    Browse
-      <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" name="logo">
+                                                                   Sélèctionner
+      <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" name="logo" >
                                                                 </div>
-           <input type="text" id="prepend-big-btn" placeholder="no file selected" value="{{$p->logo}}">
+           <input type="text" id="prepend-big-btn" >
                                                             </div>
                                                         </div>
                                                     </div>
