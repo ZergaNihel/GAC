@@ -46,7 +46,7 @@
                                     <li>
                                         <a href="{{url('notes/'.$semestre->idSem.'/'.$c->idPaq)}}"><h2><span class="counter">Paquet {{$c->salle}}</span></h2></a>
                                          <small> {{$nbEtuCC[$i++]}} étudiant(s)</small>
-                                        <div class="pull-right">{{$tauxCC[$j]}}% de réussite<i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
+                                        <div class="pull-right">{{number_format($tauxCC[$j])}}% de réussite<i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
                                         <div class="progress progress-bt">
                                             <div class="progress-bar progress-bar-{{$x}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$tauxCC[$j]}}%;"> <span>{{$tauxCC[$j++]}} % de réussite</span></div>
                                         </div>

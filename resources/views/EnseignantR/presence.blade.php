@@ -339,6 +339,20 @@
 
     });
  </script>
+ <script>
+     $(window).resize(function(){     
+
+        if ($('header').width() <= 600 ){
+
+           // alert("bjr");
+           BootstrapTable.prototype.onSort = function (event) {
+            $('button[name=toggle]').toggleView(); 
+        }
+
+        }
+
+        });
+ </script>
 @endsection
 
 @section('path')
@@ -370,9 +384,9 @@
                                         <div class="sparkline13-hd">
                                             <div class="">
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Section:</b> {{$section[0]->nomSec}} </span></div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><span> <br> <b>Section:</b> {{$section[0]->nomSec}} </span></div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
                                                         <div class="sparkline16-graph">
                                                             <div class="date-picker-inner">
                                                                 <div class="form-group data-custon-pick" id="data_2">
@@ -384,7 +398,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
                                                         <button type="button" class="btn btn-default mg-tb-10" id="Reinitialiser" style="height: 40px;" title="Réinitialiser" disabled><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
                                                     </div>
                                                 </div>

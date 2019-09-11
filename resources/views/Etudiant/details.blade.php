@@ -16,11 +16,14 @@
 });
 
 
-    $("#voir").on('show.bs.modal', function(event) {
- var a = $(event.relatedTarget).data('jus');
- 
-   $('.pdf-single-pro a').attr('href',a);
- 
+
+$("#det").on('show.bs.modal', function(event) {
+    var b = $(event.relatedTarget).data('jus');
+    var src='http://localhost:8000'+b;
+
+    $("#lienjust").attr('href',b) 
+    $('#lienjust iframe').attr('src',src);  
+    
 });
 
 
@@ -79,7 +82,7 @@ if(data.abs[i].etat_just == 1){
          if(data.abs[i].etat_just == 0){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
-$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#detail'+data.abs[i].idAbs+'" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a   data-toggle="modal"  href="#" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
+$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#det" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a href="#" data-toggle="modal" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
 $("#bjus").text(data.abs[i].date);
 }
 $("#alertSuc1").css("display","");  
@@ -480,26 +483,31 @@ $('#error2').css("display","");
                                         </div>
                                     </div>
             </div> 
-                    
-                        {{-- <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header header-color-modal bg-color-1">
-                                        <h4 class="modal-title">La justification</h4>
-                                        <div class="modal-close-area modal-close-df">
-                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+
+            <div id="det" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body" id="modalbody">
+                            
+
+                            <div class="panel-body admin-panel-content animated bounce" id="pdfviewer">
+                                <div id="pdfviewer1" class="pdf-viewer-area">
+                                    <div class="row">
+                                        <div class="pdf-single-pro">
+                                            <a class="media medi" id="lienjust" href="{{asset('/uploads/justifications/1568238964.pdf')}}"></a>
                                         </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a onclick="window.print();">Imprimer</a>
-                                        <a href="/uploads/justifications/" download="">Télécharger</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>  --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+            
              <div id="trash" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
              <div class="modal-dialog">
              <div class="modal-content">

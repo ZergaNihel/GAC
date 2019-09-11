@@ -2052,7 +2052,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                 <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2 style="color:#006DF0;">Nouvelle Séance</h2><br>
                                               <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="newError" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tous les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="newError1" style="display: none;">
@@ -2157,7 +2157,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                   
                                    <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="error" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tous les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none;">
@@ -2217,7 +2217,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                             <div class="review-content-section">
                                                          <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="errortd" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tous les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="error1td" style="display: none;">
@@ -2285,7 +2285,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                             <div class="review-content-section">
                                                           <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="errortp" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tous les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="error1tp" style="display: none;">
