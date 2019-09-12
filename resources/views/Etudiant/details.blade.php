@@ -14,15 +14,15 @@
  m.find("b").text(a);
     
 });
+var detailjus ="";
 
-
-
-$("#det").on('show.bs.modal', function(event) {
-    var b = $(event.relatedTarget).data('jus');
+$(document).on("click","#voirdet",function(){
+    var b = detailjus;
     var src='http://localhost:8000'+b;
 
     $("#lienjust").attr('href',b) 
     $('#lienjust iframe').attr('src',src);  
+    $("#det").modal('show');
     
 });
 
@@ -82,7 +82,8 @@ if(data.abs[i].etat_just == 1){
          if(data.abs[i].etat_just == 0){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
-$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#det" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a href="#" data-toggle="modal" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
+    detailjus=data.abs[i].justification;
+$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  href="#" title="Voir" id="voirdet" class="btn btn-default"  data-jus="'+data.abs[i].justification+'" data-id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a href="#" data-toggle="modal" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
 $("#bjus").text(data.abs[i].date);
 }
 $("#alertSuc1").css("display","");  
@@ -126,8 +127,6 @@ success: function(data) {
    $("html, body").animate({
         scrollTop: 0
     },10);
-   // alert($("#a"+data.id+"").attr('data-jus')) 
-   $("#a"+data.id+"").data('jus',data.img);
 },
 error: function (dataErr) {
 
