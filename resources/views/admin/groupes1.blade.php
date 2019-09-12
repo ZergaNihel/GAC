@@ -7,8 +7,7 @@
 
   $(document).ready(function(){
  $('#formGrp').submit(function(e){
-    e.preventDefault();
-     
+    e.preventDefault();   
       var fd = new FormData($(this)[0]);
    
 $.ajax({
@@ -16,23 +15,23 @@ $.ajax({
   type: "POST",
   data: fd,
   cache : false ,     
-  processData: false,  // indique à jQuery de ne pas traiter les données
+  processData: false,  
   contentType: false ,                 
 success: function(data) {
-   // alert(data.idG+"nn"+data.idSem);
-window.location = "/groupe/detail/"+data.idG+"/"+data.idSem;
+  
+window.location = "groupe/detail/"+data.idG+"/"+data.idSem+"";
+
 },
 error: function (dataErr) {
-
+ 
 $('.alert-block').css("display","");
  var response = JSON.parse(dataErr.responseText);
-       // alert(dataErr.errors)
+    
         var errorString = '<ul>';
-        var k=1;
         $.each( response.errors, function( key, value) {
 
-            errorString += '<li>' + k+'. '+value + '</li>';
-k++;
+            errorString += '<li>' + value + '</li>';
+
         });
         errorString += '</ul>';
          $('.alert-block').html(errorString);
@@ -40,7 +39,7 @@ k++;
 });
        });
        $(document).on('click','#deleteBtn',function(){
-       // alert("hhh");
+      
         $.ajax({
 type: "POST",
 data: $('#deleteForm').serialize(),                             // to submit fields at once
@@ -57,6 +56,14 @@ success: function(data) {
      if( $("#EditError").val() == 1){
          $("#edit").modal("show");
         }
+ $("#zoomInDown1").on('show.bs.modal', function(event) {
+ 
+    var m = $(this)
+    m.find('.alert-block')css("display","none");
+    m.find('#nameGrp').val("");
+    m.find('#liste').val("");
+
+});
      $("#edit").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('groupe');
     var b = $(event.relatedTarget).data('id');
@@ -100,7 +107,7 @@ $.ajax({
     var piechart = new Chart(ctx, {
         type: 'pie',
         data: {
-        labels: ["Endétté", "Répétitifs", "Nouveau"],
+        labels: ["Endetté", "Répétitif", "Nouveau"],
             datasets: [{
                 label: 'pie Chart',
                 backgroundColor: [
@@ -123,7 +130,8 @@ $.ajax({
  });
           });
     </script>
-    <style>
+
+<style>
     .hover_img a { position:relative; }
     .hover_img a span { position:absolute; display:none; z-index:99; }
     .hover_img a:hover span { display:block;   height:448px !important; width: 1200px !important;}
@@ -160,7 +168,7 @@ $.ajax({
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
-                            <h2>Groupe étudiants par section</h2>
+                            <h2>Groupe d'étudiants par section</h2>
                          
                         </div>
                            <div class="add-product pull-right">
@@ -169,24 +177,7 @@ $.ajax({
                                           
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                @if($message = Session::get('succ'))
- 
- <div class="alert-icon shadow-inner res-mg-t-30 table-mg-t-pro-n" id="alertSuc1" >
-                             <div class="alert alert-success alert-success-style1 alert-st-bg alert-st-bg11" style="">
-                              <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
-                  <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                </button>
-                             
-                              <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Modification!</strong> {{ $message }}<b id="bjus"></b>.</p>
-                          </div>
-   </div>
 
-
- @endif
- </div>
- </div>
 
   <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                                 <div class="modal-dialog">
@@ -240,24 +231,24 @@ $.ajax({
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group-inner"  >
+                                                            <div class="form-group-inner"  >
                                                         <div class="row">
                                                             
-                                                               <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                                                 <label class="login2 pull-right pull-right-pro">Liste d'étudiants</label>
-                                                               </div>
-                                                               <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 mg-tb-15">
-                                                                  <div class="hover_img">
+                                                            </div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 mg-tb-15">
+                                                                <div class="hover_img">
                                                                     <a href="#"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i><span><img src="{{asset('img/Etudiants.PNG')}}" alt="image" width="500px" height="300px" class="pull-left"/></span></a>
-                                                                  </div>
-                                                               </div>
+                                                                </div>
+                                                            </div>
                                                             <div class="col-lg-8 col-md-11 col-sm-11 col-xs-11">
                                                                 <div class="file-upload-inner ts-forms">
                                                                     <div class="input prepend-small-btn">
                                                                        
                                                                         <div class="file-button">
                                                                           <i class="fa fa-download"></i>
-                                                                          <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" id ="liste" >
+ <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" id ="liste" >
                                                                         </div>
                                                                         <input type="text" id="prepend-big-btn" placeholder="no file selected" style="width:80%">
                                                                     </div>
@@ -265,7 +256,7 @@ $.ajax({
                                                             </div>
                                                             
                                                         </div>
-                                        </div>
+                                                    </div>
                          <div class="login-btn-inner">
                                                                                     
                    <div class="row">
@@ -289,7 +280,14 @@ $.ajax({
 
             <!--  njgjbxkgnbjlxk  -->
                 <div class="row">
-       
+       @if($message = Session::get('succ'))
+   <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+           <strong>{{ $message }}</strong>
+   </div>
+ 
+  
+   @endif
                     <?php $var=1; ?>
 @foreach($section as $s)
 
@@ -356,10 +354,10 @@ $.ajax({
                             
      @if(count($errors) > 0)
     <div class="alert alert-danger">
-     @php $var = 1; @endphp
+     Upload Validation Error<br><br>
      <ul>
       @foreach($errors->all() as $error)
-      <li>{{ $var}}. {{ $error }}</li>
+      <li>{{ $error }}</li>
       @endforeach
      </ul>
     </div>
@@ -443,7 +441,6 @@ $.ajax({
                                           <input type="hidden" id="groupe_id" class="groupe" name="group[]" value="{{$grp->groupe}}">
                                             <div class="charts-area mg-b-15">
                                                     <div class="charts-single-pro responsive-mg-b-30">
-                                                     
                                                         <div id="pie-chart">
                                                             <canvas id="piechart{{$grp->groupe1->idG}}"></canvas>
                                                         </div>
@@ -462,12 +459,11 @@ $.ajax({
                     </div>
    
   @endforeach
-  
                 </div>
             <!--    cvbcj -->
             </div>
         </div>
-        <br>
+        <br><br>
         @endsection    
         <!-- accordion End-->
         

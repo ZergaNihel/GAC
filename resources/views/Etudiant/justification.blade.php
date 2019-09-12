@@ -14,7 +14,7 @@
   url: "{{url('dates')}}/"+a+"/" ,
   success: function(data){
    // $('.stats-icon').css('display','');
-    m.find('#idAbs').append('<option >Choisir une date</option>');
+   // m.find('#idAbs').append('<option disabled selected >Choisir une date</option>');
     for(var i =0;i<data.dates.length;i++){
      m.find('#idAbs').append('<option value="'+data.dates[i].idAbs+'">'+data.dates[i].date+'</option>');
     }//$('.stats-icon').css('display','none');}
@@ -200,7 +200,7 @@
                                                             </div>
      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <div class="form-select-list"> <select class="form-control custom-select-value" name="idAbs" placeholder="password" style="width: 80%;" id="idAbs">
-               <option disabled >choisissez la section</option>
+              
 
                      
                                                                         </select>

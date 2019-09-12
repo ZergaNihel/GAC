@@ -40,10 +40,7 @@ function addSeance(Request $request)
 {
    $emp1 = 0;
     if($request->newType == "Cour"){
-        $c = Cour::where("id_seance","=",$request->newSeance)
-                   ->where("id_section","=",$request->newSec)
-                   ->where("id_module","=",$request->idmodule)
-                   ->count();
+        $c = Cour::where("id_seance","=",$request->newSeance)->count();
                     if($c == 0){
         //dd($request->newEns);
     $emp = Cour::create(["id_module"=>$request->idmodule,"id_Ens"=>$request->newEns,"id_section"=>$request->newSec,"id_seance"=>$request->newSeance,]);
@@ -56,10 +53,11 @@ function addSeance(Request $request)
                }
     }
     if($request->newType == "TP" || $request->newType == "TD"  ){
-         $c = TDTP::where("id_seance","=",$request->newSeance)
+       /*  $c = TDTP::where("id_seance","=",$request->newSeance)
                    ->where("id_groupe","=",$request->newGrp)
                    ->where("id_module","=",$request->idmodule)
-                   ->count();
+                   ->count();*/
+        $c = TDTP::where("id_seance","=",$request->newSeance) ->count();
                    if($c == 0){
         //  dd($request->newGrp);
     $emp = TDTP::create(["id_module"=>$request->idmodule,"id_Ens"=>$request->newEns,

@@ -81,7 +81,19 @@
                                              <td>
                                                 @if ($e->Rcp)
                                                 <a href="{{url('/emails/view/'.$e->id.'/0')}}">
-                                                {{ $e->Rcp->name}}</a>
+                                                @if( $e->Rcp->role == 1)
+                                                {{ $e->Rcp->name}}
+                                                @endif
+                                                @if($e->Rcp->role == 2)
+                                                {{ $e->Rcp->name}}
+                                                @endif
+                                                @if($e->Rcp->role == 0)
+                                                {{App\Etudiant::find($e->Rcp->id_Etu)->nom}}  {{App\Etudiant::find($e->Rcp->id_Etu)->prenom}}
+                                                @endif
+                                                @if($e->Rcp->role == 3)
+                                                {{App\Enseignant::find($e->Rcp->id_Ens)->nom}}  {{App\Enseignant::find($e->Rcp->id_Ens)->prenom}}
+                                                @endif
+                                                </a>
                                                 @else
 
                                 <a href="{{url('/emails/view/'.$e->id.'/0')}}">
@@ -89,12 +101,12 @@
                                                 @endif
                                                 </td>
                                                 <td><a href="{{url('/emails/view/'.$e->id.'/0')}}">
-                                                    {{ $e->sujet}}
+                      @if ($e->sujet) {{ $e->sujet}}  @else Aucun sujet @endif
                                                 </a></td>
                                                 <td>
-
+                                             @if(App\Media::where('id_msg',$e->id)->count()>0) 
                                                     <i class="fa fa-paperclip">
-                                                      
+                                             @endif      
                                                     </td>
                                                 <td class="text-right mail-date">{{\Carbon\Carbon::parse($e->created_at)->toFormattedDateString()}}</td>
                                             </tr>

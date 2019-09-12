@@ -1151,7 +1151,7 @@ var tp=1;
             var ktp = $(this).attr("id").substring(9);
       
             i++;
-            var text ='<form class="formTP" method="post" id="groupe'+i+'" action="{{ url("empTP") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input type="hidden" name="idmodule"  class="hiddenid" value="" ><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTP" id="ensTP'+i+'" class="chosen-select" tabindex="-1" >@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->nom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTP'+i+'" name="idgrpTP" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTP[]" id="seaTP'+i+'" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple"  >@foreach($seancesTP as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
+            var text ='<form class="formTP" method="post" id="groupe'+i+'" action="{{ url("empTP") }}">{!! csrf_field() !!}<fieldset class="dropzone dropzone-custom" style="border-color:grey; border-width: 3px;" ><div class="row"><div class="button-ap-list responsive-btn pull-right"><div class="button-style-four btn-mg-b-10"><button type="button" class="btn btn-custon-rounded-four btn-danger" id="'+i+'"><i class="fa fa-times edu-danger-error" aria-hidden="true"></i> </button></div></div></div><div class="row "><input type="hidden" name="idmodule"  class="hiddenid" value="" ><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Enseignant</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select name="idensTP" id="ensTP'+i+'" class="chosen-select" tabindex="-1" >@foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Groupe</label><div class="form-group"><div class="chosen-select-single mg-b-20"><select id="grpTP'+i+'" name="idgrpTP" class="chosen-select" tabindex="-1">@foreach($groupes as $grp)<option value="{{$grp->idG}}">{{$grp->nomG}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select name="idseaTP[]" id="seaTP'+i+'" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple"  >@foreach($seancesTP as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form><div id="saute'+i+'"><br></div>';
                
             
 $("#sectionTP"+ktp+"").append(text);
@@ -1387,11 +1387,11 @@ var mo1;
   $('.ch > option').remove();
  $('.sea > option').remove();
   if(mo3 ==="CTT"){
-    $('.ch').append('<option value="0" selected>Select your opyion </option><option > Cour </option><option > TD </option><option> TP </option>');
+    $('.ch').append('<option value="0" selected> Choisir le type  </option><option > Cour </option><option > TD </option><option> TP </option>');
     $('.ch').trigger("chosen:updated");
   }
     if(mo3 ==="CTd"){
-$('.ch').append('<option selected value="0">Select your opyion </option><option > Cour </option><option > TD </option>');
+$('.ch').append('<option selected value="0"> Choisir le type </option><option > Cour </option><option > TD </option>');
 $('.ch').trigger("chosen:updated");
   }
  
@@ -1402,7 +1402,7 @@ $('.ch').trigger("chosen:updated");
     $('.ch').trigger("chosen:updated");
     $('#newGrpRow').css('display','none');
     $('#newSecRow').css('display','');
-    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\"> Choisir une séance </option>@foreach($cour as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
 
   }
@@ -1413,7 +1413,7 @@ $('.ch').trigger("chosen:updated");
     $('.ch').trigger("chosen:updated");
     $('#newSecRow').css('display','none');
     $('#newGrpRow').css('display','');
-    $('.sea').append("<option selected value=\"0\">Select your option </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
+    $('.sea').append("<option selected value=\"0\"> Choisir une séance </option>@foreach($tp as $sea)<option value=\"{{$sea->idSea}}\">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}  </option>@endforeach");
     $('.sea').trigger("chosen:updated");
   }
 
@@ -2052,7 +2052,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                 <span class="educate-icon educate-info modal-check-pro information-icon-pro"></span><h2 style="color:#006DF0;">Nouvelle Séance</h2><br>
                                               <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="newError" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tout les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="newError1" style="display: none;">
@@ -2066,7 +2066,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
 
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Type </h4></div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
-                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select  name="newType" class="chosen-select ch" id="newType" tabindex="-1"> <option value="" disabled selected>Select your option</option>
+                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select  name="newType" class="chosen-select ch" id="newType" tabindex="-1"> <option value="" disabled selected>Type de séance</option>
 
                                    </select></div></div>
                                     </div></div>
@@ -2074,17 +2074,17 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Enseignant </h4></div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
-                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="" name="newEns" class="chosen-select" id="newEns" tabindex="-1"> <option value="0" selected>Select your option</option>
-                                    @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}}{{$p->nom}} </option>@endforeach</select></div></div>
+                                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="" name="newEns" class="chosen-select" id="newEns" tabindex="-1"> <option value="0" selected>Choisir un enseignant</option>
+                                    @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}} </option>@endforeach</select></div></div>
                                     </div></div>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <h4>Seance </h4></div>
+                                        <h4>Séance </h4></div>
                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                             <div class="form-group-inner"  id="module">
                                             <div class="chosen-select-single mg-b-20">
                                                 <select id="newSeance"  class="chosen-select sea"   name="newSeance">
-                                                <option value="0">Select your Option</option>
+                                                <option value="0">Choisir une séance</option>
                                             </select>
                                         </div>
                                         </div>
@@ -2096,14 +2096,14 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                 <div class="form-group-inner">
                                                     <div class="chosen-select-single mg-b-20"><select id="newGrp" name="newGrp" class="chosen-select" id="group" tabindex="-1">
-                                                     <option value="0"  selected>Select your option</option>
+                                                     <option value="0"  selected>Choisir un groupe</option>
                                     @foreach($groupes as $s)<option value="{{$s->idG}}">{{$s->nomG}} </option>@endforeach</select></div></div></div></div>
                                               <div class="row" id="newSecRow" style="display: none;">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><h4>Section  </h4></div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                 <div class="form-group-inner">
                                                     <div class="chosen-select-single mg-b-20"><select id="newSec" name="newSec" class="chosen-select" id="group" tabindex="-1">
-                                                     <option value="0" selected>Select your option</option>
+                                                     <option value="0" selected>Choisir une section</option>
                                     @foreach($sec as $s)<option value="{{$s->idSec}}">{{$s->nomSec}} </option>@endforeach</select></div></div></div></div>
                                         <div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                      <div class="login-btn-inner">       
@@ -2157,7 +2157,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                   
                                    <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="error" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tout les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none;">
@@ -2175,8 +2175,8 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                <input type="hidden" name="idmodule" value="">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <label class="login2"> Enseignant</label>
-                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="idens" class="chosen-select" tabindex="-1" id="ensC{{$i}}" > <option value="" disabled selected>Select your option</option>
-                                  @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->nom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Section</label><div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="secC{{$i}}" name="idsec" class="chosen-select" id="group" tabindex="-1"> <option value="" disabled selected>Select your option</option>
+                        <div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select name="idens" class="chosen-select" tabindex="-1" id="ensC{{$i}}" > <option value="" disabled selected>Choisir un enseignant</option>
+                                  @foreach($pro as $p)<option value="{{$p->idEns}}">{{$p->nom}} {{$p->prenom}}</option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Section</label><div class="form-group-inner"><div class="chosen-select-single mg-b-20"><select id="secC{{$i}}" name="idsec" class="chosen-select" id="group" tabindex="-1"> <option value="" disabled selected>Choisir une section</option>
                                     @foreach($sec as $s)<option value="{{$s->idSec}}">{{$s->nomSec}} </option>@endforeach</select></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><label class="login2"> Séances </label><div class="form-group-inner"  id="module"><div class="chosen-select-single"><select id="seaC{{$i}}" data-placeholder="Choisir une seance" class="chosen-select" multiple="multiple" id="seance" name="idsea[]">@foreach($seances as $sea)<option value="{{$sea->idSea}}">{{$sea->jour}} {{$sea->heure}} {{$sea->salle}}</option>@endforeach</select></div></div></div></div></fieldset></form>
                                 
                                </div>   
@@ -2217,7 +2217,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                             <div class="review-content-section">
                                                          <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="errortd" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tout les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="error1td" style="display: none;">
@@ -2285,7 +2285,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                             <div class="review-content-section">
                                                           <div class="alert-wrap1 shadow-inner wrap-alert-b">
                                 <div class="alert alert-danger alert-mg-b" role="alert" id="errortp" style="display: none;">
-                                <strong>Erreur!</strong> Vous devez remplisser tout les champs.
+                                <strong>Erreur!</strong> Vous devez remplir tout les champs.
                             </div>
                             <br>
                             <div class="alert alert-danger alert-mg-b" role="alert" id="error1tp" style="display: none;">

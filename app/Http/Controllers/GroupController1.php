@@ -16,6 +16,7 @@ use App\Etudiant;
 use App\Endette;
 use App\User;
 use Session;
+use Auth;
 //use Datatables;
 use Illuminate\Support\Facades\Validator;
 class GroupController extends Controller
@@ -33,7 +34,14 @@ class GroupController extends Controller
     $section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();
     $sections = Section::all();
 
-		 return view('admin.groupes', compact('semestre','section','sections','sem1','sem2'));
+     if(Auth::user()->role == '1')
+      {
+        return view('admin.groupes', compact('semestre','section','sections','sem1','sem2'));
+      }
+      else
+      {
+          return view('Erreur403');
+      }
 	}
   
 	function groupe($id,$idSem){
@@ -46,15 +54,21 @@ class GroupController extends Controller
 		$modules = Module::where('semestre','=',$idSem)->get();
     $sec = Groupe_etu::where('groupe',$id)->get();		//dd($modules);
 	
-		 return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre','id','grp','sec'));
+     if(Auth::user()->role == '1')
+      {
+        return view('admin.groupe_det', compact('modules','etudiants','sem1','sem2','semestre','id','grp','sec'));
+      }
+      else
+      {
+          return view('Erreur403');
+      }
 	}
 function edit(Request $request){
-  $messages1 = ['required'    => "Vous devez remplir le champ \":attribute\"",];
 
 	  $this->validate($request, [
-      'groupe' => 'required',
+      'groupe' => 'required|string',
       'section' => 'required'
-    ],$messages1);
+     ]);
         
 	$idG = $request->idGrp;
 	$idGrp_etu = $request->idGrp_etu;
@@ -82,16 +96,9 @@ $mods = 0;
 
 	function new_student(Request $request)
     {  
-      $attributes = [
-        'nom'    => 'Nom',
-        'prenom'=> "Prénom",
-        'matricule'=>"Matricule",
-        "birthday"=>"Date de naissance",
-        "type"=>"Type",
-    ];
    $messages = [
-    'required'    => 'Vous devez remplir le champ ":attribute".',
-    'alpha_spaces'=> "Le champ \":attribute\" doit contenir que les caractéres",
+    'required'    => 'Vous devez remplisser tous les champs.',
+    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
     'unique'=>"Le matricule doit être unique",
     "numeric"=>"Le matricule doit contenir que les chiffres",
 ];
@@ -101,7 +108,7 @@ $mods = 0;
             'matricule' => 'required|numeric|unique:etudiants',
             'birthday'  => 'required ',
              'type'  => 'required ',
-        ],$messages,$attributes);
+        ],$messages);
  
         if ($validator->fails()) {
              return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
@@ -158,13 +165,13 @@ if($etud->matricule == $request->matricule){
         if ($validator->fails()) {
              return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
         }
-   
+    
      $etud->matricule = $request->matricule;
      $etud->nom = $request->nom;
      $etud->prenom = $request->prenom;
      $etud->type = $request->type;
      $etud->date_naissance = $request->birthday;
-     $etud->save();
+      $etud->save();
       //dd();
     if($request->type === "Répétitif(ve)" || $request->type === "Endétté(e)"){ 
       $mods = Endette::where("Etu_end",$id)->get();
@@ -188,80 +195,38 @@ if($etud->matricule == $request->matricule){
    
     function import(Request $request)
     {
-      $attribute1 = [
-        "select_file" => "liste d'étudiants",
-    ];
+      /*$attributs = [ 'select_file'  =>  "Liste d'étudiants", ];
       $messages1 = [
-        'required'    => "Vous devez remplir le champ \":attribute\"",
-        'mimes' => "Le champ \":attribute\" doit être de type: \":values\".",
+        'required'    => 'Vous devez remplisser le champ ":attribute" ',
+        'mimetypes' => 'le champs :attribute doit être compatible avec le type de format : :values.',
     ];
-      $validator1 = Validator::make($request->all(), [
-        'section' => 'required',
-        'groupe' => 'required',
-        'select_file' => 'required|mimes:xlsx',
-      ],$messages1,$attribute1);
+      $semestre=Semestre::find($request->idsemestre);
+      $validator1 = $request->validate(['section' => 'required','groupe' => 'required',
+      'select_file' => 'required|mimes:xlsx',$messages1,$attributs]);
+   
+ 
+        if ($validator1->fails()) {
+       return response()->json(['errors'=> $validator1->getMessageBag()->toArray()],422);}*/
 
-    if ($validator1->fails()) {
-      return response()->json(['errors'=> $validator1->getMessageBag()->toArray()],422);
-    }
-
-    $tab[]=null; 
+   $tab[]=null; 
     $groupe = $request->groupe;
+  
+    $k = Groupe::create(['nomG'=> $groupe,]);	
+    //dd($k->idG);
     $section = $request->section;
-    
+    $grp_etu  = Groupe_etu::create(['sem_groupe'=>$request->idsemestre,'sec_groupe'=>$section,'groupe'=>$k->idG,]);
     $path = $request->file('select_file')->getRealPath();
     $data = Excel::load($path)->get();
-    if($data->count() > 0)
+     
+     if($data->count() > 0)
      {
       foreach($data->toArray() as $key => $value)
       {
-                 $i=0; 
-              foreach($value as $row)
-              {  $tab[$i]=$row; $i++; }
-      $check_data[] = array(
-        'matricule'  => $tab[0],
-        'nom'   => $tab[1],
-        'prenom'   => $tab[2],
-        'type'   => $tab[3],
-        'date_naissance'  => $tab[4]);
-   
-      }
+        $i=0; 
+       foreach($value as $row)
+       {  $tab[$i]=$row; $i++;
       
-      if(!empty($check_data))
-      {
-        //dd(count($insert_data));
-        $m=1;
-        for($i=0;$i<count($check_data);$i++){
-        $messages = [
-    'required'    => "Vous devez remplisser le champs \":attribute\" dans la ligne ".$m,
-    'alpha_spaces'=> "Le champ :attribute doit contenir que les caractéres dans la ligne ".$m,
-    'unique'=>"Le matricule doit être unique dans le fichier excel dans la ligne ".$m,
-    "numeric"=>"Le matricule doit contenir que les chiffres dans la ligne ".$m,
-];
-
-   $validator = Validator::make( $check_data[$i], [
-            'nom' => 'required',
-            'prenom' => 'required',
-            'matricule' => 'required|numeric|unique:etudiants',
-            'date_naissance'  => 'required ',
-            'type'  => 'required ',
-        ],$messages);
- 
-        if ($validator->fails()) {
-           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
-        }
-       // dd($insert_data[0]);
-       $m++;
- 
-      }
-    $k = Groupe::create(['nomG'=> $groupe,]);	
-    $grp_etu  = Groupe_etu::create(['sem_groupe'=>$request->idsemestre,'sec_groupe'=>$section,'groupe'=>$k->idG,]);
-      foreach($data->toArray() as $key => $value)
-      {
-                 $i=0; 
-              foreach($value as $row)
-              {  $tab[$i]=$row; $i++; }
-     
+       }
        $insert_data[] = array(
         'matricule'  => $tab[0],
         'nom'   => $tab[1],
@@ -271,10 +236,36 @@ if($etud->matricule == $request->matricule){
         'idG'  => $k->idG
        );
       }
-      DB::table('etudiants')->insert($insert_data);
+      
+      //return $tab;
+
+      if(!empty($insert_data))
+      {
+        //dd(count($insert_data));
+        for($i=0;$i<count($insert_data);$i++){
+        $messages = [
+    'required'    => 'Vous devez remplir tous les champs.',
+    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
+    'unique'=>"Le matricule doit être unique dans le fichier excel dans la ligne ".$i,
+    "numeric"=>"Le matricule doit contenir que les chiffres",
+];
+   $validator = Validator::make($insert_data[$i], [
+            'nom' => 'required|alpha_spaces',
+            'prenom' => 'required|alpha_spaces',
+            'matricule' => 'required|numeric|unique:etudiants',
+            'date_naissance'  => 'required ',
+             'type'  => 'required ',
+        ],$messages);
+ 
+        if ($validator->fails()) {
+           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+        }
+       // dd($insert_data[0]);
+
+  DB::table('etudiants')->insert($insert_data[$i]);
+}
       }
      }
-     //return redirect('groupe/detail/'.$k->idG.'/'. $request->idsemestre);
      return response()->json(['idSem'=> $request->idsemestre,'idG'=>$k->idG]);
     }
       function statistique ($id){
@@ -311,7 +302,7 @@ if($etud->matricule == $request->matricule){
                       $button .= '&nbsp;&nbsp;';
                       $user = User::where('id_Etu',$data->idEtu)->get();
                       foreach ($user as $u) {
-  $button .='<a  href="#"  id="'.$u->id.'" class="vue"><button type="button" class="edit btn btn-info btn-sm "><i class="fa fa-eye"></i></button></a >';
+   $button .='<a  href="#"  id="'.$u->id.'" class="vue"><button type="button" class="edit btn btn-info btn-sm "><i class="fa fa-eye"></i></button></a >';
                       }
                  
                       
