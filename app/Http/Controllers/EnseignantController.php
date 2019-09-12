@@ -93,12 +93,10 @@ Mail::send('emails.contact', $data, function($message) use ($email) {
              for($i=0;$i<count($insert_data);$i++){
         $messages = [
     'required'    => 'Vous devez remplisser tous les champs.',
-    'email'=> "Le :attribute doit être un email",
- 'unique'=>"L'email' doit être unique dans le fichier excel dans la ligne ".$i,
-];
-   $validator = Validator::make($insert_data[$i], [
-            'email' => 'required|email|unique:users',
- ],$messages);
+    'email'=> "Le :attribute doit être un email dans la ligne ".$i,
+ 'unique'=>"L'email' doit être unique dans le fichier excel dans la ligne ".$i,];
+
+   $validator = Validator::make($insert_data[$i], [ 'email' => 'required|email|unique:users',],$messages);
  
         if ($validator->fails()) {
            return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);

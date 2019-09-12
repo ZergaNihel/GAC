@@ -15,10 +15,7 @@
             processing: true,
             serverSide: true,
             ajax: "{{ url('groupe/index1') }}/" + grp,
-            columns: [{
-                    data: "idEtu",
-                    name: "idEtu"
-                },
+            columns: [
                 {
                     data: "nom",
                     name: "nom"
@@ -140,10 +137,11 @@
                     var response = JSON.parse(data.responseText);
                    
                     var errorString = '<ul>';
+                    var k=1;
                     $.each(response.errors, function (key, value) {
 
-                        errorString += '<li>' + value + '</li>';
-
+                        errorString += '<li>' + k+'. ' +value + '</li>';
+k++;
                     });
                     errorString += '</ul>';
                     $('#error').html(errorString);
@@ -298,16 +296,17 @@
                             <h1>Groupe : <span class="table-project-n">{{$grp->nomG}} - </span> @foreach ($sec as $s)
                                 <span class="table-project-n">{{$s->section->nomSec}}</span>
                                 @endforeach</h1>
+                                <div class="add-product pull-right">
+                                <a class="zoomInDown mg-t new" data-toggle="modal"><i class="fa fa-plus"> </i> Nouveau
+                                    étudiant</a>
+                            </div>
 
                         </div>
                     </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-
-                            <div class="add-product">
-                                <a class="zoomInDown mg-t new" data-toggle="modal"><i class="fa fa-plus"> </i> Nouveau
-                                    étudiant</a>
-                            </div>
+                        
+                        
                             <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -566,7 +565,7 @@
                                 <thead>
                                     <tr>
 
-                                        <th data-field="idEtu">ID</th>
+                                       
                                         <th data-field="nom" data-editable="true">Nom</th>
                                         <th data-field="prenom" data-editable="true">Prénom</th>
                                         <th data-field="matricule">Matricule</th>
@@ -624,6 +623,6 @@
         </div>
     </div>
 </div>
-
+<br>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
 @endsection

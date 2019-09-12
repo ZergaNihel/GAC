@@ -47,22 +47,13 @@
                         <div class="hpanel">
                             <div class="panel-heading hbuilt mailbox-hd">
                                 <div class="text-center p-xs font-normal">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control input-sm" placeholder="Search email in your inbox..."> <span class="input-group-btn active-hook"> <button type="button" class="btn btn-sm btn-default">Search
-                                            </button> </span></div>
+                                 
                                 </div>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-8">
-                                
-                                    </div>
-                                    <div class="col-md-6 col-md-6 col-sm-6 col-xs-4 mailbox-pagination">
-                                        <div class="btn-group ib-btn-gp active-hook mail-btn-sd mg-b-15">
-                                            <button class="btn btn-default btn-sm"><i class="fa fa-arrow-left"></i></button>
-                                            <button class="btn btn-default btn-sm"><i class="fa fa-arrow-right"></i></button>
-                                        </div>
-                                    </div>
+                                   
+                                  
                                 </div>
                                 <div class="table-responsive ib-tb">
                                     <table class="table table-hover table-mailbox">
@@ -85,7 +76,7 @@
    @endif
    @if( App\User::find($notification->data['id_emt'])->role == 3)
                        {{ App\User::find($notification->data['id_emt'])->enseignant->nom}}
-            {{ App\User::find($notification->data['id_emt'])->etudiant->prenom}}
+            {{ App\User::find($notification->data['id_emt'])->enseignant->prenom}}
 
 
    @endif
@@ -101,11 +92,13 @@
                                      @endif
 
                                                 </a></td>
-                                                <td><i class="fa fa-paperclip"></td>
+                                                <td>@if($notification->data['nbr_att'] >0)
+                                                    <i class="fa fa-paperclip">
+                                                        @endif</td>
                                                 <td class="text-right mail-date">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}</td>
                                             </tr>
                                             @endforeach
-                                            @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification') as $notification)
+                        @foreach(Auth::user()->readNotifications->where('type','App\Notifications\MsgNotification') as $notification)
                                             <tr class="unread">
                                                 <td class="">
                                                     <div class="checkbox checkbox-single checkbox-success">
@@ -113,9 +106,23 @@
                                                         <label></label>
                                                     </div>
                                                 </td>
-                                             <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">{{ App\User::find($notification->data['id_emt'])->name}}</a> </td>
-                                                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
-                                                    {{$notification->data['sujet']}}
+<td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+@if( App\User::find($notification->data['id_emt'])->role == 1 or  App\User::find($notification->data['id_emt'])->role == 2)
+{{ App\User::find($notification->data['id_emt'])->name}}
+@endif
+@if(App\User::find($notification->data['id_emt'])->role == 0)
+{{ App\User::find($notification->data['id_emt'])->etudiant->nom}} {{ App\User::find($notification->data['id_emt'])->etudiant->prenom}}
+@endif
+@if(App\User::find($notification->data['id_emt'])->role == 3)
+{{ App\User::find($notification->data['id_emt'])->enseignant->nom}} {{ App\User::find($notification->data['id_emt'])->enseignant->prenom}}
+@endif
+</a> </td>
+                <td><a href="{{url('/emails/view/'.$notification->data['id_msg'].'/'.$notification->id)}}">
+                                                @if($notification->data['sujet'] )
+                                     {{ $notification->data['sujet'] }}
+                                     @else
+                                      Aucun Sujet
+                                     @endif
                                                 </a></td>
                                                 <td>@if($notification->data['nbr_att'] >0)
                                                     <i class="fa fa-paperclip">
@@ -126,7 +133,7 @@
                                       
                                          @endforeach
                                             
-                            
+                            <tr></tr>
                                
                                         </tbody>
                                     </table>

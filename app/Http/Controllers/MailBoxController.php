@@ -35,7 +35,7 @@ class MailBoxController extends Controller
 
    function  envoye(){
         $b=0;
-        $emails = Message::where('id_emt','=',Auth::user()->id)->where('save','=',0)->where('delete','=',0)->get();
+        $emails = Message::where('id_emt','=',Auth::user()->id)->where('save','=',0)->where('delete','=',0)->orderBy('created_at', 'DESC')->get();
         $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
     
@@ -50,7 +50,7 @@ class MailBoxController extends Controller
 
     function  brouillons(){
          $b=1;
-    $emails = Message::where('id_emt','=',Auth::user()->id)->where('save','=',1)->where('delete','=',0)->get();
+    $emails = Message::where('id_emt','=',Auth::user()->id)->where('save','=',1)->where('delete','=',0)->orderBy('updated_at', 'DESC')->get();
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   
@@ -66,7 +66,7 @@ class MailBoxController extends Controller
 
      function  corbeille(){
          $b=2;
-   $emails = Message::where('id_emt','=',Auth::user()->id)->where('delete','=',1)->get();
+   $emails = Message::where('id_emt','=',Auth::user()->id)->where('delete','=',1)->orderBy('updated_at', 'DESC')->get();
     $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
     $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   

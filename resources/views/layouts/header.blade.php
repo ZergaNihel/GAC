@@ -317,7 +317,7 @@
 
                                                         </ul>
                                                         <div class="message-view">
-                                                            <a href="{{url('/boite_de_reception')}}">Voir tou les
+                                                            <a href="{{url('/boite_de_reception')}}">Voir tous les
                                                                 messages</a>
                                                         </div>
                                                     </div>
@@ -597,6 +597,7 @@
 
                                                             {{Auth::user()->etudiant->nom}}
                                                             {{Auth::user()->etudiant->prenom}}
+                                                            
                                                             @elseif(Auth::user()->role == '3')
 
                                                             {{Auth::user()->enseignant->nom}}

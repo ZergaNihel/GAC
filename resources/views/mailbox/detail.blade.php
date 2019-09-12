@@ -193,16 +193,16 @@
 @endif
                             <div class="panel-footer text-right ft-pn">
                                 <div class="btn-group active-hook">
-                                    <button class="btn btn-default"><i class="fa fa-reply"></i> Répondre</button>
+                                    
                                     <a class="btn btn-default" href="{{ url()->previous() }}"><i class="fa fa-arrow-right"></i> Précédent</a>
-                                    <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Imprimer</button>
+                                    <a class="btn btn-default" onclick="window.print();" href="#"><i class="fa fa-print"></i> Imprimer</a>
                                     @if($message->delete == 0 )
                                     <a class="btn btn-default" href="{{url('/delete_msg/'.$message->id.'/'.$id_notif)}}"><i class="fa fa-trash-o"></i>  Supprimer</a>
                                     @endif
-                                   
+                                 
                                 </div>
                             </div>
-
+                            <br>
                         </div>
                     </div>
                 </div>
