@@ -320,6 +320,11 @@
             $('.pd-setting-ed').attr('title',"veuillez d'abord renseigner la date");
             
         });
+
+        $(window).on('resize', function(){
+            var win = $(this); //this = window
+            if (win.width() <= 600) {  $('button[name=toggle]').click();}
+        });
      });
  </script>
 
@@ -344,16 +349,19 @@
 
  
 <script>
-        $(window).resize(function(){     
+        // $(window).resize(function(){     
     
-        if ($('header').width() <= 500 ){
+        // if ($('header').width() <= 500 ){
     
-            $('button[name=toggle]').click();
-        }
+        //     $('button[name=toggle]').click();
+        // }
     
         
     
-        });
+        // });
+
+        
+
 </script>
 @endsection
 

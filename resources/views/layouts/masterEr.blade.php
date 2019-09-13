@@ -187,7 +187,7 @@ $(".indicator-nt").css('display','none');
                         </li>
 
                         <li>
-                            <a title="Correction" href="{{url('gestion/correction/choix/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
+                            <a title="Gestion notes" href="{{url('gestion/correction/choix/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-calculator" aria-hidden="true"></i> <span class="mini-click-non"> Gestion notes</span></a>
                         </li>
 
                         <li>
@@ -202,11 +202,11 @@ $(".indicator-nt").css('display','none');
                         </li>
 
                         <li>
-                            <a title="Groupes" href="{{url('notes/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-graduation-cap"></i> <span class="mini-click-non"> Notes finales</span></a>
+                            <a title="Notes finales" href="{{url('notes/'.$semestre->idSem)}}" aria-expanded="false"><i class="fa fa-graduation-cap"></i> <span class="mini-click-non"> Notes finales</span></a>
                         </li>
 
                         <li>
-                            <a href="{{url('Emplois_du_Temps_generale/'.$semestre->idSem)}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Emplois du temps</span></a>
+                            <a title="Emplois du temps" href="{{url('Emplois_du_Temps_generale/'.$semestre->idSem)}}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Emplois du temps</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -611,6 +611,9 @@ $(".indicator-nt").css('display','none');
                                                 <li><a href="{{url('gestion/paquet/examen/'.$semestre->idSem)}}">Examen</a>
                                                 </li>
                                             </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('notes/'.$semestre->idSem)}}"> Notes finales</a>
                                         </li>
                                         <li><a href="{{url('Emplois_du_Temps_generale/'.$semestre->idSem)}}">Emplois du temps <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                         </li>
