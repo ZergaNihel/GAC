@@ -27,6 +27,17 @@
     
 
 </script>
+<script>
+    $(window).resize(function(){     
+
+    if ($('header').width() <= 500 ){
+
+        $('button[name=toggle]').click();
+        $('#v').attr('class','btn btn-primary mg-tb-10 pull-left')
+    }
+
+    });
+</script>
 @endsection
 
 @section('path')
@@ -58,10 +69,10 @@
                                         
                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 mg-t-30">
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <h5 class="pull-left">Date Limite: <b title="Date limite">{{$examen[0]->delais}}</b> </h5>    
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 button-style-three">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 button-style-three">
                                                         <button type="button" class="btn btn-custon-rounded-three btn-default pull-left" data-toggle="modal" data-target="#PrimaryModalalertS">Sujet</button>
                                                     <button type="button" class="btn btn-custon-rounded-three btn-default pull-right" data-toggle="modal" data-target="#PrimaryModalalertC">Corrigé Type</button>
                                                 </div>
@@ -95,8 +106,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mg-t-30">
-                                            <button class="btn btn-primary mg-tb-10 pull-right" title="Valider" data-toggle="modal" data-target="#validerP"> valider </button>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mg-t-30">
+                                            <button class="btn btn-primary mg-tb-10 pull-right" id="v" title="Valider" data-toggle="modal" data-target="#validerP"> valider </button>
                                         </div>
                                     </div>
                                     <br>

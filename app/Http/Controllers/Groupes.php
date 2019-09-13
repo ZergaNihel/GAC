@@ -16,6 +16,11 @@ use Auth;
 
 class Groupes extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function index($id){
    
 		$section = Groupe_etu::where('sem_groupe','=',$id)->select('sec_groupe')->distinct()->get();

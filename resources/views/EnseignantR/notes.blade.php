@@ -4,6 +4,17 @@
 <!-- modals jquery
     ============================================ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                $('button[name=toggle]').click();
+            } 
+        }
+
+        var x = window.matchMedia("(max-width: 600px)")
+        myFunction(x) // Call listener function at run time
+        x.addListener(myFunction) // Attach listener function on state changes
+    </script>
 
 @endsection
 
