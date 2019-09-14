@@ -1,7 +1,7 @@
  <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                 <a href="index.html"><img class="main-logo" src="{{ asset('img/logo/logo.png') }}" alt="" /></a>
+                 <a href="{{ url('Semestres/index') }}"><img class="main-logo" src="{{ asset('img/logo/logo.png') }}" alt="" /></a>
                 <strong><a href="{{url('Semestres/index')}}"><img src="img/logo/logosn.png" alt="" /></a></strong>
                 <br>
                 <br>

@@ -1,9 +1,8 @@
 @extends('layouts.masterAnonym')
 
 @section('script1')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
-    
     $(document).ready(function () {
         $('.summernote').summernote();
         $("input[type='file']").on("change", function () {
@@ -28,6 +27,14 @@
     });
 
 </script>
+@endsection
+
+@section('path')
+<ul class="breadcome-menu">
+    <li><a href="#">Envoyer un email </a>
+
+    </li>
+</ul>
 @endsection
 
 @section('content')
@@ -136,7 +143,8 @@
                                             <label class="icon-right" for="prepend-big-btn">
                                                 <i class="fa fa-download"></i>
                                             </label>
-                                            <input type="text" id="prepend-big-btn" placeholder="Aucun fichier selectionné">
+                                            <input type="text" id="prepend-big-btn"
+                                                placeholder="Aucun fichier selectionné">
                                         </div>
                                     </div>
                                 </div>
@@ -144,31 +152,17 @@
                         </div>
                     </div>
                     <br>
-                    <div class="panel-footer">
-                        <button class="btn btn-primary ft-compse" type="submit">Envoyer</button>
+                    <div class="panel-footer container" style="width:100%">
+                        <button class="btn btn-primary ft-compse pull-right"type="submit">Envoyer</button>
                         </form>
-                        <div class="pull-right">
+                        <div class="pull-left">
                             <div class="btn-group active-hook">
-                                <button class="btn btn-default" type="button" id="save"><i
-                                        class="fa fa-edit"></i>Enregistrer</button>
-
+                                <button class="btn btn-default" type="button" id="save"><i class="fa fa-edit"></i>Enregistrer</button>
                             </div>
                         </div>
 
                     </div>
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
+                    <hr>
                 </div>
             </div>
         </div>

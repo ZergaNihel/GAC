@@ -4,6 +4,17 @@
 <!-- modals jquery
     ============================================ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                $('button[name=toggle]').click();
+            } 
+        }
+
+        var x = window.matchMedia("(max-width: 600px)")
+        myFunction(x) // Call listener function at run time
+        x.addListener(myFunction) // Attach listener function on state changes
+    </script>
 
 @endsection
 
@@ -46,7 +57,7 @@
                                     <li>
                                         <a href="{{url('notes/'.$semestre->idSem.'/'.$c->idPaq)}}"><h2><span class="counter">Paquet {{$c->salle}}</span></h2></a>
                                          <small> {{$nbEtuCC[$i++]}} étudiant(s)</small>
-                                        <div class="pull-right">{{$tauxCC[$j]}}% de réussite<i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
+                                        <div class="pull-right">{{number_format($tauxCC[$j])}}% de réussite<i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
                                         <div class="progress progress-bt">
                                             <div class="progress-bar progress-bar-{{$x}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$tauxCC[$j]}}%;"> <span>{{$tauxCC[$j++]}} % de réussite</span></div>
                                         </div>
@@ -80,10 +91,11 @@
                                     @endif
                                     
                                     <li>
-                                        <h2><span class="counter">Paquet {{$c->salle}}</span></h2> <small> {{$nbEtuEx[$i++]}} étudiant(s)</small>
-                                        <div class="pull-right">{{$tauxEx[$j]}}% <i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
+                                        <a href="{{url('notes/'.$semestre->idSem.'/'.$c->idPaq)}}"><h2><span class="counter">Paquet {{$c->salle}}</span></h2></a>
+                                         <small> {{$nbEtuCC[$i++]}} étudiant(s)</small>
+                                        <div class="pull-right">{{number_format($tauxEx[$j])}}% de réussite<i class="fa fa-level-{{$l}} ctn-ic-{{$var}}"></i></div>
                                         <div class="progress progress-bt">
-                                            <div class="progress-bar progress-bar-{{$x}} ctn-vs-{{$var++}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$tauxEx[$j]}}%;"> <span>{{$tauxEx[$j++]}} % de réussite</span></div>
+                                            <div class="progress-bar progress-bar-{{$x}}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$tauxEx[$j]}}%;"> <span>{{$tauxEx[$j++]}} % de réussite</span></div>
                                         </div>
                                     </li>
                                 @endforeach

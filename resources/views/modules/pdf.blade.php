@@ -35,9 +35,9 @@
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                         <div class="pdf-single-pro">
                             @if($sc == 1)
-                            <a class="media" href="{{ asset($pdf->sujet) }}"></a>
+                            <a class="media" href="{{ asset('pdf/'.$pdf->sujet) }}"></a>
                             @else
-                            <a class="media" href="{{ asset($pdf->corrige_type) }}"></a>
+                            <a class="media" href="{{ asset('pdf/'.$pdf->corrige_type) }}"></a>
                             @endif
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-
+<br> <br>
 @endsection
 @section('pdf')
 

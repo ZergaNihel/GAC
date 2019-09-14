@@ -157,7 +157,7 @@
 <style>
     .hover_img a { position:relative; }
     .hover_img a span { position:absolute; display:none; z-index:99; }
-    .hover_img a:hover span { display:block;   height:354; width: 1035;}
+    .hover_img a:hover span { display:block;   height:354; width: 1035 !important;}
 </style>
 
 @endsection
@@ -167,12 +167,6 @@
         <span class="bread-blod">Liste des paquets</span>
     </li>
 @endsection
-
-{{-- @section('logo')
-<div class="col-lg-2 mg-tb-15">
-    <a href="{{url('anonymat/paquets')}}"><img class="main-logo" src="{{asset('img/logo/logosn.png')}}" alt=""  height="40px" width="30px"/></a>
-  </div> 
-@endsection --}}
 
 @section('content')
 
@@ -199,7 +193,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-select-list">
                                 <select class="form-control custom-select-value" name="type" id="type" required>
-                                    <option value="">Nature</option>
+                                    <option value="">Type</option>
                                     <option value="Controle">Controle</option>
                                     <option value="Examen">Examen</option>
                                 </select>
@@ -265,7 +259,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:1200px; left:150px;">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><span > <br> <b id="nomM">Module:</b>  </span></div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"><span> <br> <b id="ensR">Enseignant responsable:</b>  </span></div>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b id="nature">La nature d'examen:</b>  </span></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b id="nature">Le type d'examen:</b>  </span></div>
 </div>
 
 <div class="row">

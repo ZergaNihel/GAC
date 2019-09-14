@@ -73,6 +73,16 @@
         
             });
 </script>
+<script>
+    $(window).resize(function(){     
+
+    if ($('header').width() <= 500 ){
+
+        $('button[name=toggle]').click();
+    }
+
+    });
+</script>
 @endsection 
 
 @section('path')
@@ -115,7 +125,7 @@
                             <tbody id="justif">
                                 @php $No=1 @endphp
                                 @foreach($justifications as $justification)
-                                 <tr id="row{{$justification->idAbs}}">
+                                <tr id="row{{$justification->idAbs}}">
                                     <td></td>
                                     <td>{{$No++}}</td>
                                     <td>{{$justification->matricule}}</td>
@@ -130,8 +140,9 @@
                                                 <div class="button-style-three">
                                                     <div class="row" id="det{{$justification->idAbs}}" >
                                                         <div class="col-lg-3">
-                                                            <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                            <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->idAbs}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                         </div>
+                                                        
                                                         <div class="col-lg-4" id="accp">
                                                             <form id="editA{{$justification->idAbs}}" method="POST">
                                                                 {{ csrf_field() }}
@@ -154,7 +165,7 @@
                                     @elseif ($justification->etat_just == 1)
                                         <td class="datatable-ct">
                                             <div class="col-lg-6">
-                                                <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->idAbs}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                             </div>
                                             <div class="col-lg-6 mg-t-15 pull-center">
                                                 <h5 style="color:green">Acceptée</h5> 
@@ -163,16 +174,31 @@
                                     @elseif ($justification->etat_just == 0)
                                         <td class="datatable-ct">
                                             <div class="col-lg-6">
-                                                <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->idAbs}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                             </div>
                                             <div class="col-lg-6 mg-t-15 pull-center">
                                                 <h5 style="color:red">Refusée</h5> 
                                             </div>
-                                         </td>
+                                        </td>
                                     @endif
+
+                                    <div id="detail{{$justification->idAbs}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-close-area modal-close-df">
+                                                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                </div>
+                                                <div class="modal-body" id="modalbody">
+                                                    <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                                        <a class="media" href="{{asset($justification->justification)}}"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                     
                                 </tr>
-                                
+{{--                                 
                                 <div id="detail{{$justification->matricule}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -186,7 +212,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>  --}}
                                 @endforeach
                             </tbody>
                         </table>

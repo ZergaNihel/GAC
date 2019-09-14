@@ -254,10 +254,10 @@
                                         <div class="row">
                                             <div class="col-lg-11">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"> Sujet: </a>
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="color:white;"> Sujet: </a>
                                             </h4></div>
                                             <div class="col-lg-1">
-                                                <a class href="#" data-toggle="modal" data-target="#Newfile"><i class="fa fa-plus" style="color:black;"></i></a>
+                                                <a class href="#" data-toggle="modal" data-target="#Newfile"><i class="fa fa-plus" style="color:white;"></i></a>
                                                 <div id="Newfile" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -313,10 +313,10 @@
                                         <div class="row">
                                             <div class="col-lg-11">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4"> Corrigé type: </a>
+                                                <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4" style="color:white;"> Corrigé type: </a>
                                             </h4></div>
                                             <div class="col-lg-1">
-                                                <a class href="#" data-toggle="modal" data-target="#NewfileC"><i class="fa fa-plus" style="color:black;"></i></a>
+                                                <a class href="#" data-toggle="modal" data-target="#NewfileC"><i class="fa fa-plus" style="color:white;"></i></a>
                                                 <div id="NewfileC" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">

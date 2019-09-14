@@ -41,6 +41,19 @@
         });
     </script>
 
+<script>
+        $(window).resize(function(){     
+    
+        if ($('header').width() <= 500 ){
+    
+            $('button[name=toggle]').click();
+        }
+    
+        
+    
+        });
+</script>
+
 @endsection
 
 @section('path')

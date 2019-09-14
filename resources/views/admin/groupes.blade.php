@@ -467,7 +467,7 @@ $.ajax({
             <!--    cvbcj -->
             </div>
         </div>
-        <br>
+        <br> <br>
         @endsection    
         <!-- accordion End-->
         

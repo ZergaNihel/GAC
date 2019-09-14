@@ -592,4 +592,5 @@ $.ajax({
         </div>
     </div>
 </div>
+<br> <br>
 @endsection

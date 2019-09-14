@@ -98,7 +98,7 @@ $mods = 0;
    $validator = Validator::make($request->all(), [
             'nom' => 'required|alpha_spaces',
             'prenom' => 'required|alpha_spaces',
-            'matricule' => 'required|numeric|unique:etudiants',
+            'matricule' => 'required|numeric|unique:etudiants|max:9',
             'birthday'  => 'required ',
              'type'  => 'required ',
         ],$messages,$attributes);
@@ -145,7 +145,7 @@ $mods = 0;
              'type'  => 'required ',
         ];
    $messages = [
-    'required'    => 'Vous devez remplisser tous les champs.',
+    'required'    => 'Vous devez remplir tous les champs.',
     'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
     'unique'=>"Le matricule doit être unique",
     "numeric"=>"Le matricule doit contenir que les chiffres",
@@ -233,7 +233,7 @@ if($etud->matricule == $request->matricule){
         $m=1;
         for($i=0;$i<count($check_data);$i++){
         $messages = [
-    'required'    => "Vous devez remplisser le champs \":attribute\" dans la ligne ".$m,
+    'required'    => "Vous devez remplir le champs \":attribute\" dans la ligne ".$m,
     'alpha_spaces'=> "Le champ :attribute doit contenir que les caractéres dans la ligne ".$m,
     'unique'=>"Le matricule doit être unique dans le fichier excel dans la ligne ".$m,
     "numeric"=>"Le matricule doit contenir que les chiffres dans la ligne ".$m,

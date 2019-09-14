@@ -316,8 +316,11 @@
                                         $( this ).css("background-color", "#F6F8FA");
                                     });
             $('.btn-default').attr('disabled',true); 
+            $('.pd-setting-ed').attr('disabled',true);
+            $('.pd-setting-ed').attr('title',"veuillez d'abord renseigner la date");
             
         });
+        
      });
  </script>
 
@@ -339,6 +342,19 @@
 
     });
  </script>
+
+ 
+<script>
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                $('button[name=toggle]').click();
+            } 
+        }
+
+        var x = window.matchMedia("(max-width: 600px)")
+        myFunction(x) // Call listener function at run time
+        x.addListener(myFunction) // Attach listener function on state changes
+</script>
 @endsection
 
 @section('path')
@@ -370,9 +386,9 @@
                                         <div class="sparkline13-hd">
                                             <div class="">
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><span> <br> <b>Section:</b> {{$section[0]->nomSec}} </span></div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><span> <br> <b>Section:</b> {{$section[0]->nomSec}} </span></div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"><span> <br> <b>Salle:</b> {{$seance->salle}} </span></div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
                                                         <div class="sparkline16-graph">
                                                             <div class="date-picker-inner">
                                                                 <div class="form-group data-custon-pick" id="data_2">
@@ -384,7 +400,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
                                                         <button type="button" class="btn btn-default mg-tb-10" id="Reinitialiser" style="height: 40px;" title="Réinitialiser" disabled><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
                                                     </div>
                                                 </div>
@@ -521,7 +537,7 @@
                                                         <option value="selected">Exporter les lignes selectionnées </option>
                                                     </select>
                                                 </div>
-                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-cookie="true"
                                                     data-cookie-id-table="saveId" data-show-export="true"  data-toolbar="#toolbar2">
                                                     <thead>
                                                         <tr>
@@ -553,8 +569,9 @@
                                                                         <div class="button-style-three">
                                                                             <div class="row" id="det{{$justification->idAbs}}" >
                                                                                 <div class="col-lg-3">
-                                                                                    <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                                                    <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->idAbs}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                                                 </div>
+                                                                                
                                                                                 <div class="col-lg-4" id="accp">
                                                                                     <form id="editA{{$justification->idAbs}}" method="POST">
                                                                                         {{ csrf_field() }}
@@ -577,7 +594,7 @@
                                                             @elseif ($justification->etat_just == 1)
                                                                 <td class="datatable-ct">
                                                                     <div class="col-lg-6">
-                                                                        <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                                        <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->idAbs}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                                     </div>
                                                                     <div class="col-lg-6 mg-t-15 pull-center">
                                                                         <h5 style="color:green">Acceptée</h5> 
@@ -586,30 +603,32 @@
                                                             @elseif ($justification->etat_just == 0)
                                                                 <td class="datatable-ct">
                                                                     <div class="col-lg-6">
-                                                                        <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->matricule}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
+                                                                        <button type="button" class="btn btn-custon-rounded-four btn-primary" data-toggle="modal" data-target="#detail{{$justification->idAbs}}"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i> Détail</button>
                                                                     </div>
                                                                     <div class="col-lg-6 mg-t-15 pull-center">
                                                                         <h5 style="color:red">Refusée</h5> 
                                                                     </div>
                                                                 </td>
                                                             @endif
-                                                            
-                                                        </tr>
-                                                        
-                                                        <div id="detail{{$justification->matricule}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-close-area modal-close-df">
-                                                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                                                    </div>
-                                                                    <div class="modal-body" id="modalbody">
-                                                                        <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
-                                                                            <a class="media" href="{{asset($justification->justification)}}"></a>
+
+                                                            <div id="detail{{$justification->idAbs}}" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-close-area modal-close-df">
+                                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                                        </div>
+                                                                        <div class="modal-body" id="modalbody">
+                                                                            <div id="liensPDF" class="pdf-viewer-area pdf-single-pro">
+                                                                                <a class="media" href="{{asset($justification->justification)}}"></a>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div> 
+                                                            </div> 
+                                                            
+                                                        </tr>
+                                                        
+                                                         
                                                         @endforeach
                                                     </tbody>
                                                 </table>

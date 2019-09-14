@@ -70,7 +70,12 @@
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success loginbtn"> {{ __('S\'inscrire') }}</button>    
                             </div>
+                            <br>
+                            <div class="text-center" style="text-align:center;">
+                                <p><a  href="{{ route('login') }}" style=" background-color:white; color:blue; ">Se connecter à un compte existant</a>   </p>
+                            </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>

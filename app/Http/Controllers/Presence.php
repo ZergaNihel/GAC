@@ -296,6 +296,7 @@ class Presence extends Controller
             $i++;
         }
     }
+    
         return view('EnseignantR.presence')->with( 
             [
             'seance'=> $seance ,

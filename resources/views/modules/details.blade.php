@@ -212,7 +212,7 @@
                             <div class="panel-group edu-custon-design" id="accordion2">
                                
           @foreach($exams as $e)
-          @if($e->sujet)
+         
                         <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
@@ -233,7 +233,7 @@
                                     </div>
                                 </div>
                                  <?php $var++;?>
-                                 @endif
+                             
                                  @endforeach
                             </div>
                         </div>

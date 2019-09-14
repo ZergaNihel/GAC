@@ -42,51 +42,65 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <strong>Nom</strong>
+                                        <div class="row container" >
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>Nom</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->nom}}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->nom}}
-                                                </p>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>Prenom</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->prenom}}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <strong>Prenom</strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->prenom}}
-                                                </p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <strong>grade</strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->grade}}
-                                                </p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <strong>profil</strong>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->enseignant->profil}}
-                                                </p>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>grade</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->grade}}
+                                                    </p>
+                                                </div>
 
-
-
-                                            <div class="col-md-3">
-                                                <strong>email</strong>
                                             </div>
-                                            <div class="col-md-9">
-                                                <p class="text-muted">
-                                                    {{$membreE->email}}
-                                                </p>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>profil</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->enseignant->profil}}
+                                                    </p>
+                                                </div>
                                             </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <strong>email</strong>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p class="text-muted">
+                                                        {{$membreE->email}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
+
+
+
+
 
                                     </div>
                                 </div>
@@ -94,15 +108,15 @@
                         </div>
 
                         <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                            <form action=" {{url('membreEns/'. $membreE->id) }} " method="post"
-                                class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload"
+                            <form action=" {{url('membreE/'. $membreE->id) }} " method="post"
+                                 id="demo1-upload"
                                 enctype="multipart/form-data">
 
                                 <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
                                 <fieldset>
 
-                                    <input type="hidden" name="semestre" value="{{$semestre->idSem}}">
+
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
@@ -138,19 +152,28 @@
 
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" name="grade"
-                                                                data-mask id="datepicker"
                                                                 value="{{$membreE->enseignant->grade}}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="profil"
-                                                                data-mask id="datepicker"
-                                                                value="{{$membreE->enseignant->profil}}">
+                                                            <textarea placeholder="Description" class="form-control" name="profil"
+                                                                value="{{$membreE->enseignant->profil}}" ></textarea>
+                                                        </div> 
+
+
+                                                        <div class="form-group">
+
+
                                                         </div>
+                                                        <div class="file-upload-inner ts-forms">
+                                                            <div class="form-group">
 
-
-                                                            <input type="hidden" name="semestre" value="{{$idSem}}">
-
-                                                        
+                                                                <div class="col-md-9 inputGroupContainer">
+                                                                    <div style="width: 70%">
+                                                                        <input name="img" type="file">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                     <div class="col-lg-6">
@@ -174,7 +197,7 @@
 
 
                                                             <input name="password"  type=" password"
-                                                                class="form-control" placeholder="Mot de passe">
+                                                                class="form-control" placeholder="Password">
                                                             @if($errors->has('password'))
                                                             <p class="help is-danger">{{ $errors->first('password') }}
                                                             </p>
@@ -185,7 +208,7 @@
 
                                                         <div class="form-group">
                                                             <input name="password_confirmation" type="password"
-                                                                class="form-control" placeholder="Confirmer le mot de passe">
+                                                                class="form-control" placeholder="Confirm Password">
                                                             @if($errors->has('password_confirmation'))
                                                             <p class="help is-danger">
                                                                 {{ $errors->first('password_confirmation') }}</p>
@@ -193,16 +216,7 @@
                                                         </div>
 
                                                         @endif
-                                                        <div class="file-upload-inner ts-forms mg-t-15">
-                                                            <div class="form-group">
 
-                                                                <div class="col-md-9 inputGroupContainer">
-                                                                    <div style="width: 70%">
-                                                                        <input name="img" type="file" title="photo de profil">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                 </div>

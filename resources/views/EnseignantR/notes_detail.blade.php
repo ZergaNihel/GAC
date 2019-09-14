@@ -4,7 +4,18 @@
 <!-- modals jquery
     ============================================ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <script>
+            $(window).resize(function(){     
+        
+            if ($('header').width() <= 500 ){
+        
+                $('button[name=toggle]').click();
+            }
+        
+            
+        
+            });
+    </script>
 @endsection
 
 @section('path')

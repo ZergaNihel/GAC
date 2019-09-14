@@ -392,7 +392,11 @@ Auth::user()->unreadNotifications->where('type','App\Notifications\Justification
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                        @if (Auth::user()->photo)
+                                                            <img src="{{ asset(Auth::user()->photo) }} " alt="" />
+                                                        @else 
+                                                            <img src="{{ asset('img/profile/profil.png') }} " alt="" />
+                                                        @endif
                                                         <span class="admin-name">
                                                             @if(Auth::user()->role == '0')
 

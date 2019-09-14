@@ -57,13 +57,16 @@
  m.find("b").text(a);
     
 });
+var detailjus ="";
 
+$(document).on("click","#voirdet",function(){
+    var b = detailjus;
+    var src='http://localhost:8000'+b;
 
-    $("#voir").on('show.bs.modal', function(event) {
- var a = $(event.relatedTarget).data('jus');
- 
-   $('.pdf-single-pro a').attr('href',a);
- 
+    $("#lienjust").attr('href',b) 
+    $('#lienjust iframe').attr('src',src);  
+    $("#det").modal('show');
+    
 });
 
 
@@ -122,7 +125,8 @@ if(data.abs[i].etat_just == 1){
          if(data.abs[i].etat_just == 0){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
-$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td class="priority-1"> 1 </td> <td class="priority-2">'+data.abs[i].date+'</td><td class="priority-3">'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td class="priority-4">'+data.abs[i].type+'</td><td class="priority-5"> '+t+' </td>  <td class="priority-6"><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#detail'+data.abs[i].idAbs+'" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a   data-toggle="modal"  href="#" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
+    detailjus=data.abs[i].justification;
+$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  href="#" title="Voir" id="voirdet" class="btn btn-default"  data-jus="'+data.abs[i].justification+'" data-id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a href="#" data-toggle="modal" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
 $("#bjus").text(data.abs[i].date);
 }
 $("#alertSuc1").css("display","");  
@@ -161,13 +165,13 @@ processData: false,
 contentType: false,                      // use the form's action url
 success: function(data) {
 //alert(data.img);
+$("#justification").css("display","none");
     $('#edit').modal('hide');
  $("#alertSuc").css("display","");  
    $("html, body").animate({
         scrollTop: 0
     },10);
-   // alert($("#a"+data.id+"").attr('data-jus')) 
-   $("#a"+data.id+"").data('jus',data.img);
+    detailjus=data.img;
 },
 error: function (dataErr) {
 
@@ -249,7 +253,7 @@ $('#error2').css("display","");
                         </div>
      @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()== 0) 
      @if (App\Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->whereNull('justification')->join('td_tps','Absences.id_td_tp','td_tps.id')->where('td_tps.id_module','=',$mod->idMod)->count()> 0) 
-                           <div class="pull-right" id="justification">
+                           <div class="add-product pull-right" id="justification">
  <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification </a>
                                             </div>
                                              @endif
@@ -293,7 +297,6 @@ $('#error2').css("display","");
                           <div class="asset-inner table table-responsive" >
                                 <table>
                                    <tr id="1">
-                                        <th class="priority-1">No</th>
                                         <th class="priority-2">date</th>
                                         <th class="priority-3">seance</th>
                                         <th class="priority-4">Type</th>
@@ -302,7 +305,6 @@ $('#error2').css("display","");
                                </tr>
 @foreach($absences as $a)
                                      <tr id="{{$a->idAbs}}">
-                                        <th class="priority-1">{{ $var++}}</th>
                                         <td class="priority-2">{{$a->date}}</td>
                                         <td class="priority-3">{{$a->jour}} {{$a->heure}} {{$a->salle}}</td>
                                         <td class="priority-4">{{$a->type}}</td>
@@ -533,8 +535,31 @@ $('#error2').css("display","");
                                         </div>
                                     </div>
             </div> 
+
+            <div id="det" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body" id="modalbody">
+                            
+
+                            <div class="panel-body admin-panel-content animated bounce" id="pdfviewer">
+                                <div id="pdfviewer1" class="pdf-viewer-area">
+                                    <div class="row">
+                                        <div class="pdf-single-pro">
+                                            <a class="media medi" id="lienjust" href="{{asset('/uploads/justifications/1568238964.pdf')}}"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     
-          
+            
              <div id="trash" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
              <div class="modal-dialog">
              <div class="modal-content">
