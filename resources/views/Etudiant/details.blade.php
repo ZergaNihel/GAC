@@ -2,6 +2,49 @@
 
 @section('title','Justification')
 @section('js')
+<style>
+ @media screen and (max-width: 1225px) and (min-width: 1045px) {
+		.priority-1{
+			display:none;
+		}
+	}
+	
+	@media screen and (max-width: 1045px) and (min-width: 835px) {
+		.priority-1{
+			display:none;
+		}
+		.priority-4{
+			display:none;
+		}
+	}
+	
+	@media screen and (max-width: 565px) and (min-width: 300px) {
+		.priority-1{
+			display:none;
+		}
+		.priority-4{
+			display:none;
+		}
+        .resp{
+			display:none;
+		}
+       
+	}
+	
+	@media screen and (max-width: 300px) {
+		.priority-1{
+			display:none;
+		}
+		.priority-4{
+			display:none;
+		}
+        .resp{
+			display:none; }
+       
+	
+	}
+
+</style>
 <script >
    $(document).ready(function(){
 
@@ -39,13 +82,13 @@ success: function(data) {
   $("html, body").animate({
         scrollTop: 0
     },10);
-
+    $("#aucune").css("display","");
 }
 });
    });
 
  $("#edit").on('show.bs.modal', function(event) {
-
+    $('#error2').css("display","none");
     var a = $(event.relatedTarget).data('id');
     //alert(a);
     var m = $(this)
@@ -79,7 +122,7 @@ if(data.abs[i].etat_just == 1){
          if(data.abs[i].etat_just == 0){
      t='<button class="ds-setting">Réfusé</button>';}
     $('#zoomInDown1').modal('hide');
-$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td> 1 </td> <td>'+data.abs[i].date+'</td><td>'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td>'+data.abs[i].type+'</td><td> '+t+' </td>  <td ><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#detail'+data.abs[i].idAbs+'" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a   data-toggle="modal"  href="#" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
+$("#1").after('<tr id="'+data.abs[i].idAbs+'"><td class="priority-1"> 1 </td> <td class="priority-2">'+data.abs[i].date+'</td><td class="priority-3">'+data.abs[i].jour+' '+data.abs[i].heure+' '+data.abs[i].salle+'</td><td class="priority-4">'+data.abs[i].type+'</td><td class="priority-5"> '+t+' </td>  <td class="priority-6"><a  data-toggle="modal"  href="#" title="Voir" class="btn btn-default" data-target="#detail'+data.abs[i].idAbs+'" data-jus="'+data.abs[i].justification+'" id="a'+data.abs[i].idAbs+'"><i class="fa fa-book" aria-hidden="true" ></i> </a> '+t1+'<a   data-toggle="modal"  href="#" title="supprimer" class="btn btn-danger" data-target="#trash" data-id="'+data.abs[i].idAbs+'" data-date="'+data.abs[i].date+'" ><i class="fa fa-trash-o" aria-hidden="true"></i> </a></td></tr>');
 $("#bjus").text(data.abs[i].date);
 }
 $("#alertSuc1").css("display","");  
@@ -144,6 +187,9 @@ $('#error2').css("display","");
 
        });
         $("#zoomInDown1").on('show.bs.modal', function(event) {
+            $('#error1').css("display","none");
+            $('#prepend-big-btn').val("");
+            $('#select_file').val("");
 
     var a = $(event.relatedTarget).data('id');
     var m = $(this)
@@ -195,6 +241,7 @@ $('#error2').css("display","");
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="tab-content-details mg-b-30">
                             <h2>Absences du module : {{$mod->nom}} </h2>
+                            
     @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()>0)
                              <div class="m-t-xl widget-cl-1">
                          <h1 class="text-danger">EXCLUS !!</h1></div>
@@ -202,8 +249,8 @@ $('#error2').css("display","");
                         </div>
      @if(App\Exclu::where('Etu_exc',Auth::user()->id_Etu)->where('module_exc',$mod->idMod)->count()== 0) 
      @if (App\Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)->whereNull('justification')->join('td_tps','Absences.id_td_tp','td_tps.id')->where('td_tps.id_module','=',$mod->idMod)->count()> 0) 
-                           <div class="add-product pull-right" id="justification">
- <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="   {{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification </a>
+                           <div class="pull-right" id="justification">
+ <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification </a>
                                             </div>
                                              @endif
                                             @endif
@@ -240,25 +287,26 @@ $('#error2').css("display","");
                                
                                 <p>  <i class="fa fa-check edu-checked-pro admin-check-pro admin-check-pro-clr admin-check-pro-clr11" aria-hidden="true"> </i><strong> Justification supprimée!</strong> Vous avez supprimé la justification de la date <b id="sjus"></b>
                             </div>
-                          </div>    
+                          </div> 
+        
 
-                          <div class="asset-inner table-responsive">
+                          <div class="asset-inner table table-responsive" >
                                 <table>
                                    <tr id="1">
-                                        <th>No</th>
-                                        <th>date</th>
-                                        <th>seance</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                       <th>Actions</th>
+                                        <th class="priority-1">No</th>
+                                        <th class="priority-2">date</th>
+                                        <th class="priority-3">seance</th>
+                                        <th class="priority-4">Type</th>
+                                        <th class="priority-5">Status</th>
+                                       <th class="priority-5">Actions</th>
                                </tr>
 @foreach($absences as $a)
                                      <tr id="{{$a->idAbs}}">
-                                        <th >{{ $var++}}</th>
-                                        <td >{{$a->date}}</td>
-                                        <td >{{$a->jour}} {{$a->heure}} {{$a->salle}}</td>
-                                        <td >{{$a->type}}</td>
-                      <td>  @if($a->etat_just == 1)
+                                        <th class="priority-1">{{ $var++}}</th>
+                                        <td class="priority-2">{{$a->date}}</td>
+                                        <td class="priority-3">{{$a->jour}} {{$a->heure}} {{$a->salle}}</td>
+                                        <td class="priority-4">{{$a->type}}</td>
+                      <td class="priority-5">  @if($a->etat_just == 1)
                         <span class="pd-setting">Acceptée</span> 
                             @endif
                             @if($a->etat_just == 2)
@@ -269,7 +317,7 @@ $('#error2').css("display","");
                              @endif
 
                     </td>
-                                        <td >
+                                        <td class="priority-5">
                                             <a  href="#" title="Voir" class="btn btn-default" data-toggle="modal" data-target="#detail{{$a->idAbs}}" id="a{{$a->idAbs}}"><i class="fa fa-book" aria-hidden="true" ></i> </a>
 
                                            @if($a->etat_just == 2)
@@ -302,9 +350,14 @@ $('#error2').css("display","");
                             
                                 </table>
                             </div>
+            <div style="display:none;"  id="aucune">
+            <br> <br>
+ <br >    <h3 style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
+ <br> <br><br><br><br>
+  </div>
                         @if($absences->count()==0)
                         <br> <br>
- <br >    <h3 id="aucune" style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
+ <br >    <h3 style="text-align: center;color: #8d9498;">Aucune justification n'a été ajoutée</h3>
  <br> <br><br><br><br>
     @endif 
                         </div>
@@ -331,7 +384,7 @@ $('#error2').css("display","");
                                                                     >
                        <div class="basic-login-inner modal-basic-inner">
                          <h3>Ajouter une justification</h3>
-                 <p>Vous pouvez ajouter votre justification</p>
+                 <p class="resp">Vous pouvez ajouter votre justification</p>
                              <div class="alert-wrap1 shadow-inner wrap-alert-b">
      <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none">
      
@@ -367,7 +420,7 @@ $('#error2').css("display","");
                                                                        
            <div class="file-button">
      <i class="fa fa-download"></i>
-            <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" >
+            <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;" style="width:80%" name="select_file" id="select_file" >
                         </div>
                          <input type="text" id="prepend-big-btn" placeholder="no file selected" style="width:80%">
                                                                     </div>
@@ -414,7 +467,7 @@ $('#error2').css("display","");
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        <div class="basic-login-inner modal-basic-inner">
-           <h3>modifier la justification</h3>
+           <h3>Modifier la justification</h3>
                     <div class="alert-wrap1 shadow-inner wrap-alert-b">
      <div class="alert alert-danger alert-mg-b" role="alert" id="error2" style="display: none">
      
@@ -427,14 +480,14 @@ $('#error2').css("display","");
                                           
                                <div class="form-group-inner"  >
               <div class="row">
-<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <label class="login2 pull-right pull-right-pro">Justification</label>
                                                             </div>
-             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
        <div class="file-upload-inner ts-forms">
         <div class="input prepend-small-btn">
                                                                        
-           <div class="file-button">
+           <div class="file-button ">
      <i class="fa fa-download"></i>
             <input type="file" onchange="document.getElementById('prepend-big-btn1').value = this.value;" style="width:80%" name="select_file1" >
                         </div>
@@ -481,25 +534,7 @@ $('#error2').css("display","");
                                     </div>
             </div> 
                     
-                        {{-- <div id="voir" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header header-color-modal bg-color-1">
-                                        <h4 class="modal-title">La justification</h4>
-                                        <div class="modal-close-area modal-close-df">
-                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a onclick="window.print();">Imprimer</a>
-                                        <a href="/uploads/justifications/" download="">Télécharger</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  --}}
+          
              <div id="trash" class="modal modal-edu-general modal-zoomInDown fade" role="dialog" >
              <div class="modal-dialog">
              <div class="modal-content">
@@ -509,7 +544,7 @@ $('#error2').css("display","");
                                                         <div class="modal-body">
                                                             <div class="modal-login-form-inner">
                                             <span class="educate-icon educate-danger modal-check-pro information-icon-pro" style="color: #d80027"></span>
-                                        <h2>Suppression !</h2>
+                                        <h2 >Suppression </h2>
              <p>Voulez-Vous vraiment supprimer la justification de la date : <b></b></p>
                                          </div>
    </div>

@@ -210,7 +210,7 @@ class SemestreController extends Controller
    function historique (){
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
   $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
- $sem = Semestre::where('active','=',0)->get();
+ $sem = Semestre::where('active','=',1)->get();
    if(Auth::user()->role == '1')
     {
       return view('Semestres.historique',compact('sem1','sem2','sem'));
@@ -225,7 +225,11 @@ class SemestreController extends Controller
   $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
   $groupe = Groupe_etu::where('sem_groupe',$id)->get();
   $g = Groupe_etu::where('sem_groupe',$id)->select('groupe')->first();
-  
+  $exclus = Exclu::join('etudiants','Etu_exc','idEtu')
+                    ->join('groupe_etus','etudiants.idG','groupe')
+                    ->join('groupes','groupe_etus.groupe','groupes.idG')
+                    ->where('sem_groupe',$id)
+                    ->get();
   $mods = TDTP::where('id_groupe',$g->groupe)
                 ->select('id_module')
                 ->distinct('id_module')
@@ -241,7 +245,7 @@ $semestre = Semestre::find($id);
   //dd($mods);
    if(Auth::user()->role == '1')
     {
-      return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','modules','id','semestre','sec'));
+      return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','modules','id','semestre','sec','exclus'));
     }
     else
     {

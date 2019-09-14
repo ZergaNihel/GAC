@@ -471,11 +471,10 @@
 
                 </div>
             </div>
-
+<br>
             @endforeach
         </div>
-
-
+<br> <br> <br>
     </div>
 </div>
 

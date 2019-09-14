@@ -129,10 +129,9 @@ $num =  Absence::where('id_Etu','=',Auth::user()->id_Etu)->where('etat','=',0)
                       ->where('td_tps.id_module','=',$abs->tdtp->id_module)
                       ->select('idAbs','date')
                       ->count(); 
-       if($request->ajax()){
-       return response()->json(["abs"=>$abs1,"num"=>$num]);
-       }else{
-        return redirect('/absences_Etudiant/details/'.$request->idMod); }
+
+       return response()->json(["abs"=>$abs1,"num"=>$num,"mod"=>$request->idMod]);
+      
     }
 
  function dates($id){

@@ -241,7 +241,9 @@
                                 </li>
                                 <li id="liEmp"><a data-toggle="tab" href="#Emp"><span class="edu-icon edu-analytics-arrow tab-custon-ic"></span>Emplois du temps</a>
                                 </li>
-                                 <li><a data-toggle="tab" href="#Delib"><span class="edu-icon edu-analytics-arrow tab-custon-ic"></span>Délibération</a>
+                                 <li><a data-toggle="tab" href="#exclu"><span class="edu-icon edu-analytics-arrow tab-custon-ic"></span>Exclus</a>
+                                 <li><a data-toggle="tab" href="#abs"><span class="edu-icon edu-analytics-arrow tab-custon-ic"></span>Absences</a>
+                                 <li><a data-toggle="tab" href="#note"><span class="edu-icon edu-analytics-arrow tab-custon-ic"></span>Notes</a>
                                 </li>
                                
                             </ul>
@@ -251,12 +253,12 @@
                           
                             
                             <div class="product-status mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-status-wrap">
+                            <div class="container-fluid">
+                            <div class="row">
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                   <div class="product-status-wrap">
                           
-                            <div class="asset-inner">
+                                     <div class="asset-inner">
                                 <table>
                                     <tr>
                                         <th>No</th>
@@ -346,9 +348,9 @@
             </div>
         </div>
                                 </div>
-<div id="Emp" class="tab-pane in active animated flipInX custon-tab-style1">
+<div id="Emp" class="tab-pane  animated flipInX custon-tab-style1">
 
- <div class="single-pro-review-area mt-t-30 mg-b-15">
+              <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 
 
@@ -356,7 +358,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-    <div class="product-status-wrap drp-lst">
+                       <div class="product-status-wrap drp-lst">
                             <h4>Emploi du temps</h4>
                             <br>
                             <div class="row ">           
@@ -365,7 +367,7 @@
                     <label class="login2"> Section</label>  
                    <div class="form-group">
                   
-      <input name="nameasset" type="text" class="form-control" id="nameSec" value="Section" readonly>
+                   <input name="nameasset" type="text" class="form-control" id="nameSec" value="Section" readonly>
                   
            
                             </div>
@@ -486,6 +488,53 @@
                       </div>
                     </div>
  </div>
+ <div id="exclu" class="tab-pane animated flipInX custon-tab-style1">
+                             <div class="product-status mg-b-15">
+                            <div class="container-fluid">
+                            <div class="row">
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                   <div class="product-status-wrap">
+                          
+                                     <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Date de naissance</th>
+                                        <th>Matricule</th>
+                                        <th>Groupe</th>
+                                        <th>Section</th>
+                                        <th>Module</th>
+                                        
+                                        <th>Action</th>
+                                    </tr>
+                                    <?php $var=1;?>
+                                    @foreach ($exclus as $grp)
+                                    <tr>
+                                        <td>{{$var}}</td>
+                                        <td>{{$grp->nom}}</td>
+                                        <td>{{$grp->prenom}}</td>
+                                        <td>{{$grp->date_naissance}}</td>
+                                        <td>{{$grp->matricule}}</td>
+                                        <td>{{$grp->nomG}}</td>
+                                        <td>{{App/Section::find($grp->sec_groupe)->nomSec}}</td>
+                                        <td>{{App/Module::find($grp->module_exc)->nom}}</td>
+                                       
+                                    </tr>
+                                    @endforeach
+                                    <?php $var++;?>
+                                </table>
+                            </div>
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                </div>
+
+                                
                     </div>
 
 
@@ -496,8 +545,7 @@
 
     
 
- </div>
-</div>
+
                            
                             </div>
                         </div>

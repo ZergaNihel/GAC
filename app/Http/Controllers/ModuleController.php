@@ -27,7 +27,7 @@ class ModuleController extends Controller
 
          if(Auth::user()->role == '1')
         {
-            return view('modules.details' ,compact('module','sem1','sem2','exams','ex'));
+            return view('modules.details' ,compact('module','sem1','sem2','exams','ex','id'));
         }
         else
         {

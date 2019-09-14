@@ -4,6 +4,40 @@
 @section('js')
 <script >
     $(document).ready(function(){
+
+        $(document).on("click","#ajouter",function(){
+   var form = $("#add");
+  var data = new FormData(form[0]);
+        $.ajax({
+type: "post",
+data: data,                             // to submit fields at once
+url: $("#add").attr('action'),  
+processData: false,
+contentType: false,                      // use the form's action url
+success: function(data) {
+   window.location = '/absences_Etudiant/details/'+data.mod+'';
+
+},
+error: function (dataErr) {
+
+$('#error1').css("display","");
+ var response = JSON.parse(dataErr.responseText);
+       //alert(dataErr.errors)
+        var errorString = '<ul>';
+        $.each( response.errors, function( key, value) {
+
+            errorString += '<li>' + value + '</li>';
+
+        });
+        errorString += '</ul>';
+         $('#error1').html(errorString);
+          }
+});
+
+       });
+
+
+//-------------------------------------dates
        $("#zoomInDown1").on('show.bs.modal', function(event) {
     var a = $(event.relatedTarget).data('id');
     var m = $(this)
@@ -14,7 +48,7 @@
   url: "{{url('dates')}}/"+a+"/" ,
   success: function(data){
    // $('.stats-icon').css('display','');
-   // m.find('#idAbs').append('<option disabled selected >Choisir une date</option>');
+    m.find('#idAbs').append('<option disabled selected >Choisir une date</option>');
     for(var i =0;i<data.dates.length;i++){
      m.find('#idAbs').append('<option value="'+data.dates[i].idAbs+'">'+data.dates[i].date+'</option>');
     }//$('.stats-icon').css('display','none');}
@@ -184,13 +218,13 @@
                        <div class="basic-login-inner modal-basic-inner">
                                                                             <h3>Ajouter une justification</h3>
                             <p>Vous pouvez ajouter une justification</p>
-                             @if($message = Session::get('success'))
-   <div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-           <strong>{{ $message }}</strong>
-   </div>
-   @endif
-      <form method="post" enctype="multipart/form-data" action="{{ url('add_justif') }}">
+                            <div class="alert-wrap1 shadow-inner wrap-alert-b">
+     <div class="alert alert-danger alert-mg-b" role="alert" id="error1" style="display: none">
+     
+          </div>
+          </div>
+  
+      <form method="post" enctype="multipart/form-data" action="{{ url('add_justif') }}" id="add">
     {{ csrf_field() }}
     <input type="hidden" name="idMod" id="module">
                  <div class="form-group-inner">
@@ -234,7 +268,7 @@
            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="login-horizental">
-         <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Ajouter</button>
+         <button class="btn btn-sm btn-primary login-submit-cs" type="button" id="ajouter">Ajouter</button>
                                                                                             </div>
                                                                                         </div>
                                                                              </div>

@@ -37,40 +37,7 @@
                 </div>
 <div class="product-status mg-b-15">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-status-wrap">
-                          
-                            <div class="asset-inner">
-                                <table>
-                                    <tr>
-                                        <th>No</th>
-                                       <th>Semestre</th>
-                                        <th>année universitaire</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    <?php $var =1; ?>
-                                    @foreach ($sem as $s)
-                                    <tr>
-                                        <td>{{$var}}</td>
-                                    
-                                        <td>{{$s->nomSem}}</td>
-                                       
-                                        <td>{{$s->annee}}</td>
-                                     
-                                        <td>
-                                        
-  <a href="{{url('Semestres/historique/'.$s->idSem)}}">  <button data-toggle="tooltip" title="Détails" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                        </td>
-                                    </tr>
-                                <?php $var++; ?>
-                                    @endforeach
-                                </table>
-                            </div>
-                      
-                        </div>
-                    </div>
-                </div>
+            
                 <div class="row">
                             <div class="dashtwo-order-area mg-tb-30">
                         <div class="container-fluid">
@@ -79,14 +46,22 @@
                                 @foreach ($sem as $s)
                                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                                         <div class="analytics-edu-wrap res-tablet-mg-t-30 dk-res-t-pro-30">
-                                            <div class="skill-content-3 analytics-edu analytics-edu2">
+                                            @if($s->nomSem == 'Semestre 1')
+                                            <div class="skill-content-3 analytics-edu analytics-edu1">
+                                                @else 
+                                                <div class="skill-content-3 analytics-edu analytics-edu4">
+                                                @endif
                                                 <div class="skill">
                                                     <div class="progress progress-bt">
                                                         <div class="lead-content">
-                                                            <h3> <a href="{{url('Semestres/historique/'.$s->idSem)}}"> {{$s->annee}} </a> </h3>
+                                                        @if($s->nomSem == 'Semestre 1') 
+                                                            <h3> <a href="{{url('Semestres/historique/'.$s->idSem)}}"  style="color:#006DF0;"> {{$s->annee}} </a> </h3>
+                                                        @else 
+                                                        <h3> <a href="{{url('Semestres/historique/'.$s->idSem)}}" style="color:#933EC5;"> {{$s->annee}} </a> </h3>
+                                                        @endif
                                                             <p> {{$s->nomSem}}</p>
                                                         </div>
-                                                       
+                                                        <div class="progress-bar wow fadeInLeft" data-progress="80%" style="width: 80%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>80%</span> </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -84,7 +84,7 @@
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
                                                             <div class="product-status-wrap">
-                                                            <p><b>Status</b></br>
+                                                            <p><b>Status</b><br>
                                                      
                                                         <button class="pd-setting">Active</button> 
                                                    
@@ -96,7 +96,7 @@
                                                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                                         <div class="address-hr biography">
                                                             <div class="product-status-wrap">
-                                                            <p><b>Status</b></br>
+                                                            <p><b>Status</b><br>
                                                                 
                                                  
                                                 <button class="ps-setting">Active</button>
@@ -152,10 +152,11 @@
                                                         </div>
                                                     </div>
                                                     @endif
-                                                     
+                                                    <br>                
                             </div>
 <br>
                                 </div>
+                                <br>     
                                 <div id="TabDetails" class="tab-pane animated flipInX custon-tab-style1">
                                
                                 <!-- accordion start-->
@@ -173,10 +174,11 @@
                             <div class="panel-group edu-custon-design" id="accordion">
                                 <?php $var = 0;?>
                                   @foreach($exams as $e)
+                                  @if($e->sujet)
                         <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$var}}" style="color:white;">
                                     {{ $e->sem_ann->annee }}</a>
                                         </h4>
                                     </div>
@@ -184,8 +186,10 @@
                                         <div class="panel-body admin-panel-content animated bounce">
                                                 <div class="ex-pro">
                                                             <ul>
-@foreach($ex as $e1)
+@foreach(App\Examen::where('module_Exam',$id)->where('idSem',$e->idSem)->get() as $e1)
+
   <a href="{{ url('modules/pdf/'.$e1->idExam.'/1') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Sujet {{$e1->type}} -  {{ $e->sem_ann->annee}}</li> </a>
+
   @endforeach
                                                             </ul>
                                                         </div>
@@ -193,6 +197,7 @@
                                     </div>
                                 </div>
                                 <?php $var++;?>
+                                @endif
                                  @endforeach
                             </div>
                            
@@ -207,10 +212,11 @@
                             <div class="panel-group edu-custon-design" id="accordion2">
                                
           @foreach($exams as $e)
+          @if($e->sujet)
                         <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse{{$var}}">
+                                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse{{$var}}" style="color:white;">
                                     {{ $e->sem_ann->annee }}</a>
                                         </h4>
                                     </div>
@@ -218,7 +224,7 @@
                                         <div class="panel-body admin-panel-content animated bounce">
                                                 <div class="ex-pro">
                                                             <ul>
-@foreach($ex as $e1)
+@foreach(App\Examen::where('module_Exam',$id)->where('idSem',$e->idSem)->get() as $e1)
   <a href="{{ url('modules/pdf/'.$e1->idExam.'/2') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Corrigé {{$e1->type}} -  {{ $e->sem_ann->annee}}</li> </a>
   @endforeach
                                                             </ul>
@@ -227,6 +233,7 @@
                                     </div>
                                 </div>
                                  <?php $var++;?>
+                                 @endif
                                  @endforeach
                             </div>
                         </div>
@@ -234,6 +241,7 @@
                 </div>
             </div>
         </div>
+        <br>
                                 </div>
                            
                             </div>
@@ -241,8 +249,8 @@
                     </div>
                    
                 </div>
+               
+                <div class="row"> <br></div>
             </div>
         </div>
  @endsection
-
-        

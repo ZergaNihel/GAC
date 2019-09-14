@@ -62,7 +62,7 @@ class UserEController extends Controller
     {
 
         $membreE = User::find($id);
-        $etudiant = Etudiant::all();
+        //$etudiant = Etudiant::all();
         if($request->hasFile('img')){
 
             $file = $request->file('img');
@@ -74,10 +74,11 @@ class UserEController extends Controller
 
 
 
-        $membreE->name = $request->input('name');
-        $etudiant->prenom = $request->input('prenom');
-
-        $etudiant->nom = $request->input('nom');
+        //$membreE->enseignant->name = $request->input('name');
+        $membreE->enseignant->prenom = $request->input('prenom');
+        $membreE->enseignant->nom = $request->input('nom');
+        $membreE->enseignant->profil = $request->input('profil');
+        $membreE->enseignant->grade = $request->input('grade');
         $membreE->email = $request->input('email');
        // $enseignant->grade = $request->input('grade');
          $etudiant->date_naissance = $request->input('date_naissance');

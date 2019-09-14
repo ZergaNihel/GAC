@@ -127,6 +127,7 @@
     <!-- modals CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+    <link rel="stylesheet" href="{{asset('css/tabs.css')}}">
     <!-- summernote CSS
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/summernote/summernote.css')}}">
