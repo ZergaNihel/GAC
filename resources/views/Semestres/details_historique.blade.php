@@ -286,8 +286,9 @@
                               <a href="{{url('Semestres/historique/Groupes/'.$grp->groupe)}}">  <button  title="voir" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                         </td>
                                     </tr>
+                                     <?php $var++;?>
                                     @endforeach
-                                    <?php $var++;?>
+                                   
                                 </table>
                             </div>
                       
@@ -311,7 +312,7 @@
       <div class="panel panel-default">
          <div class="panel-heading accordion-head">
      <h4 class="panel-title"> 
-    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$mods->idMod}}">{{$mods->nom}}</a>
+    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$mods->idMod}}" style="color: white;">{{$mods->nom}}</a>
                                         </h4>
                                     </div>
     <div id="collapse{{$mods->idMod}}" class="panel-collapse panel-ic collapse">
@@ -323,14 +324,22 @@
   <li style="color: #006DF0"><i class="fa fa-angle-right"></i><a>Code : </a>{{$mods->code}} </li>
   <li style="color: #006DF0"><i class="fa fa-angle-right"></i><a>Type : </a>{{$mods->type}} </li>
   @foreach(App\Examen::where('idSem',$id)->where('module_Exam',$mods->idMod)->where('type','Examen')->get() as $m)
+  @if($m->sujet)
  <a href="{{url('modules/pdf/'.$m->idExam.'/1')}}"> <li style="color: #006DF0"><i class="fa fa-angle-right"></i>Sujet d'Examen  </li></a>
+ @endif
+ @if($m->corrige_type)
   <a href="{{url('modules/pdf/'.$m->idExam.'/3')}}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Corrigé d'Examen   </li></a>
+@endif
   @endforeach
   @if($mods->type == 'CTT' or $mods->type == 'CTd' )
 
     @foreach(App\Examen::where('idSem',$id)->where('module_Exam',$mods->idMod)->where('type','Controle')->get() as $m)
+    @if($m->sujet)
  <a href="{{url('modules/pdf/'.$m->idExam.'/1')}}"> <li style="color: #006DF0"><i class="fa fa-angle-right"></i>Sujet de Contrôle  </li></a>
+ @endif
+ @if($m->corrige_type)
   <a href="{{url('modules/pdf/'.$m->idExam.'/3')}}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Corrigé de Contrôle  </li></a>
+  @endif
   @endforeach
    @endif                                                         </ul>
                                                         </div>
@@ -488,7 +497,21 @@
                       </div>
                     </div>
  </div>
- <div id="exclu" class="tab-pane animated flipInX custon-tab-style1">
+ 
+
+
+<!--            modal mauve TP   -->
+      
+
+<!--            modal bleu Cour   -->
+
+    
+
+
+                           
+                            </div>
+                        </div>
+<div id="exclu" class="tab-pane animated flipInX custon-tab-style1">
                              <div class="product-status mg-b-15">
                             <div class="container-fluid">
                             <div class="row">
@@ -507,7 +530,7 @@
                                         <th>Section</th>
                                         <th>Module</th>
                                         
-                                        <th>Action</th>
+                                       
                                     </tr>
                                     <?php $var=1;?>
                                     @foreach ($exclus as $grp)
@@ -518,12 +541,61 @@
                                         <td>{{$grp->date_naissance}}</td>
                                         <td>{{$grp->matricule}}</td>
                                         <td>{{$grp->nomG}}</td>
-                                        <td>{{App/Section::find($grp->sec_groupe)->nomSec}}</td>
-                                        <td>{{App/Module::find($grp->module_exc)->nom}}</td>
+                                        <td>{{App\Section::find($grp->sec_groupe)->nomSec}}</td>
+                                        <td>{{App\Module::find($grp->module_exc)->nom}}</td>
                                        
                                     </tr>
+                                      <?php $var++;?>
                                     @endforeach
-                                    <?php $var++;?>
+                                  
+                                </table>
+                            </div>
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                </div>
+                                <div id="abs" class="tab-pane animated flipInX custon-tab-style1">
+                             <div class="product-status mg-b-15">
+                            <div class="container-fluid">
+                            <div class="row">
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                   <div class="product-status-wrap">
+                          
+                                     <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Date</th>
+                                        <th>Groupe</th>
+                                        <th>Seance</th>
+                                        <th>type</th>
+                                        <th>Section</th>
+                                        <th>Module</th>
+                                        <th>Action</th>
+                                       
+                                    </tr>
+                                    <?php $var=1;?>
+                                    @foreach ($abs as $a)
+                                    <tr>
+                                        <td>{{$var}}</td>
+                                        <td>{{$a->date}}</td>
+                                        <td>{{App\Groupe::find(App\TDTP::find($a->id_td_tp)->id_groupe)->nomG}}</td>
+
+                                        <td>{{App\Seance::find(App\TDTP::find($a->id_td_tp)->id_seance)->jour}} {{App\Seance::find(App\TDTP::find($a->id_td_tp)->id_seance)->heure}} {{App\Seance::find(App\TDTP::find($a->id_td_tp)->id_seance)->salle}}</td>
+
+                                         <td>{{App\Seance::find(App\TDTP::find($a->id_td_tp)->id_seance)->type}} </td>
+                                        <td></td>
+                                        <td>{{App\Module::find(App\TDTP::find($a->id_td_tp)->id_module)->nom}}</td>
+                                       <td>                
+                              <a href="{!! asset('/Semestres/historique/absence/'.$a->id_td_tp.'/'.$a->date) !!}">  <button  title="voir" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                        </td>
+                                    </tr>
+                                     <?php $var++;?>
+                                    @endforeach
+                                   
                                 </table>
                             </div>
                       
@@ -534,25 +606,62 @@
         </div>
                                 </div>
 
+                          <div id="note" class="tab-pane animated flipInX custon-tab-style1">
+                             <div class="product-status mg-b-15">
+                            <div class="container-fluid">
+                            <div class="row">
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                   <div class="product-status-wrap">
+                          
+                                     <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>paquets</th>
+                                        <th>type</th>
+                                        <th>correcteurs</th>
+                                        <th>Module</th>
+                                         <th>Action</th>
+                                       
+                                    </tr>
+                                    <?php $var=1;?>
+                                    @foreach ($notes as $n)
+                                    <tr>
+                                        <td>{{$var}}</td>
+                                        <td>{{$n->salle}}</td>
+                                        <td>{{$n->type}}</td>
+                                        <td>
+                                        @foreach(App\Paquet_en::where('id_paq',$n->idPaq)->get() as $ens)
+                                        {{$ens->enseignant->nom}}  {{$ens->enseignant->prenom}}   
+                                         @endforeach
+                                         </td>
+                                        <td>{{App\Module::find($n->module_Exam)->nom}}</td>
+                                    <td>                
+ <a href="{{url('Semestres/historique/notes/'.$n->idPaq)}}">  <button  title="voir" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                        </td>
+                                    </tr>
+                                     <?php $var++;?>
+                                    @endforeach
+                                   
+                                </table>
+                            </div>
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
                                 
                     </div>
 
 
-<!--            modal mauve TP   -->
-      
-
-<!--            modal bleu Cour   -->
-
-    
-
-
-                           
-                            </div>
-                        </div>
                     </div>
                    
                 </div>
             </div>
+        </div>
         </div>
         <script >
     $(document).ready(function(){

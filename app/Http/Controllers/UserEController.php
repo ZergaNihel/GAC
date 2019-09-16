@@ -81,7 +81,7 @@ class UserEController extends Controller
         $membreE->enseignant->grade = $request->input('grade');
         $membreE->email = $request->input('email');
        // $enseignant->grade = $request->input('grade');
-         $etudiant->date_naissance = $request->input('date_naissance');
+         //$etudiant->date_naissance = $request->input('date_naissance');
 
        
 

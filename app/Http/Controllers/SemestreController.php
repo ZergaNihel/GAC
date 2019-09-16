@@ -12,6 +12,8 @@ use App\TDTP;
 use App\Exclu;
 use App\Absence;
 use App\Module;
+use App\Paquet;
+use App\Code;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -21,6 +23,41 @@ class SemestreController extends Controller
     {
         $this->middleware('auth');
     }
+    public function absence ($id,$d,$m,$y){
+      $date=$d.'/'.$m.'/'.$y;
+      $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+   	//dd($sem1);
+  
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+      if(Auth::user()->role == '1')
+        {
+          $abs = Absence::where('id_td_tp',$id)->where('date',$date)->get();
+          return view('Semestres.abs_det',compact('sem1','sem2','abs'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
+    }
+    public function notes ($id){
+      $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
+   	//dd($sem1);
+  
+    $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
+      if(Auth::user()->role == '1')
+        {
+          $notes = Code::where('codes.paq_code','=',$id)
+                          ->join('etudiants', 'etudiants.matricule', '=', 'codes.etu_code')
+                          ->join('groupes', 'etudiants.idG', '=', 'groupes.idG')
+                          ->get();
+          return view('Semestres.notes',compact('sem1','sem2','notes'));
+        }
+        else
+        {
+            return view('Erreur403');
+        }
+    }
+
    public function index (){
    	$sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
    	//dd($sem1);
@@ -210,7 +247,7 @@ class SemestreController extends Controller
    function historique (){
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();
   $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
- $sem = Semestre::where('active','=',1)->get();
+ $sem = Semestre::where('active','=',0)->get();
    if(Auth::user()->role == '1')
     {
       return view('Semestres.historique',compact('sem1','sem2','sem'));
@@ -230,6 +267,13 @@ class SemestreController extends Controller
                     ->join('groupes','groupe_etus.groupe','groupes.idG')
                     ->where('sem_groupe',$id)
                     ->get();
+  $abs = Absence::join('td_tps','id_td_tp','id')
+                 ->join('groupe_etus','id_groupe','groupe')
+                 ->join('groupes','groupe_etus.groupe','groupes.idG')
+                 ->where('sem_groupe',$id)
+                 ->select('id_td_tp','date')
+                 ->distinct('id_td_tp','date')
+                 ->get();
   $mods = TDTP::where('id_groupe',$g->groupe)
                 ->select('id_module')
                 ->distinct('id_module')
@@ -241,11 +285,11 @@ $semestre = Semestre::find($id);
                            ->select('idSec','nomSec')
                            ->distinct('idSec')
                            ->get();
-  
+  $notes = Paquet::join('examens','paq_Exam','idExam')->where('idSem',$id)->get();
   //dd($mods);
    if(Auth::user()->role == '1')
     {
-      return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','modules','id','semestre','sec','exclus'));
+      return view('Semestres.details_historique',compact('sem1','sem2','groupe','mods','notes','modules','id','semestre','sec','exclus','abs'));
     }
     else
     {

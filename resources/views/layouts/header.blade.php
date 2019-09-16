@@ -57,12 +57,11 @@
 		============================================ -->
     <link rel="stylesheet" href="{{asset('css/editor/select2.css')}}">
     <link rel="stylesheet" href="{{asset('css/editor/datetimepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('css/editor/bootstrap-editable.css')}}">
-    <link rel="stylesheet" href="{{asset('css/editor/x-editor-style.css')}}">
+   
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-table.css')}}">
-    <link rel="stylesheet" href="{{asset('css/data-table/bootstrap-editable.css')}}">
+   
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset('style.css')}}">
@@ -742,13 +741,7 @@
     <script src="{{asset('js/data-table/bootstrap-table-export.js')}}"></script>
     <!--  editable JS
     ============================================ -->
-    <script src="{{asset('js/editable/jquery.mockjax.js')}}"></script>
-    <script src="{{asset('js/editable/mock-active.js')}}"></script>
-    <script src="{{asset('js/editable/select2.js')}}"></script>
-    <script src="{{asset('js/editable/moment.min.js')}}"></script>
-    <script src="{{asset('js/editable/bootstrap-datetimepicker.js')}}"></script>
-    <script src="{{asset('js/editable/bootstrap-editable.js')}}"></script>
-    <script src="{{asset('js/editable/xediable-active.js')}}"></script>
+   
     <!-- Chart JS
     ============================================ -->
     <script src="{{asset('js/chart/jquery.peity.min.js')}}"></script>

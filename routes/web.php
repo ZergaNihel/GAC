@@ -57,7 +57,8 @@ Route::post('multifileupload', 'MailBoxController@store')->name('multifileupload
  Route::get('Semestres/historique/Groupes/{id}', 'SemestreController@GrpDet');
   Route::get('archiver/{id}', 'SemestreController@archiver');
  Route::get('admin/parametre', 'ParametresController@index');
-
+ Route::get('Semestres/historique/absence/{id}/{d}/{m}/{y}', 'SemestreController@absence');
+ Route::get('Semestres/historique/notes/{id}', 'SemestreController@notes');
  Route::post('param', 'ParametresController@store');
  Route::post('EditParam', 'ParametresController@edit');
 //------------------ EnseignantController ----------------------------

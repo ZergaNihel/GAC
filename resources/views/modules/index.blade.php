@@ -243,7 +243,9 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
 
                     <div class="asset-inner" id="asset-inner">
                      @include('modules.pagination')
+                     
                  </div>
+               
                                
                   <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
                     <div class="modal-dialog">
@@ -402,7 +404,7 @@ $('#semestre'+data.module.idMod+'').html('Aucun');
 
 
    
-       
+        <br> <br>      
 
       
 @endsection

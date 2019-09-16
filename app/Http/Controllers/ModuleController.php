@@ -52,7 +52,9 @@ class ModuleController extends Controller
 	public function edit(Request $request){
         
 		$a =$request->idMod;
-		$module= Module::find($a);
+        $module= Module::find($a);
+        //return $module->nom;
+        //dd( $module->nom);
         $module->nom = $request->nom;
 		$module->code = $request->code;
 		$module->type = $request->type;

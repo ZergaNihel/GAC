@@ -98,7 +98,7 @@ $mods = 0;
    $validator = Validator::make($request->all(), [
             'nom' => 'required|alpha_spaces',
             'prenom' => 'required|alpha_spaces',
-            'matricule' => 'required|numeric|unique:etudiants|max:9',
+            'matricule' => 'required|numeric|unique:etudiants',
             'birthday'  => 'required ',
              'type'  => 'required ',
         ],$messages,$attributes);

@@ -174,7 +174,7 @@
                             <div class="panel-group edu-custon-design" id="accordion">
                                 <?php $var = 0;?>
                                   @foreach($exams as $e)
-                                  @if($e->sujet)
+                                  
                         <div class="panel panel-default">
                                     <div class="panel-heading accordion-head">
                                         <h4 class="panel-title">
@@ -187,9 +187,9 @@
                                                 <div class="ex-pro">
                                                             <ul>
 @foreach(App\Examen::where('module_Exam',$id)->where('idSem',$e->idSem)->get() as $e1)
-
+@if($e1->sujet)
   <a href="{{ url('modules/pdf/'.$e1->idExam.'/1') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Sujet {{$e1->type}} -  {{ $e->sem_ann->annee}}</li> </a>
-
+@endif
   @endforeach
                                                             </ul>
                                                         </div>
@@ -197,7 +197,7 @@
                                     </div>
                                 </div>
                                 <?php $var++;?>
-                                @endif
+                                
                                  @endforeach
                             </div>
                            
@@ -225,7 +225,9 @@
                                                 <div class="ex-pro">
                                                             <ul>
 @foreach(App\Examen::where('module_Exam',$id)->where('idSem',$e->idSem)->get() as $e1)
+@if($e1->corrige_type)
   <a href="{{ url('modules/pdf/'.$e1->idExam.'/2') }}"><li style="color: #006DF0"><i class="fa fa-angle-right"></i>Corrigé {{$e1->type}} -  {{ $e->sem_ann->annee}}</li> </a>
+  @endif
   @endforeach
                                                             </ul>
                                                         </div>

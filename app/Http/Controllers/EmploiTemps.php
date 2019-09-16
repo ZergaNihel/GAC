@@ -128,7 +128,10 @@ return response()->json(['sec' => $sec,'pop' => $pop ,'pop1' => $pop1]);
         }
     }
   function afficher ($id){
+    $c = Cour::select('id_seance')->distinct('id_seance')->get()->toArray();
+   // dd($c);
     $cour = Seance::where('type','=','Cour')->get();
+   // dd($cour);
     $td = Seance::where('type','=','td')->get();
     $tp = Seance::where('type','=','tp')->get();
   $sem1 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 1')->get();

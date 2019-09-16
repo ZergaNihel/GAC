@@ -155,9 +155,10 @@
 </script>
 
 <style>
-    .hover_img a { position:relative; }
-    .hover_img a span { position:absolute; display:none; z-index:99; }
-    .hover_img a:hover span { display:block;   height:354; width: 1035 !important;}
+        .hover_img a { position:relative; }
+        .hover_img a span { position:absolute; display:none; z-index:99; }
+        .hover_img a:hover span { display:block;   height:448px !important; width: 1200px !important;}
+        .product-status-wrap img { width:500px !important;}
 </style>
 
 @endsection
@@ -235,7 +236,7 @@
                             <div class="row">
                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 mg-tb-15">
                                     <div class="hover_img">
-                                        <a href="#"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i><span><img src="{{asset('img/paquet_type.PNG')}}" alt="image" width="500" height="448px" class="pull-left"/></span></a>
+                                    <a href="#"><i class="fa fa-info-circle edu-informatio" aria-hidden="true"></i><span><img src="{{asset('img/paquet_type.PNG')}}" alt="image" width="500" height="448px" class="pull-left"/></span></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">

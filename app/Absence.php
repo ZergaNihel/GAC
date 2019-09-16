@@ -13,4 +13,9 @@ class Absence extends Model
          return $this->belongsTo('App\TDTP','id_td_tp');
          
     }
+    public function etu()
+    {
+         return $this->belongsTo('App\Etudiant','id_Etu');
+         
+    }
 }
