@@ -102,20 +102,7 @@ class Presence extends Controller
         $groupe= Groupe::find($idgroupe);
          
         $nomgroupe = $groupe->nomG;
-        
-        //justifiation
-        $auth=Auth::user()->enseignant->idEns;
-        $justifiations=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat_just 
-                                            ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance 
-                                    FROM absences A,etudiants E 
-                                    WHERE A.id_td_tp in (SELECT id FROM td_tps WHERE id_Ens=$auth) 
-                                    and A.justification IS NOT NULL and A.id_Etu=E.idEtu");
 
-        $etuExclus = DB::table('exclus')
-                    ->pluck('Etu_exc');
-
-        // exclus
-        $i=0; $j=0;
         $td_tp=DB::table('td_tps')
                 ->join('seances', 'td_tps.id_seance', '=', 'seances.idSea')
                 ->where('id_Ens','=',Auth::user()->enseignant->idEns)
@@ -123,6 +110,21 @@ class Presence extends Controller
                 ->where('id_module','=',$request->input('module'))
                 ->where('seances.type','=', $seance->type)
                 ->pluck('id');
+        
+        //justifiation
+        $auth=Auth::user()->enseignant->idEns;
+        $justifiations=DB::select("SELECT  A.idAbs,A.justification , A.date , A.etat_just 
+                                            ,E.matricule,E.idEtu,E.type, E.nom ,E.prenom,E.date_naissance 
+                                    FROM absences A,etudiants E 
+                                    WHERE A.id_td_tp in $td_tp 
+                                    and A.justification IS NOT NULL and A.id_Etu=E.idEtu");
+
+        $etuExclus = DB::table('exclus')
+                    ->pluck('Etu_exc');
+
+        // exclus
+        $i=0; $j=0;
+        
                 
         $etu=DB::table('absences')
                     ->where('etat','=',0)
