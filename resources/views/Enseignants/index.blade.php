@@ -296,11 +296,11 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
-                                                                                        class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                      class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                                                         <div class="login-horizental">
-                                                                                            <button data-dismiss="modal"
+                                                                                        <button data-dismiss="modal"
                                                                                                 href="#"
-                                                                                                class="btn btn-sm btn-primary login-submit-cs"
+                                                                                                class="btn btn-sm btn-primary login-submit-cs pull-left"
                                                                                                 type="button">Annuler</button>
                                                                                         </div>
                                                                                     </div>
@@ -401,10 +401,8 @@
                                                                                     <div
                                                                                         class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                                                         <div class="login-horizental">
-                                                                                            <button data-dismiss="modal"
-                                                                                                href="#"
-                                                                                                class="btn btn-sm btn-primary login-submit-cs pull-left"
-                                                                                                type="button">Annuler</button>
+                                                                                        <a href="{{url('Enseignants/index')}}"><button  href="{{url('Enseignants/index')}}" class="btn btn-sm btn-primary login-submit-cs" type="button">Annuler</button></a>
+                                                                                           
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

@@ -11,7 +11,7 @@
   type: "get",
   url: "{{url('new_sem')}}/" ,
   success: function(data){
-  // alert(data.test);
+  
     if(data.test){
     $("#new").prop("disabled",true);
     }
@@ -23,12 +23,12 @@
      // -----------------------------------archiver---------------------------
      $(document).on('click' , '.archive' , function(){
       var a = $(this).attr('id');
-      alert(a);
+     
      $.ajax({
   type: "get",
   url: "{{url('archiver')}}/"+a ,
   success: function(data){
-  alert(data.success);
+ // alert(data.success);
    $("#pa"+a).css("display","none");
    $('.err').css("display","");
    $('.err').html('<strong> semestre archivé (voir <a href="{{url("Semestres/historique")}}"> l\'historique</a> )</strong> ');

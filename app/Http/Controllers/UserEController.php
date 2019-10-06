@@ -24,11 +24,11 @@ class UserEController extends Controller
     
         $sem2 = Semestre::where('active','=',1)->where('nomSem','=','Semestre 2')->get();
         $membreE = User::find($id);
-        $etudiant = Etudiant::all();
-         $enseignant = Enseignant::all();
+       // $etudiant = Etudiant::all();
+       //  $enseignant = Enseignant::all();
         
 
-        return view('membreE.details', compact('membreE','etudiant','enseignant','sem1','sem2'));
+        return view('membreE.details', compact('membreE','sem1','sem2'));
             
             
      }
@@ -58,10 +58,10 @@ class UserEController extends Controller
     
     }
 
-    public function update(Request $request , $id)
+    public function update(Request $request)
     {
-
-        $membreE = User::find($id);
+//dd($request->input('profil'));
+        $membreE = User::find( $request->input('id'));
         //$etudiant = Etudiant::all();
         if($request->hasFile('img')){
 
@@ -88,7 +88,7 @@ class UserEController extends Controller
           
         $membreE->save();
 
-        return redirect('membreE/'.$id.'/details/'.$request->input('semestre'));
+        return redirect('membreE/'.$id.'/details');
 
     } 
   

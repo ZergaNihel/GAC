@@ -3,19 +3,29 @@
 @section('title','Justification')
 @section('js')
 <style>
+ @media screen and (min-width: 1225px)  {
+		
+        .stats-icon{
+			display:none; }
+	}
+	
  @media screen and (max-width: 1225px) and (min-width: 1045px) {
 		.priority-1{
 			display:none;
 		}
+        .stats-icon{
+			display:none; }
 	}
 	
-	@media screen and (max-width: 1045px) and (min-width: 835px) {
+	@media screen and (max-width: 1045px) and (min-width: 768px) {
 		.priority-1{
 			display:none;
 		}
 		.priority-4{
 			display:none;
 		}
+        .stats-icon{
+			display:none; }
 	}
 	
 	@media screen and (max-width: 565px) and (min-width: 300px) {
@@ -25,9 +35,14 @@
 		.priority-4{
 			display:none;
 		}
+        .priority-3{
+			display:none;
+		}
         .resp{
 			display:none;
 		}
+        .stats-icon{
+			display:""; }
        
 	}
 	
@@ -38,10 +53,13 @@
 		.priority-4{
 			display:none;
 		}
+        .priority-3{
+			display:none;
+		}
         .resp{
 			display:none; }
-       
-	
+       .stats-icon{
+			display:""; }
 	}
 
 </style>
@@ -85,7 +103,7 @@ success: function(data) {
   $("html, body").animate({
         scrollTop: 0
     },10);
-    $("#aucune").css("display","");
+  
 }
 });
    });
@@ -108,7 +126,7 @@ url: $("#addForm").attr('action'),
 processData: false,
 contentType: false,                      // use the form's action url
 success: function(data) {
-    $("#aucune").css("display","none");
+   
 //alert(data.abs.length);
 var t;
 var t1=" ";
@@ -256,6 +274,12 @@ $('#error2').css("display","");
                            <div class="add-product pull-right" id="justification">
  <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$mod->idMod}}"><i class="fa fa-plus"> </i> Justification </a>
                                             </div>
+                                            <div class="stats-icon pull-right" >
+<a  href="#" data-toggle="modal" data-target="#zoomInDown1" data-id="{{$mod->idMod}}" style="color:#006DF0;"> <i  class="fa fa-plus"></i> 
+                      <span class="indicator-ms"></span>
+                                    </a>
+
+                                </div>
                                              @endif
                                             @endif
                                           

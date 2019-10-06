@@ -93,6 +93,7 @@
                                                 </div>
 
                                             </div>
+                                            @if($membreE->enseignant->profil)
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <strong>profil</strong>
@@ -104,6 +105,8 @@
                                                 </div>
                                             </div>
                                             <br>
+                                            @endif
+                                           
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <strong>email</strong>
@@ -127,14 +130,14 @@
                         </div>
 
                         <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                            <form action=" {{url('membreE/'. $membreE->id) }} " method="post"
+                            <form action=" {{url('membreE/update) }} " method="post"
                                  id="demo1-upload"
                                 enctype="multipart/form-data">
 
-                                <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
                                 <fieldset>
 
+                                <input type="hidden" name="id" value="{{$membreE->id}}">
 
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -146,13 +149,7 @@
                                                         <div class="form-group">
                                                             <input name="nom" type="text" class="form-control"
                                                                 value="{{$membreE->enseignant->nom}}">
-                                                            <span class="help-block">
-                                                                @if($errors->get('nom'))
-                                                                @foreach($errors->get('nom') as $message)
-                                                                <li> {{ $message }} </li>
-                                                                @endforeach
-                                                                @endif
-                                                            </span>
+                                                         
                                                         </div>
                                                         <!-- -->
 
@@ -160,11 +157,7 @@
                                                             <input name="prenom" type="text" class="form-control"
                                                                 value="{{$membreE->enseignant->prenom}}">
                                                             <span class="help-block">
-                                                                @if($errors->get('prenom'))
-                                                                @foreach($errors->get('prenom') as $message)
-                                                                <li> {{ $message }} </li>
-                                                                @endforeach
-                                                                @endif
+                                                               
                                                             </span>
                                                         </div>
 
@@ -174,8 +167,8 @@
                                                                 value="{{$membreE->enseignant->grade}}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <textarea placeholder="Description" class="form-control" name="profil"
-                                                                value="{{$membreE->enseignant->profil}}" ></textarea>
+                                      <textarea placeholder="Description" class="form-control" name="profil"
+                                                                ></textarea>
                                                         </div> 
 
 
@@ -201,13 +194,8 @@
                                                             class="form-group inputGroupContainer @if($errors->get('email')) has-error @endif">
                                                             <input name="email" type="email" class="form-control"
                                                                 value="{{$membreE->email}}">
-                                                            <span class="help-block">
-                                                                @if($errors->get('email'))
-                                                                @foreach($errors->get('email') as $message)
-                                                                <li> {{ $message }} </li>
-                                                                @endforeach
-                                                                @endif
-                                                            </span>
+                                                            
+                                                            
                                                         </div>
 
 

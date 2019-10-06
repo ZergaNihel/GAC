@@ -94,7 +94,7 @@ Route::get('membre/{id}/edite','UserController@edit');
 Route::put('membre/{id}','UserController@update');
 Route::get('membreE/{id}/details','UserEController@details');
 Route::get('membreE/{id}/edite','UserController@edit');
-Route::put('membreE/{id}','UserEController@update');
+Route::post('membreE/update','UserEController@update');
 
 //------------------ Presence ----------------------------
 

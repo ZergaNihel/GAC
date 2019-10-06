@@ -104,13 +104,13 @@ class SemestreController extends Controller
     $abs = Absence::where('etat',0)->where('etat_just',2)->orWhere('etat_just',0)
                      ->join('td_tps','id_td_tp','id')
                      ->join('modules','id_module','idMod')
-                     ->where('semestre',$id)
+                     ->where('modules.semestre',$id)
                      ->select('modules.nom', DB::raw('count(*) as total'))
                      ->groupBy('modules.nom')
-                     ->get();
-
+                  ->get();
+                  return $abs; 
                 // return $abs;
-  $pre = Absence::where('etat',1)
+   $pre = Absence::where('etat',1)
                      ->join('td_tps','id_td_tp','id')
                      ->join('modules','id_module','idMod')
                      ->where('semestre',$id)

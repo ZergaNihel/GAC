@@ -1327,8 +1327,8 @@ called=0;
 
 $(".chosen-select option:selected").removeAttr('selected');
 $(".chosen-select").trigger('chosen:updated');
- 
- $("#InformationproModalalert").modal("show");
+//$("#popnew").css('display','');
+$("#InformationproModalalert").modal("show");
 
 
 }
@@ -1357,6 +1357,7 @@ $("#empForm").css('display','none');
    $(".tpTable").remove();
 });
   emploi_du_temps(data.pop,data.pop1);
+  $("#popnew").css('display','');
 $("#InformationproModalalert").modal("hide"); 
 
 }
@@ -1938,7 +1939,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
                                         </ul>
                                         @endsection
                                          @section('content')
-               <div id="InformationproModalalert" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+ <div id="InformationproModalalert" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog" data-keyboard="false" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                    
@@ -2430,7 +2431,8 @@ var c1=""+$("#grpTD"+num+"").val()+"";
  </div>
 
                     </div>
-<br> <br>
+
+
                     <div id="InformationTP" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -2500,7 +2502,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
         {!! csrf_field() !!}
         <input type="hidden" name="supID" id="supID">
          <input type="hidden" name="supType" value="3"></form>
-         <a data-dismiss="modal" href="#" style="background-color: #8e44ad ;border-color: #8e44ad ;">OK</a>
+         <a data-dismiss="modal" href="#" style="background-color: #8e44ad ;border-color: #8e44ad ;">Annuler</a>
 <a  href="#" style="background-color: #8e44ad ;border-color: #8e44ad ; display: none;" id="supBtn">Supprimer</a>
 </div>
 </div>
@@ -2583,7 +2585,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
         {!! csrf_field() !!}
         <input type="hidden" name="supID" id="supID">
          <input type="hidden" name="supType" value="2"></form>
-<a data-dismiss="modal" href="#" style="background-color: #65b12d ;border-color: #65b12d ;">OK</a>
+<a data-dismiss="modal" href="#" style="background-color: #65b12d ;border-color: #65b12d ;">Annuler</a>
 <a href="#" id="supBtn2" style="background-color: #65b12d ;border-color: #65b12d ; display: none;">Supprimer
 </a>
 </div>
@@ -2670,7 +2672,7 @@ var c1=""+$("#grpTD"+num+"").val()+"";
         <input type="hidden" name="supID" id="supID">
          <input type="hidden" name="supType" value="1">
     </form>
-    <a data-dismiss="modal" href="#" >OK</a>
+    <a data-dismiss="modal" href="#" >Annuler</a>
      <a  href="#" id="supBtn3" style="display: none;">Supprimer</a>
 </div>
 </div>

@@ -559,7 +559,7 @@ k++;
                                     </div>
                                 </div>
                             </div>
-                            <table id="laravel_datatable" data-toggle="table" data-resizable="true" data-cookie="true"
+                            <table id="laravel_datatable" data-toggle="table"  data-cookie="true"
                                 data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true"
                                 data-toolbar="#toolbar">
                                 <thead>

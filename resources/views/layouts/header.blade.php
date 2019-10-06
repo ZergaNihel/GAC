@@ -683,8 +683,13 @@
 
 
         @yield('content')
-        <div class="footer-copyright-area" style=" position: fixed; bottom: 0;
+        @if (request()->is('Emplois_du_Temps_generale/*') or request()->is('Emplois_du_Temps/*') )
+        <div class="footer-copyright-area" >
+            @else 
+            <div class="footer-copyright-area" style=" position: fixed; bottom: 0;
             width:100%;">
+@endif
+        
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

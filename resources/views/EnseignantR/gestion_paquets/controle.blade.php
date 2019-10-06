@@ -288,7 +288,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse panel-ic collapse in">
+                                    <div id="collapse1" class="panel-collapse panel-ic collapse in" style=" margin-left: 50px;">
                                         <div class="panel-body admin-panel-content animated bounce" id="pdfviewer">
                                             @if($exam->sujet)
                                             <div id="pdfviewer1" class="pdf-viewer-area">
@@ -347,7 +347,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="collapse4" class="panel-collapse panel-ic collapse in">
+                                    <div id="collapse4" class="panel-collapse panel-ic collapse in" style=" margin-left: 50px;">
                                         <div class="panel-body admin-panel-content animated flash">
                                             @if($exam->corrige_type)
                                             <div id="pdfviewer1C" class="pdf-viewer-area">

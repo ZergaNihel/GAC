@@ -74,6 +74,7 @@
                                                 </div>
 
                                             </div>
+                                            @if($membreE->enseignant->profil)
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <strong>profil</strong>
@@ -84,6 +85,7 @@
                                                     </p>
                                                 </div>
                                             </div>
+                                            @endif
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-3">

@@ -46,11 +46,13 @@ $rand = Str::random(8);
      $tab[]=null; 
     $messages = [
     'required'    => 'Ce champs est obligatoire.',
-    'mimes'    => 'le champs :attribute doit être compatible avec le format xlsx ',
+    'mimes'    => ' :attribute doit être compatible avec le format .xlsx ',
 ];
+$attri = [
+  'ens'  => 'La liste des enseignants '   ,];
    $validator = Validator::make($request->all(), [
             'ens' => 'required|mimes:xlsx'
-        ],$messages);
+        ],$messages,$attri);
  
         if ($validator->fails()) {
  return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
@@ -60,7 +62,7 @@ $rand = Str::random(8);
     $data = Excel::load($path)->get();
     // dd($data);
      if($data->count() > 0)
-     {
+     {$i1 = 0;
       foreach($data->toArray() as $key => $value)
       {
         $i=0; 
@@ -68,14 +70,30 @@ $rand = Str::random(8);
        {  $tab[$i]=$row; $i++;
       
        }
+       $check_data[] = array(
+        'nom'   => $tab[0],
+        'prenom'   => $tab[1],
+        'email'   => $tab[2]
+       );
+       $cpi = $i1+2;
+       $messages = [
+        'required'    => 'Vous devez remplir tous les champs dans la ligne.'.$cpi ,
+        'alpha_spaces'=> 'Le ":attribute" doit contenir que les caractéres dans la ligne'.$cpi ,
+        'email'=> "L' :attribute est invalide dans la ligne ".$cpi ,
+        'unique'=>"L' email' doit être unique dans le fichier excel dans la ligne ".$cpi ,];
+    
+       $validator = Validator::make($check_data[$i1], [ 'email' => 'required|email|unique:users','nom' => 'required|alpha_spaces','prenom' => 'required|alpha_spaces',],$messages);
+     
+            if ($validator->fails()) {
+               return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
+            }
        $pwd = Str::random(8);
       $ens = Enseignant::create(['nom'=>$tab[0], 'prenom'=>$tab[1] ,'grade'=>'Enseignant',]);
-       $insert_data[] = array(
-        'email'   => $tab[2],
-        'password'   => Hash::make($pwd),
-        'role'  => 3,
-        'id_Ens'  => $ens->idEns
-       );
+       $user_data = User::create(['email'   => $tab[2],
+       'password'   => Hash::make($pwd),
+       'role'  => 3,
+       'id_Ens'  => $ens->idEns,]);
+        
        $email =  $tab[2];
 $data = array('name'=>$tab[0],'prenom'=>$tab[1] , 'email' => $email,'password' => $pwd);
 Mail::send('emails.contact', $data, function($message) use ($email) {
@@ -83,45 +101,30 @@ Mail::send('emails.contact', $data, function($message) use ($email) {
           ->subject('Nouveau Enseignant');
   $message->from('GAC13tlemcen@gmail.com','GAC');
 });
+$i1++;
       }
       
-      //return $tab;
 
-      if(!empty($insert_data))
- {
-
-             for($i=0;$i<count($insert_data);$i++){
-        $messages = [
-    'required'    => 'Vous devez remplisser tous les champs.',
-    'email'=> "Le :attribute doit être un email dans la ligne ".$i,
- 'unique'=>"L'email' doit être unique dans le fichier excel dans la ligne ".$i,];
-
-   $validator = Validator::make($insert_data[$i], [ 'email' => 'required|email|unique:users',],$messages);
- 
-        if ($validator->fails()) {
-           return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
-        }
-       // dd($insert_data[0]);
-
-  DB::table('users')->insert($insert_data[$i]);
-}
-      }
      }
      return Redirect::to('Enseignants/index');
   }
 function store(Request $request){
      $messages = [
-    'required'    => 'le champs :attribute est obligatoire.',
-    'alpha_spaces'=> "Le :attribute doit contenir que les caractéres",
-    'min'    => 'le champs :attribute doit contenir au moins 4 lettres ',
+    'required'    => 'le champs ":attribute" est obligatoire.',
+    'alpha_spaces'=> 'Le ":attribute" doit contenir que les caractéres',
+    'min'    => 'le champs ":attribute" doit contenir au moins 4 lettres ',
     'unique'    => 'l\'email existe déjà ',
+    'email'    => 'l\'email est invalide ',
+];
+$attr = [
+  'pwd'    => 'Mot de passe ',
 ];
    $validator = Validator::make($request->all(), [
             'nom' => 'required|alpha_spaces|min:3',
             'prenom' => 'required|alpha_spaces|min:3',
             'email' => 'required|email|unique:users',
             'pwd' => 'required'
-        ],$messages);
+        ],$messages,$attr);
  
         if ($validator->fails()) {
   return response()->json(['errors'=> $validator->getMessageBag()->toArray()],422);
