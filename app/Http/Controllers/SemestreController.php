@@ -92,7 +92,7 @@ class SemestreController extends Controller
     public function graphe1 ($id){
       
     $mod = Module::where("semestre",$id)->select('nom','idMod')->count();
-     
+     //return $mod;
     $m = array();
     $m_id = array();
     $m_a = array();
@@ -104,11 +104,11 @@ class SemestreController extends Controller
     $abs = Absence::where('etat',0)->where('etat_just',2)->orWhere('etat_just',0)
                      ->join('td_tps','id_td_tp','id')
                      ->join('modules','id_module','idMod')
-                     ->where('modules.semestre',$id)
+                     ->where('semestre',$id)
                      ->select('modules.nom', DB::raw('count(*) as total'))
                      ->groupBy('modules.nom')
-                  ->get();
-                  return $abs; 
+                     ->get();
+                 // return $abs; 
                 // return $abs;
    $pre = Absence::where('etat',1)
                      ->join('td_tps','id_td_tp','id')
@@ -117,6 +117,7 @@ class SemestreController extends Controller
                      ->select('modules.nom', DB::raw('count(*) as total'))
                      ->groupBy('modules.nom')
                      ->get();
+                    // return $pre; 
                      // return $pre->count();
     $i=0;
   foreach ($abs as $key ) {
